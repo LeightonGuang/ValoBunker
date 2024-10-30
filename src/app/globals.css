@@ -2,20 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-thin.ttf");
+  font-weight: 100;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-extra-light.ttf");
+  font-weight: 200;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-book.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-semi-bold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Tungsten";
+  src: url("../../public/fonts/tungsten-black.ttf");
+  font-weight: 900;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-family: "Tungsten";
+  font-weight: 600;
+  font-size: 2rem;
 }
