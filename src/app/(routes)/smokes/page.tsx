@@ -1,9 +1,37 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import * as smokesData from "../../../../public/data/smokesData.json";
 
-const smokesPage = () => {
+interface RoundSmokesDataType {
+  id: number;
+  imageUrl: string;
+  agents: string;
+  abilityName: string;
+  duration: number;
+  radius: number;
+  cost: number;
+  regen: {
+    reusable: boolean;
+    regenTime: number | null;
+  };
+}
+
+interface WallSmokesDataType {
+  id: number;
+  imageUrl: string;
+  agents: string;
+  abilityName: string;
+  duration: number;
+  length: number;
+  cost: number;
+  regen: {
+    reusable: boolean;
+    regenTime: number | null;
+  };
+}
+
+const SmokesPage = () => {
   const [isAsc, setIsAsc] = useState<{
     roundSmokes: boolean;
     wallSmokes: boolean;
@@ -19,42 +47,55 @@ const smokesPage = () => {
     wallSmokes: "agents",
   });
 
-  const sortList = (list: any, column: string, isAsc: boolean) => {
-    const sorted = [...list].sort((a: any, b: any) =>
+  const sortList = <T extends RoundSmokesDataType | WallSmokesDataType>(
+    list: T[],
+    column: keyof T,
+    isAsc: boolean,
+  ): T[] => {
+    const sorted = [...list].sort((a: T, b: T) =>
       isAsc
         ? a[column] < b[column]
           ? -1
           : a[column] > b[column]
-          ? 1
-          : 0
+            ? 1
+            : 0
         : a[column] > b[column]
-        ? -1
-        : a[column] < b[column]
-        ? 1
-        : 0
+          ? -1
+          : a[column] < b[column]
+            ? 1
+            : 0,
     );
 
     return sorted;
   };
 
-  const [roundSmokesList, setRoundSmokesList] = useState(
-    sortList(smokesData.roundSmokesData, "agents", isAsc.roundSmokes)
+  const [roundSmokesList, setRoundSmokesList] = useState<RoundSmokesDataType[]>(
+    sortList(smokesData.roundSmokesData, "agents", isAsc.roundSmokes),
   );
-  const [wallSmokesList, sortedWallSmokesList] = useState(
-    sortList(smokesData.wallSmokesData, "agents", isAsc.wallSmokes)
-  );
+  // const [wallSmokesList, setWallSmokesList] = useState<WallSmokesDataType[]>(
+  //   sortList(smokesData.wallSmokesData, "agents", isAsc.wallSmokes),
+  // );
 
-  const handleClick = (table: string, column: string) => {
+  const handleClick = (
+    table: string,
+    column: keyof RoundSmokesDataType | keyof WallSmokesDataType,
+  ) => {
     if (table === "roundSmokes") {
       if (sortedBy.roundSmokes === column) {
         setRoundSmokesList(
-          sortList(roundSmokesList, column, !isAsc.roundSmokes)
+          sortList(
+            roundSmokesList,
+            column as keyof RoundSmokesDataType,
+            !isAsc.roundSmokes,
+          ),
         );
         setIsAsc({ ...isAsc, roundSmokes: !isAsc.roundSmokes });
       } else {
         setSortedBy({ ...sortedBy, roundSmokes: column });
         setIsAsc({ ...isAsc, roundSmokes: true });
-        setRoundSmokesList(sortList(roundSmokesList, column, true));
+        setRoundSmokesList(
+          sortList(roundSmokesList, column as keyof RoundSmokesDataType, true),
+        );
       }
     } else if (table === "wallSmokes") {
       if (sortedBy.wallSmokes === column) {
@@ -72,11 +113,14 @@ const smokesPage = () => {
         <h1>Smokes</h1>
         <div>
           <h2>Round smokes</h2>
-          <table className="table-auto w-full">
+          <table className="w-full table-auto">
             <thead>
               <tr>
                 <th>Smokes</th>
-                <th onClick={() => handleClick("roundSmokes", "agents")}>
+                <th
+                  className="cursor-pointer select-none"
+                  onClick={() => handleClick("roundSmokes", "agents")}
+                >
                   Agent
                   <span
                     className={`ml-1 transition-colors duration-100 ${
@@ -89,10 +133,13 @@ const smokesPage = () => {
                       ? isAsc.roundSmokes
                         ? "▲"
                         : "▼"
-                      : ""}
+                      : "▲"}
                   </span>
                 </th>
-                <th onClick={() => handleClick("roundSmokes", "duration")}>
+                <th
+                  className="cursor-pointer select-none"
+                  onClick={() => handleClick("roundSmokes", "duration")}
+                >
                   Duration
                   <span
                     className={`ml-1 transition-colors duration-100 ${
@@ -105,10 +152,13 @@ const smokesPage = () => {
                       ? isAsc.roundSmokes
                         ? "▲"
                         : "▼"
-                      : ""}
+                      : "▲"}
                   </span>
                 </th>
-                <th onClick={() => handleClick("roundSmokes", "radius")}>
+                <th
+                  className="cursor-pointer select-none"
+                  onClick={() => handleClick("roundSmokes", "radius")}
+                >
                   Radius
                   <span
                     className={`ml-1 transition-colors duration-100 ${
@@ -121,10 +171,13 @@ const smokesPage = () => {
                       ? isAsc.roundSmokes
                         ? "▲"
                         : "▼"
-                      : ""}
+                      : "▲"}
                   </span>
                 </th>
-                <th onClick={() => handleClick("roundSmokes", "cost")}>
+                <th
+                  className="cursor-pointer select-none"
+                  onClick={() => handleClick("roundSmokes", "cost")}
+                >
                   Cost
                   <span
                     className={`ml-1 transition-colors duration-100 ${
@@ -137,7 +190,7 @@ const smokesPage = () => {
                       ? isAsc.roundSmokes
                         ? "▲"
                         : "▼"
-                      : ""}
+                      : "▲"}
                   </span>
                 </th>
               </tr>
@@ -147,7 +200,7 @@ const smokesPage = () => {
                 <tr className="text-center" key={smokeObj.id}>
                   <td className="flex justify-center">
                     <img
-                      className="w-8 h-8 bg-gray-400 p-1 rounded-sm "
+                      className="h-8 w-8 rounded-sm bg-gray-400 p-1"
                       src={smokeObj.imageUrl}
                       alt={`${smokeObj.agents}'s smoke`}
                     />
@@ -199,4 +252,4 @@ const smokesPage = () => {
   );
 };
 
-export default smokesPage;
+export default SmokesPage;
