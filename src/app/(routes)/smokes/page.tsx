@@ -97,7 +97,7 @@ const SmokesPage = () => {
                   <span
                     className={`ml-1 transition-colors duration-100 ${
                       sortedBy.roundSmokes === "agents"
-                        ? "text-black"
+                        ? "text-white"
                         : "text-gray-400"
                     }`}
                   >
@@ -116,7 +116,7 @@ const SmokesPage = () => {
                   <span
                     className={`ml-1 transition-colors duration-100 ${
                       sortedBy.roundSmokes === "duration"
-                        ? "text-black"
+                        ? "text-white"
                         : "text-gray-400"
                     }`}
                   >
@@ -135,7 +135,7 @@ const SmokesPage = () => {
                   <span
                     className={`ml-1 transition-colors duration-100 ${
                       sortedBy.roundSmokes === "radius"
-                        ? "text-black"
+                        ? "text-white"
                         : "text-gray-400"
                     }`}
                   >
@@ -154,7 +154,7 @@ const SmokesPage = () => {
                   <span
                     className={`ml-1 transition-colors duration-100 ${
                       sortedBy.roundSmokes === "cost"
-                        ? "text-black"
+                        ? "text-white"
                         : "text-gray-400"
                     }`}
                   >
@@ -201,7 +201,7 @@ const SmokesPage = () => {
                     <span
                       className={`ml-1 transition-colors duration-100 ${
                         sortedBy.wallSmokes === "agents"
-                          ? "text-black"
+                          ? "text-white"
                           : "text-gray-400"
                       }`}
                     >
@@ -220,7 +220,7 @@ const SmokesPage = () => {
                     <span
                       className={`ml-1 transition-colors duration-100 ${
                         sortedBy.wallSmokes === "duration"
-                          ? "text-black"
+                          ? "text-white"
                           : "text-gray-400"
                       }`}
                     >
@@ -239,7 +239,7 @@ const SmokesPage = () => {
                     <span
                       className={`ml-1 transition-colors duration-100 ${
                         sortedBy.wallSmokes === "length"
-                          ? "text-black"
+                          ? "text-white"
                           : "text-gray-400"
                       }`}
                     >
@@ -258,7 +258,7 @@ const SmokesPage = () => {
                     <span
                       className={`ml-1 transition-colors duration-100 ${
                         sortedBy.wallSmokes === "cost"
-                          ? "text-black"
+                          ? "text-white"
                           : "text-gray-400"
                       }`}
                     >
