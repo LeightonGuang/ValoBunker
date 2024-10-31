@@ -1,311 +1,39 @@
 "use client";
 
-import { useState } from "react";
-import smokesDataJson from "@/../../public/data/smokesData.json";
-
-import { RoundSmokesDataType } from "@/app/types/RoundSmokesDataType";
-import { WallSmokesDataType } from "@/app/types/WallSmokesDataType";
-import { SmokesDataType } from "@/app/types/SmokesDataType";
-
-const smokesData = smokesDataJson as SmokesDataType;
-
-type CommonKeys = keyof (RoundSmokesDataType & WallSmokesDataType);
+import smokesData from "@/../../public/data/smokesData.json";
+import TableComponent from "@/components/TableComponent";
 
 const SmokesPage = () => {
-  const [isAsc, setIsAsc] = useState<{
-    roundSmokes: boolean;
-    wallSmokes: boolean;
-  }>({
-    roundSmokes: true,
-    wallSmokes: true,
-  });
-  const [sortedBy, setSortedBy] = useState<{
-    roundSmokes: string | null;
-    wallSmokes: string | null;
-  }>({
-    roundSmokes: "agents",
-    wallSmokes: "agents",
-  });
-
-  const sortList = (
-    list: (RoundSmokesDataType | WallSmokesDataType)[],
-    column: CommonKeys,
-    isAsc: boolean,
-  ) => {
-    const sorted = [...list].sort((a, b) => {
-      // Define a fallback value to handle missing properties
-      const aValue = column in a ? a[column as keyof typeof a] : 0;
-      const bValue = column in b ? b[column as keyof typeof b] : 0;
-
-      return isAsc ? (aValue < bValue ? -1 : 1) : aValue > bValue ? -1 : 1;
-    });
-
-    return sorted;
-  };
-
-  const [roundSmokesList, setRoundSmokesList] = useState<RoundSmokesDataType[]>(
-    sortList(smokesData.roundSmokesData, "agents", isAsc.roundSmokes),
-  );
-  const [wallSmokesList, setWallSmokesList] = useState<WallSmokesDataType[]>(
-    sortList(smokesData.wallSmokesData, "agents", isAsc.wallSmokes),
-  );
-
-  const handleClick = (
-    table: string,
-    column: keyof RoundSmokesDataType | keyof WallSmokesDataType,
-  ) => {
-    if (table === "roundSmokes") {
-      if (sortedBy.roundSmokes === column) {
-        setRoundSmokesList(
-          sortList(roundSmokesList, column, !isAsc.roundSmokes),
-        );
-        setIsAsc({ ...isAsc, roundSmokes: !isAsc.roundSmokes });
-      } else {
-        setSortedBy({ ...sortedBy, roundSmokes: column });
-        setIsAsc({ ...isAsc, roundSmokes: true });
-        setRoundSmokesList(sortList(roundSmokesList, column, true));
-      }
-    } else if (table === "wallSmokes") {
-      if (sortedBy.wallSmokes === column) {
-        setWallSmokesList(sortList(wallSmokesList, column, !isAsc.wallSmokes));
-        setIsAsc({ ...isAsc, wallSmokes: !isAsc.wallSmokes });
-      } else {
-        setSortedBy({ ...sortedBy, wallSmokes: column });
-        setWallSmokesList(
-          sortList(wallSmokesList, column as keyof WallSmokesDataType, true),
-        );
-        setIsAsc({ ...isAsc, wallSmokes: true });
-      }
-    }
-  };
-
   return (
     <main>
       <div className="m-4">
         <h1>Smokes</h1>
+
         <div id="round_smokes-container">
-          <h2>Round smokes</h2>
-          <table className="w-full table-auto" id="round-smokes-table">
-            <thead>
-              <tr>
-                <th>Smokes</th>
-                <th
-                  className="cursor-pointer select-none"
-                  onClick={() => handleClick("roundSmokes", "agents")}
-                >
-                  <div className="flex items-center">
-                    Agent
-                    <span
-                      className={`ml-1 text-xs transition-colors duration-100 ${
-                        sortedBy.roundSmokes === "agents"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.roundSmokes === "agents"
-                        ? isAsc.roundSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
-                  </div>
-                </th>
-                <th
-                  className="cursor-pointer select-none"
-                  onClick={() => handleClick("roundSmokes", "duration")}
-                >
-                  <div className="flex items-center">
-                    Duration (s)
-                    <span
-                      className={`ml-1 text-xs transition-colors duration-100 ${
-                        sortedBy.roundSmokes === "duration"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.roundSmokes === "duration"
-                        ? isAsc.roundSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
-                  </div>
-                </th>
-                <th
-                  className="cursor-pointer select-none"
-                  onClick={() => handleClick("roundSmokes", "radius")}
-                >
-                  <div className="flex items-center">
-                    Radius (m)
-                    <span
-                      className={`ml-1 text-xs transition-colors duration-100 ${
-                        sortedBy.roundSmokes === "radius"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.roundSmokes === "radius"
-                        ? isAsc.roundSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
-                  </div>
-                </th>
-                <th
-                  className="cursor-pointer select-none"
-                  onClick={() => handleClick("roundSmokes", "cost")}
-                >
-                  <div className="flex items-center">
-                    Cost
-                    <span
-                      className={`ml-1 text-xs transition-colors duration-100 ${
-                        sortedBy.roundSmokes === "cost"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.roundSmokes === "cost"
-                        ? isAsc.roundSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {roundSmokesList.map((smokeObj) => (
-                <tr key={smokeObj.id}>
-                  <td className="flex justify-center">
-                    <img
-                      className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                      src={smokeObj.imageUrl}
-                      alt={`${smokeObj.agents}'s smoke`}
-                    />
-                  </td>
-                  <td>{smokeObj.agents}</td>
-                  <td>{smokeObj.duration}</td>
-                  <td>{smokeObj.radius}</td>
-                  <td>{smokeObj.cost}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TableComponent
+            tableName="Round smokes"
+            columnNameObjList={[
+              { name: "imageUrl", sortable: false },
+              { name: "agent", sortable: true },
+              { name: "duration", sortable: true },
+              { name: "radius", sortable: true },
+              { name: "cost", sortable: true },
+            ]}
+            dataList={smokesData.roundSmokesData}
+          />
         </div>
-        <div id="wall_smokes-container">
-          <h2>Wall smokes</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full table-auto">
-              <thead>
-                <tr>
-                  <th>Smokes</th>
-                  <th
-                    className="cursor-pointer select-none"
-                    onClick={() => handleClick("wallSmokes", "agents")}
-                  >
-                    <div className="flex items-center">
-                      Agent
-                      <span
-                        className={`ml-1 text-xs transition-colors duration-100 ${
-                          sortedBy.wallSmokes === "agents"
-                            ? "text-white"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {sortedBy.wallSmokes === "agents"
-                          ? isAsc.wallSmokes
-                            ? "▲"
-                            : "▼"
-                          : "▲"}
-                      </span>
-                    </div>
-                  </th>
-                  <th
-                    className="cursor-pointer select-none"
-                    onClick={() => handleClick("wallSmokes", "duration")}
-                  >
-                    <div className="flex items-center">
-                      Duration (s)
-                      <span
-                        className={`ml-1 text-xs transition-colors duration-100 ${
-                          sortedBy.wallSmokes === "duration"
-                            ? "text-white"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {sortedBy.wallSmokes === "duration"
-                          ? isAsc.wallSmokes
-                            ? "▲"
-                            : "▼"
-                          : "▲"}
-                      </span>
-                    </div>
-                  </th>
-                  <th
-                    className="cursor-pointer select-none"
-                    onClick={() => handleClick("wallSmokes", "length")}
-                  >
-                    <div className="flex items-center">
-                      Length
-                      <span
-                        className={`ml-1 text-xs transition-colors duration-100 ${
-                          sortedBy.wallSmokes === "length"
-                            ? "text-white"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {sortedBy.wallSmokes === "length"
-                          ? isAsc.wallSmokes
-                            ? "▲"
-                            : "▼"
-                          : "▲"}
-                      </span>
-                    </div>
-                  </th>
-                  <th
-                    className="cursor-pointer select-none"
-                    onClick={() => handleClick("wallSmokes", "cost")}
-                  >
-                    <div className="flex items-center">
-                      Cost
-                      <span
-                        className={`ml-1 text-xs transition-colors duration-100 ${
-                          sortedBy.wallSmokes === "cost"
-                            ? "text-white"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {sortedBy.wallSmokes === "cost"
-                          ? isAsc.wallSmokes
-                            ? "▲"
-                            : "▼"
-                          : "▲"}
-                      </span>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {wallSmokesList.map((smokeObj) => (
-                  <tr key={smokeObj.id}>
-                    <td className="flex justify-center">
-                      <img
-                        className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                        src={smokeObj.imageUrl}
-                        alt={`${smokeObj.agents}'s smoke`}
-                      />
-                    </td>
-                    <td>{smokeObj.agents}</td>
-                    <td>{smokeObj.duration}</td>
-                    <td>{smokeObj.length}</td>
-                    <td>{smokeObj.cost}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="mt-8" id="wall_smokes-container">
+          <TableComponent
+            tableName="Wall smokes"
+            columnNameObjList={[
+              { name: "imageUrl", sortable: false },
+              { name: "agent", sortable: true },
+              { name: "duration", sortable: true },
+              { name: "length", sortable: true },
+              { name: "cost", sortable: true },
+            ]}
+            dataList={smokesData.wallSmokesData}
+          />
         </div>
       </div>
     </main>
