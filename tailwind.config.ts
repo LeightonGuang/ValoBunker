@@ -8,9 +8,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        tungsten: ["Tungsten", "sans-serif"],
+      },
+      fontWeight: {
+        thin: "100",
+        extraLight: "200",
+        light: "300",
+        normal: "400",
+        semiBold: "600",
+        bold: "700",
+        black: "900",
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#0f1923",
+        valorantRed: "#FD4556",
       },
     },
   },
