@@ -2,46 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-thin.ttf");
-  font-weight: 100;
-}
+@layer base {
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-extra-light.ttf");
-  font-weight: 200;
-}
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-extra-light.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-light.ttf");
-  font-weight: 300;
-}
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-book.ttf");
-  font-weight: 400;
-}
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-book.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-semi-bold.ttf");
-  font-weight: 600;
-}
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-semi-bold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-bold.ttf");
-  font-weight: 700;
-}
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: "Tungsten";
-  src: url("../../public/fonts/tungsten-black.ttf");
-  font-weight: 900;
+  @font-face {
+    font-family: "Tungsten";
+    src: url("../../public/fonts/tungsten-black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+  }
 }
 
 img {
@@ -51,12 +60,19 @@ img {
 
 * {
   box-sizing: border-box;
+  font-family: "Tungsten";
+  font-weight: 400;
+  font-size: 1.125rem;
   padding: 0;
   margin: 0;
 }
 
 h1 {
-  font-family: "Tungsten";
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+h2 {
   font-weight: 600;
   font-size: 2rem;
 }
