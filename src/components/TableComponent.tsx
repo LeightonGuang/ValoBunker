@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-interface Props<T extends { id: number }> {
+interface Props<
+  T extends { id: number; [key: string]: string | number | unknown },
+> {
   tableName: string;
   columnNameObjList: { name: string; sortable: boolean }[];
   dataList: T[];
 }
 
-type TableRow = { id: number } & { [key: string]: string | number };
+type TableRow = { id: number } & { [key: string]: unknown };
 
 const TableComponent = <T extends TableRow>({
   tableName,
@@ -96,24 +98,26 @@ const TableComponent = <T extends TableRow>({
               key={dataObj.id}
             >
               {Object.entries(dataObj).map(([key, value], j) => {
-                // Check if the key exists in columnNameObjList
-                if (columnNameObjList.some((column) => column.name === key)) {
-                  if (key === "imageUrl") {
-                    return (
-                      <td className="flex justify-center" key={j}>
-                        <img
-                          className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                          src={`${value}`}
-                          alt="ability icon"
-                        />
-                      </td>
-                    );
-                  } else if (key === "duration") {
-                    return <td key={j}>{value} s</td>;
-                  } else if (key === "length" || key === "radius") {
-                    return <td key={j}>{value} m</td>;
-                  } else if (key !== "id") {
-                    return <td key={j}>{value}</td>;
+                if (typeof value === "string" || typeof value === "number") {
+                  // Check if the key exists in columnNameObjList
+                  if (columnNameObjList.some((column) => column.name === key)) {
+                    if (key === "imageUrl") {
+                      return (
+                        <td className="flex justify-center" key={j}>
+                          <img
+                            className="h-8 w-8 rounded-sm bg-gray-400 p-1"
+                            src={`${value}`}
+                            alt="ability icon"
+                          />
+                        </td>
+                      );
+                    } else if (key === "duration") {
+                      return <td key={j}>{value} s</td>;
+                    } else if (key === "length" || key === "radius") {
+                      return <td key={j}>{value} m</td>;
+                    } else if (key !== "id") {
+                      return <td key={j}>{value}</td>;
+                    }
                   }
                 }
               })}
