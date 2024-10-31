@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import * as smokesData from "../../../../public/data/smokesData.json";
+import smokesDataJson from "../../../../public/data/smokesData.json";
+const smokesData = smokesDataJson as SmokesData;
 
 interface RoundSmokesDataType {
   id: number;
@@ -9,7 +10,7 @@ interface RoundSmokesDataType {
   agents: string;
   abilityName: string;
   duration: number;
-  radius: number;
+  radius?: number;
   cost: number;
   regen: {
     reusable: boolean;
@@ -23,13 +24,20 @@ interface WallSmokesDataType {
   agents: string;
   abilityName: string;
   duration: number;
-  length: number;
+  length?: number | string;
   cost: number;
   regen: {
     reusable: boolean;
     regenTime: number | null;
   };
 }
+
+interface SmokesData {
+  roundSmokesData: RoundSmokesDataType[];
+  wallSmokesData: WallSmokesDataType[];
+}
+
+type CommonKeys = keyof (RoundSmokesDataType & WallSmokesDataType);
 
 const SmokesPage = () => {
   const [isAsc, setIsAsc] = useState<{
@@ -47,24 +55,18 @@ const SmokesPage = () => {
     wallSmokes: "agents",
   });
 
-  const sortList = <T extends RoundSmokesDataType | WallSmokesDataType>(
-    list: T[],
-    column: keyof T,
+  const sortList = (
+    list: (RoundSmokesDataType | WallSmokesDataType)[],
+    column: CommonKeys,
     isAsc: boolean,
-  ): T[] => {
-    const sorted = [...list].sort((a: T, b: T) =>
-      isAsc
-        ? a[column] < b[column]
-          ? -1
-          : a[column] > b[column]
-            ? 1
-            : 0
-        : a[column] > b[column]
-          ? -1
-          : a[column] < b[column]
-            ? 1
-            : 0,
-    );
+  ) => {
+    const sorted = [...list].sort((a, b) => {
+      // Define a fallback value to handle missing properties
+      const aValue = column in a ? a[column as keyof typeof a] : 0;
+      const bValue = column in b ? b[column as keyof typeof b] : 0;
+
+      return isAsc ? (aValue < bValue ? -1 : 1) : aValue > bValue ? -1 : 1;
+    });
 
     return sorted;
   };
@@ -72,9 +74,9 @@ const SmokesPage = () => {
   const [roundSmokesList, setRoundSmokesList] = useState<RoundSmokesDataType[]>(
     sortList(smokesData.roundSmokesData, "agents", isAsc.roundSmokes),
   );
-  // const [wallSmokesList, setWallSmokesList] = useState<WallSmokesDataType[]>(
-  //   sortList(smokesData.wallSmokesData, "agents", isAsc.wallSmokes),
-  // );
+  const [wallSmokesList, setWallSmokesList] = useState<WallSmokesDataType[]>(
+    sortList(smokesData.wallSmokesData, "agents", isAsc.wallSmokes),
+  );
 
   const handleClick = (
     table: string,
@@ -83,25 +85,23 @@ const SmokesPage = () => {
     if (table === "roundSmokes") {
       if (sortedBy.roundSmokes === column) {
         setRoundSmokesList(
-          sortList(
-            roundSmokesList,
-            column as keyof RoundSmokesDataType,
-            !isAsc.roundSmokes,
-          ),
+          sortList(roundSmokesList, column, !isAsc.roundSmokes),
         );
         setIsAsc({ ...isAsc, roundSmokes: !isAsc.roundSmokes });
       } else {
         setSortedBy({ ...sortedBy, roundSmokes: column });
         setIsAsc({ ...isAsc, roundSmokes: true });
-        setRoundSmokesList(
-          sortList(roundSmokesList, column as keyof RoundSmokesDataType, true),
-        );
+        setRoundSmokesList(sortList(roundSmokesList, column, true));
       }
     } else if (table === "wallSmokes") {
       if (sortedBy.wallSmokes === column) {
+        setWallSmokesList(sortList(wallSmokesList, column, !isAsc.wallSmokes));
         setIsAsc({ ...isAsc, wallSmokes: !isAsc.wallSmokes });
       } else {
         setSortedBy({ ...sortedBy, wallSmokes: column });
+        setWallSmokesList(
+          sortList(wallSmokesList, column as keyof WallSmokesDataType, true),
+        );
         setIsAsc({ ...isAsc, wallSmokes: true });
       }
     }
@@ -111,9 +111,9 @@ const SmokesPage = () => {
     <main>
       <div>
         <h1>Smokes</h1>
-        <div>
+        <div id="round_smokes-container">
           <h2>Round smokes</h2>
-          <table className="w-full table-auto">
+          <table className="w-full table-auto" id="round-smokes-table">
             <thead>
               <tr>
                 <th>Smokes</th>
@@ -214,25 +214,97 @@ const SmokesPage = () => {
             </tbody>
           </table>
         </div>
-        {/* <div>
+        <div id="wall_smokes-container">
           <h2>Wall smokes</h2>
           <div className="overflow-x-auto">
-            <table className="table-auto w-full">
+            <table className="w-full table-auto">
               <thead>
                 <tr>
                   <th>Image</th>
-                  <th>Agent</th>
-                  <th>Duration (s)</th>
-                  <th>Length (m)</th>
-                  <th>Cost</th>
+                  <th
+                    className="cursor-pointer select-none"
+                    onClick={() => handleClick("wallSmokes", "agents")}
+                  >
+                    Agent
+                    <span
+                      className={`ml-1 transition-colors duration-100 ${
+                        sortedBy.wallSmokes === "agents"
+                          ? "text-black"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.wallSmokes === "agents"
+                        ? isAsc.wallSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </th>
+                  <th
+                    className="cursor-pointer select-none"
+                    onClick={() => handleClick("wallSmokes", "duration")}
+                  >
+                    Duration (s)
+                    <span
+                      className={`ml-1 transition-colors duration-100 ${
+                        sortedBy.wallSmokes === "duration"
+                          ? "text-black"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.wallSmokes === "duration"
+                        ? isAsc.wallSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </th>
+                  <th
+                    className="cursor-pointer select-none"
+                    onClick={() => handleClick("wallSmokes", "length")}
+                  >
+                    Length
+                    <span
+                      className={`ml-1 transition-colors duration-100 ${
+                        sortedBy.wallSmokes === "length"
+                          ? "text-black"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.wallSmokes === "length"
+                        ? isAsc.wallSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </th>
+                  <th
+                    className="cursor-pointer select-none"
+                    onClick={() => handleClick("wallSmokes", "cost")}
+                  >
+                    Cost
+                    <span
+                      className={`ml-1 transition-colors duration-100 ${
+                        sortedBy.wallSmokes === "cost"
+                          ? "text-black"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.wallSmokes === "cost"
+                        ? isAsc.wallSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {sortedWallSmokes.map((smokeObj) => (
+                {wallSmokesList.map((smokeObj) => (
                   <tr className="text-center" key={smokeObj.id}>
                     <td className="flex justify-center">
                       <img
-                        className="w-8 h-8 bg-gray-400 p-1 rounded-sm "
+                        className="h-8 w-8 rounded-sm bg-gray-400 p-1"
                         src={smokeObj.imageUrl}
                         alt={`${smokeObj.agents}'s smoke`}
                       />
@@ -246,7 +318,7 @@ const SmokesPage = () => {
               </tbody>
             </table>
           </div>
-        </div> */}
+        </div>
       </div>
     </main>
   );
