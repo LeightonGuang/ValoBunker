@@ -1,7 +1,7 @@
 export interface RoundSmokesDataType {
   id: number;
   imageUrl: string;
-  agents: string;
+  agent: string;
   abilityName: string;
   duration: number;
   radius?: number;

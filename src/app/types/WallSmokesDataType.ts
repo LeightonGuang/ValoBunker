@@ -1,7 +1,7 @@
 export interface WallSmokesDataType {
   id: number;
   imageUrl: string;
-  agents: string;
+  agent: string;
   abilityName: string;
   duration: number;
   length?: number | string;
