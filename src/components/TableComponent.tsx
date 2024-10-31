@@ -1,9 +1,8 @@
-import { RoundSmokesDataType } from "@/app/types/RoundSmokesDataType";
-import { WallSmokesDataType } from "@/app/types/WallSmokesDataType";
+import { useEffect, useState } from "react";
 
-interface Props<T> {
+interface Props<T extends { id: number }> {
   columnNameObjList: { name: string; sortable: boolean }[];
-  dataList: RoundSmokesDataType[] | WallSmokesDataType[] | T[];
+  dataList: T[];
 }
 
 type TableRow = { id: number } & { [key: string]: string | number };
@@ -12,19 +11,82 @@ const TableComponent = <T extends TableRow>({
   columnNameObjList,
   dataList,
 }: Props<T>) => {
+  const [sortedBy, setSortedBy] = useState<string | null>(null);
+  const [isAscendingOrder, setIsAscendingOrder] = useState<boolean>(true);
+
+  const sortList = <T, K extends keyof T>(
+    list: T[],
+    column: K,
+    isAsc: boolean,
+  ) => {
+    return [...list].sort((a, b) => {
+      const aValue = a[column];
+      const bValue = b[column];
+      return aValue < bValue
+        ? isAsc
+          ? -1
+          : 1
+        : aValue > bValue
+          ? isAsc
+            ? 1
+            : -1
+          : 0;
+    });
+  };
+
+  const [sortedDataList, setSortedDataList] = useState(
+    sortList(dataList, Object.keys(dataList[0])[1], isAscendingOrder),
+  );
+
+  const handleClickSort = (columnName: string) => {
+    if (sortedBy === columnName) {
+      setSortedDataList(
+        sortList(sortedDataList, columnName, !isAscendingOrder),
+      );
+      setIsAscendingOrder(!isAscendingOrder);
+    } else if (sortedBy !== columnName) {
+      setSortedBy(columnName);
+      setIsAscendingOrder(true);
+      setSortedDataList(sortList(sortedDataList, columnName, true));
+    }
+  };
+
+  useEffect(() => {
+    console.table(sortedDataList);
+  }, [sortedDataList]);
+
   return (
     <table className="w-full table-auto border-white">
       <thead>
         <tr className="border-b-2 border-gray-500 border-opacity-20">
           {columnNameObjList.map((columnObj, i) => (
             <th className="text-left font-bold" key={i}>
-              {columnObj.name === "imageUrl" ? "image" : columnObj.name}
+              {columnObj.sortable ? (
+                <button onClick={() => handleClickSort(columnObj.name)}>
+                  {columnObj.name}
+                  <span
+                    className={`ml-1 text-xs transition-colors duration-100 ${
+                      sortedBy === columnObj.name
+                        ? "text-white"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    {sortedBy === columnObj.name
+                      ? isAscendingOrder
+                        ? "▲"
+                        : "▼"
+                      : "▲"}
+                  </span>
+                </button>
+              ) : (
+                <>{columnObj.name === "imageUrl" ? "image" : columnObj.name}</>
+              )}
             </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {dataList.map((dataObj) => (
+        {sortedDataList.map((dataObj) => (
           <tr
             className="border-b-2 border-gray-500 border-opacity-20"
             key={dataObj.id}
