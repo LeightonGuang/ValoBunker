@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface Props<T extends { id: number }> {
+  tableName: string;
   columnNameObjList: { name: string; sortable: boolean }[];
   dataList: T[];
 }
@@ -8,10 +9,13 @@ interface Props<T extends { id: number }> {
 type TableRow = { id: number } & { [key: string]: string | number };
 
 const TableComponent = <T extends TableRow>({
+  tableName,
   columnNameObjList,
   dataList,
 }: Props<T>) => {
-  const [sortedBy, setSortedBy] = useState<string | null>(null);
+  const [sortedBy, setSortedBy] = useState<string | null>(
+    Object.keys(dataList[0])[2],
+  );
   const [isAscendingOrder, setIsAscendingOrder] = useState<boolean>(true);
 
   const sortList = <T, K extends keyof T>(
@@ -35,7 +39,7 @@ const TableComponent = <T extends TableRow>({
   };
 
   const [sortedDataList, setSortedDataList] = useState(
-    sortList(dataList, Object.keys(dataList[0])[1], isAscendingOrder),
+    sortList(dataList, Object.keys(dataList[0])[2], isAscendingOrder),
   );
 
   const handleClickSort = (columnName: string) => {
@@ -51,72 +55,73 @@ const TableComponent = <T extends TableRow>({
     }
   };
 
-  useEffect(() => {
-    console.table(sortedDataList);
-  }, [sortedDataList]);
-
   return (
-    <table className="w-full table-auto border-white">
-      <thead>
-        <tr className="border-b-2 border-gray-500 border-opacity-20">
-          {columnNameObjList.map((columnObj, i) => (
-            <th className="text-left font-bold" key={i}>
-              {columnObj.sortable ? (
-                <button onClick={() => handleClickSort(columnObj.name)}>
-                  {columnObj.name}
-                  <span
-                    className={`ml-1 text-xs transition-colors duration-100 ${
-                      sortedBy === columnObj.name
-                        ? "text-white"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {sortedBy === columnObj.name
-                      ? isAscendingOrder
-                        ? "▲"
-                        : "▼"
-                      : "▲"}
-                  </span>
-                </button>
-              ) : (
-                <>{columnObj.name === "imageUrl" ? "image" : columnObj.name}</>
-              )}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {sortedDataList.map((dataObj) => (
-          <tr
-            className="border-b-2 border-gray-500 border-opacity-20"
-            key={dataObj.id}
-          >
-            {Object.entries(dataObj).map(([key, value], j) => {
-              // Check if the key exists in columnNameObjList
-              if (columnNameObjList.some((column) => column.name === key)) {
-                if (key === "imageUrl") {
-                  return (
-                    <td className="flex justify-center" key={j}>
-                      <img
-                        className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                        src={`${value}`}
-                        alt="ability icon"
-                      />
-                    </td>
-                  );
-                } else if (key === "duration") {
-                  return <td key={j}>{value} s</td>;
-                } else if (key === "length" || key === "radius") {
-                  return <td key={j}>{value} m</td>;
-                } else if (key !== "id") {
-                  return <td key={j}>{value}</td>;
-                }
-              }
-            })}
+    <>
+      <h2>{tableName}</h2>
+      <table className="w-full table-auto border-white">
+        <thead>
+          <tr className="border-b-2 border-gray-500 border-opacity-20">
+            {columnNameObjList.map((columnObj, i) => (
+              <th className="text-left font-bold" key={i}>
+                {columnObj.sortable ? (
+                  <button onClick={() => handleClickSort(columnObj.name)}>
+                    {columnObj.name}
+                    <span
+                      className={`ml-1 text-xs transition-colors duration-100 ${
+                        sortedBy === columnObj.name
+                          ? "text-white"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy === columnObj.name
+                        ? isAscendingOrder
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </button>
+                ) : (
+                  <>
+                    {columnObj.name === "imageUrl" ? "image" : columnObj.name}
+                  </>
+                )}
+              </th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {sortedDataList.map((dataObj) => (
+            <tr
+              className="border-b-2 border-gray-500 border-opacity-20"
+              key={dataObj.id}
+            >
+              {Object.entries(dataObj).map(([key, value], j) => {
+                // Check if the key exists in columnNameObjList
+                if (columnNameObjList.some((column) => column.name === key)) {
+                  if (key === "imageUrl") {
+                    return (
+                      <td className="flex justify-center" key={j}>
+                        <img
+                          className="h-8 w-8 rounded-sm bg-gray-400 p-1"
+                          src={`${value}`}
+                          alt="ability icon"
+                        />
+                      </td>
+                    );
+                  } else if (key === "duration") {
+                    return <td key={j}>{value} s</td>;
+                  } else if (key === "length" || key === "radius") {
+                    return <td key={j}>{value} m</td>;
+                  } else if (key !== "id") {
+                    return <td key={j}>{value}</td>;
+                  }
+                }
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 
