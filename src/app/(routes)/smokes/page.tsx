@@ -1,41 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import smokesDataJson from "../../../../public/data/smokesData.json";
-const smokesData = smokesDataJson as SmokesData;
+import smokesDataJson from "@/../../public/data/smokesData.json";
 
-interface RoundSmokesDataType {
-  id: number;
-  imageUrl: string;
-  agents: string;
-  abilityName: string;
-  duration: number;
-  radius?: number;
-  cost: number;
-  regen: {
-    reusable: boolean;
-    regenTime: number | null;
-  };
-}
+import { RoundSmokesDataType } from "@/app/types/RoundSmokesDataType";
+import { WallSmokesDataType } from "@/app/types/WallSmokesDataType";
+import { SmokesDataType } from "@/app/types/SmokesDataType";
 
-interface WallSmokesDataType {
-  id: number;
-  imageUrl: string;
-  agents: string;
-  abilityName: string;
-  duration: number;
-  length?: number | string;
-  cost: number;
-  regen: {
-    reusable: boolean;
-    regenTime: number | null;
-  };
-}
-
-interface SmokesData {
-  roundSmokesData: RoundSmokesDataType[];
-  wallSmokesData: WallSmokesDataType[];
-}
+const smokesData = smokesDataJson as SmokesDataType;
 
 type CommonKeys = keyof (RoundSmokesDataType & WallSmokesDataType);
 
