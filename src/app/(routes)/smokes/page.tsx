@@ -81,7 +81,7 @@ const SmokesPage = () => {
 
   return (
     <main>
-      <div>
+      <div className="m-4">
         <h1>Smokes</h1>
         <div id="round_smokes-container">
           <h2>Round smokes</h2>
@@ -93,83 +93,91 @@ const SmokesPage = () => {
                   className="cursor-pointer select-none"
                   onClick={() => handleClick("roundSmokes", "agents")}
                 >
-                  Agent
-                  <span
-                    className={`ml-1 transition-colors duration-100 ${
-                      sortedBy.roundSmokes === "agents"
-                        ? "text-white"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {sortedBy.roundSmokes === "agents"
-                      ? isAsc.roundSmokes
-                        ? "▲"
-                        : "▼"
-                      : "▲"}
-                  </span>
+                  <div className="flex items-center">
+                    Agent
+                    <span
+                      className={`ml-1 text-xs transition-colors duration-100 ${
+                        sortedBy.roundSmokes === "agents"
+                          ? "text-white"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.roundSmokes === "agents"
+                        ? isAsc.roundSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </div>
                 </th>
                 <th
                   className="cursor-pointer select-none"
                   onClick={() => handleClick("roundSmokes", "duration")}
                 >
-                  Duration
-                  <span
-                    className={`ml-1 transition-colors duration-100 ${
-                      sortedBy.roundSmokes === "duration"
-                        ? "text-white"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {sortedBy.roundSmokes === "duration"
-                      ? isAsc.roundSmokes
-                        ? "▲"
-                        : "▼"
-                      : "▲"}
-                  </span>
+                  <div className="flex items-center">
+                    Duration (s)
+                    <span
+                      className={`ml-1 text-xs transition-colors duration-100 ${
+                        sortedBy.roundSmokes === "duration"
+                          ? "text-white"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.roundSmokes === "duration"
+                        ? isAsc.roundSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </div>
                 </th>
                 <th
                   className="cursor-pointer select-none"
                   onClick={() => handleClick("roundSmokes", "radius")}
                 >
-                  Radius
-                  <span
-                    className={`ml-1 transition-colors duration-100 ${
-                      sortedBy.roundSmokes === "radius"
-                        ? "text-white"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {sortedBy.roundSmokes === "radius"
-                      ? isAsc.roundSmokes
-                        ? "▲"
-                        : "▼"
-                      : "▲"}
-                  </span>
+                  <div className="flex items-center">
+                    Radius (m)
+                    <span
+                      className={`ml-1 text-xs transition-colors duration-100 ${
+                        sortedBy.roundSmokes === "radius"
+                          ? "text-white"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.roundSmokes === "radius"
+                        ? isAsc.roundSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </div>
                 </th>
                 <th
                   className="cursor-pointer select-none"
                   onClick={() => handleClick("roundSmokes", "cost")}
                 >
-                  Cost
-                  <span
-                    className={`ml-1 transition-colors duration-100 ${
-                      sortedBy.roundSmokes === "cost"
-                        ? "text-white"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {sortedBy.roundSmokes === "cost"
-                      ? isAsc.roundSmokes
-                        ? "▲"
-                        : "▼"
-                      : "▲"}
-                  </span>
+                  <div className="flex items-center">
+                    Cost
+                    <span
+                      className={`ml-1 text-xs transition-colors duration-100 ${
+                        sortedBy.roundSmokes === "cost"
+                          ? "text-white"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {sortedBy.roundSmokes === "cost"
+                        ? isAsc.roundSmokes
+                          ? "▲"
+                          : "▼"
+                        : "▲"}
+                    </span>
+                  </div>
                 </th>
               </tr>
             </thead>
             <tbody>
               {roundSmokesList.map((smokeObj) => (
-                <tr className="text-center" key={smokeObj.id}>
+                <tr key={smokeObj.id}>
                   <td className="flex justify-center">
                     <img
                       className="h-8 w-8 rounded-sm bg-gray-400 p-1"
@@ -192,88 +200,96 @@ const SmokesPage = () => {
             <table className="w-full table-auto">
               <thead>
                 <tr>
-                  <th>Image</th>
+                  <th>Smokes</th>
                   <th
                     className="cursor-pointer select-none"
                     onClick={() => handleClick("wallSmokes", "agents")}
                   >
-                    Agent
-                    <span
-                      className={`ml-1 transition-colors duration-100 ${
-                        sortedBy.wallSmokes === "agents"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.wallSmokes === "agents"
-                        ? isAsc.wallSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
+                    <div className="flex items-center">
+                      Agent
+                      <span
+                        className={`ml-1 text-xs transition-colors duration-100 ${
+                          sortedBy.wallSmokes === "agents"
+                            ? "text-white"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {sortedBy.wallSmokes === "agents"
+                          ? isAsc.wallSmokes
+                            ? "▲"
+                            : "▼"
+                          : "▲"}
+                      </span>
+                    </div>
                   </th>
                   <th
                     className="cursor-pointer select-none"
                     onClick={() => handleClick("wallSmokes", "duration")}
                   >
-                    Duration (s)
-                    <span
-                      className={`ml-1 transition-colors duration-100 ${
-                        sortedBy.wallSmokes === "duration"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.wallSmokes === "duration"
-                        ? isAsc.wallSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
+                    <div className="flex items-center">
+                      Duration (s)
+                      <span
+                        className={`ml-1 text-xs transition-colors duration-100 ${
+                          sortedBy.wallSmokes === "duration"
+                            ? "text-white"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {sortedBy.wallSmokes === "duration"
+                          ? isAsc.wallSmokes
+                            ? "▲"
+                            : "▼"
+                          : "▲"}
+                      </span>
+                    </div>
                   </th>
                   <th
                     className="cursor-pointer select-none"
                     onClick={() => handleClick("wallSmokes", "length")}
                   >
-                    Length
-                    <span
-                      className={`ml-1 transition-colors duration-100 ${
-                        sortedBy.wallSmokes === "length"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.wallSmokes === "length"
-                        ? isAsc.wallSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
+                    <div className="flex items-center">
+                      Length
+                      <span
+                        className={`ml-1 text-xs transition-colors duration-100 ${
+                          sortedBy.wallSmokes === "length"
+                            ? "text-white"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {sortedBy.wallSmokes === "length"
+                          ? isAsc.wallSmokes
+                            ? "▲"
+                            : "▼"
+                          : "▲"}
+                      </span>
+                    </div>
                   </th>
                   <th
                     className="cursor-pointer select-none"
                     onClick={() => handleClick("wallSmokes", "cost")}
                   >
-                    Cost
-                    <span
-                      className={`ml-1 transition-colors duration-100 ${
-                        sortedBy.wallSmokes === "cost"
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {sortedBy.wallSmokes === "cost"
-                        ? isAsc.wallSmokes
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
+                    <div className="flex items-center">
+                      Cost
+                      <span
+                        className={`ml-1 text-xs transition-colors duration-100 ${
+                          sortedBy.wallSmokes === "cost"
+                            ? "text-white"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {sortedBy.wallSmokes === "cost"
+                          ? isAsc.wallSmokes
+                            ? "▲"
+                            : "▼"
+                          : "▲"}
+                      </span>
+                    </div>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {wallSmokesList.map((smokeObj) => (
-                  <tr className="text-center" key={smokeObj.id}>
+                  <tr key={smokeObj.id}>
                     <td className="flex justify-center">
                       <img
                         className="h-8 w-8 rounded-sm bg-gray-400 p-1"
