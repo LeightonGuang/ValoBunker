@@ -1,0 +1,198 @@
+{
+  "flashData": [
+    {
+      "id": 1,
+      "agent": "Phoenix",
+      "ability": {
+        "name": "Curveball",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/beb874d19c79982f0e99e858098c067d9132a95a-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 1.5,
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": null
+    },
+    {
+      "id": 2,
+      "agent": "Breach",
+      "ability": {
+        "name": "Flashpoint",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/cca58acc93956ee755ccea171a36584a402793c2-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 2,
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": null
+    },
+    {
+      "id": 3,
+      "agent": "Skye",
+      "ability": {
+        "name": "Guiding Light",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/ed6e5f91be20274ff84cb24644c3b559bfa8fed1-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 1.25,
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": null
+    },
+    {
+      "id": 4,
+      "agent": "Yoru",
+      "ability": {
+        "name": "Blindside",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/ea733bf224ae53e8e53cabfae19bfc12ce9fcda3-512x512.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 1.75,
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": null
+    },
+    {
+      "id": 5,
+      "agent": "Kay/O",
+      "ability": {
+        "name": "FLASH/drive",
+        "iconUrl": "https://static.wikia.nocookie.net/valorant/images/1/13/FLASH-drive.png"
+      },
+      "blind_duration": "1.25 / 2.25",
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": true,
+        "regenTime": 30
+      },
+      "health": null
+    },
+    {
+      "id": 6,
+      "agent": "Gekko",
+      "ability": {
+        "name": "Dizzy",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5cd2d39b6747b897e6648172d084d355477ea545-255x248.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 1,
+      "charge": 1,
+      "cost": 0,
+      "regen": {
+        "reusable": true,
+        "regenTime": 10
+      },
+      "health": 20
+    },
+    {
+      "id": 7,
+      "agent": "Vyse",
+      "ability": {
+        "name": "Arc Rose",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/f0ac7fb5d31a65820bcc22217abcafbbfb4077e7-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 2.25,
+      "charge": 1,
+      "cost": 0,
+      "regen": {
+        "reusable": true,
+        "regenTime": "20 / 45"
+      },
+      "health": 20
+    },
+    {
+      "id": 8,
+      "agent": "Yoru",
+      "ability": {
+        "name": "Fakeout",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/43416e5b34cd80c691ed0cc3b69fc73fae93f923-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 3.1,
+      "charge": 1,
+      "cost": 100,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": 150
+    }
+  ],
+  "nearsigntData": [
+    {
+      "id": 1,
+      "agent": "Reyna",
+      "ability": {
+        "name": "Leer",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/9d295b17382acbc17bdb4e45e0be74d58e94e6c5-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 1.6,
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": 100
+    },
+    {
+      "id": 2,
+      "agent": "Omen",
+      "ability": {
+        "name": "Paranoia",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e8544e323a51c9b8ff7ae8fca257e038a570819d-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 2,
+      "charge": 1,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": null
+    },
+    {
+      "id": 3,
+      "agent": "Fade",
+      "ability": {
+        "name": "Prowlier",
+        "iconUrl": "https://static.wikia.nocookie.net/valorant/images/6/68/Prowler.png"
+      },
+      "blind_duration": 2.75,
+      "charge": 2,
+      "cost": 250,
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": 60
+    },
+    {
+      "id": 4,
+      "agent": "Skye",
+      "ability": {
+        "name": "Seekers",
+        "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/9ccbd11eadca50047c6e84125285a11e1d334acd-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
+      },
+      "blind_duration": 3,
+      "charge": 1,
+      "cost": "ultimate",
+      "regen": {
+        "reusable": false,
+        "regenTime": null
+      },
+      "health": 120
+    }
+  ]
+}
