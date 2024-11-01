@@ -64,7 +64,10 @@ const TableComponent = <T extends TableRow>({
         <thead>
           <tr className="border-b-2 border-gray-500 border-opacity-20">
             {columnNameObjList.map((columnObj, i) => (
-              <th className="text-left font-bold" key={i}>
+              <th
+                className={`text-left font-bold ${i > 5 ? "hidden" : ""}`}
+                key={i}
+              >
                 {columnObj.sortable ? (
                   <button onClick={() => handleClickSort(columnObj.name)}>
                     {columnObj.name}
@@ -107,26 +110,34 @@ const TableComponent = <T extends TableRow>({
                 ) {
                   // Check if the key exists in columnNameObjList
                   if (columnNameObjList.some((column) => column.name === key)) {
-                    if (
-                      value &&
-                      key === "ability" &&
-                      typeof value === "object" &&
-                      "iconUrl" in value &&
-                      "name" in value
-                    ) {
+                    if (key === "ability") {
+                      const abilityValue = value as {
+                        name: string;
+                        iconUrl: string;
+                      };
                       return (
                         <td key={j}>
                           <img
                             className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                            src={`${value.iconUrl}`}
-                            alt={`${value.name}`}
+                            src={abilityValue.iconUrl}
+                            alt={abilityValue.name}
                           />
                         </td>
                       );
                     } else if (key === "duration") {
                       return <td key={j}>{String(value)} s</td>;
                     } else if (key === "length" || key === "radius") {
-                      return <td key={j}>{String(value)} m</td>;
+                      return <td key={j}>{`${value} m`}</td>;
+                    } else if (key === "regen") {
+                      const regenValue = value as {
+                        reusable: boolean;
+                        regenTime: number | null;
+                      };
+                      return (
+                        <td key={j}>
+                          {regenValue.reusable ? regenValue.regenTime : "x"}
+                        </td>
+                      );
                     } else if (key !== "id") {
                       return <td key={j}>{String(value)}</td>;
                     }
