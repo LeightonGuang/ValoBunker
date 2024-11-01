@@ -11,7 +11,7 @@ const SmokesPage = () => {
 
         <div id="round_smokes-container">
           <TableComponent
-            tableName="Round smokes"
+            tableName="Circular smokes"
             columnNameObjList={[
               { name: "agent", sortable: true },
               { name: "ability", sortable: false },
@@ -19,7 +19,7 @@ const SmokesPage = () => {
               { name: "radius", sortable: true },
               { name: "cost", sortable: true },
             ]}
-            dataList={smokesData.roundSmokesData}
+            dataList={smokesData.circularSmokesData}
           />
         </div>
         <div className="mt-8" id="wall_smokes-container">

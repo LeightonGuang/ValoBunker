@@ -1,4 +1,4 @@
-export interface RoundSmokesDataType {
+export interface CircularSmokesDataType {
   id: number;
   imageUrl: string;
   agent: string;

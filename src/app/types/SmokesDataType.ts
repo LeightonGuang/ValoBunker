@@ -1,7 +1,7 @@
-import { RoundSmokesDataType } from "./RoundSmokesDataType";
+import { CircularSmokesDataType } from "./CircularSmokesDataType";
 import { WallSmokesDataType } from "./WallSmokesDataType";
 
 export interface SmokesDataType {
-  roundSmokesData: RoundSmokesDataType[];
+  circularSmokesData: CircularSmokesDataType[];
   wallSmokesData: WallSmokesDataType[];
 }
