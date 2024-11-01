@@ -18,6 +18,7 @@ const SmokesPage = () => {
               { name: "duration", sortable: true },
               { name: "radius", sortable: true },
               { name: "cost", sortable: true },
+              { name: "regen", sortable: true },
             ]}
             dataList={smokesData.circularSmokesData}
           />
@@ -31,6 +32,7 @@ const SmokesPage = () => {
               { name: "duration", sortable: true },
               { name: "length", sortable: true },
               { name: "cost", sortable: true },
+              { name: "regen", sortable: true },
             ]}
             dataList={smokesData.wallSmokesData}
           />
