@@ -29,6 +29,13 @@ const TableComponent = <T extends TableRow>({
     return [...list].sort((a, b) => {
       const aValue = a[column];
       const bValue = b[column];
+
+      if (typeof aValue === "number" && typeof bValue === "string") {
+        return isAsc ? 1 : -1;
+      } else if (typeof aValue === "string" && typeof bValue === "number") {
+        return isAsc ? -1 : 1;
+      }
+
       return aValue < bValue
         ? isAsc
           ? -1
@@ -71,7 +78,7 @@ const TableComponent = <T extends TableRow>({
               >
                 {columnObj.sortable ? (
                   <button onClick={() => handleClickSort(columnObj.name)}>
-                    {columnObj.name}
+                    {columnObj.name.replace(/_/g, " ")}
                     <span
                       className={`ml-1 text-xs transition-colors duration-100 ${
                         sortedBy === columnObj.name
@@ -109,6 +116,7 @@ const TableComponent = <T extends TableRow>({
                   typeof value === "number" ||
                   typeof value === "object"
                 ) {
+                  if (value === null || !value) value = "x";
                   // Check if the key exists in columnNameObjList
                   if (columnNameObjList.some((column) => column.name === key)) {
                     return (
