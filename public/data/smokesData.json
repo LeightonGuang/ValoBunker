@@ -2,9 +2,9 @@
   "roundSmokesData": [
     {
       "id": 1,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5325b2340045a32d919d467ce3b09c3725de73ea-126x126.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Brimstone",
       "abilityName": "Sky Smoke",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5325b2340045a32d919d467ce3b09c3725de73ea-126x126.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 19.25,
       "radius": 4.15,
       "cost": 100,
@@ -15,9 +15,9 @@
     },
     {
       "id": 2,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/3eba05b8ed1ac69c440d54cec365e537d294be25-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Viper",
       "abilityName": "Toxic Screen",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/3eba05b8ed1ac69c440d54cec365e537d294be25-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 10,
       "radius": 4.5,
       "cost": 200,
@@ -28,9 +28,9 @@
     },
     {
       "id": 3,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/292fbe783ac9e2f638822c5f87f09b005b48a712-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Cypher",
       "abilityName": "Cyber Cage",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/292fbe783ac9e2f638822c5f87f09b005b48a712-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 7.25,
       "radius": 3.72,
       "cost": 100,
@@ -41,9 +41,9 @@
     },
     {
       "id": 4,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e4012aeda506a8e77f2e83d48aa8c5c73a37b659-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Omen",
       "abilityName": "Dark Cover",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e4012aeda506a8e77f2e83d48aa8c5c73a37b659-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 15,
       "radius": 4.1,
       "cost": 150,
@@ -54,9 +54,9 @@
     },
     {
       "id": 5,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/8c5e94bfc817e5d35eca7692fd242404de5ac5dd-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Jett",
       "abilityName": "Cloudburst",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/8c5e94bfc817e5d35eca7692fd242404de5ac5dd-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 2.5,
       "radius": 3.35,
       "cost": 200,
@@ -67,9 +67,9 @@
     },
     {
       "id": 6,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/fe8a6fdb673e9f5a94c3379bde8e78aa9ec7c6c1-512x512.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Astra",
       "abilityName": "Nebula/Dissipate",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/fe8a6fdb673e9f5a94c3379bde8e78aa9ec7c6c1-512x512.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 14.25,
       "radius": 4.75,
       "cost": 150,
@@ -80,9 +80,9 @@
     },
     {
       "id": 7,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e988e2cc973a4c6791db0b87c13ce6a02162ed89-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Harbor",
       "abilityName": "Cove",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e988e2cc973a4c6791db0b87c13ce6a02162ed89-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 15,
       "radius": 4.5,
       "cost": 100,
@@ -93,9 +93,9 @@
     },
     {
       "id": 8,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5ce846ce8e5ae7ce7904f0c31824f7729307743e-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Clove",
       "abilityName": "Ruse",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5ce846ce8e5ae7ce7904f0c31824f7729307743e-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 13.5,
       "radius": 4.72,
       "cost": 150,
@@ -108,9 +108,9 @@
   "wallSmokesData": [
     {
       "id": 1,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/d807a982ce70475acb2e8461b4f8737204e35d96-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Phoenix",
       "abilityName": "Blaze",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/d807a982ce70475acb2e8461b4f8737204e35d96-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 8,
       "length": 21,
       "cost": 150,
@@ -121,9 +121,9 @@
     },
     {
       "id": 2,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/b1204a1fbcc0e2fced090f18ad18e7587357c783-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Viper",
       "abilityName": "Toxic Screen",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/b1204a1fbcc0e2fced090f18ad18e7587357c783-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 10,
       "length": 60,
       "cost": 0,
@@ -134,9 +134,9 @@
     },
     {
       "id": 3,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/46c16f398d28f7e029f42bc742f3838443e8a3d3-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Neon",
       "abilityName": "Fast Lane",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/46c16f398d28f7e029f42bc742f3838443e8a3d3-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 4,
       "length": 46.5,
       "cost": 300,
@@ -147,9 +147,9 @@
     },
     {
       "id": 4,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e6af3e9f6f2259ffe3c69448adc9f89beebc4f80-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Harbor",
       "abilityName": "High Tide",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e6af3e9f6f2259ffe3c69448adc9f89beebc4f80-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 15,
       "length": 50,
       "cost": 0,
@@ -160,9 +160,9 @@
     },
     {
       "id": 5,
-      "imageUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/88032d13dc1b40e61bc763749c5aae29a056735d-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "agent": "Harbor",
       "abilityName": "Cascade",
+      "abilityIconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/88032d13dc1b40e61bc763749c5aae29a056735d-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
       "duration": 7,
       "length": 9.75,
       "cost": 150,
