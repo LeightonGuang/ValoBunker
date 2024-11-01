@@ -84,7 +84,9 @@ const TableComponent = <T extends TableRow>({
                   </button>
                 ) : (
                   <>
-                    {columnObj.name === "imageUrl" ? "image" : columnObj.name}
+                    {columnObj.name === "abilityIconUrl"
+                      ? "icon"
+                      : columnObj.name}
                   </>
                 )}
               </th>
@@ -101,7 +103,7 @@ const TableComponent = <T extends TableRow>({
                 if (typeof value === "string" || typeof value === "number") {
                   // Check if the key exists in columnNameObjList
                   if (columnNameObjList.some((column) => column.name === key)) {
-                    if (key === "imageUrl") {
+                    if (key === "abilityIconUrl") {
                       return (
                         <td className="flex justify-center" key={j}>
                           <img

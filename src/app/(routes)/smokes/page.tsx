@@ -13,8 +13,8 @@ const SmokesPage = () => {
           <TableComponent
             tableName="Round smokes"
             columnNameObjList={[
-              { name: "imageUrl", sortable: false },
               { name: "agent", sortable: true },
+              { name: "abilityIconUrl", sortable: false },
               { name: "duration", sortable: true },
               { name: "radius", sortable: true },
               { name: "cost", sortable: true },
@@ -26,8 +26,8 @@ const SmokesPage = () => {
           <TableComponent
             tableName="Wall smokes"
             columnNameObjList={[
-              { name: "imageUrl", sortable: false },
               { name: "agent", sortable: true },
+              { name: "abilityIconUrl", sortable: false },
               { name: "duration", sortable: true },
               { name: "length", sortable: true },
               { name: "cost", sortable: true },
