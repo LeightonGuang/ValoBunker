@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 
 interface Props<
@@ -65,7 +66,7 @@ const TableComponent = <T extends TableRow>({
           <tr className="border-b-2 border-gray-500 border-opacity-20">
             {columnNameObjList.map((columnObj, i) => (
               <th
-                className={`text-left font-bold ${i > 5 ? "hidden" : ""}`}
+                className={`text-left font-bold ${i > 4 && "hidden sm:table-cell"}`}
                 key={i}
               >
                 {columnObj.sortable ? (
@@ -110,37 +111,63 @@ const TableComponent = <T extends TableRow>({
                 ) {
                   // Check if the key exists in columnNameObjList
                   if (columnNameObjList.some((column) => column.name === key)) {
-                    if (key === "ability") {
-                      const abilityValue = value as {
-                        name: string;
-                        iconUrl: string;
-                      };
-                      return (
-                        <td key={j}>
-                          <img
-                            className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                            src={abilityValue.iconUrl}
-                            alt={abilityValue.name}
+                    return (
+                      <td
+                        className={`${j > 5 && "hidden sm:table-cell"}`}
+                        key={j}
+                      >
+                        {key === "ability" ? (
+                          <Image
+                            width={32}
+                            height={32}
+                            loader={() =>
+                              (
+                                value as {
+                                  name: string;
+                                  iconUrl: string;
+                                }
+                              ).iconUrl
+                            }
+                            className="min-h-8 min-w-8 rounded-sm bg-gray-400 p-1"
+                            src={
+                              (
+                                value as {
+                                  name: string;
+                                  iconUrl: string;
+                                }
+                              ).iconUrl
+                            }
+                            alt={
+                              (value as { name: string; iconUrl: string }).name
+                            }
                           />
-                        </td>
-                      );
-                    } else if (key === "duration") {
-                      return <td key={j}>{String(value)} s</td>;
-                    } else if (key === "length" || key === "radius") {
-                      return <td key={j}>{`${value} m`}</td>;
-                    } else if (key === "regen") {
-                      const regenValue = value as {
-                        reusable: boolean;
-                        regenTime: number | null;
-                      };
-                      return (
-                        <td key={j}>
-                          {regenValue.reusable ? regenValue.regenTime : "x"}
-                        </td>
-                      );
-                    } else if (key !== "id") {
-                      return <td key={j}>{String(value)}</td>;
-                    }
+                        ) : key === "duration" ? (
+                          `${value} s`
+                        ) : key === "length" || key === "radius" ? (
+                          `${value} m`
+                        ) : key === "regen" ? (
+                          `${
+                            (
+                              value as {
+                                reusable: boolean;
+                                regenTime: number | null;
+                              }
+                            ).reusable
+                              ? (
+                                  value as {
+                                    reusable: boolean;
+                                    regenTime: number | null;
+                                  }
+                                ).regenTime
+                              : "x"
+                          }`
+                        ) : key !== "id " ? (
+                          `${value}`
+                        ) : (
+                          ""
+                        )}
+                      </td>
+                    );
                   }
                 }
               })}
