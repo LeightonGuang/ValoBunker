@@ -14,7 +14,7 @@ const SmokesPage = () => {
             tableName="Round smokes"
             columnNameObjList={[
               { name: "agent", sortable: true },
-              { name: "abilityIconUrl", sortable: false },
+              { name: "ability", sortable: false },
               { name: "duration", sortable: true },
               { name: "radius", sortable: true },
               { name: "cost", sortable: true },
@@ -27,7 +27,7 @@ const SmokesPage = () => {
             tableName="Wall smokes"
             columnNameObjList={[
               { name: "agent", sortable: true },
-              { name: "abilityIconUrl", sortable: false },
+              { name: "ability", sortable: false },
               { name: "duration", sortable: true },
               { name: "length", sortable: true },
               { name: "cost", sortable: true },

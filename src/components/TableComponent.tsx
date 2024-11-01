@@ -100,25 +100,35 @@ const TableComponent = <T extends TableRow>({
               key={dataObj.id}
             >
               {Object.entries(dataObj).map(([key, value], j) => {
-                if (typeof value === "string" || typeof value === "number") {
+                if (
+                  typeof value === "string" ||
+                  typeof value === "number" ||
+                  typeof value === "object"
+                ) {
                   // Check if the key exists in columnNameObjList
                   if (columnNameObjList.some((column) => column.name === key)) {
-                    if (key === "abilityIconUrl") {
+                    if (
+                      value &&
+                      key === "ability" &&
+                      typeof value === "object" &&
+                      "iconUrl" in value &&
+                      "name" in value
+                    ) {
                       return (
-                        <td className="flex justify-center" key={j}>
+                        <td key={j}>
                           <img
                             className="h-8 w-8 rounded-sm bg-gray-400 p-1"
-                            src={`${value}`}
-                            alt="ability icon"
+                            src={`${value.iconUrl}`}
+                            alt={`${value.name}`}
                           />
                         </td>
                       );
                     } else if (key === "duration") {
-                      return <td key={j}>{value} s</td>;
+                      return <td key={j}>{String(value)} s</td>;
                     } else if (key === "length" || key === "radius") {
-                      return <td key={j}>{value} m</td>;
+                      return <td key={j}>{String(value)} m</td>;
                     } else if (key !== "id") {
-                      return <td key={j}>{value}</td>;
+                      return <td key={j}>{String(value)}</td>;
                     }
                   }
                 }
