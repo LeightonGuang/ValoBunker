@@ -105,80 +105,71 @@ const TableComponent = <T extends TableRow>({
           </tr>
         </thead>
         <tbody>
-          {sortedDataList.map((dataObj) => (
-            <tr
-              className="border-b-2 border-gray-500 border-opacity-20"
-              key={dataObj.id}
-            >
-              {Object.entries(dataObj).map(([key, value], j) => {
-                if (
-                  typeof value === "string" ||
-                  typeof value === "number" ||
-                  typeof value === "object"
-                ) {
-                  if (value === null || !value) value = "x";
-                  // Check if the key exists in columnNameObjList
-                  if (columnNameObjList.some((column) => column.name === key)) {
-                    return (
-                      <td
-                        className={`${j > 5 && "hidden sm:table-cell"}`}
-                        key={j}
-                      >
-                        {key === "ability" ? (
-                          <Image
-                            width={32}
-                            height={32}
-                            loader={() =>
-                              (
-                                value as {
-                                  name: string;
-                                  iconUrl: string;
-                                }
-                              ).iconUrl
+          {sortedDataList.map((dataObj, i) => (
+            <tr key={i} className="border-b border-gray-500 border-opacity-20">
+              {columnNameObjList.map((columnObj, j) => (
+                <td
+                  className={`pr-4 text-left ${
+                    j > 4 && "hidden sm:table-cell"
+                  }`}
+                  key={j}
+                >
+                  {columnObj.name === "ability" ? (
+                    <Image
+                      className="min-h-8 min-w-8 rounded-sm bg-gray-400 p-1"
+                      width={32}
+                      height={32}
+                      loader={() =>
+                        (
+                          dataObj.ability as {
+                            name: string;
+                            iconUrl: string;
+                          }
+                        ).iconUrl
+                      }
+                      src={
+                        (
+                          dataObj.ability as {
+                            name: string;
+                            iconUrl: string;
+                          }
+                        ).iconUrl
+                      }
+                      alt={
+                        (dataObj.ability as { name: string; iconUrl: string })
+                          .name
+                      }
+                    />
+                  ) : columnObj.name === "regen" ? (
+                    `${
+                      (
+                        dataObj.ability as {
+                          reusable: boolean;
+                          regenTime: number | null;
+                        }
+                      ).reusable
+                        ? (
+                            dataObj.ability as {
+                              reusable: boolean;
+                              regenTime: number | null;
                             }
-                            className="min-h-8 min-w-8 rounded-sm bg-gray-400 p-1"
-                            src={
-                              (
-                                value as {
-                                  name: string;
-                                  iconUrl: string;
-                                }
-                              ).iconUrl
-                            }
-                            alt={
-                              (value as { name: string; iconUrl: string }).name
-                            }
-                          />
-                        ) : key === "duration" ? (
-                          `${value} s`
-                        ) : key === "length" || key === "radius" ? (
-                          `${value} m`
-                        ) : key === "regen" ? (
-                          `${
-                            (
-                              value as {
-                                reusable: boolean;
-                                regenTime: number | null;
-                              }
-                            ).reusable
-                              ? (
-                                  value as {
-                                    reusable: boolean;
-                                    regenTime: number | null;
-                                  }
-                                ).regenTime
-                              : "x"
-                          }`
-                        ) : key !== "id " ? (
-                          `${value}`
-                        ) : (
-                          ""
-                        )}
-                      </td>
-                    );
-                  }
-                }
-              })}
+                          ).regenTime
+                        : "x"
+                    }`
+                  ) : columnObj.name === "imgUrl" ? (
+                    <Image
+                      className="sm:w-20"
+                      src={dataObj.imgUrl as string}
+                      alt={dataObj.name as string}
+                      width={48}
+                      height={27}
+                      loader={() => dataObj.imgUrl as string}
+                    />
+                  ) : (
+                    (dataObj[columnObj.name] as string | number)
+                  )}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
