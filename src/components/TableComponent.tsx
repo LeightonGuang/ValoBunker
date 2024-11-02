@@ -1,9 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-interface Props<
-  T extends { id: number; [key: string]: string | number | unknown },
-> {
+interface Props<T extends { id: number; [key: string]: unknown }> {
   tableName: string;
   columnNameObjList: { name: string; sortable: boolean }[];
   dataList: T[];
@@ -16,11 +14,6 @@ const TableComponent = <T extends TableRow>({
   columnNameObjList,
   dataList,
 }: Props<T>) => {
-  const [sortedBy, setSortedBy] = useState<string | null>(
-    Object.keys(dataList[0])[2],
-  );
-  const [isAscendingOrder, setIsAscendingOrder] = useState<boolean>(true);
-
   const sortList = <T, K extends keyof T>(
     list: T[],
     column: K,
@@ -29,13 +22,6 @@ const TableComponent = <T extends TableRow>({
     return [...list].sort((a, b) => {
       const aValue = a[column];
       const bValue = b[column];
-
-      if (typeof aValue === "number" && typeof bValue === "string") {
-        return isAsc ? 1 : -1;
-      } else if (typeof aValue === "string" && typeof bValue === "number") {
-        return isAsc ? -1 : 1;
-      }
-
       return aValue < bValue
         ? isAsc
           ? -1
@@ -48,20 +34,74 @@ const TableComponent = <T extends TableRow>({
     });
   };
 
+  const [sortedBy, setSortedBy] = useState<string | null>(
+    Object.keys(dataList[0])[2],
+  );
+  const [isAscendingOrder, setIsAscendingOrder] = useState<boolean>(true);
   const [sortedDataList, setSortedDataList] = useState(
-    sortList(dataList, Object.keys(dataList[0])[2], isAscendingOrder),
+    sortList(dataList, sortedBy!, isAscendingOrder),
   );
 
   const handleClickSort = (columnName: string) => {
     if (sortedBy === columnName) {
       setSortedDataList(
-        sortList(sortedDataList, columnName, !isAscendingOrder),
+        sortList(sortedDataList, columnName as keyof T, !isAscendingOrder),
       );
       setIsAscendingOrder(!isAscendingOrder);
-    } else if (sortedBy !== columnName) {
+    } else {
       setSortedBy(columnName);
       setIsAscendingOrder(true);
-      setSortedDataList(sortList(sortedDataList, columnName, true));
+      setSortedDataList(sortList(dataList, columnName as keyof T, true));
+    }
+  };
+
+  const renderCellContent = (columnName: string, value: unknown) => {
+    switch (columnName) {
+      case "imgUrl": {
+        const imgUrl = value as string;
+        return (
+          <Image
+            className="sm:w-20"
+            src={imgUrl}
+            alt="Image"
+            width={48}
+            height={27}
+            loader={() => imgUrl}
+          />
+        );
+      }
+      case "ability": {
+        const ability = value as { name: string; iconUrl: string };
+        return (
+          <Image
+            className="min-h-8 min-w-8 rounded-sm bg-gray-400 p-1"
+            src={ability.iconUrl}
+            alt={ability.name}
+            width={32}
+            height={32}
+            loader={() => ability.iconUrl}
+          />
+        );
+      }
+      case "regen": {
+        const regen = value as { reusable: boolean; regenTime: number | null };
+        return regen.reusable ? `${regen.regenTime} s` : "x";
+      }
+      case "fire_rate": {
+        if (value) {
+          const fire_rate = value as { primary: number; alt: number };
+          return (
+            fire_rate.primary + (fire_rate.alt ? ` / ${fire_rate.alt}` : "")
+          );
+        } else {
+          return "-";
+        }
+      }
+      default: {
+        return typeof value === "string" || typeof value === "number"
+          ? value
+          : "-";
+      }
     }
   };
 
@@ -73,18 +113,14 @@ const TableComponent = <T extends TableRow>({
           <tr className="border-b-2 border-gray-500 border-opacity-20">
             {columnNameObjList.map((columnObj, i) => (
               <th
-                className={`text-left font-bold ${i > 4 && "hidden sm:table-cell"}`}
                 key={i}
+                className={`text-left font-bold ${i > 4 ? "hidden sm:table-cell" : ""}`}
               >
                 {columnObj.sortable ? (
                   <button onClick={() => handleClickSort(columnObj.name)}>
                     {columnObj.name.replace(/_/g, " ")}
                     <span
-                      className={`ml-1 text-xs transition-colors duration-100 ${
-                        sortedBy === columnObj.name
-                          ? "text-white"
-                          : "text-gray-400"
-                      }`}
+                      className={`ml-1 text-xs ${sortedBy === columnObj.name ? "text-white" : "text-gray-400"}`}
                     >
                       {sortedBy === columnObj.name
                         ? isAscendingOrder
@@ -94,80 +130,24 @@ const TableComponent = <T extends TableRow>({
                     </span>
                   </button>
                 ) : (
-                  <>
-                    {columnObj.name === "abilityIconUrl"
-                      ? "icon"
-                      : columnObj.name}
-                  </>
+                  columnObj.name
                 )}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {sortedDataList.map((dataObj, i) => (
-            <tr key={i} className="border-b border-gray-500 border-opacity-20">
+          {sortedDataList.map((dataObj) => (
+            <tr
+              key={dataObj.id}
+              className="border-b border-gray-500 border-opacity-20"
+            >
               {columnNameObjList.map((columnObj, j) => (
                 <td
-                  className={`pr-4 text-left ${
-                    j > 4 && "hidden sm:table-cell"
-                  }`}
                   key={j}
+                  className={`pr-4 text-left ${j > 4 ? "hidden sm:table-cell" : ""}`}
                 >
-                  {columnObj.name === "ability" ? (
-                    <Image
-                      className="min-h-8 min-w-8 rounded-sm bg-gray-400 p-1"
-                      width={32}
-                      height={32}
-                      loader={() =>
-                        (
-                          dataObj.ability as {
-                            name: string;
-                            iconUrl: string;
-                          }
-                        ).iconUrl
-                      }
-                      src={
-                        (
-                          dataObj.ability as {
-                            name: string;
-                            iconUrl: string;
-                          }
-                        ).iconUrl
-                      }
-                      alt={
-                        (dataObj.ability as { name: string; iconUrl: string })
-                          .name
-                      }
-                    />
-                  ) : columnObj.name === "regen" ? (
-                    `${
-                      (
-                        dataObj.ability as {
-                          reusable: boolean;
-                          regenTime: number | null;
-                        }
-                      ).reusable
-                        ? (
-                            dataObj.ability as {
-                              reusable: boolean;
-                              regenTime: number | null;
-                            }
-                          ).regenTime
-                        : "x"
-                    }`
-                  ) : columnObj.name === "imgUrl" ? (
-                    <Image
-                      className="sm:w-20"
-                      src={dataObj.imgUrl as string}
-                      alt={dataObj.name as string}
-                      width={48}
-                      height={27}
-                      loader={() => dataObj.imgUrl as string}
-                    />
-                  ) : (
-                    (dataObj[columnObj.name] as string | number)
-                  )}
+                  {renderCellContent(columnObj.name, dataObj[columnObj.name])}
                 </td>
               ))}
             </tr>
