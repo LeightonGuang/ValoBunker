@@ -1,0 +1,338 @@
+{
+  "weaponData": [
+    {
+      "id": 1,
+      "name": "Classic",
+      "type": "pistol",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/bfa273477b5ce6345c00da5a396281bd51830dc8-680x384.png?auto=format&fit=fill&q=80&w=355",
+      "cost": 0,
+      "damage": [
+        { "range": "0 - 30m", "damage": { "head": 78, "body": 26, "leg": 22 } },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 66, "body": 22, "leg": 18 }
+        }
+      ],
+      "fire_rate": { "primary": 6.75, "alt": 2.22 }
+    },
+    {
+      "id": 2,
+      "name": "Shorty",
+      "type": "pistol",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/25b9844dfade4acdbd05229da3b07b0071e5059a-680x384.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 300,
+      "damage": [
+        {
+          "range": "0 - 7m",
+          "damage": { "head": 22, "body": 11, "leg": 9 }
+        },
+        {
+          "range": "7 - 15m",
+          "damage": { "head": 12, "body": 6, "leg": 5 }
+        },
+        {
+          "range": "15 - 50m",
+          "damage": { "head": 6, "body": 3, "leg": 2 }
+        }
+      ],
+      "fire_rate": { "primary": 3.33, "alt": null }
+    },
+    {
+      "id": 3,
+      "name": "Frenzy",
+      "type": "pistol",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/10c955e82728dbcc4f7edd687be251437b3c8acc-680x384.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 450,
+      "damage": [
+        {
+          "range": "0 - 20m",
+          "damage": { "head": 78, "body": 26, "leg": 22 }
+        },
+        {
+          "range": "20 - 50m",
+          "damage": { "head": 63, "body": 2, "leg": 17 }
+        }
+      ],
+      "fire_rate": { "primary": 10, "alt": null }
+    },
+    {
+      "id": 4,
+      "name": "Ghost",
+      "type": "pistol",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/575558a88acc67dfac8da6c6ab26f4b61589c96f-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 500,
+      "damage": [
+        {
+          "range": "0 - 30m",
+          "damage": { "head": 105, "body": 30, "leg": 25 }
+        },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 87, "body": 25, "leg": 21 }
+        }
+      ],
+      "fire_rate": { "primary": 6.75, "alt": null }
+    },
+    {
+      "id": 5,
+      "name": "Sheriff",
+      "type": "pistol",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/37efa958bf1dd8ec57a0b1585e741599c7b7bee7-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 800,
+      "damage": [
+        {
+          "range": "0 - 30m",
+          "damage": { "head": 159, "body": 55, "leg": 46 }
+        },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 145, "body": 50, "leg": 42 }
+        }
+      ],
+      "fire_rate": { "primary": 4, "alt": null }
+    },
+    {
+      "id": 6,
+      "name": "Stinger",
+      "type": "smg",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/377c8a9058a364478ed179ccbe41a68dd2255234-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 1100,
+      "damage": [
+        {
+          "range": "0 - 15m",
+          "damage": { "head": 67, "body": 27, "leg": 22 }
+        },
+        {
+          "range": "15 - 50m",
+          "damage": { "head": 57, "body": 23, "leg": 19 }
+        }
+      ],
+      "fire_rate": { "primary": 16, "alt": 18 }
+    },
+    {
+      "id": 7,
+      "name": "Spectre",
+      "type": "smg",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/9fad4bf3774e87edf9994a2afada0abdc72c4bed-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 1600,
+      "damage": [
+        {
+          "range": "0 - 15m",
+          "damage": { "head": 78, "body": 26, "leg": 22 }
+        },
+        {
+          "range": "15 - 30m",
+          "damage": { "head": 66, "body": 22, "leg": 18 }
+        },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 60, "body": 20, "leg": 17 }
+        }
+      ],
+      "fire_rate": { "primary": 13.33, "alt": 12 }
+    },
+    {
+      "id": 8,
+      "name": "Bucky",
+      "type": "shotgun",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/982db8ebe5b57b989e009d13b24d9f1bc9c090b5-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 850,
+      "damage": [
+        {
+          "range": "0 - 8m",
+          "damage": { "head": 40, "body": 20, "leg": 17 }
+        },
+        {
+          "range": "8 - 12m",
+          "damage": { "head": 26, "body": 13, "leg": 11 }
+        },
+        {
+          "range": "12 - 50m",
+          "damage": { "head": 18, "body": 9, "leg": 7 }
+        }
+      ],
+      "fire_rate": { "primary": 1.1, "alt": 1.1 }
+    },
+    {
+      "id": 9,
+      "name": "Judge",
+      "type": "shotgun",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/7190d2e85b82bd1de81eba87a1db2b469259289d-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 1850,
+      "damage": [
+        {
+          "range": "0 - 10m",
+          "damage": { "head": 34, "body": 17, "leg": 14 }
+        },
+        {
+          "range": "10 - 15m",
+          "damage": { "head": 20, "body": 10, "leg": 8 }
+        },
+        {
+          "range": "15 - 50m",
+          "damage": { "head": 14, "body": 7, "leg": 5 }
+        }
+      ],
+      "fire_rate": { "primary": 3.5, "alt": null }
+    },
+
+    {
+      "id": 10,
+      "name": "Bulldog",
+      "type": "rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/7bbdf3063c94fa06fbde33c35ce09fd5202fc153-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 2050,
+      "damage": [
+        {
+          "range": "0 - 50m",
+          "damage": { "head": 115, "body": 35, "leg": 29 }
+        }
+      ],
+      "fire_rate": { "primary": 10, "alt": 13.333 }
+    },
+    {
+      "id": 11,
+      "name": "Guardian",
+      "type": "rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/64917f04177ef9666f58149f0a98a41fa7bf96ba-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 2250,
+      "damage": [
+        {
+          "range": "0 - 50m",
+          "damage": { "head": 195, "body": 65, "leg": 49 }
+        }
+      ],
+      "fire_rate": { "primary": 5.25, "alt": 5.25 }
+    },
+    {
+      "id": 12,
+      "name": "Phantom",
+      "type": "rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/f0636340d8a60e1488a447e66784921d01f90d18-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 2900,
+      "damage": [
+        {
+          "range": "0 - 15m",
+          "damage": { "head": 156, "body": 39, "leg": 33 }
+        },
+        {
+          "range": "15 - 30m",
+          "damage": { "head": 140, "body": 35, "leg": 29 }
+        },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 124, "body": 31, "leg": 26 }
+        }
+      ],
+      "fire_rate": { "primary": 10, "alt": 9.9 }
+    },
+    {
+      "id": 13,
+      "name": "Vandal",
+      "type": "rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/fc32a60b112201776c490a5a6a7f2381cd232bd5-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 2900,
+      "damage": [
+        {
+          "range": "0 - 50m",
+          "damage": { "head": 160, "body": 40, "leg": 34 }
+        }
+      ],
+      "fire_rate": { "primary": 9.75, "alt": 8.775 }
+    },
+    {
+      "id": 14,
+      "name": "Marshal",
+      "type": "sniper rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/248441a78c76ee615ad1ece97db1c0203cebc5b1-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 950,
+      "damage": [
+        {
+          "range": "0 - 50m",
+          "damage": { "head": 202, "body": 101, "leg": 85 }
+        }
+      ],
+      "fire_rate": { "primary": 1.5, "alt": 1.2 }
+    },
+    {
+      "id": 15,
+      "name": "Outlaw",
+      "type": "sniper rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1b1e480a139ae8d1892f8d7fd163391ce123ee38-680x383.png?auto=format&fit=fill&q=80&w=439",
+      "cost": 2400,
+      "damage": [
+        {
+          "range": "0 - 50m",
+          "damage": { "head": 238, "body": 140, "leg": 119 }
+        }
+      ],
+      "fire_rate": { "primary": 2.75, "alt": 2.75 }
+    },
+    {
+      "id": 16,
+      "name": "Operator",
+      "type": "sniper rifle",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/606f29a17f5bc6f13264f2df21a29d4e209c9dce-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 4700,
+      "damage": [
+        {
+          "range": "0 - 50m",
+          "damage": { "head": 255, "body": 150, "leg": 120 }
+        }
+      ],
+      "fire_rate": { "primary": 0.6, "alt": 0.6 }
+    },
+    {
+      "id": 17,
+      "name": "Ares",
+      "type": "machine gun",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/4f1969789f8f0da0863d15a6a23957b4508753f2-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 1600,
+      "damage": [
+        {
+          "range": "0 - 30m",
+          "damage": { "head": 75, "body": 30, "leg": 25 }
+        },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 70, "body": 28, "leg": 23 }
+        }
+      ],
+      "fire_rate": { "primary": 13, "alt": 13 }
+    },
+    {
+      "id": 18,
+      "name": "Odin",
+      "type": "machine gun",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/d7e242b2e704155c71841325629ad1a4673c436f-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 3200,
+      "damage": [
+        {
+          "range": "0 - 30m",
+          "damage": { "head": 95, "body": 38, "leg": 32 }
+        },
+        {
+          "range": "30 - 50m",
+          "damage": { "head": 77, "body": 31, "leg": 26 }
+        }
+      ],
+      "fire_rate": { "primary": "12-15.6", "alt": 15.6 }
+    },
+    {
+      "id": 19,
+      "name": "Melee",
+      "type": "melee",
+      "imgUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/48649a9bbc3bc0afce42f498991ea081958992a2-680x383.png?auto=format&fit=fill&q=80&w=427",
+      "cost": 0,
+      "damage": [
+        {
+          "range": "0 - 8m",
+          "damage": {
+            "front": { "primary": 50, "alt": 75 },
+            "back": { "primary": 100, "alt": 150 }
+          }
+        }
+      ]
+    }
+  ]
+}
