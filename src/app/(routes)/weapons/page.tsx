@@ -6,12 +6,12 @@ import weaponData from "@/../../public/data/weaponData.json";
 const WeaponsPage = () => {
   return (
     <main>
-      <div className="m-4">
+      <div className="mx-4 py-4">
         <h1>Weapons</h1>
 
         <div>
           <TableComponent
-            tableName="Weapons"
+            tableName="All Weapons"
             columnNameObjList={[
               { name: "name", sortable: true },
               { name: "imgUrl", sortable: false },

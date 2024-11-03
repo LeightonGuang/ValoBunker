@@ -6,7 +6,7 @@ import TableComponent from "@/components/TableComponent";
 const FlashPage = () => {
   return (
     <main>
-      <div className="m-4">
+      <div className="mx-4 py-4">
         <h1>Blind Abilities</h1>
 
         <div>

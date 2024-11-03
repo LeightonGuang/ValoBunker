@@ -6,7 +6,7 @@ import TableComponent from "@/components/TableComponent";
 const SmokesPage = () => {
   return (
     <main>
-      <div className="m-4">
+      <div className="mx-4 py-4">
         <h1>Smokes</h1>
 
         <div id="round_smokes-container">
