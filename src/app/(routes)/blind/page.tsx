@@ -1,12 +1,13 @@
 "use client";
 
 import blindData from "@/../../public/data/blindData.json";
+import MainLayout from "@/components/MainLayout";
 import TableComponent from "@/components/TableComponent";
 
 const FlashPage = () => {
   return (
-    <main>
-      <div className="m-4">
+    <MainLayout>
+      <div className="mx-4 py-4">
         <h1>Blind Abilities</h1>
 
         <div>
@@ -40,7 +41,7 @@ const FlashPage = () => {
           />
         </div>
       </div>
-    </main>
+    </MainLayout>
   );
 };
 

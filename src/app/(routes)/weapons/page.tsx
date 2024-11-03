@@ -2,16 +2,17 @@
 
 import TableComponent from "@/components/TableComponent";
 import weaponData from "@/../../public/data/weaponData.json";
+import MainLayout from "@/components/MainLayout";
 
 const WeaponsPage = () => {
   return (
-    <main>
-      <div className="m-4">
+    <MainLayout>
+      <div className="mx-4 py-4">
         <h1>Weapons</h1>
 
         <div>
           <TableComponent
-            tableName="Weapons"
+            tableName="All Weapons"
             columnNameObjList={[
               { name: "name", sortable: true },
               { name: "imgUrl", sortable: false },
@@ -23,7 +24,7 @@ const WeaponsPage = () => {
           />
         </div>
       </div>
-    </main>
+    </MainLayout>
   );
 };
 
