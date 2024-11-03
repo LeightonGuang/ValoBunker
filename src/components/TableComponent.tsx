@@ -106,55 +106,59 @@ const TableComponent = <T extends TableRow>({
   };
 
   return (
-    <>
-      <h2>{tableName}</h2>
-      <table className="w-full table-auto border-white">
-        <thead>
-          <tr className="border-b-2 border-gray-500 border-opacity-20">
-            {columnNameObjList.map((columnObj, i) => (
-              <th
-                key={i}
-                className={`text-left font-bold ${i > 4 ? "hidden sm:table-cell" : ""}`}
-              >
-                {columnObj.sortable ? (
-                  <button onClick={() => handleClickSort(columnObj.name)}>
-                    {columnObj.name.replace(/_/g, " ")}
-                    <span
-                      className={`ml-1 text-xs ${sortedBy === columnObj.name ? "text-white" : "text-gray-400"}`}
-                    >
-                      {sortedBy === columnObj.name
-                        ? isAscendingOrder
-                          ? "▲"
-                          : "▼"
-                        : "▲"}
-                    </span>
-                  </button>
-                ) : (
-                  columnObj.name
-                )}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sortedDataList.map((dataObj) => (
-            <tr
-              key={dataObj.id}
-              className="border-b border-gray-500 border-opacity-20"
-            >
-              {columnNameObjList.map((columnObj, j) => (
-                <td
-                  key={j}
-                  className={`pr-4 text-left ${j > 4 ? "hidden sm:table-cell" : ""}`}
+    <div className="flex justify-center">
+      <div>
+        <h2>{tableName}</h2>
+        <table className="table-auto">
+          <thead>
+            <tr className="border-b-2 border-gray-500 border-opacity-20">
+              {columnNameObjList.map((columnObj, i) => (
+                <th
+                  key={i}
+                  className={`pr-4 text-left font-bold ${i > 4 ? "hidden sm:table-cell" : ""}`}
                 >
-                  {renderCellContent(columnObj.name, dataObj[columnObj.name])}
-                </td>
+                  {columnObj.sortable ? (
+                    <button onClick={() => handleClickSort(columnObj.name)}>
+                      {columnObj.name.replace(/_/g, " ")}
+                      <span
+                        className={`ml-1 text-xs ${sortedBy === columnObj.name ? "text-white" : "text-gray-400"}`}
+                      >
+                        {sortedBy === columnObj.name
+                          ? isAscendingOrder
+                            ? "▲"
+                            : "▼"
+                          : "▲"}
+                      </span>
+                    </button>
+                  ) : columnObj.name === "imgUrl" ? (
+                    "Image"
+                  ) : (
+                    columnObj.name
+                  )}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+          </thead>
+          <tbody>
+            {sortedDataList.map((dataObj) => (
+              <tr
+                key={dataObj.id}
+                className="border-b border-gray-500 border-opacity-20"
+              >
+                {columnNameObjList.map((columnObj, j) => (
+                  <td
+                    className={`pr-4 text-left ${j > 4 ? "hidden sm:table-cell" : ""}`}
+                    key={j}
+                  >
+                    {renderCellContent(columnObj.name, dataObj[columnObj.name])}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
