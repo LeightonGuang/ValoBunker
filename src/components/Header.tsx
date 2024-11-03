@@ -1,34 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/navbar";
 
 const Header = () => {
   return (
-    <Navbar
-      className="bg-valorantRed p-4 text-white"
-      shouldHideOnScroll={true}
-      id="header"
-    >
-      <NavbarBrand>
-        <Link className="hover:underline" href="/">
-          <h1 className="text-3xl font-bold">Valo Bunker</h1>
+    <header className="flex items-center justify-between bg-valorantRed px-4">
+      <h1 className="bg-valorantRed text-3xl font-bold">Valo Bunker</h1>
+      <nav className="flex h-16 items-center bg-valorantRed">
+        <Link className="bg-valorantRed" href="/">
+          Home
         </Link>
-      </NavbarBrand>
-      <NavbarContent className="">
-        <NavbarItem>
-          <Link href="/">Home</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/smokes">Smokes</Link>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+        <Link className="ml-4 bg-valorantRed" href="/smokes">
+          Smokes
+        </Link>
+      </nav>
+    </header>
   );
 };
 
