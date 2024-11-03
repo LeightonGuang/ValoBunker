@@ -2,10 +2,11 @@
 
 import TableComponent from "@/components/TableComponent";
 import weaponData from "@/../../public/data/weaponData.json";
+import MainLayout from "@/components/MainLayout";
 
 const WeaponsPage = () => {
   return (
-    <main>
+    <MainLayout>
       <div className="mx-4 py-4">
         <h1>Weapons</h1>
 
@@ -23,7 +24,7 @@ const WeaponsPage = () => {
           />
         </div>
       </div>
-    </main>
+    </MainLayout>
   );
 };
 

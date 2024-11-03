@@ -1,11 +1,12 @@
 "use client";
 
 import smokesData from "@/../../public/data/smokesData.json";
+import MainLayout from "@/components/MainLayout";
 import TableComponent from "@/components/TableComponent";
 
 const SmokesPage = () => {
   return (
-    <main>
+    <MainLayout>
       <div className="mx-4 py-4">
         <h1>Smokes</h1>
 
@@ -38,7 +39,7 @@ const SmokesPage = () => {
           />
         </div>
       </div>
-    </main>
+    </MainLayout>
   );
 };
 

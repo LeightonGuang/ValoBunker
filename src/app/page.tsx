@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import MainLayout from "@/components/MainLayout";
 
 export default function Home() {
   return (
-    <main>
-      <div className="flex justify-center" id="home-container">
+    <MainLayout>
+      <div className="mx-4 flex justify-center py-4" id="home-container">
         <div
-          className="flex w-[60rem] flex-col p-4 sm:min-w-40 sm:flex-row"
+          className="flex w-[60rem] flex-col sm:min-w-40 sm:flex-row"
           id="home-container-layout"
         >
           <div
@@ -70,13 +71,29 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="order-3 w-full border-[1px] border-valorantRed p-2"
+            className="order-3 w-full border-[1px] border-valorantRed p-2 sm:w-80"
             id="right-content"
           >
             <h2>Esports</h2>
+            <ul className="mt-2">
+              <li className="flex items-center justify-between rounded-md bg-black p-2">
+                <div className="flex gap-4">
+                  <p>SEN City Classic</p>
+                  <p>Nov 1 - 3, 2024</p>
+                </div>
+                <Image
+                  className="h-12 w-12"
+                  src="https://owcdn.net/img/672158045f9f1.png"
+                  alt="sen city classic logo"
+                  width={32}
+                  height={32}
+                  unoptimized
+                />
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </main>
+    </MainLayout>
   );
 }
