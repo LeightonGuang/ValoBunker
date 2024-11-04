@@ -1,0 +1,29 @@
+{
+  "agentsData": [
+    { "id": 1, "name": "Brimstone" },
+    { "id": 2, "name": "Viper" },
+    { "id": 3, "name": "Omen" },
+    { "id": 4, "name": "Killjoy" },
+    { "id": 5, "name": "Cypher" },
+    { "id": 6, "name": "Sova" },
+    { "id": 7, "name": "Sage" },
+    { "id": 8, "name": "Phoenix" },
+    { "id": 9, "name": "Jett" },
+    { "id": 10, "name": "Reyna" },
+    { "id": 11, "name": "Raze" },
+    { "id": 12, "name": "Breach" },
+    { "id": 13, "name": "Skye" },
+    { "id": 14, "name": "Yoru" },
+    { "id": 15, "name": "Astra" },
+    { "id": 16, "name": "KAY/O" },
+    { "id": 17, "name": "Chamber" },
+    { "id": 18, "name": "Neon" },
+    { "id": 19, "name": "Fade" },
+    { "id": 20, "name": "Harbor" },
+    { "id": 21, "name": "Gekko" },
+    { "id": 22, "name": "Deadlock" },
+    { "id": 23, "name": "Iso" },
+    { "id": 24, "name": "Clove" },
+    { "id": 25, "name": "Vyse" }
+  ]
+}
