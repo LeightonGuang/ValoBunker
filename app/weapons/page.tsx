@@ -15,11 +15,11 @@ import { title } from "@/components/primitives";
 
 export default function WeaponPage() {
   const flashColumns = [
-    { name: "name", sortable: true },
-    { name: "type", sortable: false },
-    { name: "img_url", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "damage", sortable: true },
+    { name: "Name", sortable: true },
+    { name: "Type", sortable: false },
+    { name: "Image", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Range: Head / Body / Leg", sortable: true },
     { name: "fire_rate", sortable: true },
   ];
 
