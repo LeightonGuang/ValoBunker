@@ -53,9 +53,9 @@ export default function SmokePage() {
                       <Image
                         unoptimized
                         alt={smoke.ability.name}
-                        height={32}
+                        height={24}
                         src={smoke.ability.iconUrl}
-                        width={32}
+                        width={24}
                       />
                     </div>
                   </Tooltip>
@@ -87,9 +87,9 @@ export default function SmokePage() {
                   <Image
                     unoptimized
                     alt={smoke.ability.name}
-                    height={32}
+                    height={24}
                     src={smoke.ability.iconUrl}
-                    width={32}
+                    width={24}
                   />
                 </TableCell>
                 <TableCell>{smoke.duration}</TableCell>

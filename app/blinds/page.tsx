@@ -55,9 +55,9 @@ export default function SmokePage() {
                       <Image
                         unoptimized
                         alt={flash.ability.name}
-                        height={32}
+                        height={24}
                         src={flash.ability.iconUrl}
-                        width={32}
+                        width={24}
                       />
                     </div>
                   </Tooltip>
@@ -90,9 +90,9 @@ export default function SmokePage() {
                   <Image
                     unoptimized
                     alt={nearsight.ability.name}
-                    height={32}
+                    height={24}
                     src={nearsight.ability.iconUrl}
-                    width={32}
+                    width={24}
                   />
                 </TableCell>
                 <TableCell>{nearsight.blind_duration}</TableCell>
