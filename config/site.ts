@@ -1,54 +1,35 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + NextUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Valo Bunker",
+  description: "Anything useful about Valorant is here!",
   navItems: [
     {
       label: "Home",
       href: "/",
     },
+    { label: "Agents", href: "/agents" },
+    { label: "Weapons", href: "/weapons" },
     {
       label: "Smokes",
       href: "/smokes",
     },
     { label: "Blinds", href: "/blinds" },
-    { label: "Weapons", href: "/weapons" },
-    { label: "Agents", href: "/agents" },
+    { label: "Mollies", href: "/mollies" },
   ],
   navMenuItems: [
     {
-      label: "Profile",
-      href: "/profile",
+      label: "Home",
+      href: "/",
     },
+    { label: "Agents", href: "/agents" },
+    { label: "Weapons", href: "/weapons" },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "Smokes",
+      href: "/smokes",
     },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
-    },
+    { label: "Blinds", href: "/blinds" },
+    { label: "Mollies", href: "/mollies" },
   ],
   links: {
     github: "https://github.com/nextui-org/nextui",

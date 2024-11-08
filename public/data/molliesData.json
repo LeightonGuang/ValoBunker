@@ -1,0 +1,88 @@
+{
+  "molliesData": [
+    {
+      "id": 1,
+      "agent": "Gekko",
+      "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/6/66/Gekko_icon.png",
+      "name": "Mosh Pit",
+      "cost": 250,
+      "ability_icon_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/6a9ead27349e4fa318bc426ac57f9addb2ecf143-252x175.png?auto=format&fit=crop&q=80&h=64&w=64&crop=center",
+      "damage": {
+        "max": 179,
+        "min": 75
+      },
+      "duration": 3,
+      "charge": 1
+    },
+    {
+      "id": 2,
+      "agent": "KAY/O",
+      "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/f/f0/KAYO_icon.png",
+      "name": "FRAG/ment",
+      "cost": 200,
+      "ability_icon_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/40a6811eadf8b794b94e2b40695e14b7c36281a8-512x512.png?auto=format&fit=crop&q=80&h=64&w=64&crop=center",
+      "damage": {
+        "max": 240,
+        "min": 100
+      },
+      "duration": 4,
+      "charge": 1
+    },
+    {
+      "id": 3,
+      "agent": "Brimstone",
+      "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/4/4d/Brimstone_icon.png",
+      "name": "Incendiary",
+      "cost": 250,
+      "ability_icon_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/d7e00a4ad8a1a01b2edcb9fc1193d05e4e50248f-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center",
+      "damage": {
+        "max": 465,
+        "min": 420
+      },
+      "duration": 7,
+      "charge": 1
+    },
+    {
+      "id": 4,
+      "agent": "Phoenix",
+      "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/1/14/Phoenix_icon.png",
+      "name": "Hot Hands",
+      "cost": 0,
+      "ability_icon_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/67df9ca3cb158a945fc9b13eb0e3949683c4c65d-128x128.png?auto=format&fit=crop&q=80&h=64&w=64&crop=center",
+      "damage": {
+        "max": 240,
+        "min": 195
+      },
+      "duration": 4,
+      "charge": 1
+    },
+    {
+      "id": 5,
+      "agent": "Viper",
+      "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/5/5f/Viper_icon.png",
+      "name": "Snake Bite",
+      "cost": 300,
+      "ability_icon_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/f477dce332e51e53f4e2f565f2d3d868dd2d0df8-128x128.png?auto=format&fit=crop&q=80&h=64&w=64&crop=center",
+      "damage": {
+        "max": 79,
+        "min": 76
+      },
+      "duration": 6.5,
+      "charge": 1
+    },
+    {
+      "id": 6,
+      "agent": "Killjoy",
+      "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/1/15/Killjoy_icon.png",
+      "name": "Nanoswarm",
+      "cost": 200,
+      "ability_icon_url": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/4ca9c7f4a85e5e454d8d9638247bd36cab1d4124-256x256.png?auto=format&fit=crop&q=80&h=64&w=64&crop=center",
+      "damage": {
+        "max": 180,
+        "min": null
+      },
+      "duration": 4,
+      "charge": 2
+    }
+  ]
+}
