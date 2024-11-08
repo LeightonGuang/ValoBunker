@@ -40,7 +40,7 @@ const page = () => {
             {molliesData.molliesData.map((molly) => (
               <TableRow key={molly.id}>
                 <TableCell>
-                  <div className="flex items-center gap-4">
+                  <div className="flex w-max items-center gap-4">
                     <Image
                       unoptimized
                       alt={molly.agent}
@@ -52,7 +52,7 @@ const page = () => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-4">
+                  <div className="flex w-max items-center gap-4">
                     <Image
                       unoptimized
                       alt={molly.name}
