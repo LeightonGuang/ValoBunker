@@ -14,7 +14,7 @@ import { Tooltip } from "@nextui-org/react";
 import smokesData from "@/public/data/smokesData.json";
 import { title } from "@/components/primitives";
 
-export default function SmokePage() {
+export default function SmokesPage() {
   const circularSmokesColumns = [
     { name: "agent", sortable: true },
     { name: "ability", sortable: false },

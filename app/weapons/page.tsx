@@ -13,7 +13,7 @@ import {
 import weaponsData from "@/public/data/weaponData.json";
 import { title } from "@/components/primitives";
 
-export default function WeaponPage() {
+export default function WeaponsPage() {
   const flashColumns = [
     { name: "Name", sortable: true },
     { name: "Type", sortable: false },
@@ -46,10 +46,10 @@ export default function WeaponPage() {
                     <Image
                       unoptimized
                       alt={weapon.name}
-                      className="h-10 w-auto"
+                      className="h-12 w-auto"
                       height={32}
                       src={weapon.img_url}
-                      width={32}
+                      width={56.89}
                     />
                   </div>
                 </TableCell>

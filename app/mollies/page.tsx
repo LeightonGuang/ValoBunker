@@ -13,7 +13,7 @@ import {
 import molliesData from "@/public/data/molliesData.json";
 import { title } from "@/components/primitives";
 
-const page = () => {
+export default function MolliesPage() {
   const mollyColumns = [
     { name: "Agent", sortable: true },
     { name: "Name", sortable: true },
@@ -74,6 +74,4 @@ const page = () => {
       </div>
     </section>
   );
-};
-
-export default page;
+}
