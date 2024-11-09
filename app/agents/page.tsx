@@ -10,12 +10,13 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import Link from "next/link";
-import { Tabs, Tab } from "@nextui-org/react";
+import { Tabs, Tab, Card, CardHeader, CardBody } from "@nextui-org/react";
 
 import agentsData from "@/public/data/agentData.json";
 import { title } from "@/components/primitives";
+import { ListIcon } from "@/components/icons";
 
-export default function SmokePage() {
+export default function AgentsPage() {
   const allAgentsColumns = [
     { name: "Agent", sortable: true },
     { name: "Role", sortable: true },
@@ -169,8 +170,27 @@ export default function SmokePage() {
             className="flex flex-col gap-10"
             title="Sort by Roles"
           >
+            <Card className="w-min">
+              <CardHeader>
+                Contents <ListIcon className="ml-2 h-4 w-4" />
+              </CardHeader>
+              <CardBody>
+                <ul className="list-decimal text-sm text-[#aaaaaa] marker:text-sm marker:text-[#aaaaaa]">
+                  {rolesList.map((roleObj, i) => (
+                    <li key={i} className="w-max">
+                      <Link
+                        className="hover:underline"
+                        href={`#agentsPage__${roleObj.role}`}
+                      >
+                        {roleObj.role}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </CardBody>
+            </Card>
             {rolesList.map((roleObj, i) => (
-              <div key={i}>
+              <div key={i} id={`agentsPage__` + roleObj.role}>
                 <h2>
                   <div className="flex items-center gap-4">
                     <Image
