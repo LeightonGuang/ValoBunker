@@ -64,7 +64,7 @@ export default function AgentsPage() {
 
   return (
     <section>
-      <div className="mt-6 flex justify-between">
+      <div className="flex justify-between">
         <h1 className={title()}>Agents</h1>
       </div>
       <div>
