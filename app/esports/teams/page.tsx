@@ -47,11 +47,11 @@ const TeamsPage = () => {
                 </ul>
               </CardBody>
             </Card>
-            <div className="mt-4 flex snap-x snap-mandatory flex-col gap-16 py-4 lg:flex-row lg:flex-nowrap lg:gap-8 lg:overflow-x-scroll">
+            <div className="mt-4 flex flex-col gap-16 py-4 lg:snap-x lg:snap-mandatory lg:flex-row lg:flex-nowrap lg:gap-8 lg:overflow-x-scroll">
               {teamsData.americasTeamsData.map((teamObj) => (
                 <Card
                   key={teamObj.id}
-                  className="flex-shrink-0 snap-start lg:w-[calc(25%-1.5rem)]"
+                  className="lg:w-[calc(25%-1.5rem)] lg:flex-shrink-0 lg:snap-start"
                   id={`teamsPage__americas--${teamObj.id}`}
                 >
                   <CardHeader>
