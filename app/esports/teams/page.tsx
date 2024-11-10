@@ -63,15 +63,14 @@ const TeamsPage = () => {
                       src={teamObj.team_logo_url}
                       width={64}
                     />
-                    {teamObj.team_name}
+                    <h2 className="text-xl font-bold">{teamObj.team_name}</h2>
                   </CardHeader>
                   <Divider />
                   <CardBody>
                     <h2>Main Roster</h2>
-
                     <ul className="mt-4 flex list-disc flex-col gap-4">
                       {teamObj.roster.map((player, i) => (
-                        <li key={player.id} className="flex items-center gap-4">
+                        <li key={player.id} className="flex">
                           <Button className="flex h-full w-full p-2">
                             <Avatar
                               className="ml-[0.625rem] min-w-[2.5rem] bg-[#ffffff]"
