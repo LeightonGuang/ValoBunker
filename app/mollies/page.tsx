@@ -12,6 +12,7 @@ import {
 
 import molliesData from "@/public/data/molliesData.json";
 import { title } from "@/components/primitives";
+import { User } from "@nextui-org/react";
 
 export default function MolliesPage() {
   const mollyColumns = [
@@ -40,15 +41,12 @@ export default function MolliesPage() {
             {molliesData.molliesData.map((molly) => (
               <TableRow key={molly.id}>
                 <TableCell>
-                  <div className="flex w-max items-center gap-4">
-                    <Image
-                      unoptimized
-                      alt={molly.agent}
-                      height={24}
-                      src={molly.agent_icon_url}
-                      width={24}
+                  <div className="flex w-max items-center">
+                    <User
+                      avatarProps={{ src: molly.agent_icon_url }}
+                      className="gap-4"
+                      name={molly.agent}
                     />
-                    {molly.agent}
                   </div>
                 </TableCell>
                 <TableCell>
