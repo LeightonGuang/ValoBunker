@@ -1,0 +1,213 @@
+{
+  "teamsData": [
+    {
+      "id": 1,
+      "team_logo_url": "",
+      "team_name": "100 Thieves",
+      "team_tag": "100T",
+      "country": "United States",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 2,
+      "team_logo_url": "",
+      "team_name": "Cloud9",
+      "team_tag": "C9",
+      "country": "United States",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 3,
+      "team_logo_url": "",
+      "team_name": "Evil Geniuses",
+      "team_tag": "EG",
+      "country": "United States",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 4,
+      "team_logo_url": "",
+      "team_name": "FURIA",
+      "team_tag": "FURIA",
+      "country": "Brazil",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 5,
+      "team_logo_url": "",
+      "team_name": "G2 Esports",
+      "team_tag": "G2",
+      "country": "United States",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 6,
+      "team_logo_url": "",
+      "team_name": "KR  Esports",
+      "team_tag": "KR ",
+      "country": "Argentina",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 7,
+      "team_logo_url": "",
+      "team_name": "LEVIAT N Chile",
+      "team_tag": "LEV",
+      "country": "Chile",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 8,
+      "team_logo_url": "",
+      "team_name": "LOUD",
+      "team_tag": "LOUD",
+      "country": "Brazil",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 9,
+      "team_logo_url": "",
+      "team_name": "MIBR",
+      "team_tag": "MIBR",
+      "country": "Brazil",
+      "head_coach": {},
+      "roster": []
+    },
+    {
+      "id": 10,
+      "team_logo_url": "https://owcdn.net/img/6610f02d2d7b0.png",
+      "team_name": "NRG Esports",
+      "team_tag": "NRG",
+      "country": "United States",
+      "head_coach": {
+        "id": 2,
+        "profile_picture_url": "https://owcdn.net/img/664bd698b8908.png",
+        "ign": "bonkar",
+        "name": "Malkolm Rench",
+        "country": "Sweden"
+      },
+      "roster": [
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/64168fe1322dd.png",
+          "ign": "FiNESSE",
+          "name": "Pujan Mehta",
+          "role": "IGL",
+          "country": "Canada"
+        },
+        {
+          "id": 8,
+          "profile_picture_url": "https://owcdn.net/img/64169001cb7f4.png",
+          "ign": "s0m",
+          "name": "Sam Oh",
+          "role": "Duelist",
+          "country": "United States"
+        },
+        {
+          "id": 9,
+          "profile_picture_url": "https://owcdn.net/img/664bd823278c5.png",
+          "ign": "Verno",
+          "name": "Andrew Maust",
+          "role": "",
+          "country": "United States"
+        },
+        {
+          "id": 10,
+          "profile_picture_url": "https://owcdn.net/img/6399a40caf260.png",
+          "ign": "mada",
+          "name": "Adam Pampuch",
+          "role": "",
+          "country": "Canada"
+        },
+        {
+          "id": 11,
+          "profile_picture_url": "https://owcdn.net/img/6416939a5a1c2.png",
+          "ign": "Ethan",
+          "name": "Ethan Arnold",
+          "role": "",
+          "country": "United States"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "team_logo_url": "https://owcdn.net/img/62875027c8e06.png",
+      "team_name": "Sentinels",
+      "team_tag": "SEN",
+      "country": "United States",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/627b460a3b85d.png",
+        "ign": "kaplan",
+        "name": "Adam Kaplan",
+        "country": "United States"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/65622aa13dc03.png",
+          "ign": "johnqt",
+          "name": "Mohamed Amine Ouarid",
+          "role": "IGL",
+          "country": "Morocco"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/63ffbd9ee57bd.png",
+          "ign": "N4RRATE",
+          "name": "Marshall Massey",
+          "role": "Sentinel/Controller",
+          "country": "United States"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/64169245acebe.png",
+          "ign": "bang",
+          "name": "Sean Bezerra",
+          "role": "Controller",
+          "country": "United States"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/671b20fca8019.png",
+          "ign": "Zellsis",
+          "name": "Jordan Montemurro",
+          "role": "Initiator/Controller",
+          "country": "United States"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/6416956f0da1e.png",
+          "ign": "zekken",
+          "name": "Zachary Patrone",
+          "role": "Duelist",
+          "country": "United States"
+        },
+        {
+          "id": 6,
+          "profile_picture_url": "https://owcdn.net/img/65a635d303c3e.png",
+          "ign": "Reduxx",
+          "name": "Yassin Aboulalazm",
+          "role": "Sub",
+          "country": "United States"
+        },
+        {
+          "id": 7,
+          "profile_picture_url": "https://owcdn.net/img/6399a54fc4472.png",
+          "ign": "SicK",
+          "name": "Hunter Mims",
+          "role": "Inactive",
+          "country": "United States"
+        }
+      ]
+    }
+  ]
+}
