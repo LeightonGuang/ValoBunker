@@ -12,10 +12,12 @@ import {
   Tabs,
 } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 
 import teamsData from "../../../public/data/teamsData.json";
 
 import { title } from "@/components/primitives";
+import { ListIcon } from "@/components/icons";
 
 const TeamsPage = () => {
   return (
@@ -26,9 +28,32 @@ const TeamsPage = () => {
       <div>
         <Tabs className="mt-4 flex justify-end">
           <Tab title="Americas">
-            <div className="mt-6 flex flex-col gap-16 py-4 lg:flex-row lg:flex-nowrap lg:gap-8 lg:overflow-x-scroll">
+            <Card className="mt-6 w-min lg:hidden">
+              <CardHeader>
+                Contents <ListIcon className="ml-2 h-4 w-4" />
+              </CardHeader>
+              <CardBody>
+                <ul className="list-decimal text-sm text-default-500 marker:text-default-500">
+                  {teamsData.americasTeamsData.map((teamObj) => (
+                    <li key={teamObj.id} className="w-max">
+                      <Link
+                        className="hover:underline"
+                        href={`#teamsPage__americas--${teamObj.id}`}
+                      >
+                        {teamObj.team_name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </CardBody>
+            </Card>
+            <div className="mt-4 flex flex-col gap-16 py-4 lg:flex-row lg:flex-nowrap lg:gap-8 lg:overflow-x-scroll">
               {teamsData.americasTeamsData.map((teamObj) => (
-                <Card key={teamObj.id} className="lg:w-80 lg:min-w-80">
+                <Card
+                  key={teamObj.id}
+                  className="lg:w-80 lg:min-w-80"
+                  id={`teamsPage__americas--${teamObj.id}`}
+                >
                   <CardHeader>
                     <Image
                       unoptimized
