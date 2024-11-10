@@ -9,10 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
+import { User } from "@nextui-org/react";
 
 import molliesData from "@/public/data/molliesData.json";
 import { title } from "@/components/primitives";
-import { User } from "@nextui-org/react";
 
 export default function MolliesPage() {
   const mollyColumns = [
