@@ -13,7 +13,7 @@ import {
 import molliesData from "@/public/data/molliesData.json";
 import { title } from "@/components/primitives";
 
-const page = () => {
+export default function MolliesPage() {
   const mollyColumns = [
     { name: "Agent", sortable: true },
     { name: "Name", sortable: true },
@@ -40,7 +40,7 @@ const page = () => {
             {molliesData.molliesData.map((molly) => (
               <TableRow key={molly.id}>
                 <TableCell>
-                  <div className="flex items-center gap-4">
+                  <div className="flex w-max items-center gap-4">
                     <Image
                       unoptimized
                       alt={molly.agent}
@@ -52,7 +52,7 @@ const page = () => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-4">
+                  <div className="flex w-max items-center gap-4">
                     <Image
                       unoptimized
                       alt={molly.name}
@@ -74,6 +74,4 @@ const page = () => {
       </div>
     </section>
   );
-};
-
-export default page;
+}

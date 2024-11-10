@@ -10,15 +10,13 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import Link from "next/link";
-import { Checkbox } from "@nextui-org/react";
-import { useState } from "react";
+import { Tabs, Tab, Card, CardHeader, CardBody } from "@nextui-org/react";
 
 import agentsData from "@/public/data/agentData.json";
 import { title } from "@/components/primitives";
+import { ListIcon } from "@/components/icons";
 
-export default function SmokePage() {
-  const [isByRole, setIsByRole] = useState<boolean>(false);
-
+export default function AgentsPage() {
   const allAgentsColumns = [
     { name: "Agent", sortable: true },
     { name: "Role", sortable: true },
@@ -66,123 +64,12 @@ export default function SmokePage() {
 
   return (
     <section>
-      <div className="mt-6 flex justify-between">
+      <div className="flex justify-between">
         <h1 className={title()}>Agents</h1>
-        <Checkbox
-          isSelected={isByRole}
-          onChange={(event) => setIsByRole(event.target.checked)}
-        >
-          Sort by roles
-        </Checkbox>
       </div>
       <div>
-        {isByRole ? (
-          rolesList.map((roleObj, i) => (
-            <div key={i}>
-              <h2 className="mt-6">
-                <div className="flex items-center gap-4">
-                  <Image
-                    unoptimized
-                    alt={roleObj.role}
-                    height={24}
-                    src={roleObj.role_icon_url}
-                    width={24}
-                  />
-                  {roleObj.role}
-                </div>
-                <p className="mt-3 text-sm text-[#eeeeee]">
-                  {roleObj.description}
-                </p>
-              </h2>
-              <Table className="mt-4" fullWidth={true}>
-                <TableHeader>
-                  {sortedAgentsColumns.map((column) => (
-                    <TableColumn key={column.name}>
-                      {column.name.replace(/_/g, " ")}
-                    </TableColumn>
-                  ))}
-                </TableHeader>
-                <TableBody>
-                  {agentsData.agentsData
-                    .filter((agentObj) => agentObj.role === roleObj.role)
-                    .map((agentObj) => (
-                      <TableRow key={agentObj.id}>
-                        <TableCell>
-                          <div className="flex w-max items-center gap-4">
-                            <Image
-                              unoptimized
-                              alt={agentObj.name}
-                              height={24}
-                              src={agentObj.agent_icon_url}
-                              width={24}
-                            />
-                            <div>
-                              <Link
-                                className="hover:underline"
-                                href={`/agents/${agentObj.name.toLowerCase()}`}
-                              >
-                                {agentObj.name}
-                              </Link>
-                            </div>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex w-max items-center gap-4">
-                            <Image
-                              unoptimized
-                              alt={agentObj.c_ability.name}
-                              height={24}
-                              src={agentObj.c_ability.ability_icon_url}
-                              width={24}
-                            />
-                            <span>{agentObj.c_ability.name}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex w-max items-center gap-4">
-                            <Image
-                              unoptimized
-                              alt={agentObj.q_ability.name}
-                              height={24}
-                              src={agentObj.q_ability.ability_icon_url}
-                              width={24}
-                            />
-                            <span>{agentObj.q_ability.name}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex w-max items-center gap-4">
-                            <Image
-                              unoptimized
-                              alt={agentObj.e_ability.name}
-                              height={24}
-                              src={agentObj.e_ability.ability_icon_url}
-                              width={24}
-                            />
-                            <span>{agentObj.e_ability.name}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex w-max items-center gap-4">
-                            <Image
-                              unoptimized
-                              alt={agentObj.x_ability.name}
-                              height={24}
-                              src={agentObj.x_ability.ability_icon_url}
-                              width={24}
-                            />
-                            <span>{agentObj.x_ability.name}</span>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </div>
-          ))
-        ) : (
-          <>
-            <h2 className="mt-6">All Agents</h2>
+        <Tabs className="mt-4 flex justify-end" size="sm">
+          <Tab key={"allAgents"} title="All Agents">
             <Table className="mt-4" fullWidth={true} selectionMode="single">
               <TableHeader>
                 {allAgentsColumns.map((column) => (
@@ -277,8 +164,136 @@ export default function SmokePage() {
                 ))}
               </TableBody>
             </Table>
-          </>
-        )}
+          </Tab>
+          <Tab
+            key={"sortByRoles"}
+            className="flex flex-col gap-10"
+            title="Sort by Roles"
+          >
+            <Card className="w-min">
+              <CardHeader>
+                Contents <ListIcon className="ml-2 h-4 w-4" />
+              </CardHeader>
+              <CardBody>
+                <ul className="list-decimal text-sm text-[#aaaaaa] marker:text-sm marker:text-[#aaaaaa]">
+                  {rolesList.map((roleObj, i) => (
+                    <li key={i} className="w-max">
+                      <Link
+                        className="hover:underline"
+                        href={`#agentsPage__${roleObj.role}`}
+                      >
+                        {roleObj.role}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </CardBody>
+            </Card>
+            {rolesList.map((roleObj, i) => (
+              <div key={i} id={`agentsPage__` + roleObj.role}>
+                <h2>
+                  <div className="flex items-center gap-4">
+                    <Image
+                      unoptimized
+                      alt={roleObj.role}
+                      height={24}
+                      src={roleObj.role_icon_url}
+                      width={24}
+                    />
+                    {roleObj.role}
+                  </div>
+                  <p className="mt-3 text-sm text-[#eeeeee]">
+                    {roleObj.description}
+                  </p>
+                </h2>
+                <Table className="mt-4" fullWidth={true}>
+                  <TableHeader>
+                    {sortedAgentsColumns.map((column) => (
+                      <TableColumn key={column.name}>
+                        {column.name.replace(/_/g, " ")}
+                      </TableColumn>
+                    ))}
+                  </TableHeader>
+                  <TableBody>
+                    {agentsData.agentsData
+                      .filter((agentObj) => agentObj.role === roleObj.role)
+                      .map((agentObj) => (
+                        <TableRow key={agentObj.id}>
+                          <TableCell>
+                            <div className="flex w-max items-center gap-4">
+                              <Image
+                                unoptimized
+                                alt={agentObj.name}
+                                height={24}
+                                src={agentObj.agent_icon_url}
+                                width={24}
+                              />
+                              <div>
+                                <Link
+                                  className="hover:underline"
+                                  href={`/agents/${agentObj.name.toLowerCase()}`}
+                                >
+                                  {agentObj.name}
+                                </Link>
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex w-max items-center gap-4">
+                              <Image
+                                unoptimized
+                                alt={agentObj.c_ability.name}
+                                height={24}
+                                src={agentObj.c_ability.ability_icon_url}
+                                width={24}
+                              />
+                              <span>{agentObj.c_ability.name}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex w-max items-center gap-4">
+                              <Image
+                                unoptimized
+                                alt={agentObj.q_ability.name}
+                                height={24}
+                                src={agentObj.q_ability.ability_icon_url}
+                                width={24}
+                              />
+                              <span>{agentObj.q_ability.name}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex w-max items-center gap-4">
+                              <Image
+                                unoptimized
+                                alt={agentObj.e_ability.name}
+                                height={24}
+                                src={agentObj.e_ability.ability_icon_url}
+                                width={24}
+                              />
+                              <span>{agentObj.e_ability.name}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex w-max items-center gap-4">
+                              <Image
+                                unoptimized
+                                alt={agentObj.x_ability.name}
+                                height={24}
+                                src={agentObj.x_ability.ability_icon_url}
+                                width={24}
+                              />
+                              <span>{agentObj.x_ability.name}</span>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </div>
+            ))}
+          </Tab>
+        </Tabs>
       </div>
     </section>
   );

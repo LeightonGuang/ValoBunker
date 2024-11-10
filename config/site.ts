@@ -4,10 +4,6 @@ export const siteConfig = {
   name: "Valo Bunker",
   description: "Anything useful about Valorant is here!",
   navItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
     {
@@ -18,10 +14,6 @@ export const siteConfig = {
     { label: "Mollies", href: "/mollies" },
   ],
   navMenuItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
     {
