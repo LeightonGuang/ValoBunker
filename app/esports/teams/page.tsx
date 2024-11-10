@@ -72,15 +72,15 @@ const TeamsPage = () => {
                     <ul className="mt-4 flex list-disc flex-col gap-4">
                       {teamObj.roster.map((player, i) => (
                         <li key={player.id} className="flex items-center gap-4">
-                          <Button className="flex h-full w-full justify-between p-2">
+                          <Button className="flex h-full w-full p-2">
                             <Avatar
-                              className="min-w-[2.5rem] bg-[#ffffff]"
+                              className="ml-[0.625rem] min-w-[2.5rem] bg-[#ffffff]"
                               color="primary"
                               isBordered={i === 0}
                               size="md"
                               src={player.profile_picture_url}
                             />
-                            <div className="flex w-full flex-col">
+                            <div className="ml-[1.25rem] flex w-full flex-col text-left">
                               <p className="text-[1rem]">{player.ign}</p>
                               <p className="text-[0.8rem] text-default-500">
                                 {player.name}
@@ -98,10 +98,10 @@ const TeamsPage = () => {
                   <CardFooter>
                     <Button className="flex h-full w-full justify-between p-2">
                       <Avatar
-                        className={`min-w-[2.5rem] bg-[#ffffff]`}
+                        className="ml-[0.625rem] min-w-[2.5rem] bg-[#ffffff]"
                         src={teamObj.head_coach.profile_picture_url}
                       />
-                      <div className="flex w-full flex-col">
+                      <div className="ml-[1.25rem] flex w-full flex-col text-left">
                         <p>{teamObj.head_coach.ign}</p>
                         <p className="text-[0.8rem] text-default-500">
                           {teamObj.head_coach.name}
