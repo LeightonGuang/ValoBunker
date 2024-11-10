@@ -155,7 +155,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  className="w-full justify-start p-0 text-left text-[1rem] text-[#ECEFEF]"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
