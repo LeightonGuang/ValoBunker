@@ -16,20 +16,20 @@ import { title } from "@/components/primitives";
 
 export default function SmokesPage() {
   const circularSmokesColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "duration", sortable: true },
-    { name: "radius", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Duration", sortable: true },
+    { name: "Radius", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
   ];
   const wallSmokesColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "duration", sortable: true },
-    { name: "length", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Duration", sortable: true },
+    { name: "Length", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
   ];
 
   return (
