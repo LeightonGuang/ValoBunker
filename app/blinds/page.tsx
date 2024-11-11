@@ -16,22 +16,22 @@ import { title } from "@/components/primitives";
 
 export default function SmokePage() {
   const flashColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "blind_duration", sortable: true },
-    { name: "charge", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
-    { name: "health", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Blind Duration", sortable: true },
+    { name: "Charge", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
+    { name: "Health", sortable: true },
   ];
   const nearsigntColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "blind_duration", sortable: true },
-    { name: "charge", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
-    { name: "health", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Blind Duration", sortable: true },
+    { name: "Charge", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
+    { name: "Health", sortable: true },
   ];
 
   return (
