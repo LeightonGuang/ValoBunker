@@ -78,7 +78,7 @@ export default function SmokesPage() {
       </div>
       <div className="mt-6">
         <h2 className="mt-6">Wall Smokes</h2>
-        <Table className="mt-4" selectionMode="single">
+        <Table className="mt-4">
           <TableHeader>
             {wallSmokesColumns.map((column) => (
               <TableColumn key={column.name}>{column.name}</TableColumn>
@@ -94,13 +94,17 @@ export default function SmokesPage() {
                   />
                 </TableCell>
                 <TableCell>
-                  <Image
-                    unoptimized
-                    alt={smoke.ability.name}
-                    height={24}
-                    src={smoke.ability.iconUrl}
-                    width={24}
-                  />
+                  <Tooltip content={smoke.ability.name}>
+                    <div className="cursor-pointer">
+                      <Image
+                        unoptimized
+                        alt={smoke.ability.name}
+                        height={24}
+                        src={smoke.ability.iconUrl}
+                        width={24}
+                      />
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{smoke.duration}</TableCell>
                 <TableCell>{smoke.length}</TableCell>

@@ -81,7 +81,7 @@ export default function SmokePage() {
       </div>
       <div className="mt-6">
         <h2 className="mt-6">Nearsight</h2>
-        <Table className="mt-4" selectionMode="single">
+        <Table className="mt-4">
           <TableHeader>
             {nearsigntColumns.map((column) => (
               <TableColumn key={column.name}>{column.name}</TableColumn>
@@ -97,13 +97,17 @@ export default function SmokePage() {
                   />
                 </TableCell>
                 <TableCell>
-                  <Image
-                    unoptimized
-                    alt={nearsight.ability.name}
-                    height={24}
-                    src={nearsight.ability.iconUrl}
-                    width={24}
-                  />
+                  <Tooltip content={nearsight.ability.name}>
+                    <div className="cursor-pointer">
+                      <Image
+                        unoptimized
+                        alt={nearsight.ability.name}
+                        height={24}
+                        src={nearsight.ability.iconUrl}
+                        width={24}
+                      />
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{nearsight.blind_duration}</TableCell>
                 <TableCell>{nearsight.charge}</TableCell>
