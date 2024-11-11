@@ -210,23 +210,6 @@ export default function AgentsPage() {
                       .map((agentObj) => (
                         <TableRow key={agentObj.id}>
                           <TableCell>
-                            {/* <div className="flex w-max items-center gap-4">
-                              <Image
-                                unoptimized
-                                alt={agentObj.name}
-                                height={24}
-                                src={agentObj.agent_icon_url}
-                                width={24}
-                              />
-                              <div>
-                                <Link
-                                  className="hover:underline"
-                                  href={`/agents/${agentObj.name.toLowerCase()}`}
-                                >
-                                  {agentObj.name}
-                                </Link>
-                              </div>
-                            </div> */}
                             <div className="flex w-max items-center">
                               <Link
                                 href={`/agents/${agentObj.name.toLowerCase()}`}
