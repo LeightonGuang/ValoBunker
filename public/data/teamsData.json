@@ -604,7 +604,7 @@
   "chinaTeamsData": [
     {
       "id": 1,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/6549c2b905061.png",
       "team_name": "All Gamers",
       "team_tag": "AG",
       "country": "China",
@@ -619,7 +619,7 @@
     },
     {
       "id": 2,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/63f25d72216c1.png",
       "team_name": "Bilibili Gaming",
       "team_tag": "BLG",
       "country": "China",
@@ -634,7 +634,7 @@
     },
     {
       "id": 3,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/642233fc01f26.png",
       "team_name": "Dragon Ranger Gaming",
       "team_tag": "DRG",
       "country": "China",
@@ -649,7 +649,7 @@
     },
     {
       "id": 4,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/62c8204fbb29d.png",
       "team_name": "EDward Gaming",
       "team_tag": "EDG",
       "country": "China",
@@ -664,7 +664,7 @@
     },
     {
       "id": 5,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/65a17b313b131.png",
       "team_name": "FunPlus Phoenix",
       "team_tag": "FPX",
       "country": "China",
@@ -679,7 +679,7 @@
     },
     {
       "id": 6,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/64f9825408326.png",
       "team_name": "JDG Esports",
       "team_tag": "JDG",
       "country": "China",
@@ -694,7 +694,7 @@
     },
     {
       "id": 7,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/6404c031b6c67.png",
       "team_name": "Nova Esports",
       "team_tag": "NOV",
       "country": "China",
@@ -709,7 +709,7 @@
     },
     {
       "id": 8,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/6548741adc65f.png",
       "team_name": "Titan Esports Club",
       "team_tag": "TEC",
       "country": "China",
@@ -724,7 +724,7 @@
     },
     {
       "id": 9,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/6433a2d3b58c9.png",
       "team_name": "Trace Esports",
       "team_tag": "TRC",
       "country": "China",
@@ -739,7 +739,7 @@
     },
     {
       "id": 10,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/63eb60fb08390.png",
       "team_name": "TYLOO",
       "team_tag": "TYL",
       "country": "China",
@@ -754,7 +754,7 @@
     },
     {
       "id": 11,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/651d33f8e6a1f.png",
       "team_name": "Wolves Esports",
       "team_tag": "WOL",
       "country": "China",
@@ -1398,7 +1398,7 @@
   "pacificTeamsData": [
     {
       "id": 1,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/629f1bdae82ab.png",
       "team_name": "BOOM Esports",
       "team_tag": "BME",
       "country": "Indonesia",
@@ -1409,86 +1409,340 @@
         "name": "TBD",
         "country": "TBD"
       },
-      "roster": []
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/670fae90e29ac.png",
+          "ign": "dos9",
+          "name": "Dastan Zhumagali",
+          "role": "IGL",
+          "country": "Kazakhstan"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/6704d517cee11.png",
+          "ign": "Famouz",
+          "name": "Fikri Zaki Hamdani",
+          "role": "Duelist",
+          "country": "Indonesia"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/6704d5214e54a.png",
+          "ign": "Shiro",
+          "name": "Hildegard Arnaldo",
+          "role": "Controller",
+          "country": "Indonesia"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6704d52d2da8f.png",
+          "ign": "NcSlasher",
+          "name": "Sheldon Andersen Chandra",
+          "role": "Initiator",
+          "country": "Indonesia"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/6704d5384e034.png",
+          "ign": "BerserX",
+          "name": "Rizkie Adla Kusuma",
+          "role": "Sentinel",
+          "country": "Indonesia"
+        }
+      ]
     },
     {
       "id": 2,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/63972e75f18ed.png",
       "team_name": "DetonatioN FocusMe",
       "team_tag": "DFM",
       "country": "Japan",
       "head_coach": {
         "id": 1,
-        "profile_picture_url": "TBD",
-        "ign": "TBD",
-        "name": "TBD",
-        "country": "TBD"
+        "profile_picture_url": "https://pbs.twimg.com/profile_images/1846181058574012416/1rAxRXT2_400x400.jpg",
+        "ign": "Melofovia",
+        "name": "Hirotaka Okazaki",
+        "country": "Japan"
       },
-      "roster": []
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://team-detonation.net/wp-content/uploads/2024/10/dfm2025_art-min-683x1024.png",
+          "ign": "Art",
+          "name": "Koki Kagami",
+          "role": "IGL",
+          "country": "Japan"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://team-detonation.net/wp-content/uploads/2023/11/dfm2025_meiy-min.png",
+          "ign": "Meiy",
+          "name": "Ibuki Seki",
+          "role": "IGL",
+          "country": "Japan"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://team-detonation.net/wp-content/uploads/2024/10/dfm2025_jinboong-min.png",
+          "ign": "Jinboong",
+          "name": "Kim Jin-won (김진원)",
+          "role": "Sentinel",
+          "country": "South Korea"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://team-detonation.net/wp-content/uploads/2024/10/dfm2025_akame-min.png",
+          "ign": "Akame",
+          "name": "Yu Gwang-hui (유광희)",
+          "role": "Initiator",
+          "country": "South Korea"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://team-detonation.net/wp-content/uploads/2024/10/dfm2025_gyen-min.png",
+          "ign": "gyen",
+          "name": "Koki Nakamura",
+          "role": "Initiator",
+          "country": "Japan"
+        },
+        {
+          "id": 6,
+          "profile_picture_url": "https://team-detonation.net/wp-content/uploads/2023/11/dfm2025_ssees-min.png",
+          "ign": "SSeeS",
+          "name": "Tomonori Okimura",
+          "role": "Sub",
+          "country": "Japan"
+        }
+      ]
     },
     {
       "id": 3,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/63b17ac3a7d00.png",
       "team_name": "DRX",
       "team_tag": "DRX",
       "country": "South Korea",
       "head_coach": {
         "id": 1,
-        "profile_picture_url": "TBD",
-        "ign": "TBD",
-        "name": "TBD",
-        "country": "TBD"
+        "profile_picture_url": "https://owcdn.net/img/6360e1d0a85c2.png",
+        "ign": "termi",
+        "name": "Pyeon Seon-ho (편선호)",
+        "country": "South Korea"
       },
-      "roster": []
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://prosettings.net/wp-content/uploads/flashback.png",
+          "ign": "Flashback",
+          "name": "Cho Min-hyuk (조민혁)",
+          "role": "TBD",
+          "country": "South Korea"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/63eba2963b69b.png",
+          "ign": "MaKo",
+          "name": "Kim Myeong-gwan (김명관)",
+          "role": "Controller",
+          "country": "South Korea"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT526enV1hvvMoMOs4f-gUThq85YFKXNucBeA&s",
+          "ign": "Athan",
+          "name": "Na Ha-jun (나하준)",
+          "role": "Initiator",
+          "country": "South Korea"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "",
+          "ign": "freeing",
+          "name": "No Ha-jun (노하준)",
+          "role": "Sentinel/Controller",
+          "country": "South Korea"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://pbs.twimg.com/media/GawEGGuaAAQphZd?format=jpg&name=large",
+          "ign": "HYUNMIN",
+          "name": "Song Hyun-min (송현민)",
+          "role": "Duelist",
+          "country": "South Korea"
+        }
+      ]
     },
     {
       "id": 4,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/662f72041aff8.png",
       "team_name": "Gen.G",
       "team_tag": "GEN",
       "country": "South Korea",
       "head_coach": {
         "id": 1,
-        "profile_picture_url": "TBD",
-        "ign": "TBD",
-        "name": "TBD",
-        "country": "TBD"
+        "profile_picture_url": "https://pbs.twimg.com/profile_images/1808855808907825155/8YMw8V-u_400x400.jpg",
+        "ign": "solo",
+        "name": "Kang Geun-chul (강근철)",
+        "country": "South Korea"
       },
-      "roster": []
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/65f66e6f7a024.png",
+          "ign": "Munchkin",
+          "name": "Byeon Sang-beom (변상범)",
+          "role": "IGL",
+          "country": "South Korea"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/63eba29e99c0e.png",
+          "ign": "Foxy9",
+          "name": "Jung Jae-sung (정재성)",
+          "role": "Sentinel/Initiator",
+          "country": "South Korea"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/65f66ea5150a9.png",
+          "ign": "t3xture",
+          "name": "Kim Na-ra (김나라)",
+          "role": "Duelist",
+          "country": "South Korea"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6516acf7d1f4f.png",
+          "ign": "yoman",
+          "name": "Chae Young-moon (채영문)",
+          "role": "Initiator",
+          "country": "South Korea"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/65f66eaf0857d.png",
+          "ign": "Karon",
+          "name": "Kim Won-tae (김원태)",
+          "role": "Controller",
+          "country": "South Korea"
+        }
+      ]
     },
     {
       "id": 5,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/629f316ddd4dd.png",
       "team_name": "Global Esports",
       "team_tag": "GE",
       "country": "India",
       "head_coach": {
         "id": 1,
-        "profile_picture_url": "TBD",
-        "ign": "TBD",
-        "name": "TBD",
-        "country": "TBD"
+        "profile_picture_url": "https://pbs.twimg.com/profile_images/1848330294505644032/2_YlOEZn_400x400.jpg",
+        "ign": "Juv3nile",
+        "name": "Preston Dornon",
+        "country": "United States"
       },
-      "roster": []
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/668e74d79c390.png",
+          "ign": "patrickWHO",
+          "name": "Mark Musni",
+          "role": "IGL",
+          "country": "Philippines"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/6655b7b338b24.png",
+          "ign": "UdoTan",
+          "name": "Go Kyung-won (고경원)",
+          "role": "Controller",
+          "country": "South Korea"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/65865dcc05ee7.png",
+          "ign": "Kr1stal",
+          "name": "Savva Fedorov",
+          "role": "Sentinel",
+          "country": "Russia"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6667c20a949de.png",
+          "ign": "kellyS",
+          "name": "Kelly Sedillo",
+          "role": "Duelist",
+          "country": "Philippines"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/65cca6d7673a0.png",
+          "ign": "Papi",
+          "name": "Federico Evangelista",
+          "role": "Initiator",
+          "country": "Philippines"
+        }
+      ]
     },
     {
       "id": 6,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/62bbebb185a7e.png",
       "team_name": "Paper Rex",
       "team_tag": "PRX",
       "country": "Singapore",
       "head_coach": {
         "id": 1,
-        "profile_picture_url": "TBD",
-        "ign": "TBD",
-        "name": "TBD",
-        "country": "TBD"
+        "profile_picture_url": "https://owcdn.net/img/66b07d76d8707.png",
+        "ign": "alecks",
+        "name": "Alexandre Sallé",
+        "country": "France"
       },
-      "roster": []
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/66b07e9a956c9.png",
+          "ign": "f0rsakeN",
+          "name": "Jason Susanto",
+          "role": "IGL",
+          "country": "Indonesia"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/66b07e91da344.png",
+          "ign": "mindfreak",
+          "name": "Aaron Leonhart",
+          "role": "Controller",
+          "country": "Indonesia"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/66b07eb31b330.png",
+          "ign": "Jinggg",
+          "name": "Wang Jing Jie",
+          "role": "Duelist",
+          "country": "Singapore"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/66b07ea23868a.png",
+          "ign": "d4v41",
+          "name": "Khalish Rusyaidee",
+          "role": "Sentinel/Initiator",
+          "country": "Malaysia"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/66b07eaa6c113.png",
+          "ign": "something",
+          "name": "Ilya Petrov",
+          "role": "Duelist",
+          "country": "Russia"
+        }
+      ]
     },
     {
       "id": 7,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/629f17f51e7a3.png",
       "team_name": "Rex Regum Qeon",
       "team_tag": "RRQ",
       "country": "Indonesia",
@@ -1503,7 +1757,7 @@
     },
     {
       "id": 8,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/62fe0b8f6b084.png",
       "team_name": "T1",
       "team_tag": "T1",
       "country": "South Korea",
@@ -1518,7 +1772,7 @@
     },
     {
       "id": 9,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/6226f3d764e03.png",
       "team_name": "Talon Esports",
       "team_tag": "TLN",
       "country": "Thailand",
@@ -1533,7 +1787,7 @@
     },
     {
       "id": 10,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/629f130e0501d.png",
       "team_name": "Team Secret",
       "team_tag": "TS",
       "country": "Philippines",
@@ -1548,7 +1802,7 @@
     },
     {
       "id": 11,
-      "team_logo_url": "",
+      "team_logo_url": "https://owcdn.net/img/62a4117e1c021.png",
       "team_name": "ZETA DIVISION",
       "team_tag": "ZETA",
       "country": "Japan",
