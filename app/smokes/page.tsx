@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, User } from "@nextui-org/react";
 
 import smokesData from "@/public/data/smokesData.json";
 import { title } from "@/components/primitives";
@@ -46,7 +46,12 @@ export default function SmokesPage() {
           <TableBody>
             {smokesData.circularSmokesData.map((smoke) => (
               <TableRow key={smoke.id}>
-                <TableCell>{smoke.agent}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: smoke.agent.agent_icon_url }}
+                    name={smoke.agent.name}
+                  />
+                </TableCell>
                 <TableCell>
                   <Tooltip content={smoke.ability.name}>
                     <div className="cursor-pointer">
@@ -82,7 +87,12 @@ export default function SmokesPage() {
           <TableBody>
             {smokesData.wallSmokesData.map((smoke) => (
               <TableRow key={smoke.id}>
-                <TableCell>{smoke.agent}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: smoke.agent.agent_icon_url }}
+                    name={smoke.agent.name}
+                  />
+                </TableCell>
                 <TableCell>
                   <Image
                     unoptimized

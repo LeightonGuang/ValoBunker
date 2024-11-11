@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, User } from "@nextui-org/react";
 
 import blindsData from "@/public/data/blindData.json";
 import { title } from "@/components/primitives";
@@ -48,7 +48,12 @@ export default function SmokePage() {
           <TableBody>
             {blindsData.flashData.map((flash) => (
               <TableRow key={flash.id}>
-                <TableCell>{flash.agent}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: flash.agent.agent_icon_url }}
+                    name={flash.agent.name}
+                  />
+                </TableCell>
                 <TableCell>
                   <Tooltip content={flash.ability.name}>
                     <div className="cursor-pointer">
@@ -85,7 +90,12 @@ export default function SmokePage() {
           <TableBody>
             {blindsData.nearsigntData.map((nearsight) => (
               <TableRow key={nearsight.id}>
-                <TableCell>{nearsight.agent}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: nearsight.agent.agent_icon_url }}
+                    name={nearsight.agent.name}
+                  />
+                </TableCell>
                 <TableCell>
                   <Image
                     unoptimized
