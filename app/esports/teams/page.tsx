@@ -93,7 +93,7 @@ const TeamsPage = () => {
                   <Card
                     key={teamObj.id}
                     className="lg:w-[calc(25%-1.5rem)] lg:flex-shrink-0 lg:snap-start"
-                    id={`teamsPage__americas--${teamObj.id}`}
+                    id={`teamsPage__${regionList[i]}--${teamObj.id}`}
                   >
                     <CardHeader>
                       <Image
