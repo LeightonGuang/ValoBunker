@@ -27,9 +27,6 @@ export const siteConfig = {
   navMenuItems: [
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
-    { label: "Smokes", href: "/smokes" },
-    { label: "Blinds", href: "/blinds" },
-    { label: "Mollies", href: "/mollies" },
   ],
   links: {
     github: "https://github.com/nextui-org/nextui",
