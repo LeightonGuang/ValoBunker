@@ -2,7 +2,10 @@
   "circularSmokesData": [
     {
       "id": 1,
-      "agent": "Brimstone",
+      "agent": {
+        "name": "Brimstone",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/4/4d/Brimstone_icon.png"
+      },
       "ability": {
         "name": "Sky Smoke",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5325b2340045a32d919d467ce3b09c3725de73ea-126x126.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -17,7 +20,10 @@
     },
     {
       "id": 2,
-      "agent": "Viper",
+      "agent": {
+        "name": "Viper",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/5/5f/Viper_icon.png"
+      },
       "ability": {
         "name": "Toxic Screen",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/3eba05b8ed1ac69c440d54cec365e537d294be25-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -32,7 +38,10 @@
     },
     {
       "id": 3,
-      "agent": "Cypher",
+      "agent": {
+        "name": "Cypher",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/8/88/Cypher_icon.png"
+      },
       "ability": {
         "name": "Cyber Cage",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/292fbe783ac9e2f638822c5f87f09b005b48a712-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -47,7 +56,10 @@
     },
     {
       "id": 4,
-      "agent": "Omen",
+      "agent": {
+        "name": "Omen",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/b/b0/Omen_icon.png"
+      },
       "ability": {
         "name": "Dark Cover",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e4012aeda506a8e77f2e83d48aa8c5c73a37b659-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -62,7 +74,10 @@
     },
     {
       "id": 5,
-      "agent": "Jett",
+      "agent": {
+        "name": "Jett",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/3/35/Jett_icon.png"
+      },
       "ability": {
         "name": "Cloudburst",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/8c5e94bfc817e5d35eca7692fd242404de5ac5dd-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -77,7 +92,10 @@
     },
     {
       "id": 6,
-      "agent": "Astra",
+      "agent": {
+        "name": "Astra",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/0/08/Astra_icon.png"
+      },
       "ability": {
         "name": "Nebula/Dissipate",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/fe8a6fdb673e9f5a94c3379bde8e78aa9ec7c6c1-512x512.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -92,7 +110,10 @@
     },
     {
       "id": 7,
-      "agent": "Harbor",
+      "agent": {
+        "name": "Harbor",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/f/f3/Harbor_icon.png"
+      },
       "ability": {
         "name": "Cove",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e988e2cc973a4c6791db0b87c13ce6a02162ed89-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -107,7 +128,10 @@
     },
     {
       "id": 8,
-      "agent": "Clove",
+      "agent": {
+        "name": "Clove",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/3/30/Clove_icon.png"
+      },
       "ability": {
         "name": "Ruse",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5ce846ce8e5ae7ce7904f0c31824f7729307743e-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -124,7 +148,10 @@
   "wallSmokesData": [
     {
       "id": 1,
-      "agent": "Phoenix",
+      "agent": {
+        "name": "Phoenix",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/1/14/Phoenix_icon.png"
+      },
       "ability": {
         "name": "Blaze",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/d807a982ce70475acb2e8461b4f8737204e35d96-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -139,7 +166,10 @@
     },
     {
       "id": 2,
-      "agent": "Viper",
+      "agent": {
+        "name": "Viper",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/5/5f/Viper_icon.png"
+      },
       "ability": {
         "name": "Toxic Screen",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/b1204a1fbcc0e2fced090f18ad18e7587357c783-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -154,7 +184,10 @@
     },
     {
       "id": 3,
-      "agent": "Neon",
+      "agent": {
+        "name": "Neon",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/d/d0/Neon_icon.png"
+      },
       "ability": {
         "name": "Fast Lane",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/46c16f398d28f7e029f42bc742f3838443e8a3d3-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -169,7 +202,10 @@
     },
     {
       "id": 4,
-      "agent": "Harbor",
+      "agent": {
+        "name": "Harbor",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/f/f3/Harbor_icon.png"
+      },
       "ability": {
         "name": "High Tide",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e6af3e9f6f2259ffe3c69448adc9f89beebc4f80-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -184,7 +220,10 @@
     },
     {
       "id": 5,
-      "agent": "Harbor",
+      "agent": {
+        "name": "Harbor",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/f/f3/Harbor_icon.png"
+      },
       "ability": {
         "name": "Cascade",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/88032d13dc1b40e61bc763749c5aae29a056735d-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"

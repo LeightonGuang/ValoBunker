@@ -2,7 +2,10 @@
   "flashData": [
     {
       "id": 1,
-      "agent": "Phoenix",
+      "agent": {
+        "name": "Phoenix",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/1/14/Phoenix_icon.png"
+      },
       "ability": {
         "name": "Curveball",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/beb874d19c79982f0e99e858098c067d9132a95a-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -18,7 +21,10 @@
     },
     {
       "id": 2,
-      "agent": "Breach",
+      "agent": {
+        "name": "Breach",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/5/53/Breach_icon.png"
+      },
       "ability": {
         "name": "Flashpoint",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/cca58acc93956ee755ccea171a36584a402793c2-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -34,7 +40,10 @@
     },
     {
       "id": 3,
-      "agent": "Skye",
+      "agent": {
+        "name": "Skye",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/3/33/Skye_icon.png"
+      },
       "ability": {
         "name": "Guiding Light",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/ed6e5f91be20274ff84cb24644c3b559bfa8fed1-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -50,7 +59,10 @@
     },
     {
       "id": 4,
-      "agent": "Yoru",
+      "agent": {
+        "name": "Yoru",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/d/d4/Yoru_icon.png"
+      },
       "ability": {
         "name": "Blindside",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/ea733bf224ae53e8e53cabfae19bfc12ce9fcda3-512x512.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -66,7 +78,10 @@
     },
     {
       "id": 5,
-      "agent": "Kay/O",
+      "agent": {
+        "name": "Kay/O",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/f/f0/KAYO_icon.png"
+      },
       "ability": {
         "name": "FLASH/drive",
         "iconUrl": "https://static.wikia.nocookie.net/valorant/images/1/13/FLASH-drive.png"
@@ -82,7 +97,10 @@
     },
     {
       "id": 6,
-      "agent": "Gekko",
+      "agent": {
+        "name": "Gekko",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/6/66/Gekko_icon.png"
+      },
       "ability": {
         "name": "Dizzy",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/5cd2d39b6747b897e6648172d084d355477ea545-255x248.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -98,7 +116,10 @@
     },
     {
       "id": 7,
-      "agent": "Vyse",
+      "agent": {
+        "name": "Vyse",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/2/21/Vyse_icon.png"
+      },
       "ability": {
         "name": "Arc Rose",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/f0ac7fb5d31a65820bcc22217abcafbbfb4077e7-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -114,7 +135,10 @@
     },
     {
       "id": 8,
-      "agent": "Yoru",
+      "agent": {
+        "name": "Yoru",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/d/d4/Yoru_icon.png"
+      },
       "ability": {
         "name": "Fakeout",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/43416e5b34cd80c691ed0cc3b69fc73fae93f923-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -132,7 +156,10 @@
   "nearsigntData": [
     {
       "id": 1,
-      "agent": "Reyna",
+      "agent": {
+        "name": "Reyna",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/b/b0/Reyna_icon.png"
+      },
       "ability": {
         "name": "Leer",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/9d295b17382acbc17bdb4e45e0be74d58e94e6c5-256x256.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -148,7 +175,10 @@
     },
     {
       "id": 2,
-      "agent": "Omen",
+      "agent": {
+        "name": "Omen",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/b/b0/Omen_icon.png"
+      },
       "ability": {
         "name": "Paranoia",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/e8544e323a51c9b8ff7ae8fca257e038a570819d-128x128.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
@@ -164,7 +194,10 @@
     },
     {
       "id": 3,
-      "agent": "Fade",
+      "agent": {
+        "name": "Fade",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/a/a6/Fade_icon.png"
+      },
       "ability": {
         "name": "Prowlier",
         "iconUrl": "https://static.wikia.nocookie.net/valorant/images/6/68/Prowler.png"
@@ -180,7 +213,10 @@
     },
     {
       "id": 4,
-      "agent": "Skye",
+      "agent": {
+        "name": "Skye",
+        "agent_icon_url": "https://static.wikia.nocookie.net/valorant/images/3/33/Skye_icon.png"
+      },
       "ability": {
         "name": "Seekers",
         "iconUrl": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data/9ccbd11eadca50047c6e84125285a11e1d334acd-1024x1024.png?auto=format&fit=crop&q=80&h=48&w=48&crop=center"
