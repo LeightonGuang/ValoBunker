@@ -9,29 +9,29 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, User } from "@nextui-org/react";
 
 import blindsData from "@/public/data/blindData.json";
 import { title } from "@/components/primitives";
 
 export default function SmokePage() {
   const flashColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "blind_duration", sortable: true },
-    { name: "charge", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
-    { name: "health", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Blind Duration", sortable: true },
+    { name: "Charge", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
+    { name: "Health", sortable: true },
   ];
   const nearsigntColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "blind_duration", sortable: true },
-    { name: "charge", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
-    { name: "health", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Blind Duration", sortable: true },
+    { name: "Charge", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
+    { name: "Health", sortable: true },
   ];
 
   return (
@@ -48,7 +48,12 @@ export default function SmokePage() {
           <TableBody>
             {blindsData.flashData.map((flash) => (
               <TableRow key={flash.id}>
-                <TableCell>{flash.agent}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: flash.agent.agent_icon_url }}
+                    name={flash.agent.name}
+                  />
+                </TableCell>
                 <TableCell>
                   <Tooltip content={flash.ability.name}>
                     <div className="cursor-pointer">
@@ -76,7 +81,7 @@ export default function SmokePage() {
       </div>
       <div className="mt-6">
         <h2 className="mt-6">Nearsight</h2>
-        <Table className="mt-4" selectionMode="single">
+        <Table className="mt-4">
           <TableHeader>
             {nearsigntColumns.map((column) => (
               <TableColumn key={column.name}>{column.name}</TableColumn>
@@ -85,15 +90,24 @@ export default function SmokePage() {
           <TableBody>
             {blindsData.nearsigntData.map((nearsight) => (
               <TableRow key={nearsight.id}>
-                <TableCell>{nearsight.agent}</TableCell>
                 <TableCell>
-                  <Image
-                    unoptimized
-                    alt={nearsight.ability.name}
-                    height={24}
-                    src={nearsight.ability.iconUrl}
-                    width={24}
+                  <User
+                    avatarProps={{ src: nearsight.agent.agent_icon_url }}
+                    name={nearsight.agent.name}
                   />
+                </TableCell>
+                <TableCell>
+                  <Tooltip content={nearsight.ability.name}>
+                    <div className="cursor-pointer">
+                      <Image
+                        unoptimized
+                        alt={nearsight.ability.name}
+                        height={24}
+                        src={nearsight.ability.iconUrl}
+                        width={24}
+                      />
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{nearsight.blind_duration}</TableCell>
                 <TableCell>{nearsight.charge}</TableCell>

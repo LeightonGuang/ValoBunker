@@ -6,20 +6,28 @@ export const siteConfig = {
   navItems: [
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
+  ],
+  navSimilarAbilities: [
+    {
+      label: "Blinds",
+      href: "/blinds",
+      description: "Disorient or obstruct the enemy's vision.",
+    },
+    {
+      label: "Mollies",
+      href: "/mollies",
+      description: "Deals damage and slows enemies within its area of effect.",
+    },
     {
       label: "Smokes",
       href: "/smokes",
+      description: "Blocks vision and provides cover for players.",
     },
-    { label: "Blinds", href: "/blinds" },
-    { label: "Mollies", href: "/mollies" },
   ],
   navMenuItems: [
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
-    {
-      label: "Smokes",
-      href: "/smokes",
-    },
+    { label: "Smokes", href: "/smokes" },
     { label: "Blinds", href: "/blinds" },
     { label: "Mollies", href: "/mollies" },
   ],

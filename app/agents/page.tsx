@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import Link from "next/link";
-import { Tabs, Tab, Card, CardHeader, CardBody } from "@nextui-org/react";
+import { Tabs, Tab, Card, CardHeader, CardBody, User } from "@nextui-org/react";
 
 import agentsData from "@/public/data/agentData.json";
 import { title } from "@/components/primitives";
@@ -70,7 +70,7 @@ export default function AgentsPage() {
       <div>
         <Tabs className="mt-4 flex justify-end" size="sm">
           <Tab key={"allAgents"} title="All Agents">
-            <Table className="mt-4" fullWidth={true} selectionMode="single">
+            <Table className="mt-4" fullWidth={true}>
               <TableHeader>
                 {allAgentsColumns.map((column) => (
                   <TableColumn key={column.name}>
@@ -82,22 +82,12 @@ export default function AgentsPage() {
                 {agentsData.agentsData.map((agentObj) => (
                   <TableRow key={agentObj.id}>
                     <TableCell>
-                      <div className="flex w-max items-center gap-4">
-                        <Image
-                          unoptimized
-                          alt={agentObj.name}
-                          height={24}
-                          src={agentObj.agent_icon_url}
-                          width={24}
+                      <div className="flex w-max items-center">
+                        <User
+                          avatarProps={{ src: agentObj.agent_icon_url }}
+                          className="gap-4"
+                          name={agentObj.name}
                         />
-                        <div>
-                          <Link
-                            className="hover:underline"
-                            href={`/agents/${agentObj.name.toLowerCase()}`}
-                          >
-                            {agentObj.name}
-                          </Link>
-                        </div>
                       </div>
                     </TableCell>
                     <TableCell>
@@ -220,22 +210,16 @@ export default function AgentsPage() {
                       .map((agentObj) => (
                         <TableRow key={agentObj.id}>
                           <TableCell>
-                            <div className="flex w-max items-center gap-4">
-                              <Image
-                                unoptimized
-                                alt={agentObj.name}
-                                height={24}
-                                src={agentObj.agent_icon_url}
-                                width={24}
-                              />
-                              <div>
-                                <Link
-                                  className="hover:underline"
-                                  href={`/agents/${agentObj.name.toLowerCase()}`}
-                                >
-                                  {agentObj.name}
-                                </Link>
-                              </div>
+                            <div className="flex w-max items-center">
+                              <Link
+                                href={`/agents/${agentObj.name.toLowerCase()}`}
+                              >
+                                <User
+                                  avatarProps={{ src: agentObj.agent_icon_url }}
+                                  className="gap-4"
+                                  name={agentObj.name}
+                                />
+                              </Link>
                             </div>
                           </TableCell>
                           <TableCell>

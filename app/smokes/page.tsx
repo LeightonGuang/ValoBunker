@@ -9,27 +9,27 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, User } from "@nextui-org/react";
 
 import smokesData from "@/public/data/smokesData.json";
 import { title } from "@/components/primitives";
 
 export default function SmokesPage() {
   const circularSmokesColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "duration", sortable: true },
-    { name: "radius", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Duration", sortable: true },
+    { name: "Radius", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
   ];
   const wallSmokesColumns = [
-    { name: "agent", sortable: true },
-    { name: "ability", sortable: false },
-    { name: "duration", sortable: true },
-    { name: "length", sortable: true },
-    { name: "cost", sortable: true },
-    { name: "regen", sortable: true },
+    { name: "Agent", sortable: true },
+    { name: "Ability", sortable: false },
+    { name: "Duration", sortable: true },
+    { name: "Length", sortable: true },
+    { name: "Cost", sortable: true },
+    { name: "Regen", sortable: true },
   ];
 
   return (
@@ -46,7 +46,12 @@ export default function SmokesPage() {
           <TableBody>
             {smokesData.circularSmokesData.map((smoke) => (
               <TableRow key={smoke.id}>
-                <TableCell>{smoke.agent}</TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: smoke.agent.agent_icon_url }}
+                    name={smoke.agent.name}
+                  />
+                </TableCell>
                 <TableCell>
                   <Tooltip content={smoke.ability.name}>
                     <div className="cursor-pointer">
@@ -73,7 +78,7 @@ export default function SmokesPage() {
       </div>
       <div className="mt-6">
         <h2 className="mt-6">Wall Smokes</h2>
-        <Table className="mt-4" selectionMode="single">
+        <Table className="mt-4">
           <TableHeader>
             {wallSmokesColumns.map((column) => (
               <TableColumn key={column.name}>{column.name}</TableColumn>
@@ -82,15 +87,24 @@ export default function SmokesPage() {
           <TableBody>
             {smokesData.wallSmokesData.map((smoke) => (
               <TableRow key={smoke.id}>
-                <TableCell>{smoke.agent}</TableCell>
                 <TableCell>
-                  <Image
-                    unoptimized
-                    alt={smoke.ability.name}
-                    height={24}
-                    src={smoke.ability.iconUrl}
-                    width={24}
+                  <User
+                    avatarProps={{ src: smoke.agent.agent_icon_url }}
+                    name={smoke.agent.name}
                   />
+                </TableCell>
+                <TableCell>
+                  <Tooltip content={smoke.ability.name}>
+                    <div className="cursor-pointer">
+                      <Image
+                        unoptimized
+                        alt={smoke.ability.name}
+                        height={24}
+                        src={smoke.ability.iconUrl}
+                        width={24}
+                      />
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{smoke.duration}</TableCell>
                 <TableCell>{smoke.length}</TableCell>

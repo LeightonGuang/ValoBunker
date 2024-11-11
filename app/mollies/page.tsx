@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
+import { Tooltip, User } from "@nextui-org/react";
 
 import molliesData from "@/public/data/molliesData.json";
 import { title } from "@/components/primitives";
@@ -16,7 +17,7 @@ import { title } from "@/components/primitives";
 export default function MolliesPage() {
   const mollyColumns = [
     { name: "Agent", sortable: true },
-    { name: "Name", sortable: true },
+    { name: "Ability", sortable: true },
     { name: "Damage", sortable: false },
     { name: "Duration", sortable: true },
     { name: "Charge", sortable: true },
@@ -40,28 +41,26 @@ export default function MolliesPage() {
             {molliesData.molliesData.map((molly) => (
               <TableRow key={molly.id}>
                 <TableCell>
-                  <div className="flex w-max items-center gap-4">
-                    <Image
-                      unoptimized
-                      alt={molly.agent}
-                      height={24}
-                      src={molly.agent_icon_url}
-                      width={24}
+                  <div className="flex w-max items-center">
+                    <User
+                      avatarProps={{ src: molly.agent_icon_url }}
+                      className="gap-4"
+                      name={molly.agent}
                     />
-                    {molly.agent}
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex w-max items-center gap-4">
-                    <Image
-                      unoptimized
-                      alt={molly.name}
-                      height={24}
-                      src={molly.ability_icon_url}
-                      width={24}
-                    />
-                    {molly.name}
-                  </div>
+                  <Tooltip content={molly.name}>
+                    <div className="cursor-pointer">
+                      <Image
+                        unoptimized
+                        alt={molly.name}
+                        height={24}
+                        src={molly.ability_icon_url}
+                        width={24}
+                      />
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell>{`${molly.damage.min !== null ? `${molly.damage.min} - ` : ""} ${molly.damage.max}`}</TableCell>
                 <TableCell>{molly.duration}</TableCell>

@@ -24,7 +24,12 @@ import {
   DropdownTrigger,
 } from "@nextui-org/react";
 
-import { SearchIcon, MenuIcon, ChevronDown } from "@/components/icons";
+import {
+  SearchIcon,
+  MenuIcon,
+  CloseIcon,
+  ChevronDown,
+} from "@/components/icons";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { siteConfig } from "@/config/site";
 
@@ -90,6 +95,39 @@ export const Navbar = () => {
                   radius="sm"
                   variant="light"
                 >
+                  Similar Abilities
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label="Similar Abilities"
+              className="w-[340px]"
+              itemClasses={{
+                base: "gap-4",
+              }}
+            >
+              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+                <DropdownItem
+                  key={i}
+                  description={abilityType.description}
+                  href={abilityType.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {abilityType.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  endContent={<ChevronDown fill="currentColor" size={16} />}
+                  radius="sm"
+                  variant="light"
+                >
                   Esports
                 </Button>
               </DropdownTrigger>
@@ -120,16 +158,13 @@ export const Navbar = () => {
         </div>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden basis-1/5 sm:flex sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent className="basis-1 pl-4 lg:hidden" justify="end">
+      <NavbarContent className="basis-1 pl-4" justify="end">
         <ThemeSwitch />
-        <NavbarMenuToggle icon={<MenuIcon />} />
+        <NavbarMenuToggle
+          className="lg:hidden"
+          icon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        />
+        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
       </NavbarContent>
 
       <NavbarMenu>
@@ -148,6 +183,78 @@ export const Navbar = () => {
               </Link>
             </NavbarMenuItem>
           ))}
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  endContent={<ChevronDown fill="currentColor" size={16} />}
+                  radius="sm"
+                  variant="light"
+                >
+                  Similar Abilities
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label="Similar Abilities"
+              className="w-[340px]"
+              itemClasses={{
+                base: "gap-4",
+              }}
+            >
+              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+                <DropdownItem
+                  key={i}
+                  description={abilityType.description}
+                  href={abilityType.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {abilityType.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="w-full justify-start p-0 text-left text-[1rem] text-[#ECEFEF]"
+                  endContent={<ChevronDown fill="currentColor" size={16} />}
+                  radius="sm"
+                  variant="light"
+                >
+                  Esports
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label="Esports"
+              className="w-[340px]"
+              itemClasses={{
+                base: "gap-4",
+              }}
+            >
+              <DropdownItem
+                key="teams"
+                description="Teams playing in the VCTs."
+                href="/esports/teams"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Teams
+              </DropdownItem>
+              <DropdownItem
+                key="events"
+                description="Valorant esports events."
+                href="/esports/events"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Events
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
       </NavbarMenu>
     </NextUINavbar>
