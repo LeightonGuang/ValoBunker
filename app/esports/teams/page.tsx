@@ -46,7 +46,7 @@ const TeamsPage = () => {
       </div>
       <div>
         <Tabs
-          className="mt-4 flex justify-end"
+          className="mt-4 flex justify-center"
           classNames={{
             tab: "max-w-fit",
           }}
@@ -54,9 +54,9 @@ const TeamsPage = () => {
           {Object.values(teamsData).map((regionData, i) => (
             <Tab
               key={regionList[i].region}
-              className="w-full"
+              className="h-full w-full"
               title={
-                <div className="flex w-full items-center gap-2">
+                <div className="flex flex-col items-center gap-2 lg:flex-row">
                   <Image
                     unoptimized
                     alt={regionList[i].region}
