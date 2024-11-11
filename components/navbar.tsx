@@ -95,6 +95,39 @@ export const Navbar = () => {
                   radius="sm"
                   variant="light"
                 >
+                  Similar Abilities
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label="Similar Abilities"
+              className="w-[340px]"
+              itemClasses={{
+                base: "gap-4",
+              }}
+            >
+              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+                <DropdownItem
+                  key={i}
+                  description={abilityType.description}
+                  href={abilityType.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {abilityType.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  endContent={<ChevronDown fill="currentColor" size={16} />}
+                  radius="sm"
+                  variant="light"
+                >
                   Esports
                 </Button>
               </DropdownTrigger>
@@ -150,6 +183,39 @@ export const Navbar = () => {
               </Link>
             </NavbarMenuItem>
           ))}
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  endContent={<ChevronDown fill="currentColor" size={16} />}
+                  radius="sm"
+                  variant="light"
+                >
+                  Similar Abilities
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu
+              aria-label="Similar Abilities"
+              className="w-[340px]"
+              itemClasses={{
+                base: "gap-4",
+              }}
+            >
+              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+                <DropdownItem
+                  key={i}
+                  description={abilityType.description}
+                  href={abilityType.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {abilityType.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
           <Dropdown>
             <NavbarItem>
               <DropdownTrigger>
