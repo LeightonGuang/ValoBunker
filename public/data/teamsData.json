@@ -601,7 +601,965 @@
       ]
     }
   ],
-  "chinaTeamsData": [],
-  "emeaTeamsData": [],
-  "pacificTeamsData": []
+  "chinaTeamsData": [
+    {
+      "id": 1,
+      "team_logo_url": "",
+      "team_name": "All Gamers",
+      "team_tag": "AG",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 2,
+      "team_logo_url": "",
+      "team_name": "Bilibili Gaming",
+      "team_tag": "BLG",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 3,
+      "team_logo_url": "",
+      "team_name": "Dragon Ranger Gaming",
+      "team_tag": "DRG",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 4,
+      "team_logo_url": "",
+      "team_name": "EDward Gaming",
+      "team_tag": "EDG",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 5,
+      "team_logo_url": "",
+      "team_name": "FunPlus Phoenix",
+      "team_tag": "FPX",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 6,
+      "team_logo_url": "",
+      "team_name": "JDG Esports",
+      "team_tag": "JDG",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 7,
+      "team_logo_url": "",
+      "team_name": "Nova Esports",
+      "team_tag": "NOV",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 8,
+      "team_logo_url": "",
+      "team_name": "Titan Esports Club",
+      "team_tag": "TEC",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 9,
+      "team_logo_url": "",
+      "team_name": "Trace Esports",
+      "team_tag": "TRC",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 10,
+      "team_logo_url": "",
+      "team_name": "TYLOO",
+      "team_tag": "TYL",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 11,
+      "team_logo_url": "",
+      "team_name": "Wolves Esports",
+      "team_tag": "WOL",
+      "country": "China",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    }
+  ],
+  "emeaTeamsData": [
+    {
+      "id": 1,
+      "team_logo_url": "https://owcdn.net/img/65b8ccef5e273.png",
+      "team_name": "BBL Esports",
+      "team_tag": "BBL",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/666ddb4d53d8a.png",
+        "ign": "marqnue",
+        "name": "Salih Onaran",
+        "country": "Turkey"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/62249ca670bbe.png",
+          "ign": "Jamppi",
+          "name": "Elias Olkkonen",
+          "role": "IGL",
+          "country": "Finland"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/655c320544992.png",
+          "ign": "sociablEE",
+          "name": "Volkan Yonal",
+          "role": "Initiator",
+          "country": "Turkey"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/62c5a2e14ef10.png",
+          "ign": "chiwa",
+          "name": "Egor Stepanyuk",
+          "role": "Sentinel/Controller",
+          "country": "Russia"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/671ead5bad2c5.png",
+          "ign": "PROFEK",
+          "name": "Dawid Święć",
+          "role": "Controller",
+          "country": "Poland"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/668e53d3a17be.png",
+          "ign": "LewN",
+          "name": "Burak Alkan",
+          "role": "Duelist",
+          "country": "Turkey"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "team_logo_url": "https://owcdn.net/img/62a40cc2b5e29.png",
+      "team_name": "FNATIC",
+      "team_tag": "FNC",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/643932db4215a.png",
+        "ign": "Elmapuddy",
+        "name": "Chris Tebbit",
+        "country": "Australia"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/65dc51898955a.png",
+          "ign": "Boaster",
+          "name": "Jake Howlett",
+          "role": "IGL",
+          "country": "United Kingdom"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/65785a05179e0.png",
+          "ign": "kaajak",
+          "name": "Kajetan Haremski",
+          "role": "Duelist",
+          "country": "Poland"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba02d661.png",
+          "ign": "Chronicle",
+          "name": "Timofey Khromov",
+          "role": "Controller/Initiator",
+          "country": "Russia"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba76e19b.png",
+          "ign": "Alfajer",
+          "name": "Emir Ali Beder",
+          "role": "Sentinel/Initiator",
+          "country": "Turkey"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/672db1f0ea39b.png",
+          "ign": "Sayonara",
+          "name": "Ștefan Mîtcu",
+          "role": "Stand In",
+          "country": "Moldova"
+        },
+        {
+          "id": 6,
+          "profile_picture_url": "https://owcdn.net/img/65d5cb904fc7c.png",
+          "ign": "Leo",
+          "name": "Leo Jannesson",
+          "role": "Sub",
+          "country": "Sweden"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "team_logo_url": "https://owcdn.net/img/632be99c96c64.png",
+      "team_name": "FUT Esports",
+      "team_tag": "FUT",
+      "country": "Turkey",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/65d5cba1d4f4c.png",
+        "ign": "Gais",
+        "name": "Eray Sarikaya",
+        "country": "Turkey"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba2a4d16.png",
+          "ign": "MrFaliN",
+          "name": "Furkan Yeğen",
+          "role": "IGL",
+          "country": "Turkey"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba34d4b7.png",
+          "ign": "xeus",
+          "name": "Doğan Gözgen",
+          "role": "Controller",
+          "country": "Turkey"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba4c4b6b.png",
+          "ign": "yetujey",
+          "name": "Eray Budak",
+          "role": "Duelist",
+          "country": "Turkey"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba5d4ff5.png",
+          "ign": "AtaKaptan",
+          "name": "Ata Tan",
+          "role": "Initiator",
+          "country": "Turkey"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba6f4f4a.png",
+          "ign": "cNed",
+          "name": "Mehmet Yağız İpek",
+          "role": "Sentinel",
+          "country": "Turkey"
+        },
+        {
+          "id": 6,
+          "profile_picture_url": "https://owcdn.net/img/65d5cba7e5016.png",
+          "ign": "qRaxs",
+          "name": "Doğukan Balaban",
+          "role": "Sub",
+          "country": "Turkey"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "team_logo_url": "https://owcdn.net/img/657b2f49210a3.png",
+      "team_name": "GIANTX",
+      "team_tag": "GNT",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/65d5cba9a8b3c.png",
+        "ign": "pipsoN",
+        "name": "Daniil Mesheryakov",
+        "country": "Russia"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/65d5cbaab8f6e.png",
+          "ign": "purp0",
+          "name": "Semyon Borchev",
+          "role": "Controller",
+          "country": "Russia"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/65d5cbaae2d16.png",
+          "ign": "Cloud",
+          "name": "Kirill Nehozhin",
+          "role": "Duelist",
+          "country": "Russia"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/65d5cbaa97d4c.png",
+          "ign": "Fit1nho",
+          "name": "Adolfo Gallego",
+          "role": "Inactive",
+          "country": "Spain"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "team_logo_url": "https://owcdn.net/img/6670153fa9120.png",
+      "team_name": "Gentle Mates",
+      "team_tag": "M8",
+      "country": "France",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "TBD",
+          "ign": "kAdavra",
+          "name": "TBD",
+          "role": "TBD",
+          "country": "TBD"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "TBD",
+          "ign": "Minny",
+          "name": "TBD",
+          "role": "TBD",
+          "country": "TBD"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "TBD",
+          "ign": "Click",
+          "name": "TBD",
+          "role": "TBD",
+          "country": "TBD"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "TBD",
+          "ign": "Zyppan",
+          "name": "TBD",
+          "role": "TBD",
+          "country": "TBD"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "TBD",
+          "ign": "RobbieBK",
+          "name": "TBD",
+          "role": "TBD",
+          "country": "TBD"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "team_logo_url": "https://owcdn.net/img/627403aa2c53d.png",
+      "team_name": "Karmine Corp",
+      "team_tag": "KCP",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7e7.png",
+        "ign": "ENGH",
+        "name": "Andrey Sholokhov",
+        "country": "Russia"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7e8.png",
+          "ign": "saadhak",
+          "name": "Matias Delipetro",
+          "role": "Duelist",
+          "country": "Argentina"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7e9.png",
+          "ign": "Avez",
+          "name": "Hazem Khaled",
+          "role": "Initiator",
+          "country": "France"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7ea.png",
+          "ign": "Elite",
+          "name": "Efe Teber",
+          "role": "Controller",
+          "country": "Turkey"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7eb.png",
+          "ign": "SUYGETSU",
+          "name": "Dmitry Ilyushin",
+          "role": "Sentinel",
+          "country": "Russia"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7ec.png",
+          "ign": "marteen",
+          "name": "Martin Pátek",
+          "role": "Duelist",
+          "country": "Czech Republic"
+        },
+        {
+          "id": 6,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7ed.png",
+          "ign": "tomaszy",
+          "name": "Tomás Machado",
+          "role": "Inactive",
+          "country": "Portugal"
+        },
+        {
+          "id": 7,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7ee.png",
+          "ign": "MAGNUM",
+          "name": "Martin Penkov",
+          "role": "Inactive",
+          "country": "Bulgaria"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "team_logo_url": "https://owcdn.net/img/660ceac6275cd.png",
+      "team_name": "KOI",
+      "team_tag": "KOI",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7ef.png",
+        "ign": "Gorilla",
+        "name": "Harry Mepham",
+        "country": "United Kingdom"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f0.png",
+          "ign": "flyuh",
+          "name": "Xavier Carlson",
+          "role": "Duelist",
+          "country": "United States"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f1.png",
+          "ign": "grubinho",
+          "name": "Grzegorz Ryczko",
+          "role": "Initiator",
+          "country": "Poland"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f2.png",
+          "ign": "sheydos",
+          "name": "Bogdan Naumov",
+          "role": "Controller",
+          "country": "Ukraine"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f3.png",
+          "ign": "Filu",
+          "name": "Dawid Czarnecki",
+          "role": "Sentinel",
+          "country": "Poland"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f4.png",
+          "ign": "soulcas",
+          "name": "Dom Sulcas",
+          "role": "Staff",
+          "country": "United Kingdom"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "team_logo_url": "https://owcdn.net/img/62a410a4e7b4f.png",
+      "team_name": "Natus Vincere",
+      "team_tag": "NAV",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f4.png",
+          "ign": "ANGE1",
+          "name": "Kyrylo Karasov",
+          "role": "IGL",
+          "country": "Ukraine"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f7.png",
+          "ign": "Shao",
+          "name": "Andrey Kiprsky",
+          "role": "Controller",
+          "country": "Russia"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7e1.png",
+          "ign": "Zyppan",
+          "name": "Pontus Eek",
+          "role": "Sentinel",
+          "country": "Sweden"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f8.png",
+          "ign": "ardiis",
+          "name": "Ardis Svarenieks",
+          "role": "Duelist",
+          "country": "Latvia",
+          "inactive": true
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "team_logo_url": "https://owcdn.net/img/637b7557a9225.png",
+      "team_name": "Team Heretics",
+      "team_tag": "TH",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f5.png",
+        "ign": "neilzinho",
+        "name": "Neil Finlay",
+        "country": "United Kingdom"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f6.png",
+          "ign": "Boo",
+          "name": "Ričardas Lukaševičius",
+          "role": "Duelist",
+          "country": "Lithuania"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f7.png",
+          "ign": "MiniBoo",
+          "name": "Dominykas Lukaševičius",
+          "role": "Controller",
+          "country": "Lithuania"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f8.png",
+          "ign": "Wo0t",
+          "name": "Mert Alkan",
+          "role": "Initiator",
+          "country": "Turkey"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7f9.png",
+          "ign": "RieNs",
+          "name": "Enes Ecirli",
+          "role": "Sentinel",
+          "country": "Turkey"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7fa.png",
+          "ign": "benjyfishy",
+          "name": "Benjamin David Fish",
+          "role": "Staff",
+          "country": "United Kingdom"
+        },
+        {
+          "id": 6,
+          "profile_picture_url": "https://owcdn.net/img/6a7f7d2e3a7fb.png",
+          "ign": "Niklas",
+          "name": "Niklas Geiss",
+          "role": "Manager",
+          "country": "Germany"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "team_logo_url": "https://owcdn.net/img/640c381f0603f.png",
+      "team_name": "Team Liquid",
+      "team_tag": "TL",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "LohaN",
+        "name": "Ivo Albino",
+        "country": "Portugal"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "TBD",
+          "ign": "nAts",
+          "name": "Ayaz Akhmetshin",
+          "role": "Sub",
+          "country": "TBD"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "TBD",
+          "ign": "Keiko",
+          "name": "Georgio Sanassy",
+          "role": "Sub",
+          "country": "TBD"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "TBD",
+          "ign": "kamo",
+          "name": "Kamil Frąckowiak",
+          "role": "Sub",
+          "country": "TBD"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "TBD",
+          "ign": "Harmii",
+          "name": "Nico Harms",
+          "role": "Sub",
+          "country": "TBD"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "team_logo_url": "https://owcdn.net/img/6466d7936fd86.png",
+      "team_name": "Team Vitality",
+      "team_tag": "VIT",
+      "country": "Europe",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": [
+        {
+          "id": 1,
+          "profile_picture_url": "https://owcdn.net/img/65f2c0e1c7d8a.png",
+          "ign": "trexx",
+          "name": "Nikita Cherednichenko",
+          "role": "IGL",
+          "country": "Russia"
+        },
+        {
+          "id": 2,
+          "profile_picture_url": "https://owcdn.net/img/65f2c0e1c7d8c.png",
+          "ign": "Derke",
+          "name": "Nikita Sirmitev",
+          "role": "Duelist",
+          "country": "Finland"
+        },
+        {
+          "id": 3,
+          "profile_picture_url": "https://owcdn.net/img/65f2c0e1c7d8d.png",
+          "ign": "Kicks",
+          "name": "Kimmie Laasner",
+          "role": "Controller",
+          "country": "Estonia"
+        },
+        {
+          "id": 4,
+          "profile_picture_url": "https://owcdn.net/img/65f2c0e1c7d8e.png",
+          "ign": "Sayf",
+          "name": "Saif Jibraeel",
+          "role": "Initiator",
+          "country": "Sweden"
+        },
+        {
+          "id": 5,
+          "profile_picture_url": "https://owcdn.net/img/65f2c0e1c7d8f.png",
+          "ign": "Less",
+          "name": "Felipe de Loyola Basso",
+          "role": "Sentinel",
+          "country": "Brazil"
+        }
+      ]
+    }
+  ],
+  "pacificTeamsData": [
+    {
+      "id": 1,
+      "team_logo_url": "",
+      "team_name": "BOOM Esports",
+      "team_tag": "BME",
+      "country": "Indonesia",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 2,
+      "team_logo_url": "",
+      "team_name": "DetonatioN FocusMe",
+      "team_tag": "DFM",
+      "country": "Japan",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 3,
+      "team_logo_url": "",
+      "team_name": "DRX",
+      "team_tag": "DRX",
+      "country": "South Korea",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 4,
+      "team_logo_url": "",
+      "team_name": "Gen.G",
+      "team_tag": "GEN",
+      "country": "South Korea",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 5,
+      "team_logo_url": "",
+      "team_name": "Global Esports",
+      "team_tag": "GE",
+      "country": "India",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 6,
+      "team_logo_url": "",
+      "team_name": "Paper Rex",
+      "team_tag": "PRX",
+      "country": "Singapore",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 7,
+      "team_logo_url": "",
+      "team_name": "Rex Regum Qeon",
+      "team_tag": "RRQ",
+      "country": "Indonesia",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 8,
+      "team_logo_url": "",
+      "team_name": "T1",
+      "team_tag": "T1",
+      "country": "South Korea",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 9,
+      "team_logo_url": "",
+      "team_name": "Talon Esports",
+      "team_tag": "TLN",
+      "country": "Thailand",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 10,
+      "team_logo_url": "",
+      "team_name": "Team Secret",
+      "team_tag": "TS",
+      "country": "Philippines",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    },
+    {
+      "id": 11,
+      "team_logo_url": "",
+      "team_name": "ZETA DIVISION",
+      "team_tag": "ZETA",
+      "country": "Japan",
+      "head_coach": {
+        "id": 1,
+        "profile_picture_url": "TBD",
+        "ign": "TBD",
+        "name": "TBD",
+        "country": "TBD"
+      },
+      "roster": []
+    }
+  ]
 }
