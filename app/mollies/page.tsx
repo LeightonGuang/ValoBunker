@@ -62,7 +62,7 @@ export default function MolliesPage() {
                     </div>
                   </Tooltip>
                 </TableCell>
-                <TableCell>{`${molly.damage.min !== null ? `${molly.damage.min} - ` : ""} ${molly.damage.max}`}</TableCell>
+                <TableCell className="whitespace-nowrap">{`${molly.damage.min !== null ? `${molly.damage.min} - ` : ""} ${molly.damage.max}`}</TableCell>
                 <TableCell>{molly.duration}</TableCell>
                 <TableCell>{molly.charge}</TableCell>
                 <TableCell>{molly.cost}</TableCell>

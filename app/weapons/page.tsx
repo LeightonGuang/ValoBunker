@@ -74,7 +74,7 @@ export default function WeaponsPage() {
                     ))}
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">
                   {`${weapon.fire_rate?.primary ? weapon.fire_rate?.primary : "x"} 
                 / 
                 ${weapon.fire_rate?.alt ? weapon.fire_rate?.alt : "x"}`}
