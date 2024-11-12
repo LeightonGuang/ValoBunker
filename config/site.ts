@@ -7,7 +7,7 @@ export const siteConfig = {
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
   ],
-  navSimilarAbilities: [
+  navAbilitiesComparison: [
     {
       label: "Blinds",
       href: "/blinds",

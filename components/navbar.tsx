@@ -106,7 +106,7 @@ export const Navbar = () => {
                 base: "gap-4",
               }}
             >
-              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+              {siteConfig.navAbilitiesComparison.map((abilityType, i) => (
                 <DropdownItem
                   key={i}
                   description={abilityType.description}
@@ -193,18 +193,18 @@ export const Navbar = () => {
                   radius="sm"
                   variant="light"
                 >
-                  Similar Abilities
+                  Abilities Comparison
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu
-              aria-label="Similar Abilities"
+              aria-label="Abilities Comparison"
               className="w-[340px]"
               itemClasses={{
                 base: "gap-4",
               }}
             >
-              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+              {siteConfig.navAbilitiesComparison.map((abilityType, i) => (
                 <DropdownItem
                   key={i}
                   description={abilityType.description}
