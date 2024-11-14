@@ -141,17 +141,24 @@ export const Navbar = () => {
             >
               <DropdownItem
                 key="teams"
-                description="Teams playing in the VCTs."
+                description="Teams playing in the VCTs"
                 href="/esports/teams"
               >
                 Teams
               </DropdownItem>
               <DropdownItem
                 key="events"
-                description="Valorant esports events."
+                description="Valorant esports events"
                 href="/esports/events"
               >
                 Events
+              </DropdownItem>
+              <DropdownItem
+                key="events"
+                description="All Valorant pro players"
+                href="/esports/players"
+              >
+                Pro Players
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
@@ -252,6 +259,14 @@ export const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Events
+              </DropdownItem>
+              <DropdownItem
+                key="events"
+                description="All Valorant pro players"
+                href="/esports/players"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Pro Players
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
