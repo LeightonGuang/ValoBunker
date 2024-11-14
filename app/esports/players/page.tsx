@@ -33,14 +33,14 @@ const PlayersPage = () => {
           *
         )
       `);
+
       if (error) {
         console.error(error);
       } else {
-        setPlayersList(data || []);
+        setPlayersList(data);
       }
-      setIsLoading(false);
 
-      console.log(data);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -103,7 +103,14 @@ const PlayersPage = () => {
               <TableRow key={player.id}>
                 <TableCell className="whitespace-nowrap">
                   <User
-                    avatarProps={{ src: player.profile_picture_url }}
+                    avatarProps={{
+                      src: player.profile_picture_url,
+                      isBordered: player.role === "IGL",
+                      color: player.role === "IGL" ? "primary" : "default",
+                      classNames: {
+                        base: "bg-[#ffffff]",
+                      },
+                    }}
                     description={player.name}
                     name={player.ign}
                   />
