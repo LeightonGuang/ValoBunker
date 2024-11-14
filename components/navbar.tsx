@@ -139,27 +139,16 @@ export const Navbar = () => {
                 base: "gap-4",
               }}
             >
-              <DropdownItem
-                key="teams"
-                description="Teams playing in the VCTs"
-                href="/esports/teams"
-              >
-                Teams
-              </DropdownItem>
-              <DropdownItem
-                key="events"
-                description="Valorant esports events"
-                href="/esports/events"
-              >
-                Events
-              </DropdownItem>
-              <DropdownItem
-                key="events"
-                description="All Valorant pro players"
-                href="/esports/players"
-              >
-                Pro Players
-              </DropdownItem>
+              {siteConfig.dropdownEsports.map((esport) => (
+                <DropdownItem
+                  key={esport.label}
+                  description={esport.description}
+                  href={esport.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {esport.label}
+                </DropdownItem>
+              ))}
             </DropdownMenu>
           </Dropdown>
         </div>
@@ -244,30 +233,16 @@ export const Navbar = () => {
                 base: "gap-4",
               }}
             >
-              <DropdownItem
-                key="teams"
-                description="Teams playing in the VCTs."
-                href="/esports/teams"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Teams
-              </DropdownItem>
-              <DropdownItem
-                key="events"
-                description="Valorant esports events."
-                href="/esports/events"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Events
-              </DropdownItem>
-              <DropdownItem
-                key="events"
-                description="All Valorant pro players"
-                href="/esports/players"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Pro Players
-              </DropdownItem>
+              {siteConfig.dropdownEsports.map((esport) => (
+                <DropdownItem
+                  key={esport.label}
+                  description={esport.description}
+                  href={esport.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {esport.label}
+                </DropdownItem>
+              ))}
             </DropdownMenu>
           </Dropdown>
         </div>
