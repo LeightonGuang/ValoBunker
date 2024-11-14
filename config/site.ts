@@ -7,7 +7,7 @@ export const siteConfig = {
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
   ],
-  navSimilarAbilities: [
+  navAbilitiesComparison: [
     {
       label: "Blinds",
       href: "/blinds",
@@ -27,9 +27,23 @@ export const siteConfig = {
   navMenuItems: [
     { label: "Agents", href: "/agents" },
     { label: "Weapons", href: "/weapons" },
-    { label: "Smokes", href: "/smokes" },
-    { label: "Blinds", href: "/blinds" },
-    { label: "Mollies", href: "/mollies" },
+  ],
+  dropdownEsports: [
+    {
+      label: "Teams",
+      href: "/esports/teams",
+      description: "Teams playing in the VCTs",
+    },
+    {
+      label: "Players",
+      href: "/esports/players",
+      description: "All Valorant pro players",
+    },
+    {
+      label: "Events",
+      href: "/esports/events",
+      description: "Valorant esports events",
+    },
   ],
   links: {
     github: "https://github.com/nextui-org/nextui",

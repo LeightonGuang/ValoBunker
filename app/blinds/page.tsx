@@ -70,7 +70,7 @@ export default function SmokePage() {
                 <TableCell>{flash.blind_duration}</TableCell>
                 <TableCell>{flash.charge}</TableCell>
                 <TableCell>{flash.cost}</TableCell>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">
                   {flash.regen.reusable ? flash.regen.regenTime : "x"}
                 </TableCell>
                 <TableCell>{flash.health ? flash.health : "-"}</TableCell>

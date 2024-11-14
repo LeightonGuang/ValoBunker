@@ -106,7 +106,7 @@ export const Navbar = () => {
                 base: "gap-4",
               }}
             >
-              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+              {siteConfig.navAbilitiesComparison.map((abilityType, i) => (
                 <DropdownItem
                   key={i}
                   description={abilityType.description}
@@ -139,20 +139,16 @@ export const Navbar = () => {
                 base: "gap-4",
               }}
             >
-              <DropdownItem
-                key="teams"
-                description="Teams playing in the VCTs."
-                href="/esports/teams"
-              >
-                Teams
-              </DropdownItem>
-              <DropdownItem
-                key="events"
-                description="Valorant esports events."
-                href="/esports/events"
-              >
-                Events
-              </DropdownItem>
+              {siteConfig.dropdownEsports.map((esport) => (
+                <DropdownItem
+                  key={esport.label}
+                  description={esport.description}
+                  href={esport.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {esport.label}
+                </DropdownItem>
+              ))}
             </DropdownMenu>
           </Dropdown>
         </div>
@@ -193,18 +189,18 @@ export const Navbar = () => {
                   radius="sm"
                   variant="light"
                 >
-                  Similar Abilities
+                  Abilities Comparison
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu
-              aria-label="Similar Abilities"
+              aria-label="Abilities Comparison"
               className="w-[340px]"
               itemClasses={{
                 base: "gap-4",
               }}
             >
-              {siteConfig.navSimilarAbilities.map((abilityType, i) => (
+              {siteConfig.navAbilitiesComparison.map((abilityType, i) => (
                 <DropdownItem
                   key={i}
                   description={abilityType.description}
@@ -237,22 +233,16 @@ export const Navbar = () => {
                 base: "gap-4",
               }}
             >
-              <DropdownItem
-                key="teams"
-                description="Teams playing in the VCTs."
-                href="/esports/teams"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Teams
-              </DropdownItem>
-              <DropdownItem
-                key="events"
-                description="Valorant esports events."
-                href="/esports/events"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Events
-              </DropdownItem>
+              {siteConfig.dropdownEsports.map((esport) => (
+                <DropdownItem
+                  key={esport.label}
+                  description={esport.description}
+                  href={esport.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {esport.label}
+                </DropdownItem>
+              ))}
             </DropdownMenu>
           </Dropdown>
         </div>

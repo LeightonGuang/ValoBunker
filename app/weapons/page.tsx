@@ -42,14 +42,14 @@ export default function WeaponsPage() {
                 <TableCell>{weapon.name}</TableCell>
                 <TableCell>{weapon.type}</TableCell>
                 <TableCell>
-                  <div className="cursor-pointer">
+                  <div className="w-16 cursor-pointer">
                     <Image
                       unoptimized
                       alt={weapon.name}
-                      className="h-12 w-auto"
-                      height={32}
+                      className="aspect-video h-auto w-32 object-contain"
+                      height={64}
                       src={weapon.img_url}
-                      width={56.89}
+                      width={64}
                     />
                   </div>
                 </TableCell>
@@ -74,7 +74,7 @@ export default function WeaponsPage() {
                     ))}
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="whitespace-nowrap">
                   {`${weapon.fire_rate?.primary ? weapon.fire_rate?.primary : "x"} 
                 / 
                 ${weapon.fire_rate?.alt ? weapon.fire_rate?.alt : "x"}`}
