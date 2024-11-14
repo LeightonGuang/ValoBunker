@@ -63,7 +63,7 @@
       "team_tag": "C9",
       "country": "United States",
       "head_coach": {
-        "id": 1,
+        "id": 2,
         "profile_picture_url": "https://owcdn.net/img/66193feb31822.png",
         "ign": "Immi",
         "name": "Ian Harding",
@@ -71,7 +71,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 6,
           "profile_picture_url": "https://owcdn.net/img/65cc6f07740b9.png",
           "ign": "Rossy",
           "name": "Daniel Abedrabbo",
@@ -79,7 +79,7 @@
           "country": "United States"
         },
         {
-          "id": 2,
+          "id": 7,
           "profile_picture_url": "https://owcdn.net/img/66193fbe36ba3.png",
           "ign": "Xeppaa",
           "name": "Erick Bach",
@@ -87,7 +87,7 @@
           "country": "United States"
         },
         {
-          "id": 3,
+          "id": 8,
           "profile_picture_url": "https://owcdn.net/img/627899aebb66d.png",
           "ign": "v1c",
           "name": "Victor Truong",
@@ -95,7 +95,7 @@
           "country": "United States"
         },
         {
-          "id": 4,
+          "id": 9,
           "profile_picture_url": "https://owcdn.net/img/66193fcfde2a8.png",
           "ign": "moose",
           "name": "Kaleb Jayne",
@@ -103,7 +103,7 @@
           "country": "Canada"
         },
         {
-          "id": 5,
+          "id": 10,
           "profile_picture_url": "https://owcdn.net/img/66193fe3c0381.png",
           "ign": "OXY",
           "name": "Francis Hoang",
@@ -119,7 +119,7 @@
       "team_tag": "EG",
       "country": "United States",
       "head_coach": {
-        "id": 1,
+        "id": 3,
         "profile_picture_url": "https://owcdn.net/img/6416941f5cdf8.png",
         "ign": "potter",
         "name": "Christine Chi",
@@ -127,7 +127,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 11,
           "profile_picture_url": "https://owcdn.net/img/6100fb567bb9f.png",
           "ign": "NaturE",
           "name": "Nicholas Garrison",
@@ -135,7 +135,7 @@
           "country": "United States"
         },
         {
-          "id": 2,
+          "id": 12,
           "profile_picture_url": "https://owcdn.net/img/66709857206e1.png",
           "ign": "Derrek",
           "name": "Derrek Ha",
@@ -143,7 +143,7 @@
           "country": "United States"
         },
         {
-          "id": 3,
+          "id": 13,
           "profile_picture_url": "https://owcdn.net/img/6224ad074eaec.png",
           "ign": "supamen",
           "name": "Phat Le",
@@ -151,7 +151,7 @@
           "country": "United States"
         },
         {
-          "id": 4,
+          "id": 14,
           "profile_picture_url": "https://owcdn.net/img/651eec68c75d2.png",
           "ign": "yay",
           "name": "Jaccob Whiteaker",
@@ -159,7 +159,7 @@
           "country": "United States"
         },
         {
-          "id": 5,
+          "id": 15,
           "profile_picture_url": "https://pbs.twimg.com/media/GXKQ7XnXoAAQzNt?format=jpg&name=large",
           "ign": "sym",
           "name": "Tyler Porter",
@@ -175,7 +175,7 @@
       "team_tag": "FURIA",
       "country": "Brazil",
       "head_coach": {
-        "id": 1,
+        "id": 4,
         "profile_picture_url": "https://owcdn.net/img/62d07812c3b4a.png",
         "ign": "lukzera",
         "name": "Lucas Soares",
@@ -183,7 +183,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 16,
           "profile_picture_url": "https://owcdn.net/img/64b6590d6b004.png",
           "ign": "nzr",
           "name": "Agustin Ibarra",
@@ -191,7 +191,7 @@
           "country": "Argentina"
         },
         {
-          "id": 2,
+          "id": 17,
           "profile_picture_url": "https://owcdn.net/img/60bf8c8424ec7.png",
           "ign": "mwzera",
           "name": "Leonardo Serrati",
@@ -199,7 +199,7 @@
           "country": "Brazil"
         },
         {
-          "id": 3,
+          "id": 18,
           "profile_picture_url": "https://pbs.twimg.com/card_img/1853288470208188416/Uhsrsfy-?format=png&name=360x360",
           "ign": "havoc",
           "name": "Ilan Eloy",
@@ -207,7 +207,7 @@
           "country": "Brazil"
         },
         {
-          "id": 4,
+          "id": 19,
           "profile_picture_url": "https://owcdn.net/img/62795e26e083a.png",
           "ign": "Khalil",
           "name": "Khalil Schmidt",
@@ -231,7 +231,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 20,
           "profile_picture_url": "https://owcdn.net/img/65e4660ee20e5.png",
           "ign": "valyn",
           "name": "Jacob Batio",
@@ -239,7 +239,7 @@
           "country": "United States"
         },
         {
-          "id": 2,
+          "id": 21,
           "profile_picture_url": "https://owcdn.net/img/64169400bfed7.png",
           "ign": "jawgemo",
           "name": "Alexander Mor",
@@ -247,7 +247,7 @@
           "country": "Cambodia"
         },
         {
-          "id": 3,
+          "id": 22,
           "profile_picture_url": "https://owcdn.net/img/65e466071ca19.png",
           "ign": "trent",
           "name": "Trent Cairns",
@@ -255,7 +255,7 @@
           "country": "United States"
         },
         {
-          "id": 4,
+          "id": 23,
           "profile_picture_url": "https://owcdn.net/img/65e4636c00e46.png",
           "ign": "JonahP",
           "name": "Jonah Pulice",
@@ -263,7 +263,7 @@
           "country": "Canada"
         },
         {
-          "id": 5,
+          "id": 24,
           "profile_picture_url": "https://owcdn.net/img/6613103dd51a4.png",
           "ign": "leaf",
           "name": "Nathan Orf",
@@ -287,7 +287,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 25,
           "profile_picture_url": "https://owcdn.net/img/66403a76c87b8.png",
           "ign": "Melser",
           "name": "Marco Eliot Machuca Amaro",
@@ -295,7 +295,7 @@
           "country": "Chile"
         },
         {
-          "id": 2,
+          "id": 26,
           "profile_picture_url": "https://owcdn.net/img/66403b45d7584.png",
           "ign": "keznit",
           "name": "Angelo Mori",
@@ -303,7 +303,7 @@
           "country": "Chile"
         },
         {
-          "id": 3,
+          "id": 27,
           "profile_picture_url": "https://owcdn.net/img/64b620c96e85f.png",
           "ign": "Mazino",
           "name": "Roberto Rivas",
@@ -311,7 +311,7 @@
           "country": "Chile"
         },
         {
-          "id": 4,
+          "id": 28,
           "profile_picture_url": "https://owcdn.net/img/63b46378e0d69.png",
           "ign": "adverso",
           "name": "Benjamín Poblete",
@@ -319,7 +319,7 @@
           "country": "Chile"
         },
         {
-          "id": 5,
+          "id": 29,
           "profile_picture_url": "https://owcdn.net/img/66403a3a6c828.png",
           "ign": "mta",
           "name": "Nicolás González",
@@ -327,7 +327,7 @@
           "country": "Chile"
         },
         {
-          "id": 6,
+          "id": 30,
           "profile_picture_url": "https://owcdn.net/img/664039e011708.png",
           "ign": "Shyy",
           "name": "Fabian Usnayo",
@@ -351,7 +351,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 31,
           "profile_picture_url": "https://owcdn.net/img/639a594be8d04.png",
           "ign": "kiNgg",
           "name": "Francisco Aravena",
@@ -359,7 +359,7 @@
           "country": "Chile"
         },
         {
-          "id": 2,
+          "id": 32,
           "profile_picture_url": "https://www.prosettings.gg/wp-content/uploads/2023/06/Demon1-valorant-player-profile-picture-nrg.webp",
           "ign": "Demon1",
           "name": "Max Mazanov",
@@ -367,7 +367,7 @@
           "country": "United States"
         },
         {
-          "id": 3,
+          "id": 33,
           "profile_picture_url": "https://owcdn.net/img/64bac4cfd9f9f.png",
           "ign": "tex",
           "name": "Ian Botsch",
@@ -375,7 +375,7 @@
           "country": "United States"
         },
         {
-          "id": 4,
+          "id": 34,
           "profile_picture_url": "https://owcdn.net/img/645a8b5e54694.png",
           "ign": "nataNk",
           "name": "Nathan Bocqueho",
@@ -383,7 +383,7 @@
           "country": "France"
         },
         {
-          "id": 5,
+          "id": 35,
           "profile_picture_url": "https://owcdn.net/img/641693c3a0312.png",
           "ign": "C0M",
           "name": "Corbin Lee",
@@ -407,7 +407,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 36,
           "profile_picture_url": "TBD",
           "ign": "TBD",
           "name": "TBD",
@@ -415,7 +415,7 @@
           "country": "TBD"
         },
         {
-          "id": 2,
+          "id": 37,
           "profile_picture_url": "https://owcdn.net/img/6416955d4ce03.png",
           "ign": "pANcada",
           "name": "Bryan Luna",
@@ -423,7 +423,7 @@
           "country": "Brazil"
         },
         {
-          "id": 3,
+          "id": 38,
           "profile_picture_url": "https://owcdn.net/img/66306e474531d.png",
           "ign": "tuyz",
           "name": "Arthur Andrade",
@@ -431,7 +431,7 @@
           "country": "Brazil"
         },
         {
-          "id": 4,
+          "id": 39,
           "profile_picture_url": "https://owcdn.net/img/66306e74ba40e.png",
           "ign": "cauanzin",
           "name": "Cauan Pereira",
@@ -455,7 +455,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 40,
           "profile_picture_url": "TBD",
           "ign": "TBD",
           "name": "TBD",
@@ -463,7 +463,7 @@
           "country": "TBD"
         },
         {
-          "id": 2,
+          "id": 41,
           "profile_picture_url": "https://owcdn.net/img/64169733ae9f1.png",
           "ign": "aspas",
           "name": "Erick Santos",
@@ -487,7 +487,7 @@
       },
       "roster": [
         {
-          "id": 2,
+          "id": 42,
           "profile_picture_url": "https://owcdn.net/img/64168fe1322dd.png",
           "ign": "FiNESSE",
           "name": "Pujan Mehta",
@@ -495,7 +495,7 @@
           "country": "Canada"
         },
         {
-          "id": 8,
+          "id": 43,
           "profile_picture_url": "https://owcdn.net/img/64169001cb7f4.png",
           "ign": "s0m",
           "name": "Sam Oh",
@@ -503,7 +503,7 @@
           "country": "United States"
         },
         {
-          "id": 9,
+          "id": 44,
           "profile_picture_url": "https://owcdn.net/img/664bd823278c5.png",
           "ign": "Verno",
           "name": "Andrew Maust",
@@ -511,7 +511,7 @@
           "country": "United States"
         },
         {
-          "id": 10,
+          "id": 45,
           "profile_picture_url": "https://owcdn.net/img/6399a40caf260.png",
           "ign": "mada",
           "name": "Adam Pampuch",
@@ -519,7 +519,7 @@
           "country": "Canada"
         },
         {
-          "id": 11,
+          "id": 46,
           "profile_picture_url": "https://owcdn.net/img/6416939a5a1c2.png",
           "ign": "Ethan",
           "name": "Ethan Arnold",
@@ -543,7 +543,7 @@
       },
       "roster": [
         {
-          "id": 1,
+          "id": 47,
           "profile_picture_url": "https://owcdn.net/img/65622aa13dc03.png",
           "ign": "johnqt",
           "name": "Mohamed Amine Ouarid",
@@ -551,7 +551,7 @@
           "country": "Morocco"
         },
         {
-          "id": 2,
+          "id": 48,
           "profile_picture_url": "https://owcdn.net/img/63ffbd9ee57bd.png",
           "ign": "N4RRATE",
           "name": "Marshall Massey",
@@ -559,7 +559,7 @@
           "country": "United States"
         },
         {
-          "id": 3,
+          "id": 49,
           "profile_picture_url": "https://owcdn.net/img/64169245acebe.png",
           "ign": "bang",
           "name": "Sean Bezerra",
@@ -567,7 +567,7 @@
           "country": "United States"
         },
         {
-          "id": 4,
+          "id": 50,
           "profile_picture_url": "https://owcdn.net/img/671b20fca8019.png",
           "ign": "Zellsis",
           "name": "Jordan Montemurro",
@@ -575,7 +575,7 @@
           "country": "United States"
         },
         {
-          "id": 5,
+          "id": 51,
           "profile_picture_url": "https://owcdn.net/img/6416956f0da1e.png",
           "ign": "zekken",
           "name": "Zachary Patrone",
@@ -583,7 +583,7 @@
           "country": "United States"
         },
         {
-          "id": 6,
+          "id": 52,
           "profile_picture_url": "https://owcdn.net/img/65a635d303c3e.png",
           "ign": "Reduxx",
           "name": "Yassin Aboulalazm",
@@ -591,7 +591,7 @@
           "country": "United States"
         },
         {
-          "id": 7,
+          "id": 53,
           "profile_picture_url": "https://owcdn.net/img/6399a54fc4472.png",
           "ign": "SicK",
           "name": "Hunter Mims",
