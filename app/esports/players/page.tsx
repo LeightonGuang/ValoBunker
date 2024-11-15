@@ -60,15 +60,27 @@ const PlayersPage = () => {
         return player.teams.vct_league === regionTab;
       })
       .sort((a, b) => {
-        const first = a[sortDescriptor.column as keyof PlayersTableType];
-        const second = b[sortDescriptor.column as keyof PlayersTableType];
+        const getValue = (obj: any, path: string) => {
+          return path.split(".").reduce((acc, key) => acc?.[key], obj);
+        };
+
+        const first = getValue(
+          a,
+          sortDescriptor.column as keyof PlayersTableType,
+        );
+        const second = getValue(
+          b,
+          sortDescriptor.column as keyof PlayersTableType,
+        );
 
         const normalizeTeamName = (name: string) => {
           return name.toLowerCase().replace(/^\d+\s*/, "");
         };
 
-        const normalizedFirst = normalizeTeamName(String(first));
-        const normalizedSecond = normalizeTeamName(String(second));
+        const normalizedFirst = first ? normalizeTeamName(String(first)) : "";
+        const normalizedSecond = second
+          ? normalizeTeamName(String(second))
+          : "";
 
         const result = normalizedFirst.localeCompare(normalizedSecond);
 
