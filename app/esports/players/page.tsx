@@ -115,11 +115,17 @@ const PlayersPage = () => {
                     name={player.ign}
                   />
                 </TableCell>
+
                 <TableCell>{player.role}</TableCell>
+
                 <TableCell className="whitespace-nowrap">
                   <div className="flex items-center gap-2">
                     <Image
                       alt={player.teams.name}
+                      className="light:bg-[#000000]"
+                      classNames={{
+                        img: "min-w-8 min-h-8 rounded-none",
+                      }}
                       height={32}
                       src={player.teams.logo_url}
                       width={32}
