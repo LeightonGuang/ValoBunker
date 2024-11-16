@@ -1,55 +1,27 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+"use client";
+import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
-        </div>
-      </div>
-
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
+    <section>
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <Card className="w-full lg:order-2 lg:w-64">
+          <CardHeader>Upcoming Events</CardHeader>
+          <Divider />
+          <CardBody>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti,
+            porro!
+          </CardBody>
+        </Card>
+        <Card className="lg:order-1">
+          <CardHeader>News</CardHeader>
+          <Divider />
+          <CardBody>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit
+            nobis incidunt aperiam quibusdam sapiente similique consequatur ut
+            iusto. Quibusdam, earum?
+          </CardBody>
+        </Card>
       </div>
     </section>
   );

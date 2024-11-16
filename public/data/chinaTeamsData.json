@@ -1,0 +1,90 @@
+[
+  {
+    "id": 34,
+    "name": "EDward Gaming",
+    "logo_url": "https://owcdn.net/img/62c8204fbb29d.png",
+    "tag": "EDG",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 35,
+    "name": "FunPlus Phoenix",
+    "logo_url": "https://owcdn.net/img/65a17b313b131.png",
+    "tag": "FPX",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 36,
+    "name": "Trace Esports",
+    "logo_url": "https://owcdn.net/img/6433a2d3b58c9.png",
+    "tag": "TE",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 37,
+    "name": "Bilibili Gaming",
+    "logo_url": "https://owcdn.net/img/63f25d72216c1.png",
+    "tag": "BLG",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 38,
+    "name": "Dragon Ranger Gaming",
+    "logo_url": "https://owcdn.net/img/642233fc01f26.png",
+    "tag": "DRG",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 39,
+    "name": "JDG Esports",
+    "logo_url": "https://owcdn.net/img/64f9825408326.png",
+    "tag": "JDG",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 40,
+    "name": "All Gamers",
+    "logo_url": "https://owcdn.net/img/6549c2b905061.png",
+    "tag": "AG",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 41,
+    "name": "TYLOO",
+    "logo_url": "https://owcdn.net/img/63eb60fb08390.png",
+    "tag": "TYL",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 42,
+    "name": "Wolves Esports",
+    "logo_url": "https://owcdn.net/img/651d33f8e6a1f.png",
+    "tag": "WOL",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 43,
+    "name": "Nova Esports",
+    "logo_url": "https://owcdn.net/img/6404c031b6c67.png",
+    "tag": "NOV",
+    "country": "China",
+    "vct_league": "China"
+  },
+  {
+    "id": 44,
+    "name": "Titan Esports Club",
+    "logo_url": "https://owcdn.net/img/6548741adc65f.png",
+    "tag": "TEC",
+    "country": "China",
+    "vct_league": "China"
+  }
+]

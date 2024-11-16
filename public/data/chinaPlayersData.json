@@ -1,0 +1,546 @@
+[
+  {
+    "id": 173,
+    "profile_picture_url": "https://owcdn.net/img/65c875e1b0670.png",
+    "ign": "nobody",
+    "name": "Wang Senxu (王森旭)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 174,
+    "profile_picture_url": "https://owcdn.net/img/66af55f8af29a.png",
+    "ign": "S1Mon",
+    "name": "Hsien Meng-Hsun (谢孟勋)",
+    "role": "Initiator",
+    "country": "Taiwan"
+  },
+  {
+    "id": 175,
+    "profile_picture_url": "https://owcdn.net/img/65c8760abae65.png",
+    "ign": "ZmjjKK",
+    "name": "Zheng Yongkang (郑永康)",
+    "role": "Duelist",
+    "country": "China"
+  },
+  {
+    "id": 176,
+    "profile_picture_url": "https://owcdn.net/img/65c875f2b3ec5.png",
+    "ign": "CHICHOO",
+    "name": "Wan Shunzhi (万顺治)",
+    "role": "Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 177,
+    "profile_picture_url": "https://owcdn.net/img/65c875fa773eb.png",
+    "ign": "Smoggy",
+    "name": "Zhang Zhao (张钊)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 178,
+    "profile_picture_url": "https://owcdn.net/img/65d5cba6f4f4a.png",
+    "ign": "WoodAy1",
+    "name": "Lin Weihong (林伟宏)",
+    "role": "Sub",
+    "country": "China"
+  },
+  {
+    "id": 179,
+    "profile_picture_url": "https://owcdn.net/img/65bbd19e1424a.png",
+    "ign": "BerLIN",
+    "name": "Zhang Bolin (張柏霖)",
+    "role": "IGL",
+    "country": "Taiwan"
+  },
+  {
+    "id": 180,
+    "profile_picture_url": "https://owcdn.net/img/65bbd180667db.png",
+    "ign": "Autumn",
+    "name": "Kale Dunne",
+    "role": "Flex",
+    "country": "Australia"
+  },
+  {
+    "id": 181,
+    "profile_picture_url": "https://owcdn.net/img/65bbd18d258d7.png",
+    "ign": "Life",
+    "name": "Qu Donghao (瞿东豪)",
+    "role": "Duelist",
+    "country": "China"
+  },
+  {
+    "id": 182,
+    "profile_picture_url": "https://owcdn.net/img/65bbd1947ca0a.png",
+    "ign": "AAAAY",
+    "name": "Zhang Yang (张杨)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 183,
+    "profile_picture_url": "https://owcdn.net/img/65bb6b4ef02b6.png",
+    "ign": "yosemite",
+    "name": "Wang Lei (王磊)",
+    "role": "Flex",
+    "country": "China"
+  },
+  {
+    "id": 184,
+    "profile_picture_url": "https://owcdn.net/img/66ab60c4ca428.png",
+    "ign": "LuoK1ng",
+    "name": "Zhang Zhanpeng (张展鹏)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 185,
+    "profile_picture_url": "https://owcdn.net/img/66ab60e65e899.png",
+    "ign": "Kai",
+    "name": "Lu Zhinan (卢智楠)",
+    "role": "Sentinel/Duelist",
+    "country": "China"
+  },
+  {
+    "id": 186,
+    "profile_picture_url": "https://owcdn.net/img/66ab615ebd06c.png",
+    "ign": "FengF",
+    "name": "Song Xuefeng (宋学锋)",
+    "role": "Sentinel/Duelist",
+    "country": "China"
+  },
+  {
+    "id": 187,
+    "profile_picture_url": "https://owcdn.net/img/66ab61676a207.png",
+    "ign": "heybay",
+    "name": "Ho Shun Hei",
+    "role": "Flex",
+    "country": "Hong Kong"
+  },
+  {
+    "id": 188,
+    "profile_picture_url": "https://owcdn.net/img/66ab616ed3801.png",
+    "ign": "Biank",
+    "name": "Zhong Jianfei (钟剑飞)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 189,
+    "profile_picture_url": "https://owcdn.net/img/65bb6b4ef02b6.png",
+    "ign": "Zhao",
+    "name": "",
+    "role": "Duelist",
+    "country": "China"
+  },
+  {
+    "id": 190,
+    "profile_picture_url": "https://owcdn.net/img/65bb6b45df3fb.png",
+    "ign": "B3ar",
+    "name": " Yang Zhanxiong (杨瞻雄)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 191,
+    "profile_picture_url": "https://owcdn.net/img/65bb6b34cdf7e.png",
+    "ign": "whzy",
+    "name": "Wang Haozhe (王昊哲)",
+    "role": "Duelist",
+    "country": "China"
+  },
+  {
+    "id": 192,
+    "profile_picture_url": "https://owcdn.net/img/66ab6460602a4.png",
+    "ign": "Levius",
+    "name": "Lu Yinzhong (卢胤中)",
+    "role": "Sentinel/Controller",
+    "country": "China"
+  },
+  {
+    "id": 193,
+    "profile_picture_url": "",
+    "ign": "rushia",
+    "name": "Wang Xiaojie (王晓杰)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 194,
+    "profile_picture_url": "https://owcdn.net/img/66ab64682c526.png",
+    "ign": "nephh",
+    "name": "Marcus Tan",
+    "role": "Initiator",
+    "country": "Singapore"
+  },
+  {
+    "id": 195,
+    "profile_picture_url": "https://owcdn.net/img/65bb6b3c9d1ef.png",
+    "ign": "Knight",
+    "name": "Liu Yuxiang (刘宇翔)",
+    "role": "Initiator/Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 196,
+    "profile_picture_url": "https://owcdn.net/img/665c79ef3d726.png",
+    "ign": "nizhaoTZH",
+    "name": "Tang Zehao (唐哲昊)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 197,
+    "profile_picture_url": "https://owcdn.net/img/665c79f83dbac.png",
+    "ign": "vo0kashu",
+    "name": "Ilya Ushakov",
+    "role": "Sentinel/Controller",
+    "country": "Russia"
+  },
+  {
+    "id": 198,
+    "profile_picture_url": "https://owcdn.net/img/665c79820bad0.png",
+    "ign": "Shion7",
+    "name": "Zhang Haozhe (张昊泽)",
+    "role": "Initiator/Controller",
+    "country": "China"
+  },
+  {
+    "id": 199,
+    "profile_picture_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.29350-15/465109991_949710856976025_5790089876869510922_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=109&_nc_ohc=pqR5ZA_ibL4Q7kNvgE7VvW8&_nc_gid=083e88bc5dda4e2aa417bb823ae21cf3&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_AYA9z299ehAxyV_3Xoq86zm_Ssie7nu-W6611w_m1iwlAw&oe=673E10B1&_nc_sid=d885a2",
+    "ign": "Cangshu",
+    "name": "Zheng Yujun (郑宇峻)",
+    "role": "Initiator/Controller",
+    "country": "China"
+  },
+  {
+    "id": 200,
+    "profile_picture_url": "https://owcdn.net/img/665c797bb6f57.png",
+    "ign": "Nicc",
+    "name": "Shao Yi-qun (邵逸群)",
+    "role": "Controller/Initiator",
+    "country": "Taiwan"
+  },
+  {
+    "id": 201,
+    "profile_picture_url": "https://owcdn.net/img/665c7989dd2e9.png",
+    "ign": "TvirusLuke",
+    "name": "Chen Cheng-ching",
+    "role": "Duelist",
+    "country": "Taiwan"
+  },
+  {
+    "id": 202,
+    "profile_picture_url": "https://scontent-lhr6-2.cdninstagram.com/v/t51.29350-15/463462984_8589205504528656_4870436169851605561_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=scontent-lhr6-2.cdninstagram.com&_nc_cat=100&_nc_ohc=cHOVJDfuTlMQ7kNvgEptho0&_nc_gid=6873ccbfa9564d4492ef51e236c1e867&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_AYA46EIU6DqBpufUAEJmcRQ7WSkWYyCFGGiuw5KxV5vxUQ&oe=673E1089&_nc_sid=d885a2",
+    "ign": "SpiritZ1",
+    "name": "Lin Dingyu (林定宇)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 203,
+    "profile_picture_url": "https://owcdn.net/img/65d4b12288fae.png",
+    "ign": "Dingwei",
+    "name": "Wei Dingwei (魏定伟)",
+    "role": "Sub",
+    "country": "China"
+  },
+  {
+    "id": 204,
+    "profile_picture_url": "https://owcdn.net/img/66372d12639b0.png",
+    "ign": "YHchen",
+    "name": "Chen Yuhan (陳昱瀚)",
+    "role": "IGL",
+    "country": "Taiwan"
+  },
+  {
+    "id": 205,
+    "profile_picture_url": "https://owcdn.net/img/66372d1a84e05.png",
+    "ign": "stew",
+    "name": "Park Young-chan (박영찬)",
+    "role": "Duelist",
+    "country": "South Korea"
+  },
+  {
+    "id": 206,
+    "profile_picture_url": "https://owcdn.net/img/66372d25628fb.png",
+    "ign": "Viva",
+    "name": "Lifan Ran (冉立凡)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 207,
+    "profile_picture_url": "https://owcdn.net/img/66372d2d68e2f.png",
+    "ign": "jkuro",
+    "name": "Yong Haochong (杨浩聪)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 208,
+    "profile_picture_url": "",
+    "ign": "Z1yan",
+    "name": "Liu Zihan (刘紫涵)",
+    "role": "Sentinel/Controller",
+    "country": "China"
+  },
+  {
+    "id": 209,
+    "profile_picture_url": "https://owcdn.net/img/661971c8b023a.png",
+    "ign": "sword9",
+    "name": "Li Wei (李卫)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 210,
+    "profile_picture_url": "https://owcdn.net/img/66372d08ad146.png",
+    "ign": "YiHao",
+    "name": "Chen Yihao (陈一豪)",
+    "role": "Inactive",
+    "country": "China"
+  },
+  {
+    "id": 211,
+    "profile_picture_url": "https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1taWNS.img?w=768&h=1365&m=6&x=963&y=1059&s=610&d=610",
+    "ign": "player",
+    "name": "Yang Kaiwen (杨凯文)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 212,
+    "profile_picture_url": "https://owcdn.net/img/661971b141d5d.png",
+    "ign": "bunt",
+    "name": "Jiang He (姜河)",
+    "role": "Initiator/Controller",
+    "country": "China"
+  },
+  {
+    "id": 213,
+    "profile_picture_url": "https://owcdn.net/img/661971d2596f0.png",
+    "ign": "monk",
+    "name": "Wang Haoyu (王浩宇)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 214,
+    "profile_picture_url": "https://owcdn.net/img/661971b90294a.png",
+    "ign": "deLb",
+    "name": "Delbert Tanoto",
+    "role": "Sentinel",
+    "country": "Indonesia"
+  },
+  {
+    "id": 215,
+    "profile_picture_url": "https://owcdn.net/img/661971c10b083.png",
+    "ign": "Spitfires",
+    "name": "Xin Mingyan (辛明阳)",
+    "role": "Duelist",
+    "country": "China"
+  },
+  {
+    "id": 216,
+    "profile_picture_url": "https://scontent-lhr6-1.cdninstagram.com/v/t51.29350-15/463449922_531305902878266_8394905272245303764_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=scontent-lhr6-1.cdninstagram.com&_nc_cat=102&_nc_ohc=eG4eCJhaHUYQ7kNvgGjeRNd&_nc_gid=30df144978ca41749e593142c0890119&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_AYAFtCoVM1FGNUclA0J08Nl1fs6Q-VBZ-OE7AqzFyhDlIQ&oe=673DF80D&_nc_sid=d885a2",
+    "ign": "K1ra",
+    "name": "Huang Zhihao (黄志豪)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 217,
+    "profile_picture_url": "https://owcdn.net/img/65bb58036d81d.png",
+    "ign": "X3B",
+    "name": "Zhang Chongtian (张丛天)",
+    "role": "Initiator",
+    "country": "China"
+  },
+  {
+    "id": 218,
+    "profile_picture_url": "https://owcdn.net/img/65d4b4404d6da.png",
+    "ign": "Ninebody",
+    "name": "Ding Yi (丁毅)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 219,
+    "profile_picture_url": "https://owcdn.net/img/65dd9ebf5dcf9.png",
+    "ign": "coldfish",
+    "name": "Pengzhi Xiang (向鹏志)",
+    "role": "Controller/Initiator",
+    "country": "China"
+  },
+  {
+    "id": 220,
+    "profile_picture_url": "https://owcdn.net/img/65d4b458c41be.png",
+    "ign": "hfmi0dzjc9z7",
+    "name": "Zhang Juncheng (张峻程)",
+    "role": "Sentinel/Initiator",
+    "country": "China"
+  },
+  {
+    "id": 221,
+    "profile_picture_url": "https://owcdn.net/img/652435acaee57.png",
+    "ign": "Eren",
+    "name": "Yang Zhengwei (杨曾威)",
+    "role": "Controller/Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 222,
+    "profile_picture_url": "https://owcdn.net/img/652435d2a1d3b.png",
+    "ign": "SiuFatBB",
+    "name": "Pong Gaa Hei (庞加曦)",
+    "role": "IGL",
+    "country": "Hong Kong"
+  },
+  {
+    "id": 223,
+    "profile_picture_url": "",
+    "ign": "V1yA",
+    "name": "Chang Rui-min (张睿珉)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 224,
+    "profile_picture_url": "https://owcdn.net/img/65dd9e998145e.png",
+    "ign": "Yuicaw",
+    "name": "Huang Yung-chieh (黃湧傑)",
+    "role": "Initiator/Sentinel",
+    "country": "Taiwan"
+  },
+  {
+    "id": 225,
+    "profile_picture_url": "https://owcdn.net/img/65dd9ea732e19.png",
+    "ign": "Spring",
+    "name": "Liu Jiunting (刘俊霆)",
+    "role": "Duelist",
+    "country": "Taiwan"
+  },
+  {
+    "id": 226,
+    "profile_picture_url": "https://owcdn.net/img/65dd9eae52a03.png",
+    "ign": "aluba",
+    "name": "Zhong Haojun (钟皓钧)",
+    "role": "Sentinel/Controller",
+    "country": "China"
+  },
+  {
+    "id": 227,
+    "profile_picture_url": "https://owcdn.net/img/65bbd1a6a26bf.png",
+    "ign": "Lysoar",
+    "name": "Liang Youhao (梁优好)",
+    "role": "Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 228,
+    "profile_picture_url": "https://owcdn.net/img/65bf4a53e03ae.png",
+    "ign": "o0o0o",
+    "name": "Ye Xiaodong (叶晓东)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 229,
+    "profile_picture_url": "https://owcdn.net/img/65bf4a5b96193.png",
+    "ign": "OBONE",
+    "name": "Chen Yijie (陈怡洁)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 230,
+    "profile_picture_url": "https://owcdn.net/img/661235f45b72e.png",
+    "ign": "SWERL",
+    "name": "Ali Kobraee",
+    "role": "Duelist",
+    "country": "Australia"
+  },
+  {
+    "id": 231,
+    "profile_picture_url": "https://owcdn.net/img/65bf4a62b3706.png",
+    "ign": "CB",
+    "name": "Wang Qingchuan (王庆川)",
+    "role": "Initiator/Duelist",
+    "country": "China"
+  },
+  {
+    "id": 232,
+    "profile_picture_url": "https://scontent-lhr8-2.cdninstagram.com/v/t51.29350-15/448136167_997382565242091_4685227931360198410_n.jpg?stp=dst-jpg_e15&_nc_ht=scontent-lhr8-2.cdninstagram.com&_nc_cat=103&_nc_ohc=UNSnj5OFNCIQ7kNvgHR7ttN&_nc_gid=60eb8d5b51714d0abaaa6f58610bb518&edm=ANTKIIoBAAAA&ccb=7-5&oh=00_AYB3lrdFNQH4sOlbKphKxXJfnGYif1tRLSkLhZkLjv3G7w&oe=673E20E2&_nc_sid=d885a2",
+    "ign": "Ezeir",
+    "name": "Zhao Zejun (赵泽骏)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 233,
+    "profile_picture_url": "https://owcdn.net/img/65bbd1a6a26bf.png",
+    "ign": "GuanG",
+    "name": "Guang Honglin (光洪霖)",
+    "role": "Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 234,
+    "profile_picture_url": "https://preview.redd.it/ex-nter-player-ac-joins-titan-esports-club-tec-v0-xdpeshv2z0rc1.jpeg?auto=webp&s=e59bcc7c98ba1f65d6c5427514a5081bdbf1d384",
+    "ign": "AC",
+    "name": "Wei Jiacong (韦家聪)",
+    "role": "IGL",
+    "country": "China"
+  },
+  {
+    "id": 235,
+    "profile_picture_url": "https://owcdn.net/img/65c87603071e0.png",
+    "ign": "Haodong",
+    "name": "Guo Haodong (郭浩东)",
+    "role": "Controller",
+    "country": "China"
+  },
+  {
+    "id": 236,
+    "profile_picture_url": "https://owcdn.net/img/65c9f735b2036.png",
+    "ign": "LockM",
+    "name": "Xing Fuling (邢福凌)",
+    "role": "Initiator/Controller",
+    "country": "China"
+  },
+  {
+    "id": 237,
+    "profile_picture_url": "https://owcdn.net/img/65c9f75895f85.png",
+    "ign": "Abo",
+    "name": "Han Bohao (韩博皓)",
+    "role": "Duelist/Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 238,
+    "profile_picture_url": "https://owcdn.net/img/65c9f7604ff05.png",
+    "ign": "kawaii",
+    "name": "Piao Min (朴民)",
+    "role": "Sentinel",
+    "country": "China"
+  },
+  {
+    "id": 239,
+    "profile_picture_url": "https://owcdn.net/img/65c9f769e3f6c.png",
+    "ign": "Rb",
+    "name": "Goo Sang-min (구상민)",
+    "role": "Duelist",
+    "country": "South Korea"
+  },
+  {
+    "id": 240,
+    "profile_picture_url": "https://owcdn.net/img/65c9f74585f59.png",
+    "ign": "B1ack",
+    "name": "Li Songtai (李松泰)",
+    "role": "Sub",
+    "country": "China"
+  }
+]
