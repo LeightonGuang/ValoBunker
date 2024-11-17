@@ -17,6 +17,7 @@ module.exports = {
     colors: {
       darkBlue: "#0f1923",
       valorantRed: "#FD4556",
+      white: "#fff",
     },
   },
   darkMode: "class",
