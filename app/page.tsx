@@ -67,7 +67,7 @@ export default function Home() {
           <Divider />
           <CardBody>
             <Listbox aria-label="Events" items={eventList}>
-              {eventList.map((eventObj) => (
+              {eventList.map((eventObj, i) => (
                 <ListboxItem
                   key={eventObj.id}
                   description={
@@ -79,6 +79,7 @@ export default function Home() {
                       <span className="whitespace-nowrap">{`${eventObj.start_date} - ${eventObj.end_date}`}</span>
                     </div>
                   }
+                  showDivider={i !== eventList.length - 1}
                   startContent={
                     <Image
                       className="min-h-8 min-w-8"
@@ -93,7 +94,7 @@ export default function Home() {
           </CardBody>
         </Card>
         <Card className="w-full lg:order-1">
-          <CardHeader className="text-[1.5rem]">News</CardHeader>
+          <CardHeader className="text-large">News</CardHeader>
           <Divider />
           <CardBody>
             <Listbox
@@ -105,7 +106,7 @@ export default function Home() {
                 <ListboxItem
                   key={patchObj.id}
                   classNames={{
-                    title: "text-[1rem] lg:text-[1.2rem]",
+                    title: "text-large",
                     base: "flex-col lg:flex-row",
                   }}
                   description={patchObj.description}
