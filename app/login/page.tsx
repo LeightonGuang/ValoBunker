@@ -17,6 +17,12 @@ const LoginPage = () => {
   return (
     <section className="mx-auto h-full w-full lg:mx-0 lg:flex lg:items-center">
       <div className="mt-4 flex h-full w-full justify-center">
+        <div className="hidden h-full w-1/2 object-fill lg:flex">
+          <Image
+            className="h-full rounded-none lg:object-cover"
+            src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/60cfa90e4a5195c27e50c00fb8aeb017c6855c8e-1920x1080.jpg"
+          />
+        </div>
         <div className="flex items-center justify-center lg:w-1/2 lg:bg-darkBlue">
           <Card className="h-min w-80">
             <CardHeader>
@@ -62,12 +68,6 @@ const LoginPage = () => {
               </div>
             </CardBody>
           </Card>
-        </div>
-        <div className="hidden h-full w-1/2 object-fill lg:flex">
-          <Image
-            className="h-full rounded-none lg:object-cover"
-            src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/60cfa90e4a5195c27e50c00fb8aeb017c6855c8e-1920x1080.jpg"
-          />
         </div>
       </div>
     </section>
