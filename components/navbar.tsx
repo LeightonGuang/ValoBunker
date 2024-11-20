@@ -161,6 +161,14 @@ export const Navbar = () => {
           icon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
         />
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden lg:flex lg:gap-4">
+          <Button as={Link} href="/login" variant="flat">
+            Login
+          </Button>
+          <Button as={Link} href="/signup" variant="flat">
+            Sign Up
+          </Button>
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu>
@@ -184,17 +192,17 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  className="h-7 p-0 text-[1.125rem] leading-none text-[#ECEFEF]"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
                 >
-                  Abilities Comparison
+                  Similar Abilities
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu
-              aria-label="Abilities Comparison"
+              aria-label="Similar Abilities"
               className="w-[340px]"
               itemClasses={{
                 base: "gap-4",
@@ -217,7 +225,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="w-full justify-start p-0 text-left text-[1rem] text-[#ECEFEF]"
+                  className="h-7 w-full justify-start p-0 text-left text-[1.125rem] text-[#ECEFEF]"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -245,6 +253,26 @@ export const Navbar = () => {
               ))}
             </DropdownMenu>
           </Dropdown>
+          <NavbarMenuItem>
+            <Link
+              className="w-full"
+              href="/login"
+              size="lg"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Login
+            </Link>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <Link
+              className="w-full"
+              href="/signup"
+              size="lg"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sign up
+            </Link>
+          </NavbarMenuItem>
         </div>
       </NavbarMenu>
     </NextUINavbar>
