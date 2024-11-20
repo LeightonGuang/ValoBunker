@@ -126,7 +126,7 @@ const TeamsPage = () => {
                   >
                     <div>
                       <h2>Players</h2>
-                      <ul className="mt-4 flex flex-col gap-4">
+                      <ul className="mt-4 flex flex-col gap-4 lg:flex-row lg:flex-wrap">
                         {[...teamObj.players]
                           .sort((a, b) =>
                             a.role === "IGL" ? -1 : b.role === "IGL" ? 1 : 0,
@@ -145,9 +145,12 @@ const TeamsPage = () => {
                                     base: "bg-white",
                                   },
                                 }}
+                                className="lg:p-2"
                                 description={
                                   <div className="flex flex-col">
-                                    <span>{player.name}</span>
+                                    <span className="whitespace-nowrap">
+                                      {player.name}
+                                    </span>
                                     <span>{player.role}</span>
                                   </div>
                                 }
@@ -157,7 +160,7 @@ const TeamsPage = () => {
                           ))}
                       </ul>
                       <Divider className="my-4" />
-                      <h2>Coaches</h2>
+                      <h2>Coach</h2>
                       <div className="mt-4">
                         {teamObj.coaches.length === 0 ? (
                           <User name="N/A" />
