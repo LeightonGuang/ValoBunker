@@ -2,6 +2,7 @@
 
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -12,8 +13,60 @@ import {
 } from "@nextui-org/react";
 
 import { DiscordIcon, GoogleIcon } from "@/components/icons";
+import { signUp } from "../actions/auth/signup/actions";
 
 const SignupPage = () => {
+  const [signUpForm, setSignUpForm] = useState<{
+    username: string;
+    email: string;
+    confirmEmail: string;
+    password: string;
+    confirmPassword: string;
+  }>({
+    username: "",
+    email: "",
+    confirmEmail: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState({
+    hasEmptyUserName: false,
+    hasEmptyEmail: false,
+    hasInvalidEmail: false,
+    hasEmptyConfirmEmail: false,
+    hasInvalidConfirmEmail: false,
+    hasEmptyPassword: false,
+    hasEmptyConfirmPassword: false,
+    hasInvalidPassword: false,
+  });
+
+  const onSignUpFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
+  };
+
+  const handleSignUp = async () => {
+    try {
+      const { data, errors, isSignUpFormValid } = await signUp(
+        signUpForm.username,
+        signUpForm.email,
+        signUpForm.confirmEmail,
+        signUpForm.password,
+        signUpForm.confirmPassword,
+      );
+
+      console.log(data, errors, isSignUpFormValid);
+      setErrors(errors);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(signUpForm);
+  }, [signUpForm]);
+
   return (
     <section className="mx-auto h-full w-full lg:mx-0 lg:flex lg:items-center">
       <div className="mt-4 flex h-full w-full justify-center">
@@ -26,37 +79,87 @@ const SignupPage = () => {
               </div>
             </CardHeader>
             <CardBody className="gap-4">
-              <Input
-                isRequired
-                label="User Name"
-                placeholder="username"
-                type="text"
-              />
-              <Input
-                isRequired
-                label="Email"
-                placeholder="you@example.com"
-                type="email"
-              />
-              <Input
-                isRequired
-                label="Confirm Email"
-                placeholder="you@example.com"
-                type="email"
-              />
-              <Input
-                isRequired
-                label="Password"
-                placeholder="password"
-                type="password"
-              />
-              <Input
-                isRequired
-                label="Confirm Password"
-                placeholder="confirm password"
-                type="password"
-              />
-              <Button color="primary">Sign up</Button>
+              <form className="flex flex-col gap-4">
+                <Input
+                  isRequired
+                  errorMessage={
+                    errors.hasEmptyUserName ? "User name is required" : ""
+                  }
+                  isInvalid={errors.hasEmptyUserName}
+                  label="User Name"
+                  name="username"
+                  placeholder="username"
+                  type="text"
+                  onChange={onSignUpFormChange}
+                />
+                <Input
+                  isRequired
+                  errorMessage={
+                    errors.hasEmptyEmail
+                      ? "Email is required"
+                      : errors.hasInvalidEmail
+                        ? "Invalid email"
+                        : ""
+                  }
+                  isInvalid={errors.hasEmptyEmail || errors.hasInvalidEmail}
+                  label="Email"
+                  name="email"
+                  placeholder="you@example.com"
+                  type="email"
+                  onChange={onSignUpFormChange}
+                />
+                <Input
+                  isRequired
+                  errorMessage={
+                    errors.hasEmptyConfirmEmail
+                      ? "Confirm email is required"
+                      : errors.hasInvalidConfirmEmail
+                        ? "Emails do not match"
+                        : ""
+                  }
+                  isInvalid={
+                    errors.hasEmptyConfirmEmail || errors.hasInvalidConfirmEmail
+                  }
+                  label="Confirm Email"
+                  name="confirmEmail"
+                  placeholder="you@example.com"
+                  type="email"
+                  onChange={onSignUpFormChange}
+                />
+                <Input
+                  isRequired
+                  errorMessage={
+                    errors.hasEmptyPassword ? "Password is required" : ""
+                  }
+                  isInvalid={errors.hasEmptyPassword}
+                  label="Password"
+                  name="password"
+                  placeholder="password"
+                  type="password"
+                  onChange={onSignUpFormChange}
+                />
+                <Input
+                  isRequired
+                  errorMessage={
+                    errors.hasEmptyConfirmPassword
+                      ? "Confirm password is required"
+                      : errors.hasInvalidPassword
+                        ? "Passwords do not match"
+                        : ""
+                  }
+                  isInvalid={
+                    errors.hasEmptyConfirmPassword || errors.hasInvalidPassword
+                  }
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  placeholder="confirm password"
+                  type="password"
+                  onChange={onSignUpFormChange}
+                />
+                <Button color="primary" formAction={handleSignUp} type="submit">
+                  Sign up
+                </Button>
+              </form>
               <Divider />
               <div className="flex w-full flex-col gap-4">
                 <Button
