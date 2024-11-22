@@ -25,6 +25,7 @@ const AddEventPage = () => {
     end_date: "",
     location: "",
   });
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const router = useRouter();
 
   const onAddEventFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,8 +47,9 @@ const AddEventPage = () => {
 
       if (error) {
         console.error(error);
+        setErrorMessage(error.message);
       } else {
-        console.log(data);
+        // console.log(data);
         router.push("/moderator/manage/events");
       }
     } catch (error) {
@@ -135,6 +137,10 @@ const AddEventPage = () => {
                   onChange={onAddEventFormChange}
                 />
               </label>
+
+              {errorMessage && (
+                <div className="text-[#ff0000]">{errorMessage}</div>
+              )}
 
               <div className="flex w-full justify-between gap-4">
                 <Button className="w-full" color="danger" onClick={router.back}>
