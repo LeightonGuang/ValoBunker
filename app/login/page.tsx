@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import {
@@ -11,9 +13,45 @@ import {
   Link,
 } from "@nextui-org/react";
 
+import { logIn } from "../actions/auth/login/actions";
+
 import { DiscordIcon, GoogleIcon } from "@/components/icons";
 
 const LoginPage = () => {
+  const [logInForm, setLogInForm] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
+  const [logInErrorMessage, setLogInErrorMessage] = useState<string>("");
+  const router = useRouter();
+
+  const onLogInFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    setLogInForm({ ...logInForm, [e.target.name]: e.target.value });
+  };
+
+  const handleLogIn = async () => {
+    try {
+      const { data, error } = await logIn(logInForm.email, logInForm.password);
+
+      if (error) {
+        setLogInErrorMessage(error);
+        console.error(error);
+      }
+
+      if (data) {
+        router.push("/");
+      }
+    } catch (error) {
+      setLogInErrorMessage("Unexpected error, please try again.");
+      console.error(error);
+    }
+  };
+
   return (
     <section className="mx-auto h-full w-full lg:mx-0 lg:flex lg:items-center">
       <div className="mt-4 flex h-full w-full justify-center">
@@ -32,19 +70,31 @@ const LoginPage = () => {
               </div>
             </CardHeader>
             <CardBody className="gap-4">
-              <Input
-                isRequired
-                label="Email"
-                placeholder="you@example.com"
-                type="email"
-              />
-              <Input
-                isRequired
-                label="Password"
-                placeholder="password"
-                type="password"
-              />
-              <Button color="primary">Log in</Button>
+              <form className="flex flex-col gap-4">
+                <Input
+                  isRequired
+                  isInvalid={logInErrorMessage !== ""}
+                  label="Email"
+                  name="email"
+                  placeholder="you@example.com"
+                  type="email"
+                  onChange={onLogInFormChange}
+                />
+                <Input
+                  isRequired
+                  errorMessage={logInErrorMessage}
+                  isInvalid={logInErrorMessage !== ""}
+                  label="Password"
+                  name="password"
+                  placeholder="password"
+                  type="password"
+                  onChange={onLogInFormChange}
+                />
+                <Button color="primary" formAction={handleLogIn} type="submit">
+                  Log in
+                </Button>
+              </form>
+
               <Divider />
               <div className="flex w-full flex-col gap-4">
                 <Button
