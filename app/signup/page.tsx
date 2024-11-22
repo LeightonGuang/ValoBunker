@@ -12,8 +12,9 @@ import {
   Link,
 } from "@nextui-org/react";
 
-import { DiscordIcon, GoogleIcon } from "@/components/icons";
 import { signUp } from "../actions/auth/signup/actions";
+
+import { DiscordIcon, GoogleIcon } from "@/components/icons";
 
 const SignupPage = () => {
   const [signUpForm, setSignUpForm] = useState<{
@@ -75,7 +76,7 @@ const SignupPage = () => {
             <CardHeader>
               <div className="mx-auto flex w-min flex-col whitespace-nowrap text-center">
                 <span className="text-2xl">Welcome to Valo Bunker!</span>
-                <span className="text-sm">Log in to your account</span>
+                <span className="text-sm">Create your account</span>
               </div>
             </CardHeader>
             <CardBody className="gap-4">
