@@ -17,12 +17,18 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  useDisclosure,
 } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
 import { EventsTableType } from "@/types/EventsTableType";
+import { EllipsisIcon } from "@/components/icons";
 
 const patchColumns: { name: string; sortable: boolean }[] = [
   {
@@ -40,6 +46,18 @@ const patchColumns: { name: string; sortable: boolean }[] = [
 
 const EventsPage = () => {
   const [eventsList, setEventsList] = useState<EventsTableType[]>([]);
+  const [eventToDelete, setEventToDelete] = useState<EventsTableType>({
+    id: 0,
+    type: "",
+    name: "",
+    event_icon_url: "",
+    location: "",
+    start_date: "",
+    end_date: "",
+    created_at: "",
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const router = useRouter();
   const getAllEvents = async () => {
@@ -53,8 +71,33 @@ const EventsPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data);
+        // console.log(data);
         setEventsList(data);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteEventById = async (id: number) => {
+    try {
+      const supabase = getSupabase();
+      const { data, error } = await supabase
+        .from("events")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(data);
+        getAllEvents();
+      }
+
+      if (error) {
+        console.error(error);
       }
     } catch (error) {
       console.error(error);
@@ -88,89 +131,126 @@ const EventsPage = () => {
     <section>
       <h1 className={title()}>Manage Events</h1>
       <div className="mt-6">
-        <Table
-          aria-label="Patches"
-          selectionMode="single"
-          topContent={topContent()}
-          topContentPlacement="outside"
-        >
-          <TableHeader columns={patchColumns}>
-            {patchColumns.map((column, i) => (
-              <TableColumn key={i}>{column.name}</TableColumn>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {eventsList.map((event) => {
-              const currentDate = new Date();
-              const startDate = new Date(event.start_date);
-              const endDate = new Date(event.end_date);
+        {!isLoading && (
+          <Table
+            aria-label="Patches"
+            selectionMode="single"
+            topContent={topContent()}
+            topContentPlacement="outside"
+          >
+            <TableHeader columns={patchColumns}>
+              {patchColumns.map((column, i) => (
+                <TableColumn key={i}>{column.name}</TableColumn>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {eventsList.map((event) => {
+                const currentDate = new Date();
+                const startDate = new Date(event.start_date);
+                const endDate = new Date(event.end_date);
 
-              const formatDate = (date: Date) => {
-                return date.toLocaleDateString("en-GB");
-              };
+                const formatDate = (date: Date) => {
+                  return date.toLocaleDateString("en-GB");
+                };
 
-              return (
-                <TableRow key={event.id}>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <Image
-                        alt={event.name}
-                        className="mr-2 h-8 min-h-8 w-8 min-w-8"
-                        src={event.event_icon_url}
-                      />
-                      <div>{`${event.type}: ${event.name}`}</div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <span className="whitespace-nowrap">
-                      {event.start_date ? formatDate(startDate) : "unknown"}
-                    </span>
-                    {" - "}
-                    <span className="whitespace-nowrap">
-                      {event.end_date ? formatDate(endDate) : "unknown"}
-                    </span>
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    {event.location}
-                  </TableCell>
-                  <TableCell>
-                    <Chip
-                      color={
-                        currentDate < startDate
-                          ? "default"
+                return (
+                  <TableRow key={event.id}>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <Image
+                          alt={event.name}
+                          className="mr-2 h-8 min-h-8 w-8 min-w-8"
+                          src={event.event_icon_url}
+                        />
+                        <div>{`${event.type} ${event.name}`}</div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <span className="whitespace-nowrap">
+                        {event.start_date ? formatDate(startDate) : "unknown"}
+                      </span>
+                      {" - "}
+                      <span className="whitespace-nowrap">
+                        {event.end_date ? formatDate(endDate) : "unknown"}
+                      </span>
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {event.location}
+                    </TableCell>
+                    <TableCell>
+                      <Chip
+                        color={
+                          currentDate < startDate
+                            ? "default"
+                            : currentDate > startDate && currentDate < endDate
+                              ? "success"
+                              : currentDate > endDate
+                                ? "danger"
+                                : "default"
+                        }
+                      >
+                        {currentDate < startDate
+                          ? "Upcoming"
                           : currentDate > startDate && currentDate < endDate
-                            ? "success"
+                            ? "Ongoing"
                             : currentDate > endDate
-                              ? "danger"
-                              : "default"
-                      }
-                    >
-                      {currentDate < startDate
-                        ? "Upcoming"
-                        : currentDate > startDate && currentDate < endDate
-                          ? "Ongoing"
-                          : currentDate > endDate
-                            ? "Ended"
-                            : "Unknown"}
-                    </Chip>
-                  </TableCell>
-                  <TableCell>
-                    <Dropdown>
-                      <DropdownTrigger>
-                        <Button>more</Button>
-                      </DropdownTrigger>
-                      <DropdownMenu>
-                        <DropdownItem>Edit</DropdownItem>
-                        <DropdownItem>Delete</DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+                              ? "Ended"
+                              : "Unknown"}
+                      </Chip>
+                    </TableCell>
+                    <TableCell>
+                      <Dropdown>
+                        <DropdownTrigger>
+                          <Button isIconOnly variant="light">
+                            <EllipsisIcon />
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu>
+                          <DropdownItem>Edit</DropdownItem>
+                          <DropdownItem
+                            onClick={() => {
+                              onOpen();
+                              setEventToDelete(event);
+                            }}
+                          >
+                            Delete
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        )}
       </div>
+      <Modal
+        isOpen={isOpen}
+        size="md"
+        onClose={onClose}
+        onOpenChange={onOpenChange}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalBody>{`Are you sure you want to delete the event: ${eventToDelete.type} ${eventToDelete.name}?`}</ModalBody>
+              <ModalFooter>
+                <Button onClick={onClose}>Cancel</Button>
+                <Button
+                  color="danger"
+                  onClick={() => {
+                    deleteEventById(eventToDelete.id);
+                    onClose();
+                  }}
+                >
+                  Delete
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </section>
   );
 };
