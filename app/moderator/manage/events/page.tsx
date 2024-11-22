@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Table,
@@ -9,7 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { Chip } from "@nextui-org/react";
+import {
+  Chip,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Image,
+} from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 
 import { title } from "@/components/primitives";
@@ -32,6 +40,8 @@ const patchColumns: { name: string; sortable: boolean }[] = [
 
 const EventsPage = () => {
   const [eventsList, setEventsList] = useState<EventsTableType[]>([]);
+
+  const router = useRouter();
   const getAllEvents = async () => {
     try {
       const supabase = getSupabase();
@@ -51,15 +61,39 @@ const EventsPage = () => {
     }
   };
 
+  const topContent = () => {
+    return (
+      <div className="flex items-center justify-between">
+        <span className="text-small text-default-400">
+          Total {eventsList.length} Events
+        </span>
+        <Button
+          color="primary"
+          endContent={<span>+</span>}
+          onClick={() => {
+            router.push("/moderator/manage/events/add");
+          }}
+        >
+          Add Event
+        </Button>
+      </div>
+    );
+  };
+
   useEffect(() => {
     getAllEvents();
   }, []);
 
   return (
     <section>
-      <h1 className={title()}>Events</h1>
+      <h1 className={title()}>Manage Events</h1>
       <div className="mt-6">
-        <Table aria-label="Patches" selectionMode="single">
+        <Table
+          aria-label="Patches"
+          selectionMode="single"
+          topContent={topContent()}
+          topContentPlacement="outside"
+        >
           <TableHeader columns={patchColumns}>
             {patchColumns.map((column, i) => (
               <TableColumn key={i}>{column.name}</TableColumn>
@@ -78,8 +112,14 @@ const EventsPage = () => {
               return (
                 <TableRow key={event.id}>
                   <TableCell>
-                    <span className="whitespace-nowrap">{event.type}</span>{" "}
-                    <span className="whitespace-nowrap">{event.name}</span>
+                    <div className="flex items-center">
+                      <Image
+                        alt={event.name}
+                        className="mr-2 h-8 min-h-8 w-8 min-w-8"
+                        src={event.event_icon_url}
+                      />
+                      <div>{`${event.type}: ${event.name}`}</div>
+                    </div>
                   </TableCell>
                   <TableCell>
                     <span className="whitespace-nowrap">
@@ -115,7 +155,15 @@ const EventsPage = () => {
                     </Chip>
                   </TableCell>
                   <TableCell>
-                    <Button>D</Button>
+                    <Dropdown>
+                      <DropdownTrigger>
+                        <Button>more</Button>
+                      </DropdownTrigger>
+                      <DropdownMenu>
+                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem>Delete</DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
                   </TableCell>
                 </TableRow>
               );
