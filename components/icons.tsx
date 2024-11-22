@@ -330,3 +330,21 @@ export const GoogleIcon = ({ ...props }) => (
     <path d="M0 0h48v48H0z" fill="none" />
   </svg>
 );
+
+export const EllipsisIcon = ({ ...props }) => (
+  <svg
+    className="size-6"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
