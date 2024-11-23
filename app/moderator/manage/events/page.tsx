@@ -32,7 +32,7 @@ import { EllipsisIcon } from "@/components/icons";
 
 const patchColumns: { name: string; sortable: boolean }[] = [
   {
-    name: "Name",
+    name: "Event",
     sortable: true,
   },
   {
@@ -66,7 +66,7 @@ const EventsPage = () => {
       const { data, error } = await supabase
         .from("events")
         .select(`*`)
-        .order("start_date", { ascending: true });
+        .order("end_date", { ascending: true });
 
       if (error) {
         console.error(error);
@@ -131,103 +131,109 @@ const EventsPage = () => {
     <section>
       <h1 className={title()}>Manage Events</h1>
       <div className="mt-6">
-        {!isLoading && (
-          <Table
-            aria-label="Patches"
-            selectionMode="single"
-            topContent={topContent()}
-            topContentPlacement="outside"
-          >
-            <TableHeader columns={patchColumns}>
-              {patchColumns.map((column, i) => (
-                <TableColumn key={i}>{column.name}</TableColumn>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {eventsList.map((event) => {
-                const currentDate = new Date();
+        <Table
+          aria-label="Patches"
+          selectionMode="single"
+          topContent={topContent()}
+          topContentPlacement="outside"
+        >
+          <TableHeader columns={patchColumns}>
+            {patchColumns.map((column, i) => (
+              <TableColumn key={i}>{column.name}</TableColumn>
+            ))}
+          </TableHeader>
 
-                currentDate.setHours(0, 0, 0, 0);
-                const startDate = event.start_date
-                  ? new Date(event.start_date)
-                  : "";
-                const endDate = event.end_date ? new Date(event.end_date) : "";
+          <TableBody isLoading={isLoading}>
+            {eventsList.map((event) => {
+              const currentDate = new Date();
 
-                const formatDate = (date: Date) => {
-                  return date.toLocaleDateString("en-GB");
-                };
+              currentDate.setHours(0, 0, 0, 0);
+              const startDate = event.start_date
+                ? new Date(event.start_date)
+                : "";
+              const endDate = event.end_date ? new Date(event.end_date) : "";
 
-                return (
-                  <TableRow key={event.id}>
-                    <TableCell>
-                      <div className="flex items-center">
-                        <Image
-                          alt={event.name}
-                          className="mr-2 h-8 min-h-8 w-8 min-w-8"
-                          src={event.event_icon_url}
-                        />
-                        <div>{`${event.type} ${event.name}`}</div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="lg:whitespace-nowrap">
-                        <span className="whitespace-nowrap">
-                          {startDate ? formatDate(startDate) : "TBD"}
-                        </span>
-                        {" - "}
-                        <span className="whitespace-nowrap">
-                          {endDate ? formatDate(endDate) : "TBD"}
-                        </span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {event.location}
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        color={
-                          currentDate < startDate
-                            ? "default"
-                            : startDate < currentDate && currentDate <= endDate
-                              ? "success"
-                              : currentDate > endDate
-                                ? "danger"
-                                : "default"
-                        }
-                      >
-                        {currentDate < startDate
-                          ? "Upcoming"
-                          : startDate < currentDate && currentDate <= endDate
-                            ? "Ongoing"
-                            : endDate < currentDate && "Ended"}
-                      </Chip>
-                    </TableCell>
-                    <TableCell>
-                      <Dropdown>
-                        <DropdownTrigger>
-                          <Button isIconOnly variant="light">
-                            <EllipsisIcon />
-                          </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu>
-                          <DropdownItem>Edit</DropdownItem>
-                          <DropdownItem
-                            onClick={() => {
-                              onOpen();
-                              setEventToDelete(event);
-                            }}
-                          >
-                            Delete
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        )}
+              const formatDate = (date: Date) => {
+                return date.toLocaleDateString("en-GB");
+              };
+
+              return (
+                <TableRow key={event.id}>
+                  <TableCell>
+                    <div className="flex items-center">
+                      <Image
+                        alt={event.name}
+                        className="mr-2 h-8 min-h-8 w-8 min-w-8"
+                        src={event.event_icon_url}
+                      />
+                      <div>{`${event.type} ${event.name}`}</div>
+                    </div>
+                  </TableCell>
+
+                  <TableCell>
+                    <div className="lg:whitespace-nowrap">
+                      <span className="whitespace-nowrap">
+                        {startDate ? formatDate(startDate) : "TBD"}
+                      </span>
+                      {" - "}
+                      <span className="whitespace-nowrap">
+                        {endDate ? formatDate(endDate) : "TBD"}
+                      </span>
+                    </div>
+                  </TableCell>
+
+                  <TableCell className="whitespace-nowrap">
+                    {event.location}
+                  </TableCell>
+
+                  <TableCell>
+                    <Chip
+                      color={
+                        currentDate < startDate
+                          ? "default"
+                          : (startDate < currentDate &&
+                                currentDate <= endDate) ||
+                              (startDate < currentDate && endDate === "")
+                            ? "success"
+                            : currentDate > endDate
+                              ? "danger"
+                              : "default"
+                      }
+                    >
+                      {currentDate < startDate
+                        ? "Upcoming"
+                        : (startDate < currentDate && currentDate <= endDate) ||
+                            (startDate < currentDate && endDate === "")
+                          ? "Ongoing"
+                          : endDate < currentDate && "Ended"}
+                    </Chip>
+                  </TableCell>
+
+                  <TableCell>
+                    <Dropdown>
+                      <DropdownTrigger>
+                        <Button isIconOnly variant="light">
+                          <EllipsisIcon />
+                        </Button>
+                      </DropdownTrigger>
+                      <DropdownMenu>
+                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem
+                          onClick={() => {
+                            onOpen();
+                            setEventToDelete(event);
+                          }}
+                        >
+                          Delete
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </div>
       <Modal
         isOpen={isOpen}
