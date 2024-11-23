@@ -71,7 +71,6 @@ const EventsPage = () => {
       if (error) {
         console.error(error);
       } else {
-        // console.log(data);
         setEventsList(data);
       }
     } catch (error) {
@@ -92,7 +91,7 @@ const EventsPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data);
+        // console.log(data);
         getAllEvents();
       }
 
@@ -217,7 +216,15 @@ const EventsPage = () => {
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu>
-                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem
+                          onClick={() =>
+                            router.push(
+                              `/moderator/manage/events/edit/${event.id}`,
+                            )
+                          }
+                        >
+                          Edit
+                        </DropdownItem>
                         <DropdownItem
                           onClick={() => {
                             onOpen();
