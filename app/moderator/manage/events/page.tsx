@@ -40,11 +40,12 @@ const patchColumns: { name: string; sortable: boolean }[] = [
     sortable: true,
   },
   { name: "Location", sortable: true },
+  { name: "Prize Pool", sortable: true },
   { name: "Status", sortable: true },
   { name: "Actions", sortable: false },
 ];
 
-const EventsPage = () => {
+const ManageEventsPage = () => {
   const [eventsList, setEventsList] = useState<EventsTableType[]>([]);
   const [eventToDelete, setEventToDelete] = useState<EventsTableType>({
     id: 0,
@@ -186,6 +187,10 @@ const EventsPage = () => {
                   </TableCell>
 
                   <TableCell>
+                    <div>{event.prize_pool || "/"}</div>
+                  </TableCell>
+
+                  <TableCell>
                     <Chip
                       color={
                         currentDate < startDate
@@ -272,4 +277,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default ManageEventsPage;
