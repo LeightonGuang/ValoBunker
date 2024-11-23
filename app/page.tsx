@@ -4,6 +4,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Chip,
   Divider,
   Image,
   Link,
@@ -24,7 +25,8 @@ export default function Home() {
       const { data, error } = await supabase
         .from("patches")
         .select(`*`)
-        .order("release_date", { ascending: false });
+        .order("release_date", { ascending: false })
+        .limit(3);
 
       if (error) {
         console.error(error);
@@ -42,7 +44,9 @@ export default function Home() {
       const { data, error } = await supabase
         .from("events")
         .select(`*`)
-        .order("start_date", { ascending: true });
+        .order("end_date", { ascending: true })
+        .gte("end_date", new Date().toISOString())
+        .limit(4);
 
       if (error) {
         console.error(error);
@@ -62,34 +66,68 @@ export default function Home() {
   return (
     <section>
       <div className="flex flex-col gap-4 lg:flex-row">
-        <Card className="h-min w-full lg:order-2 lg:w-72">
+        <Card className="h-min w-full lg:order-2 lg:w-96">
           <CardHeader>Upcoming Events</CardHeader>
           <Divider />
           <CardBody>
             <Listbox aria-label="Events" items={eventList}>
-              {eventList.map((eventObj, i) => (
-                <ListboxItem
-                  key={eventObj.id}
-                  description={
-                    <div className="flex flex-col">
-                      <span className="text-white text-small">
-                        {eventObj.type}
-                      </span>
-                      <span>{eventObj.name}</span>
-                      <span className="whitespace-nowrap">{`${eventObj.start_date} - ${eventObj.end_date}`}</span>
-                    </div>
-                  }
-                  showDivider={i !== eventList.length - 1}
-                  startContent={
-                    <Image
-                      className="min-h-8 min-w-8"
-                      height={32}
-                      src={eventObj.event_icon_url}
-                      width={32}
-                    />
-                  }
-                />
-              ))}
+              {eventList.map((eventObj, i) => {
+                const todayDate = new Date();
+
+                todayDate.setHours(0, 0, 0, 0);
+
+                const eventStartDate = eventObj.start_date
+                  ? new Date(eventObj.start_date)
+                  : "";
+                const eventEndDate = eventObj.end_date
+                  ? new Date(eventObj.end_date)
+                  : "";
+
+                const eventStatus =
+                  todayDate < eventStartDate
+                    ? "Upcoming"
+                    : eventStartDate < todayDate && todayDate <= eventEndDate
+                      ? "Ongoing"
+                      : eventEndDate < todayDate && "Ended";
+
+                return (
+                  <ListboxItem
+                    key={eventObj.id}
+                    description={
+                      <div className="flex flex-col">
+                        <span className="flex justify-between text-small text-white">
+                          {eventObj.type}{" "}
+                          <Chip
+                            color={
+                              eventStatus === "Upcoming"
+                                ? "default"
+                                : eventStatus === "Ongoing"
+                                  ? "success"
+                                  : eventStatus === "Ended"
+                                    ? "danger"
+                                    : "default"
+                            }
+                            size="sm"
+                          >
+                            {eventStatus}
+                          </Chip>
+                        </span>
+                        <span>{eventObj.name}</span>
+                        <span className="whitespace-nowrap">{`${eventObj.start_date} - ${eventObj.end_date}`}</span>
+                      </div>
+                    }
+                    showDivider={i !== eventList.length - 1}
+                    startContent={
+                      <Image
+                        className="min-h-8 min-w-8"
+                        height={32}
+                        src={eventObj.event_icon_url}
+                        width={32}
+                      />
+                    }
+                  />
+                );
+              })}
             </Listbox>
           </CardBody>
         </Card>
