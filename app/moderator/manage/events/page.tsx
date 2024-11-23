@@ -146,8 +146,12 @@ const EventsPage = () => {
             <TableBody>
               {eventsList.map((event) => {
                 const currentDate = new Date();
-                const startDate = new Date(event.start_date);
-                const endDate = new Date(event.end_date);
+
+                currentDate.setHours(0, 0, 0, 0);
+                const startDate = event.start_date
+                  ? new Date(event.start_date)
+                  : "";
+                const endDate = event.end_date ? new Date(event.end_date) : "";
 
                 const formatDate = (date: Date) => {
                   return date.toLocaleDateString("en-GB");
@@ -166,13 +170,15 @@ const EventsPage = () => {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <span className="whitespace-nowrap">
-                        {event.start_date ? formatDate(startDate) : "unknown"}
-                      </span>
-                      {" - "}
-                      <span className="whitespace-nowrap">
-                        {event.end_date ? formatDate(endDate) : "unknown"}
-                      </span>
+                      <div className="lg:whitespace-nowrap">
+                        <span className="whitespace-nowrap">
+                          {startDate ? formatDate(startDate) : "TBD"}
+                        </span>
+                        {" - "}
+                        <span className="whitespace-nowrap">
+                          {endDate ? formatDate(endDate) : "TBD"}
+                        </span>
+                      </div>
                     </TableCell>
                     <TableCell className="whitespace-nowrap">
                       {event.location}
@@ -182,7 +188,7 @@ const EventsPage = () => {
                         color={
                           currentDate < startDate
                             ? "default"
-                            : currentDate > startDate && currentDate < endDate
+                            : startDate < currentDate && currentDate <= endDate
                               ? "success"
                               : currentDate > endDate
                                 ? "danger"
@@ -191,11 +197,9 @@ const EventsPage = () => {
                       >
                         {currentDate < startDate
                           ? "Upcoming"
-                          : currentDate > startDate && currentDate < endDate
+                          : startDate < currentDate && currentDate <= endDate
                             ? "Ongoing"
-                            : currentDate > endDate
-                              ? "Ended"
-                              : "Unknown"}
+                            : endDate < currentDate && "Ended"}
                       </Chip>
                     </TableCell>
                     <TableCell>
