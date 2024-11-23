@@ -143,6 +143,17 @@ const EditEventPage = () => {
                   />
                 </label>
 
+                <label htmlFor="prize_pool">
+                  Prize Pool
+                  <Input
+                    name="prize_pool"
+                    placeholder="Prize Pool"
+                    type="text"
+                    value={eventForm?.prize_pool}
+                    onChange={onEventFormChange}
+                  />
+                </label>
+
                 <label htmlFor="location">
                   Location
                   <Input
