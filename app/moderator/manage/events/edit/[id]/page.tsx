@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Button, Card, CardBody, Image, Input } from "@nextui-org/react";
+import {
+  Card,
+  Input,
+  Image,
+  Button,
+  CardBody,
+  Breadcrumbs,
+  BreadcrumbItem,
+} from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
@@ -71,6 +79,11 @@ const EditEventPage = () => {
 
   return (
     <section>
+      <Breadcrumbs aria-label="breadcrumb">
+        <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
+        <BreadcrumbItem href="/moderator/manage/events">Events</BreadcrumbItem>
+        <BreadcrumbItem>Edit</BreadcrumbItem>
+      </Breadcrumbs>
       <h1 className={title()}>Edit Event</h1>
       <div className="mt-6 flex justify-center">
         {!isLoading && eventForm && (

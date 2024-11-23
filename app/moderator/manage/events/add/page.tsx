@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Card, CardBody, Image, Input } from "@nextui-org/react";
+import {
+  BreadcrumbItem,
+  Breadcrumbs,
+  Button,
+  Card,
+  CardBody,
+  Image,
+  Input,
+} from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
@@ -73,6 +81,11 @@ const AddEventPage = () => {
 
   return (
     <section>
+      <Breadcrumbs aria-label="breadcrumb">
+        <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
+        <BreadcrumbItem href="/moderator/manage/events">Events</BreadcrumbItem>
+        <BreadcrumbItem>Add</BreadcrumbItem>
+      </Breadcrumbs>
       <h1 className={title()}>Add Event</h1>
       <div className="mt-6 flex justify-center">
         <Card className="w-96">
@@ -88,7 +101,7 @@ const AddEventPage = () => {
                   }
                 />
               </div>
-              
+
               <label htmlFor="event_icon_url">
                 Event Icon Url
                 <Input

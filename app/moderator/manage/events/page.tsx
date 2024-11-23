@@ -4,26 +4,27 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Table,
-  TableBody,
+  TableRow,
   TableCell,
+  TableBody,
   TableColumn,
   TableHeader,
-  TableRow,
 } from "@nextui-org/table";
 import {
   Chip,
+  Modal,
+  Image,
   Dropdown,
+  ModalBody,
+  ModalFooter,
+  ModalContent,
   DropdownItem,
   DropdownMenu,
-  DropdownTrigger,
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
   useDisclosure,
+  DropdownTrigger,
 } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
+import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
@@ -129,6 +130,10 @@ const ManageEventsPage = () => {
 
   return (
     <section>
+      <Breadcrumbs aria-label="breadcrumb">
+        <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
+        <BreadcrumbItem>Events</BreadcrumbItem>
+      </Breadcrumbs>
       <h1 className={title()}>Manage Events</h1>
       <div className="mt-6">
         <Table
