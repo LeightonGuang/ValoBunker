@@ -11,8 +11,8 @@ interface AddEventFormType {
   event_icon_url: string;
   type: string;
   name: string;
-  start_date: string;
-  end_date: string;
+  start_date?: string;
+  end_date?: string;
   location: string;
 }
 
@@ -39,11 +39,21 @@ const AddEventPage = () => {
 
   const handleAddEventFormSubmit = async () => {
     try {
+      const newEventForm = { ...addEventForm };
+
+      if (newEventForm.start_date === "") {
+        delete newEventForm.start_date;
+      }
+
+      if (newEventForm.end_date === "") {
+        delete newEventForm.end_date;
+      }
+
       const supabase = getSupabase();
 
       const { data, error } = await supabase
         .from("events")
-        .insert([addEventForm]);
+        .insert([newEventForm]);
 
       if (error) {
         console.error(error);
