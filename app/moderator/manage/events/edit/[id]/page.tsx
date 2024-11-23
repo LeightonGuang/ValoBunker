@@ -100,12 +100,12 @@ const EditEventPage = () => {
                 </label>
 
                 <label htmlFor="type">
-                  Name
+                  Type
                   <Input
                     name="type"
                     placeholder="eg, Champions, Masters"
                     type="text"
-                    value={eventForm?.name}
+                    value={eventForm?.type}
                     onChange={onEventFormChange}
                   />
                 </label>
