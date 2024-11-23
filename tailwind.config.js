@@ -17,9 +17,14 @@ module.exports = {
     colors: {
       darkBlue: "#0f1923",
       valorantRed: "#FD4556",
+      white: "#fff",
+      black: "#000",
+      blurple: "#5865F2",
     },
   },
   darkMode: "class",
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    nextui({ themes: { light: { colors: {} }, dark: { colors: {} } } }),
+  ],
 };

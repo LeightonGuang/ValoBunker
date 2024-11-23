@@ -10,57 +10,87 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Tabs, Tab, Card, CardHeader, CardBody, User } from "@nextui-org/react";
 
 import agentsData from "@/public/data/agentData.json";
 import { title } from "@/components/primitives";
 import { ListIcon } from "@/components/icons";
+import { getSupabase } from "@/utils/supabase/client";
+import { AgentsTableType } from "@/types/AgentsTableType";
+
+const allAgentsColumns: { name: string; sortable: boolean }[] = [
+  { name: "Agent", sortable: true },
+  { name: "Role", sortable: true },
+  { name: "C", sortable: true },
+  { name: "Q", sortable: true },
+  { name: "E", sortable: true },
+  { name: "X", sortable: true },
+];
+
+const sortedAgentsColumns: { name: string; sortable: boolean }[] = [
+  { name: "Agent", sortable: true },
+  { name: "C", sortable: true },
+  { name: "Q", sortable: true },
+  { name: "E", sortable: true },
+  { name: "X", sortable: true },
+];
+
+const rolesList: {
+  role: string;
+  role_icon_url: string;
+  description: string;
+}[] = [
+  {
+    role: "Duelist",
+    role_icon_url:
+      "https://static.wikia.nocookie.net/valorant/images/f/fd/DuelistClassSymbol.png",
+    description: "Primary attackers. Gives the enemy a mouthful of knuckles.",
+  },
+  {
+    role: "Initiator",
+    role_icon_url:
+      "https://static.wikia.nocookie.net/valorant/images/7/77/InitiatorClassSymbol.png",
+    description:
+      "Teams rely on these disruptors to break open sites and start a push",
+  },
+  {
+    role: "Sentinel",
+    role_icon_url:
+      "https://static.wikia.nocookie.net/valorant/images/4/43/SentinelClassSymbol.png",
+    description: "Reinforce held territory to finish the job.",
+  },
+  {
+    role: "Controller",
+    role_icon_url:
+      "https://static.wikia.nocookie.net/valorant/images/0/04/ControllerClassSymbol.png",
+    description: "Shape the battlefield to fit the team's plans",
+  },
+];
 
 export default function AgentsPage() {
-  const allAgentsColumns = [
-    { name: "Agent", sortable: true },
-    { name: "Role", sortable: true },
-    { name: "C", sortable: true },
-    { name: "Q", sortable: true },
-    { name: "E", sortable: true },
-    { name: "X", sortable: true },
-  ];
+  const [agentsDataList, setAgentsDataList] = useState<AgentsTableType[]>([]);
+  const getAllAgents = async () => {
+    try {
+      const supabase = getSupabase();
+      const { data, error } = await supabase
+        .from("agents")
+        .select(`*, abilities(*),roles(*)`);
 
-  const sortedAgentsColumns = [
-    { name: "Agent", sortable: true },
-    { name: "C", sortable: true },
-    { name: "Q", sortable: true },
-    { name: "E", sortable: true },
-    { name: "X", sortable: true },
-  ];
+      if (error) {
+        console.error(error);
+      } else {
+        setAgentsDataList([data[0]]);
+        console.log([data[0]]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const rolesList = [
-    {
-      role: "Duelist",
-      role_icon_url:
-        "https://static.wikia.nocookie.net/valorant/images/f/fd/DuelistClassSymbol.png",
-      description: "Primary attackers. Gives the enemy a mouthful of knuckles.",
-    },
-    {
-      role: "Initiator",
-      role_icon_url:
-        "https://static.wikia.nocookie.net/valorant/images/7/77/InitiatorClassSymbol.png",
-      description:
-        "Teams rely on these disruptors to break open sites and start a push",
-    },
-    {
-      role: "Sentinel",
-      role_icon_url:
-        "https://static.wikia.nocookie.net/valorant/images/4/43/SentinelClassSymbol.png",
-      description: "Reinforce held territory to finish the job.",
-    },
-    {
-      role: "Controller",
-      role_icon_url:
-        "https://static.wikia.nocookie.net/valorant/images/0/04/ControllerClassSymbol.png",
-      description: "Shape the battlefield to fit the team's plans",
-    },
-  ];
+  useEffect(() => {
+    getAllAgents();
+  }, []);
 
   return (
     <section>
@@ -68,8 +98,12 @@ export default function AgentsPage() {
         <h1 className={title()}>Agents</h1>
       </div>
       <div>
-        <Tabs className="mt-4 flex justify-end" size="sm">
-          <Tab key={"allAgents"} title="All Agents">
+        <Tabs
+          aria-label="Agents tabs"
+          className="mt-4 flex justify-end"
+          size="sm"
+        >
+          <Tab key={"allAgents"} aria-label="All Agents" title="All Agents">
             <Table className="mt-4" fullWidth={true}>
               <TableHeader>
                 {allAgentsColumns.map((column) => (
@@ -79,12 +113,12 @@ export default function AgentsPage() {
                 ))}
               </TableHeader>
               <TableBody>
-                {agentsData.agentsData.map((agentObj) => (
+                {agentsDataList.map((agentObj) => (
                   <TableRow key={agentObj.id}>
                     <TableCell>
                       <div className="flex w-max items-center">
                         <User
-                          avatarProps={{ src: agentObj.agent_icon_url }}
+                          avatarProps={{ src: agentObj.icon_url }}
                           className="gap-4"
                           name={agentObj.name}
                         />
@@ -94,60 +128,116 @@ export default function AgentsPage() {
                       <div className="flex w-max items-center gap-4">
                         <Image
                           unoptimized
-                          alt={agentObj.role}
+                          alt={agentObj.roles.name}
                           height={24}
-                          src={agentObj.role_icon_url}
+                          src={agentObj.roles.icon_url}
                           width={24}
                         />
-                        <span>{agentObj.role}</span>
+                        <span>{agentObj.roles.name}</span>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex w-max items-center gap-4">
                         <Image
                           unoptimized
-                          alt={agentObj.c_ability.name}
+                          alt={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "C",
+                            )[0].name
+                          }
                           height={24}
-                          src={agentObj.c_ability.ability_icon_url}
+                          src={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "C",
+                            )[0].icon_url
+                          }
                           width={24}
                         />
-                        <span>{agentObj.c_ability.name}</span>
+                        <span>
+                          {
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "C",
+                            )[0].name
+                          }
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex w-max items-center gap-4">
                         <Image
                           unoptimized
-                          alt={agentObj.q_ability.name}
+                          alt={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "Q",
+                            )[0].name
+                          }
                           height={24}
-                          src={agentObj.q_ability.ability_icon_url}
+                          src={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "Q",
+                            )[0].icon_url
+                          }
                           width={24}
                         />
-                        <span>{agentObj.q_ability.name}</span>
+                        <span>
+                          {
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "Q",
+                            )[0].name
+                          }
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex w-max items-center gap-4">
                         <Image
                           unoptimized
-                          alt={agentObj.e_ability.name}
+                          alt={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "E",
+                            )[0].name
+                          }
                           height={24}
-                          src={agentObj.e_ability.ability_icon_url}
+                          src={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "E",
+                            )[0].icon_url
+                          }
                           width={24}
                         />
-                        <span>{agentObj.e_ability.name}</span>
+                        <span>
+                          {
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "E",
+                            )[0].name
+                          }
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex w-max items-center gap-4">
                         <Image
                           unoptimized
-                          alt={agentObj.x_ability.name}
+                          alt={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "X",
+                            )[0].name
+                          }
                           height={24}
-                          src={agentObj.x_ability.ability_icon_url}
+                          src={
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "X",
+                            )[0].icon_url
+                          }
                           width={24}
                         />
-                        <span>{agentObj.x_ability.name}</span>
+                        <span>
+                          {
+                            agentObj.abilities.filter(
+                              (a) => a.key_bind === "X",
+                            )[0].name
+                          }
+                        </span>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -157,10 +247,11 @@ export default function AgentsPage() {
           </Tab>
           <Tab
             key={"sortByRoles"}
+            aria-label="Sort by Roles"
             className="flex flex-col gap-10"
             title="Sort by Roles"
           >
-            <Card className="w-min">
+            <Card aria-label="Contents" className="w-min">
               <CardHeader>
                 Contents <ListIcon className="ml-2 h-4 w-4" />
               </CardHeader>
