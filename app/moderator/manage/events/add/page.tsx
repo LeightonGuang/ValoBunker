@@ -88,6 +88,7 @@ const AddEventPage = () => {
                   }
                 />
               </div>
+              
               <label htmlFor="event_icon_url">
                 Event Icon Url
                 <Input
@@ -98,7 +99,7 @@ const AddEventPage = () => {
                 />
               </label>
 
-              <label htmlFor="name">
+              <label htmlFor="type">
                 Type
                 <Input
                   name="type"
