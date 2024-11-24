@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,12 +8,14 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Chip, Image } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
+import { eventStatus } from "@/utils/eventStatus";
 import { getSupabase } from "@/utils/supabase/client";
 import { EventsTableType } from "@/types/EventsTableType";
-import { eventStatus } from "@/utils/eventStatus";
 
 const columnsHeader: { name: string; sortable: boolean }[] = [
   { name: "Event", sortable: true },
@@ -24,6 +25,7 @@ const columnsHeader: { name: string; sortable: boolean }[] = [
   { name: "Status", sortable: true },
 ];
 const EventsPage = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [eventsList, setEventsList] = useState<EventsTableType[]>([]);
 
@@ -56,7 +58,11 @@ const EventsPage = () => {
     <section>
       <h1 className={title()}>Events</h1>
       <div className="mt-6">
-        <Table aria-label="Events" selectionMode="single">
+        <Table
+          aria-label="Events"
+          selectionMode="single"
+          onRowAction={(key) => router.push(`/esports/events/${key}`)}
+        >
           <TableHeader>
             {columnsHeader.map((column, i) => (
               <TableColumn key={i}>{column.name}</TableColumn>
@@ -74,7 +80,7 @@ const EventsPage = () => {
               };
 
               return (
-                <TableRow key={event.id}>
+                <TableRow key={event.id} className="cursor-pointer">
                   <TableCell>
                     <div className="flex items-center">
                       <Image
