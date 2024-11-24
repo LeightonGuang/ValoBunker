@@ -3,8 +3,8 @@ export interface MatchesTableType {
   date_time: string;
   event_id: number;
   team1_id: number;
-  team1_score: number;
+  team1_game_score: number;
   team2_id: number;
-  team2_score: number;
+  team2_game_score: number;
   created_at: string;
 }
