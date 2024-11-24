@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { getSupabase } from "@/utils/supabase/client";
 import { PatchesTableType } from "@/types/PatchesTableType";
 import { EventsTableType } from "@/types/EventsTableType";
+import { eventStatus } from "@/utils/eventStatus";
 export default function Home() {
   const [patchNotesList, setPatchNotesList] = useState<PatchesTableType[]>([]);
   const [eventList, setEventList] = useState<EventsTableType[]>([]);
@@ -76,20 +77,6 @@ export default function Home() {
 
                 todayDate.setHours(0, 0, 0, 0);
 
-                const eventStartDate = eventObj.start_date
-                  ? new Date(eventObj.start_date)
-                  : "";
-                const eventEndDate = eventObj.end_date
-                  ? new Date(eventObj.end_date)
-                  : "";
-
-                const eventStatus =
-                  todayDate < eventStartDate
-                    ? "Upcoming"
-                    : eventStartDate < todayDate && todayDate <= eventEndDate
-                      ? "Ongoing"
-                      : eventEndDate < todayDate && "Ended";
-
                 return (
                   <ListboxItem
                     key={eventObj.id}
@@ -99,17 +86,29 @@ export default function Home() {
                           {eventObj.type}{" "}
                           <Chip
                             color={
-                              eventStatus === "Upcoming"
+                              eventStatus(
+                                eventObj.start_date,
+                                eventObj.end_date,
+                              ) === "Upcoming"
                                 ? "default"
-                                : eventStatus === "Ongoing"
+                                : eventStatus(
+                                      eventObj.start_date,
+                                      eventObj.end_date,
+                                    ) === "Ongoing"
                                   ? "success"
-                                  : eventStatus === "Ended"
+                                  : eventStatus(
+                                        eventObj.start_date,
+                                        eventObj.end_date,
+                                      ) === "Ended"
                                     ? "danger"
                                     : "default"
                             }
                             size="sm"
                           >
-                            {eventStatus}
+                            {eventStatus(
+                              eventObj.start_date,
+                              eventObj.end_date,
+                            )}
                           </Chip>
                         </span>
                         <span>{eventObj.name}</span>
