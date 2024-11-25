@@ -11,6 +11,7 @@ import {
   Listbox,
   ListboxItem,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { getSupabase } from "@/utils/supabase/client";
@@ -18,6 +19,7 @@ import { PatchesTableType } from "@/types/PatchesTableType";
 import { EventsTableType } from "@/types/EventsTableType";
 import { eventStatus } from "@/utils/eventStatus";
 export default function Home() {
+  const router = useRouter();
   const [patchNotesList, setPatchNotesList] = useState<PatchesTableType[]>([]);
   const [eventList, setEventList] = useState<EventsTableType[]>([]);
   const getAllPatchNotes = async () => {
@@ -67,11 +69,18 @@ export default function Home() {
   return (
     <section>
       <div className="flex flex-col gap-4 lg:flex-row">
-        <Card className="h-min w-full lg:order-2 lg:w-96">
+        <Card
+          aria-label="Upcoming Events"
+          className="h-min w-full lg:order-2 lg:w-96"
+        >
           <CardHeader>Upcoming Events</CardHeader>
           <Divider />
           <CardBody>
-            <Listbox aria-label="Events" items={eventList}>
+            <Listbox
+              aria-label="Events"
+              items={eventList}
+              onAction={(key) => router.push(`/esports/events/${key}`)}
+            >
               {eventList.map((eventObj, i) => {
                 const todayDate = new Date();
 
@@ -85,6 +94,7 @@ export default function Home() {
                         <span className="flex justify-between text-small text-white">
                           {eventObj.type}{" "}
                           <Chip
+                            className="border-none"
                             color={
                               eventStatus(
                                 eventObj.start_date,
@@ -104,6 +114,7 @@ export default function Home() {
                                     : "default"
                             }
                             size="sm"
+                            variant="dot"
                           >
                             {eventStatus(
                               eventObj.start_date,
@@ -130,7 +141,7 @@ export default function Home() {
             </Listbox>
           </CardBody>
         </Card>
-        <Card className="w-full lg:order-1">
+        <Card aria-label="News" className="w-full lg:order-1">
           <CardHeader className="text-large">News</CardHeader>
           <Divider />
           <CardBody>
