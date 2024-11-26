@@ -69,11 +69,13 @@ export default function Home() {
   return (
     <section>
       <div className="flex flex-col gap-4 lg:flex-row">
-        <Card
-          aria-label="Upcoming Events"
-          className="h-min w-full lg:order-2 lg:w-96"
-        >
-          <CardHeader>Upcoming Events</CardHeader>
+        <Card aria-label="Events" className="h-min w-full lg:order-2 lg:w-96">
+          <CardHeader
+            className="w-min cursor-pointer hover:underline"
+            onClick={() => router.push("/esports/events")}
+          >
+            Events
+          </CardHeader>
           <Divider />
           <CardBody>
             <Listbox
