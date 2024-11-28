@@ -81,7 +81,10 @@ const EditPatchPage = () => {
     <section>
       <Breadcrumbs aria-label="Breadcrumb">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
-        <BreadcrumbItem href="/moderator/manage/events">Events</BreadcrumbItem>
+        <BreadcrumbItem href="/moderator/manage/patches">
+          Patches
+        </BreadcrumbItem>
+        <BreadcrumbItem>Edit</BreadcrumbItem>
       </Breadcrumbs>
       <h1 className={title()}>Edit Patch Note</h1>
       <div className="mt-6 flex justify-center">
