@@ -32,7 +32,6 @@ const AddPatchPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data);
         router.push("/moderator/manage/patches");
       }
     } catch (error) {

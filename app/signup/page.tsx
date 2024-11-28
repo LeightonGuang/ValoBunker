@@ -2,7 +2,7 @@
 
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardBody,
@@ -63,10 +63,6 @@ const SignupPage = () => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    console.log(signUpForm);
-  }, [signUpForm]);
 
   return (
     <section className="mx-auto h-full w-full lg:mx-0 lg:flex lg:items-center">
