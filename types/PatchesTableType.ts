@@ -1,8 +1,8 @@
 export interface PatchesTableType {
   id: number;
-  patch_num: number;
-  act: number;
+  patch_num: string;
   episode: number;
+  act: number;
   banner_url: string;
   title: string;
   description: string;

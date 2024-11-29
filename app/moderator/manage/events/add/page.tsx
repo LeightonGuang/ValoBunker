@@ -16,11 +16,12 @@ import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
 
 interface AddEventFormType {
-  event_icon_url: string;
+  event_icon_url?: string;
   type: string;
   name: string;
   start_date?: string;
   end_date?: string;
+  prize_pool?: string;
   location: string;
 }
 
@@ -81,7 +82,7 @@ const AddEventPage = () => {
 
   return (
     <section>
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label="breadcrumb" className="mb-4">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem href="/moderator/manage/events">Events</BreadcrumbItem>
         <BreadcrumbItem>Add</BreadcrumbItem>
@@ -102,65 +103,64 @@ const AddEventPage = () => {
                 />
               </div>
 
-              <label htmlFor="event_icon_url">
-                Event Icon Url
-                <Input
-                  name="event_icon_url"
-                  placeholder="Event Icon Url"
-                  type="text"
-                  onChange={onAddEventFormChange}
-                />
-              </label>
+              <Input
+                label="Event Icon Url"
+                name="event_icon_url"
+                placeholder="Event Icon Url"
+                type="text"
+                onChange={onAddEventFormChange}
+              />
 
-              <label htmlFor="type">
-                Type
-                <Input
-                  name="type"
-                  placeholder="eg, Champions, Masters"
-                  type="text"
-                  onChange={onAddEventFormChange}
-                />
-              </label>
+              <Input
+                isRequired
+                label="Event Type"
+                name="type"
+                placeholder="eg. Champions, Masters, Game Changers"
+                type="text"
+                onChange={onAddEventFormChange}
+              />
 
-              <label htmlFor="name">
-                Event Name
-                <Input
-                  name="name"
-                  placeholder="eg, Berlin, Reykjavík, 2024"
-                  type="text"
-                  onChange={onAddEventFormChange}
-                />
-              </label>
+              <Input
+                isRequired
+                label="Event Name"
+                name="name"
+                placeholder="eg. Berlin, Reykjavík, 2024"
+                type="text"
+                onChange={onAddEventFormChange}
+              />
 
-              <label htmlFor="start_date">
-                Start Date
-                <Input
-                  name="start_date"
-                  placeholder="Start Date"
-                  type="date"
-                  onChange={onAddEventFormChange}
-                />
-              </label>
+              <Input
+                label="Start Date"
+                name="start_date"
+                placeholder="Start Date"
+                type="date"
+                onChange={onAddEventFormChange}
+              />
 
-              <label htmlFor="end_date">
-                End Date
-                <Input
-                  name="end_date"
-                  placeholder="End Date"
-                  type="date"
-                  onChange={onAddEventFormChange}
-                />
-              </label>
+              <Input
+                label="End Date"
+                name="end_date"
+                placeholder="End Date"
+                type="date"
+                onChange={onAddEventFormChange}
+              />
 
-              <label htmlFor="location">
-                Location
-                <Input
-                  name="location"
-                  placeholder="Location"
-                  type="text"
-                  onChange={onAddEventFormChange}
-                />
-              </label>
+              <Input
+                label="Prize Pool"
+                name="prize_pool"
+                placeholder="eg. US$500,000"
+                type="text"
+                onChange={onAddEventFormChange}
+              />
+
+              <Input
+                isRequired
+                label="Location"
+                name="location"
+                placeholder="eg. Los Angeles, New York"
+                type="text"
+                onChange={onAddEventFormChange}
+              />
 
               {errorMessage && (
                 <div className="text-[#ff0000]">{errorMessage}</div>

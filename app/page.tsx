@@ -11,12 +11,15 @@ import {
   Listbox,
   ListboxItem,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { PatchesTableType } from "@/types/PatchesTableType";
 import { EventsTableType } from "@/types/EventsTableType";
+import { eventStatus } from "@/utils/eventStatus";
 export default function Home() {
+  const router = useRouter();
   const [patchNotesList, setPatchNotesList] = useState<PatchesTableType[]>([]);
   const [eventList, setEventList] = useState<EventsTableType[]>([]);
   const getAllPatchNotes = async () => {
@@ -66,29 +69,24 @@ export default function Home() {
   return (
     <section>
       <div className="flex flex-col gap-4 lg:flex-row">
-        <Card className="h-min w-full lg:order-2 lg:w-96">
-          <CardHeader>Upcoming Events</CardHeader>
+        <Card aria-label="Events" className="h-min w-full lg:order-2 lg:w-96">
+          <CardHeader
+            className="w-min cursor-pointer hover:underline"
+            onClick={() => router.push("/esports/events")}
+          >
+            Events
+          </CardHeader>
           <Divider />
           <CardBody>
-            <Listbox aria-label="Events" items={eventList}>
+            <Listbox
+              aria-label="Events"
+              items={eventList}
+              onAction={(key) => router.push(`/esports/events/${key}`)}
+            >
               {eventList.map((eventObj, i) => {
                 const todayDate = new Date();
 
                 todayDate.setHours(0, 0, 0, 0);
-
-                const eventStartDate = eventObj.start_date
-                  ? new Date(eventObj.start_date)
-                  : "";
-                const eventEndDate = eventObj.end_date
-                  ? new Date(eventObj.end_date)
-                  : "";
-
-                const eventStatus =
-                  todayDate < eventStartDate
-                    ? "Upcoming"
-                    : eventStartDate < todayDate && todayDate <= eventEndDate
-                      ? "Ongoing"
-                      : eventEndDate < todayDate && "Ended";
 
                 return (
                   <ListboxItem
@@ -98,18 +96,32 @@ export default function Home() {
                         <span className="flex justify-between text-small text-white">
                           {eventObj.type}{" "}
                           <Chip
+                            className="border-none"
                             color={
-                              eventStatus === "Upcoming"
+                              eventStatus(
+                                eventObj.start_date,
+                                eventObj.end_date,
+                              ) === "Upcoming"
                                 ? "default"
-                                : eventStatus === "Ongoing"
+                                : eventStatus(
+                                      eventObj.start_date,
+                                      eventObj.end_date,
+                                    ) === "Ongoing"
                                   ? "success"
-                                  : eventStatus === "Ended"
+                                  : eventStatus(
+                                        eventObj.start_date,
+                                        eventObj.end_date,
+                                      ) === "Ended"
                                     ? "danger"
                                     : "default"
                             }
                             size="sm"
+                            variant="dot"
                           >
-                            {eventStatus}
+                            {eventStatus(
+                              eventObj.start_date,
+                              eventObj.end_date,
+                            )}
                           </Chip>
                         </span>
                         <span>{eventObj.name}</span>
@@ -120,6 +132,9 @@ export default function Home() {
                     startContent={
                       <Image
                         className="min-h-8 min-w-8"
+                        classNames={{
+                          img: "rounded-none",
+                        }}
                         height={32}
                         src={eventObj.event_icon_url}
                         width={32}
@@ -131,7 +146,7 @@ export default function Home() {
             </Listbox>
           </CardBody>
         </Card>
-        <Card className="w-full lg:order-1">
+        <Card aria-label="News" className="w-full lg:order-1">
           <CardHeader className="text-large">News</CardHeader>
           <Divider />
           <CardBody>
@@ -170,6 +185,7 @@ export default function Home() {
                       src={patchObj.banner_url}
                     />
                   }
+                  textValue={patchObj.title}
                   title={`${patchObj.patch_num} ${patchObj.title}`}
                 />
               ))}

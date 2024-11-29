@@ -62,7 +62,8 @@ export const signUp = async (
       password,
       options: {
         data: {
-          username,
+          name: username,
+          full_name: username,
         },
       },
     });
