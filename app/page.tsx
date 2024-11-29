@@ -140,6 +140,7 @@ export default function Home() {
                         width={32}
                       />
                     }
+                    textValue={eventObj.name}
                   />
                 );
               })}
