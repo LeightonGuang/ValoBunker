@@ -1,39 +1,43 @@
 "use client";
 
 import {
-  Navbar as NextUINavbar,
-  NavbarContent,
   NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
   NavbarItem,
+  NavbarBrand,
+  NavbarContent,
   NavbarMenuItem,
+  NavbarMenuToggle,
+  Navbar as NextUINavbar,
 } from "@nextui-org/navbar";
-import { useState } from "react";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-import { link as linkStyles } from "@nextui-org/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
 import {
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/react";
+import clsx from "clsx";
+import NextLink from "next/link";
+import { useState } from "react";
+import { Kbd } from "@nextui-org/kbd";
+import { Link } from "@nextui-org/link";
+import { Input } from "@nextui-org/input";
+import { link as linkStyles } from "@nextui-org/theme";
 
 import {
-  SearchIcon,
   MenuIcon,
   CloseIcon,
+  SearchIcon,
   ChevronDown,
 } from "@/components/icons";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { siteConfig } from "@/config/site";
+import { useUser } from "@/app/hook/useUser";
+import { logOut } from "@/app/actions/auth/logout/actions";
 
 export const Navbar = () => {
+  const { user, isLoadingUser } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const searchInput = (
     <Input
@@ -55,6 +59,19 @@ export const Navbar = () => {
       type="search"
     />
   );
+
+  const handleLogOut = async () => {
+    try {
+      const { error } = await logOut();
+
+      if (error) {
+        console.error(error);
+      }
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <NextUINavbar
@@ -118,6 +135,7 @@ export const Navbar = () => {
               ))}
             </DropdownMenu>
           </Dropdown>
+
           <Dropdown>
             <NavbarItem>
               <DropdownTrigger>
@@ -160,14 +178,52 @@ export const Navbar = () => {
           className="lg:hidden"
           icon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
         />
+
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden lg:flex lg:gap-4">
-          <Button as={Link} href="/login" variant="flat">
-            Login
-          </Button>
-          <Button as={Link} href="/signup" variant="flat">
-            Sign Up
-          </Button>
+
+        <NavbarItem className="hidden lg:block">
+          {isLoadingUser ? (
+            ""
+          ) : user?.user_metadata ? (
+            <Dropdown>
+              <DropdownTrigger className="hover:cursor-pointer hover:underline">
+                {user.user_metadata.name || "No Username"}
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Account"
+                disabledKeys={[user.user_metadata.name]}
+              >
+                <DropdownSection showDivider aria-label="Profile">
+                  <DropdownItem key={user.user_metadata.name}>
+                    {`Logged in as @${user.user_metadata.name}`}
+                  </DropdownItem>
+
+                  <DropdownItem key="settings" href="/settings">
+                    Settings
+                  </DropdownItem>
+                </DropdownSection>
+
+                <DropdownSection showDivider aria-label="Moderator">
+                  <DropdownItem key="moderator" href="/moderator/manage">
+                    Moderator
+                  </DropdownItem>
+                </DropdownSection>
+
+                <DropdownItem key="logout" onClick={handleLogOut}>
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <div className="flex gap-4">
+              <Button as={Link} href="/login" variant="flat">
+                Log in
+              </Button>
+              <Button as={Link} href="/signup" variant="flat">
+                Sign Up
+              </Button>
+            </div>
+          )}
         </NavbarItem>
       </NavbarContent>
 
@@ -253,26 +309,58 @@ export const Navbar = () => {
               ))}
             </DropdownMenu>
           </Dropdown>
-          <NavbarMenuItem>
-            <Link
-              className="w-full"
-              href="/login"
-              size="lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link
-              className="w-full"
-              href="/signup"
-              size="lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Sign up
-            </Link>
-          </NavbarMenuItem>
+
+          {isLoadingUser ? (
+            ""
+          ) : user?.user_metadata ? (
+            <>
+              <NavbarMenuItem>
+                <Link
+                  color={"foreground"}
+                  href="/moderator/manage"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Moderator
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link
+                  color={"foreground"}
+                  href="/settings"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Settings
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                {`@${user.user_metadata.name}` || "No Username"}
+              </NavbarMenuItem>
+            </>
+          ) : (
+            <>
+              <NavbarMenuItem>
+                <Link
+                  className="w-full"
+                  href="/login"
+                  size="lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              </NavbarMenuItem>
+
+              <NavbarMenuItem>
+                <Link
+                  className="w-full"
+                  href="/signup"
+                  size="lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign up
+                </Link>
+              </NavbarMenuItem>
+            </>
+          )}
         </div>
       </NavbarMenu>
     </NextUINavbar>
