@@ -3,12 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
+  Accordion,
+  AccordionItem,
   BreadcrumbItem,
   Breadcrumbs,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
+  Chip,
   Divider,
   Image,
 } from "@nextui-org/react";
@@ -34,7 +37,7 @@ const EventPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data[0]);
+        // console.log(data[0]);
         setEventData(data[0]);
       }
     } catch (error) {
@@ -51,9 +54,12 @@ const EventPage = () => {
   return (
     <section>
       <Breadcrumbs>
-        <BreadcrumbItem href="/esports">ESports</BreadcrumbItem>
+        <BreadcrumbItem href="/esports">Esports</BreadcrumbItem>
         <BreadcrumbItem href="/esports/events">Events</BreadcrumbItem>
-        <BreadcrumbItem>{`${eventData.type} ${eventData.name}`}</BreadcrumbItem>
+        <BreadcrumbItem>
+          <Image className="h-4 w-4" src={eventData.event_icon_url} />
+          {eventData.name ? `${eventData.type} ${eventData.name}` : "Event"}
+        </BreadcrumbItem>
       </Breadcrumbs>
       {!isLoading && (
         <Card className="mt-6">
@@ -84,20 +90,25 @@ const EventPage = () => {
               </div>
             </div>
           </CardHeader>
+
           <Divider />
+
           <CardBody>
-            <h2 className="text-xl">Qualified Teams</h2>
+            <h2 className="text-xl">Participating Teams</h2>
             <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-8">
               {eventData.event_participants.map((participant) => (
                 <Card key={participant.team_id} shadow="sm">
                   <CardHeader
-                    className="cursor-pointer whitespace-nowrap hover:underline"
+                    className="cursor-pointer whitespace-nowrap text-sm hover:underline"
                     onClick={() => {
                       router.push(`/esports/teams/${participant.team_id}`);
                     }}
                   >
                     {participant.teams.name}
                   </CardHeader>
+
+                  <Divider />
+
                   <CardBody>
                     <div className="flex justify-center">
                       <Image
@@ -108,16 +119,26 @@ const EventPage = () => {
                       />
                     </div>
                   </CardBody>
-                  <CardFooter>{participant.seeding}</CardFooter>
+
+                  <Divider />
+
+                  <CardFooter className="text-xs">
+                    {participant.seeding}
+                  </CardFooter>
                 </Card>
               ))}
             </div>
           </CardBody>
+
           <Divider />
-          <CardFooter className="flex flex-col">
-            <div>
+
+          <CardFooter className="overlfow-x-scroll">
+            <div className="overflow-x-auto lg:w-full">
               <h2>Matches</h2>
-              <ul className="flex w-full flex-col justify-center gap-4">
+              <Accordion
+                className="mb-4 mt-4 w-max lg:w-full"
+                variant="splitted"
+              >
                 {eventData.matches.map((match) => {
                   const team1 = eventData.event_participants.find(
                     (participant) => match.team1_id === participant.team_id,
@@ -128,58 +149,79 @@ const EventPage = () => {
                   );
 
                   return (
-                    <li key={match.id} className="flex gap-4 p-4">
-                      <div
-                        className="flex flex-row items-center gap-4"
-                        id="team1"
-                      >
-                        <Image
-                          className="h-8 w-8"
-                          classNames={{
-                            img: "rounded-none",
-                          }}
-                          src={team1?.teams.logo_url}
-                        />
-                        <div>{team1?.teams.name}</div>
-                      </div>
-                      <div className="flex items-center">
-                        <div
-                          className={`p-1 text-black ${
-                            match.team1_game_score > match.team2_game_score
-                              ? "bg-[#6FEE8D]"
-                              : "bg-[#ff7272]"
-                          }`}
-                        >
-                          {match.team1_game_score}
+                    <AccordionItem
+                      key={match.id}
+                      title={
+                        <div className="flex gap-4">
+                          <div className="flex w-full justify-between gap-4">
+                            <div
+                              className="flex flex-row items-center gap-4"
+                              id="team1"
+                            >
+                              <Image
+                                className="h-4 min-h-4 w-4 min-w-4 lg:h-8 lg:min-h-8 lg:w-8 lg:min-w-8"
+                                classNames={{
+                                  img: "rounded-none",
+                                }}
+                                src={team1?.teams.logo_url}
+                              />
+                              <span className="text-xs lg:text-sm">
+                                {team1?.teams.name}
+                              </span>
+                            </div>
+                            <div className="flex items-center">
+                              <Chip
+                                className={`p-1 text-black ${
+                                  match.team1_game_score >
+                                  match.team2_game_score
+                                    ? "bg-[#6FEE8D]"
+                                    : "bg-[#ff7272]"
+                                }`}
+                                radius="sm"
+                              >
+                                {match.team1_game_score}
+                              </Chip>
+                              <span>-</span>
+                              <Chip
+                                className={`p-1 text-black ${
+                                  match.team2_game_score >
+                                  match.team1_game_score
+                                    ? "bg-[#6FEE8D]"
+                                    : "bg-[#ff7272]"
+                                }`}
+                                radius="sm"
+                              >
+                                {match.team2_game_score}
+                              </Chip>
+                            </div>
+                            <div
+                              className="flex flex-row items-center gap-4"
+                              id="team2"
+                            >
+                              <span className="text-xs lg:text-sm">
+                                {team2?.teams.name}
+                              </span>
+                              <Image
+                                className="h-4 min-h-4 w-4 min-w-4 lg:h-8 lg:min-h-8 lg:w-8 lg:min-w-8"
+                                classNames={{
+                                  img: "rounded-none",
+                                }}
+                                src={team2?.teams.logo_url}
+                              />
+                            </div>
+                          </div>
+                          <Divider orientation="vertical" />
+                          <span className="hidden text-xs lg:block">
+                            {match.series}
+                          </span>
                         </div>
-                        <span>-</span>
-                        <div
-                          className={`p-1 text-black ${
-                            match.team2_game_score > match.team1_game_score
-                              ? "bg-[#6FEE8D]"
-                              : "bg-[#ff7272]"
-                          }`}
-                        >
-                          {match.team2_game_score}
-                        </div>
-                      </div>
-                      <div
-                        className="flex flex-row items-center gap-4"
-                        id="team2"
-                      >
-                        <span>{team2?.teams.name}</span>
-                        <Image
-                          className="h-8 w-8"
-                          classNames={{
-                            img: "rounded-none",
-                          }}
-                          src={team2?.teams.logo_url}
-                        />
-                      </div>
-                    </li>
+                      }
+                    >
+                      Maps
+                    </AccordionItem>
                   );
                 })}
-              </ul>
+              </Accordion>
             </div>
           </CardFooter>
         </Card>
