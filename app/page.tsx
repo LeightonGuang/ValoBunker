@@ -132,6 +132,9 @@ export default function Home() {
                     startContent={
                       <Image
                         className="min-h-8 min-w-8"
+                        classNames={{
+                          img: "rounded-none",
+                        }}
                         height={32}
                         src={eventObj.event_icon_url}
                         width={32}
@@ -182,6 +185,7 @@ export default function Home() {
                       src={patchObj.banner_url}
                     />
                   }
+                  textValue={patchObj.title}
                   title={`${patchObj.patch_num} ${patchObj.title}`}
                 />
               ))}
