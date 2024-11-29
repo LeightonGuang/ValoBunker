@@ -8,6 +8,8 @@ import { title } from "@/components/primitives";
 const buttonList = [
   { name: "Agents", href: "/moderator/manage/agents" },
   { name: "Events", href: "/moderator/manage/events" },
+  { name: "Patches", href: "/moderator/manage/patches" },
+  { name: "Players", href: "/moderator/manage/players" },
   { name: "Teams", href: "/moderator/manage/teams" },
 ];
 const ManagePage = () => {
@@ -20,7 +22,7 @@ const ManagePage = () => {
         <div className="grid grid-cols-2 gap-4">
           {buttonList.map((button) => (
             <Button
-              className="h-64 w-64"
+              className="h-32 w-32"
               key={button.name}
               color="default"
               onClick={() => {
