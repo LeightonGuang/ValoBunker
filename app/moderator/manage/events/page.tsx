@@ -16,6 +16,7 @@ import {
   Image,
   Dropdown,
   ModalBody,
+  Selection,
   ModalFooter,
   ModalContent,
   DropdownItem,
@@ -29,7 +30,8 @@ import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
 import { EventsTableType } from "@/types/EventsTableType";
-import { EllipsisIcon } from "@/components/icons";
+import { ChevronDown, EllipsisIcon } from "@/components/icons";
+import { eventStatus } from "@/utils/eventStatus";
 
 const patchColumns: { name: string; sortable: boolean }[] = [
   {
@@ -46,19 +48,22 @@ const patchColumns: { name: string; sortable: boolean }[] = [
   { name: "Actions", sortable: false },
 ];
 
+const statusOptions = [
+  { name: "Ended", uid: "ended" },
+  { name: "Ongoing", uid: "ongoing" },
+  { name: "Upcoming", uid: "upcoming" },
+  { name: "TBD", uid: "tbd" },
+];
+
 const ManageEventsPage = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [eventsList, setEventsList] = useState<EventsTableType[]>([]);
-  const [eventToDelete, setEventToDelete] = useState<EventsTableType>({
-    id: 0,
-    type: "",
-    name: "",
-    event_icon_url: "",
-    location: "",
-    start_date: "",
-    end_date: "",
-    created_at: "",
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  const [eventToDelete, setEventToDelete] = useState<EventsTableType>(
+    {} as EventsTableType,
+  );
+  const [selectedStatus, setSelectedStatus] = useState<Selection>(
+    new Set(["ongoing", "upcoming", "tbd"]),
+  );
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const router = useRouter();
@@ -80,6 +85,22 @@ const ManageEventsPage = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const filteredItems = () => {
+    let filteredEvents = [...eventsList];
+
+    if (selectedStatus !== "all" && Array.from(selectedStatus).length > 0) {
+      filteredEvents = filteredEvents.filter((event) =>
+        Array.from(selectedStatus).some(
+          (status) =>
+            status ===
+            eventStatus(event.start_date, event.end_date).toLowerCase(),
+        ),
+      );
+    }
+
+    return filteredEvents;
   };
 
   const deleteEventById = async (id: number) => {
@@ -111,15 +132,59 @@ const ManageEventsPage = () => {
         <span className="text-small text-default-400">
           Total {eventsList.length} Events
         </span>
-        <Button
-          color="primary"
-          endContent={<span>+</span>}
-          onClick={() => {
-            router.push("/moderator/manage/events/add");
-          }}
-        >
-          Add Event
-        </Button>
+        <div className="flex gap-2">
+          <Dropdown>
+            <DropdownTrigger className="hidden sm:flex">
+              <Button
+                endContent={<ChevronDown fill="currentColor" />}
+                variant="flat"
+              >
+                Status
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label="Table Columns"
+              closeOnSelect={false}
+              selectedKeys={selectedStatus}
+              selectionMode="multiple"
+              onSelectionChange={setSelectedStatus}
+            >
+              {statusOptions.map((status) => (
+                <DropdownItem
+                  key={status.uid}
+                  className="capitalize"
+                  textValue={status.uid}
+                >
+                  {
+                    <Chip
+                      color={
+                        status.uid === "ended"
+                          ? "danger"
+                          : status.uid === "upcoming"
+                            ? "default"
+                            : status.uid === "ongoing"
+                              ? "success"
+                              : "default"
+                      }
+                    >
+                      {status.name}
+                    </Chip>
+                  }
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Button
+            color="primary"
+            endContent={<span>+</span>}
+            onClick={() => {
+              router.push("/moderator/manage/events/add");
+            }}
+          >
+            Add Event
+          </Button>
+        </div>
       </div>
     );
   };
@@ -130,7 +195,7 @@ const ManageEventsPage = () => {
 
   return (
     <section>
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs aria-label="breadcrumb" className="mb-4">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Events</BreadcrumbItem>
       </Breadcrumbs>
@@ -149,7 +214,7 @@ const ManageEventsPage = () => {
           </TableHeader>
 
           <TableBody isLoading={isLoading}>
-            {eventsList.map((event) => {
+            {filteredItems().map((event) => {
               const currentDate = new Date();
 
               currentDate.setHours(0, 0, 0, 0);
@@ -198,23 +263,19 @@ const ManageEventsPage = () => {
                   <TableCell>
                     <Chip
                       color={
-                        currentDate < startDate
-                          ? "default"
-                          : (startDate < currentDate &&
-                                currentDate <= endDate) ||
-                              (startDate < currentDate && endDate === "")
-                            ? "success"
-                            : currentDate > endDate
-                              ? "danger"
+                        eventStatus(event.start_date, event.end_date) ===
+                        "Ended"
+                          ? "danger"
+                          : eventStatus(event.start_date, event.end_date) ===
+                              "Upcoming"
+                            ? "default"
+                            : eventStatus(event.start_date, event.end_date) ===
+                                "Ongoing"
+                              ? "success"
                               : "default"
                       }
                     >
-                      {currentDate < startDate
-                        ? "Upcoming"
-                        : (startDate < currentDate && currentDate <= endDate) ||
-                            (startDate < currentDate && endDate === "")
-                          ? "Ongoing"
-                          : endDate < currentDate && "Ended"}
+                      {eventStatus(event.start_date, event.end_date)}
                     </Chip>
                   </TableCell>
 
