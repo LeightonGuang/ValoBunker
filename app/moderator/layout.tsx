@@ -1,8 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { User } from "@supabase/supabase-js";
+import { useEffect, useState, useCallback } from "react";
 
 import { getSupabase } from "@/utils/supabase/client";
 
@@ -13,75 +12,68 @@ export default function ModeratorLayout({
 }) {
   const router = useRouter();
   const supabase = getSupabase();
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
+
   const [hasRole, setHasRole] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchUser = async () => {
-    const { data, error } = await supabase.auth.getSession();
+  const fetchUserAndRole = useCallback(async () => {
+    try {
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
 
-    if (error) {
-      console.error(error);
-    }
+      if (sessionError) {
+        console.error("Error fetching session:", sessionError);
+        setIsLoading(false);
 
-    if (!data.session?.user) {
-      setUser(null);
-
-      return;
-    }
-
-    setUser(data.session?.user);
-  };
-
-  const fetchUserRole = async () => {
-    if (!user) {
-      setIsLoading(false);
-
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from("user_roles")
-      .select(`*`)
-      .eq("user_uid", user.id);
-
-    if (error) {
-      console.error(error);
-    }
-
-    if (data) {
-      console.log(data);
-      if (data[0].role === "admin" || data[0].role === "moderator") {
-        setHasRole(true);
+        return;
       }
+
+      const user = sessionData.session?.user;
+
+      if (!user) {
+        router.push("/");
+
+        return;
+      }
+
+      const { data: roleData, error: roleError } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_uid", user.id);
+
+      if (roleError) {
+        console.error("Error fetching roles:", roleError);
+        setIsLoading(false);
+
+        return;
+      }
+
+      if (
+        roleData?.length &&
+        (roleData[0].role === "admin" || roleData[0].role === "moderator")
+      ) {
+        setHasRole(true);
+      } else {
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
-  };
+  }, [router, supabase]);
 
   useEffect(() => {
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    fetchUserRole();
-  }, [user]);
-
-  useEffect(() => {
-    console.log("isLoading, hasRole", isLoading, hasRole);
-    if (!isLoading && !hasRole) {
-      router.push("/");
-    }
-  }, [isLoading, hasRole]);
+    fetchUserAndRole();
+  }, [fetchUserAndRole]);
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-4">
-      {!isLoading && hasRole ? (
-        <div className="w-full">{children}</div>
-      ) : !isLoading && !hasRole ? (
-        <div>Redirecting...</div>
-      ) : (
+      {isLoading ? (
         <div>Loading...</div>
-      )}
+      ) : hasRole ? (
+        <div className="w-full">{children}</div>
+      ) : null}
     </div>
   );
 }
