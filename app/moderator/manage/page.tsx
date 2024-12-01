@@ -11,6 +11,7 @@ const buttonList = [
   { name: "Patches", href: "/moderator/manage/patches" },
   { name: "Players", href: "/moderator/manage/players" },
   { name: "Teams", href: "/moderator/manage/teams" },
+  { name: "Users", href: "/moderator/manage/users" },
 ];
 const ManagePage = () => {
   const router = useRouter();
