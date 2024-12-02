@@ -35,9 +35,9 @@ export const siteConfig = {
 
   dropdownEsports: [
     {
-      label: "Teams",
-      href: "/esports/teams",
-      description: "Teams playing in the VCTs",
+      label: "Events",
+      href: "/esports/events",
+      description: "Valorant esports events",
     },
     {
       label: "Players",
@@ -45,9 +45,9 @@ export const siteConfig = {
       description: "All Valorant pro players",
     },
     {
-      label: "Events",
-      href: "/esports/events",
-      description: "Valorant esports events",
+      label: "Teams",
+      href: "/esports/teams",
+      description: "Teams playing in the VCTs",
     },
   ],
 };
