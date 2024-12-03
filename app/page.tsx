@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import {
   Card,
   CardBody,
@@ -14,10 +15,11 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { getSupabase } from "@/utils/supabase/client";
-import { PatchesTableType } from "@/types/PatchesTableType";
-import { EventsTableType } from "@/types/EventsTableType";
 import { eventStatus } from "@/utils/eventStatus";
+import { getSupabase } from "@/utils/supabase/client";
+import { EventsTableType } from "@/types/EventsTableType";
+import { PatchesTableType } from "@/types/PatchesTableType";
+
 export default function Home() {
   const router = useRouter();
   const [patchNotesList, setPatchNotesList] = useState<PatchesTableType[]>([]);
@@ -84,9 +86,16 @@ export default function Home() {
               onAction={(key) => router.push(`/esports/events/${key}`)}
             >
               {eventList.map((eventObj, i) => {
-                const todayDate = new Date();
+                // const todayDate = new Date().setHours(0, 0, 0, 0);
 
-                todayDate.setHours(0, 0, 0, 0);
+                const formatDate = (date: Date) => {
+                  return date.toLocaleDateString("en-GB");
+                };
+
+                const startDate = formatDate(
+                  new Date(eventObj.start_date ?? ""),
+                );
+                const endDate = formatDate(new Date(eventObj.end_date ?? ""));
 
                 return (
                   <ListboxItem
@@ -125,7 +134,9 @@ export default function Home() {
                           </Chip>
                         </span>
                         <span>{eventObj.name}</span>
-                        <span className="whitespace-nowrap">{`${eventObj.start_date} - ${eventObj.end_date}`}</span>
+                        <span className="whitespace-nowrap">
+                          {startDate} - {endDate}
+                        </span>
                       </div>
                     }
                     showDivider={i !== eventList.length - 1}
