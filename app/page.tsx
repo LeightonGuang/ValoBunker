@@ -93,7 +93,12 @@ export default function Home() {
                 {newsList.map((newsObj, i) => (
                   <ListboxItem
                     key={newsObj.id}
-                    description={newsObj.content}
+                    className="flex-col justify-center text-center lg:flex-row lg:justify-start lg:text-left"
+                    description={
+                      <div className="max-h-16 overflow-hidden overflow-ellipsis">
+                        {newsObj.content}
+                      </div>
+                    }
                     endContent={
                       <span className="h-max whitespace-nowrap text-tiny text-foreground-500">
                         {new Intl.DateTimeFormat("en-GB", {
