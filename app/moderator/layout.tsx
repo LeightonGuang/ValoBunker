@@ -4,15 +4,27 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 
+import { TeamIcon, UserIcon } from "@/components/icons";
 import { getSupabase } from "@/utils/supabase/client";
+import { IconWrapper } from "@/components/IconWrapper";
 
 const menuList = [
   { name: "Agents", href: "/moderator/manage/agents" },
   { name: "Events", href: "/moderator/manage/events" },
   { name: "Patches", href: "/moderator/manage/patches" },
   { name: "Players", href: "/moderator/manage/players" },
-  { name: "Teams", href: "/moderator/manage/teams" },
-  { name: "Users", href: "/moderator/manage/users" },
+  {
+    name: "Teams",
+    href: "/moderator/manage/teams",
+    icon: <TeamIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
+  {
+    name: "Users",
+    href: "/moderator/manage/users",
+    icon: <UserIcon />,
+    iconClassName: "bg-warning/10 text-warning",
+  },
 ];
 
 export default function ModeratorLayout({
@@ -84,14 +96,21 @@ export default function ModeratorLayout({
       ) : hasRole ? (
         <div className="w-full">
           <div className="flex flex-col gap-4 lg:flex-row">
-            <div className="lg-w-1/4 w-48">
+            <div className="w-full lg:w-48">
               <Listbox
                 aria-label="Manage"
-                className="max-w-[300px] gap-0 overflow-visible rounded-medium bg-content1 shadow-small dark:divide-default-100/80"
+                className="gap-0 overflow-visible rounded-medium bg-content1 shadow-small dark:divide-default-100/80"
                 onAction={(key) => router.push(menuList[key as number].href)}
               >
                 {menuList.map((button, i) => (
-                  <ListboxItem key={i} startContent={}>
+                  <ListboxItem
+                    key={i}
+                    startContent={
+                      <IconWrapper className={button.iconClassName}>
+                        {button.icon}
+                      </IconWrapper>
+                    }
+                  >
                     {button.name}
                   </ListboxItem>
                 ))}
