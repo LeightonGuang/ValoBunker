@@ -19,7 +19,6 @@ import { getSupabase } from "@/utils/supabase/client";
 import { NewsTableType } from "@/types/NewsTableType";
 import { EventsTableType } from "@/types/EventsTableType";
 import { PatchesTableType } from "@/types/PatchesTableType";
-import { Span } from "next/dist/trace";
 
 export default function Home() {
   const router = useRouter();
@@ -86,10 +85,20 @@ export default function Home() {
           id="main-content"
         >
           <Card aria-label="News">
-            <CardHeader className="text-large">News</CardHeader>
+            <CardHeader
+              className="w-min cursor-pointer text-large hover:underline"
+              onClick={() => router.push("/news")}
+            >
+              News
+            </CardHeader>
             <Divider />
             <CardBody>
-              <Listbox aria-label="News">
+              <Listbox
+                aria-label="News"
+                onAction={(key) => {
+                  router.push(`/news/${key}`);
+                }}
+              >
                 {newsList.map((newsObj, i) => (
                   <ListboxItem
                     key={newsObj.id}
@@ -111,6 +120,7 @@ export default function Home() {
                     showDivider={i !== newsList.length - 1}
                     startContent={
                       <Image
+                        alt={newsObj.title}
                         className="h-12 min-h-12 w-12 min-w-12 rounded-none"
                         src={newsObj.img_url}
                       />
