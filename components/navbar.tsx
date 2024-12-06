@@ -204,7 +204,7 @@ export const Navbar = () => {
                 </DropdownSection>
 
                 <DropdownSection showDivider aria-label="Moderator">
-                  <DropdownItem key="moderator" href="/moderator/manage">
+                  <DropdownItem key="moderator" href="/moderator/manage/agents">
                     Moderator
                   </DropdownItem>
                 </DropdownSection>
@@ -317,7 +317,7 @@ export const Navbar = () => {
               <NavbarMenuItem>
                 <Link
                   color={"foreground"}
-                  href="/moderator/manage"
+                  href="/moderator/manage/agents"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Moderator
