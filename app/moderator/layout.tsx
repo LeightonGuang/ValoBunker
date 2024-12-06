@@ -2,8 +2,18 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
+import { Listbox, ListboxItem } from "@nextui-org/listbox";
 
 import { getSupabase } from "@/utils/supabase/client";
+
+const menuList = [
+  { name: "Agents", href: "/moderator/manage/agents" },
+  { name: "Events", href: "/moderator/manage/events" },
+  { name: "Patches", href: "/moderator/manage/patches" },
+  { name: "Players", href: "/moderator/manage/players" },
+  { name: "Teams", href: "/moderator/manage/teams" },
+  { name: "Users", href: "/moderator/manage/users" },
+];
 
 export default function ModeratorLayout({
   children,
@@ -72,7 +82,24 @@ export default function ModeratorLayout({
       {isLoading ? (
         <div>Loading...</div>
       ) : hasRole ? (
-        <div className="w-full">{children}</div>
+        <div className="w-full">
+          <div className="flex flex-col gap-4 lg:flex-row">
+            <div className="lg-w-1/4 w-48">
+              <Listbox
+                aria-label="Manage"
+                className="max-w-[300px] gap-0 overflow-visible rounded-medium bg-content1 shadow-small dark:divide-default-100/80"
+                onAction={(key) => router.push(menuList[key as number].href)}
+              >
+                {menuList.map((button, i) => (
+                  <ListboxItem key={i} startContent={}>
+                    {button.name}
+                  </ListboxItem>
+                ))}
+              </Listbox>
+            </div>
+            <div>{children}</div>
+          </div>
+        </div>
       ) : null}
     </div>
   );
