@@ -112,7 +112,11 @@ const ManageAgentsPage = () => {
                           base: "bg-transparent w-6 h-6",
                         },
                       }}
-                      name={findObjectByKeyBind(agent.abilities, "C")?.name}
+                      name={
+                        <span className="whitespace-nowrap">
+                          {findObjectByKeyBind(agent.abilities, "C")?.name}
+                        </span>
+                      }
                     />
                   </TableCell>
 
@@ -125,7 +129,11 @@ const ManageAgentsPage = () => {
                           base: "bg-transparent w-6 h-6",
                         },
                       }}
-                      name={findObjectByKeyBind(agent.abilities, "Q")?.name}
+                      name={
+                        <span className="whitespace-nowrap">
+                          {findObjectByKeyBind(agent.abilities, "Q")?.name}
+                        </span>
+                      }
                     />
                   </TableCell>
 
@@ -138,7 +146,11 @@ const ManageAgentsPage = () => {
                           base: "bg-transparent w-6 h-6",
                         },
                       }}
-                      name={findObjectByKeyBind(agent.abilities, "E")?.name}
+                      name={
+                        <span className="whitespace-nowrap">
+                          {findObjectByKeyBind(agent.abilities, "E")?.name}
+                        </span>
+                      }
                     />
                   </TableCell>
 
@@ -151,7 +163,11 @@ const ManageAgentsPage = () => {
                           base: "bg-transparent w-6 h-6",
                         },
                       }}
-                      name={findObjectByKeyBind(agent.abilities, "X")?.name}
+                      name={
+                        <span className="whitespace-nowrap">
+                          {findObjectByKeyBind(agent.abilities, "X")?.name}
+                        </span>
+                      }
                     />
                   </TableCell>
 
