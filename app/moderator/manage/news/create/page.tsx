@@ -36,7 +36,7 @@ const CreateNewsPage = () => {
 
         return;
       } else {
-        router.push("/moderator/manage/agents");
+        router.push("/moderator/manage/news");
       }
     } catch (error) {
       console.error(error);
