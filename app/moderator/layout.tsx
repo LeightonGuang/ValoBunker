@@ -11,6 +11,7 @@ import { IconWrapper } from "@/components/IconWrapper";
 const menuList = [
   { name: "Agents", href: "/moderator/manage/agents" },
   { name: "Events", href: "/moderator/manage/events" },
+  { name: "News", href: "/moderator/manage/news" },
   { name: "Patches", href: "/moderator/manage/patches" },
   { name: "Players", href: "/moderator/manage/players" },
   {
