@@ -11,6 +11,7 @@ import {
 } from "@nextui-org/navbar";
 import {
   Button,
+  Divider,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -84,7 +85,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="max-w-fit gap-3">
           <NextLink className="flex items-center justify-start gap-1" href="/">
-            <p className="text-inherit font-bold">Valo Bunker</p>
+            <p className="text-inherit text-lg font-bold">Valo Bunker</p>
           </NextLink>
         </NavbarBrand>
         <div className="ml-2 hidden justify-start gap-4 lg:flex">
@@ -107,7 +108,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  className="p-0 text-[1rem] data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -141,7 +142,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] text-[#ECEFEF]"
+                  className="p-0 text-[1rem] data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -248,7 +249,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="h-7 p-0 text-[1.125rem] leading-none text-[#ECEFEF]"
+                  className="h-7 p-0 text-[1.125rem] leading-none data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -281,7 +282,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="h-7 w-full justify-start p-0 text-left text-[1.125rem] text-[#ECEFEF]"
+                  className="h-7 w-full justify-start p-0 text-left text-[1.125rem] data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -315,6 +316,7 @@ export const Navbar = () => {
           ) : user?.user_metadata ? (
             <>
               <NavbarMenuItem>
+                <Divider />
                 <Link
                   color={"foreground"}
                   href="/moderator/manage/agents"
@@ -323,6 +325,9 @@ export const Navbar = () => {
                   Moderator
                 </Link>
               </NavbarMenuItem>
+
+              <Divider />
+
               <NavbarMenuItem>
                 <Link
                   color={"foreground"}
@@ -332,6 +337,7 @@ export const Navbar = () => {
                   Settings
                 </Link>
               </NavbarMenuItem>
+
               <NavbarMenuItem>
                 {`@${user.user_metadata.name}` || "No Username"}
               </NavbarMenuItem>
