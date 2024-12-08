@@ -16,6 +16,12 @@ const CreateNewsPage = () => {
     news_date: "",
   } as NewsTableType);
 
+  const [newsFormErrors, setNewsFormErrors] = useState({
+    title: false,
+    content: false,
+    news_date: false,
+  });
+
   const onNewsFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
@@ -64,6 +70,8 @@ const CreateNewsPage = () => {
 
               <Input
                 isRequired
+                errorMessage="Please enter a title"
+                isInvalid={newsFormErrors.title}
                 label="Title"
                 name="title"
                 placeholder="Title"
@@ -74,6 +82,8 @@ const CreateNewsPage = () => {
 
               <Textarea
                 isRequired
+                errorMessage="Please enter some content"
+                isInvalid={newsFormErrors.content}
                 label="Content"
                 name="content"
                 placeholder="Content"
@@ -84,6 +94,8 @@ const CreateNewsPage = () => {
 
               <Input
                 isRequired
+                errorMessage="Please enter the news date"
+                isInvalid={newsFormErrors.news_date}
                 label="News Date"
                 name="news_date"
                 type="date"

@@ -97,7 +97,7 @@ export default function ModeratorLayout({
       ) : hasRole ? (
         <div className="w-full">
           <div className="flex flex-col gap-4 lg:flex-row">
-            <div className="w-full lg:w-48">
+            <div className="flex h-[80dvh] w-full items-center lg:w-48">
               <Listbox
                 aria-label="Manage"
                 className="gap-0 overflow-visible rounded-medium bg-content1 shadow-small dark:divide-default-100/80"
@@ -117,7 +117,7 @@ export default function ModeratorLayout({
                 ))}
               </Listbox>
             </div>
-            <div>{children}</div>
+            <div className="flex w-full justify-center">{children}</div>
           </div>
         </div>
       ) : null}
