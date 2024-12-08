@@ -84,7 +84,9 @@ const ManagePatchesPage = () => {
 
   const topContent = () => (
     <div className="flex items-center justify-between">
-      <span>Total {patchesData.length} Patches</span>
+      <span className="text-small text-default-400">
+        Total {patchesData.length} Patches
+      </span>
       <Button
         color="primary"
         endContent={<span>+</span>}
@@ -94,6 +96,7 @@ const ManagePatchesPage = () => {
       </Button>
     </div>
   );
+
   useEffect(() => {
     fetchPatches();
   }, []);
@@ -104,7 +107,9 @@ const ManagePatchesPage = () => {
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Patches</BreadcrumbItem>
       </Breadcrumbs>
+
       <h1 className={title()}>Manage Patches</h1>
+
       <div className="mt-6">
         <Table
           aria-label="Patches"
@@ -123,7 +128,9 @@ const ManagePatchesPage = () => {
                 <TableCell className="whitespace-nowrap">
                   {new Date(patch.release_date).toLocaleDateString("en-GB")}
                 </TableCell>
+
                 <TableCell>{patch.patch_num}</TableCell>
+
                 <TableCell>
                   <div className="flex items-center gap-4">
                     <Image
@@ -135,6 +142,7 @@ const ManagePatchesPage = () => {
                     </p>
                   </div>
                 </TableCell>
+
                 <TableCell>
                   <Dropdown>
                     <DropdownTrigger>
@@ -180,6 +188,7 @@ const ManagePatchesPage = () => {
               <ModalBody>{`Are you sure you want to delete patch ${patchToDelete.patch_num}?`}</ModalBody>
               <ModalFooter>
                 <Button onClick={onClose}>Cancel</Button>
+
                 <Button
                   color="danger"
                   onClick={() => {
@@ -189,7 +198,7 @@ const ManagePatchesPage = () => {
                 >
                   Delete
                 </Button>
-              </ModalFooter>{" "}
+              </ModalFooter>
             </>
           )}
         </ModalContent>
