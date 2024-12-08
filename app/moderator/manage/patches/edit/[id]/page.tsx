@@ -35,7 +35,6 @@ const EditPatchPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data[0]);
         setPatchForm(data[0]);
       }
     } catch (error) {
@@ -56,7 +55,7 @@ const EditPatchPage = () => {
   const handlePatchNoteUpdateSubmit = async () => {
     try {
       const supabase = getSupabase();
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("patches")
         .update(patchForm)
         .eq("id", patchId)
@@ -65,7 +64,7 @@ const EditPatchPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data);
+        // console.log(data);
         router.push("/moderator/manage/patches");
       }
     } catch (error) {
