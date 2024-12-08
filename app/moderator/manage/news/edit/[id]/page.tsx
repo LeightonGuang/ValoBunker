@@ -33,7 +33,6 @@ const EditNewsPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data[0]);
         setNewsFormData(data[0]);
       }
     } catch (error) {
