@@ -43,7 +43,12 @@ const AllNewsPage = () => {
       <Card>
         <CardHeader className="text-large">News</CardHeader>
         <Divider />
-        <Listbox aria-label="News">
+        <Listbox
+          aria-label="News"
+          onAction={(key) => {
+            router.push(`/news/${key}`);
+          }}
+        >
           {newsData.map((news) => (
             <ListboxItem
               key={news.id}
