@@ -24,6 +24,7 @@ import { useState } from "react";
 import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
 import { Input } from "@nextui-org/input";
+import { useRouter } from "next/navigation";
 import { link as linkStyles } from "@nextui-org/theme";
 
 import {
@@ -38,6 +39,7 @@ import { useUser } from "@/app/hook/useUser";
 import { logOut } from "@/app/actions/auth/logout/actions";
 
 export const Navbar = () => {
+  const router = useRouter();
   const { user, isLoadingUser } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const searchInput = (
@@ -129,7 +131,10 @@ export const Navbar = () => {
                   key={i}
                   description={abilityType.description}
                   href={abilityType.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push(abilityType.href);
+                  }}
                 >
                   {abilityType.label}
                 </DropdownItem>
@@ -163,7 +168,10 @@ export const Navbar = () => {
                   key={esport.label}
                   description={esport.description}
                   href={esport.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push(esport.href);
+                  }}
                 >
                   {esport.label}
                 </DropdownItem>
@@ -199,13 +207,21 @@ export const Navbar = () => {
                     {`Logged in as @${user.user_metadata.name}`}
                   </DropdownItem>
 
-                  <DropdownItem key="settings" href="/settings">
+                  <DropdownItem
+                    key="settings"
+                    href="/settings"
+                    onClick={() => router.push("/settings")}
+                  >
                     Settings
                   </DropdownItem>
                 </DropdownSection>
 
                 <DropdownSection showDivider aria-label="Moderator">
-                  <DropdownItem key="moderator" href="/moderator/manage/agents">
+                  <DropdownItem
+                    key="moderator"
+                    href="/moderator/manage/agents"
+                    onClick={() => router.push("/moderator/manage/agents")}
+                  >
                     Moderator
                   </DropdownItem>
                 </DropdownSection>
@@ -270,7 +286,10 @@ export const Navbar = () => {
                   key={i}
                   description={abilityType.description}
                   href={abilityType.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push(abilityType.href);
+                  }}
                 >
                   {abilityType.label}
                 </DropdownItem>
@@ -303,7 +322,10 @@ export const Navbar = () => {
                   key={esport.label}
                   description={esport.description}
                   href={esport.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push(esport.href);
+                  }}
                 >
                   {esport.label}
                 </DropdownItem>
@@ -320,7 +342,7 @@ export const Navbar = () => {
                 <Link
                   color={"foreground"}
                   href="/moderator/manage/agents"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => router.push("/moderator/manage/agents")}
                 >
                   Moderator
                 </Link>
