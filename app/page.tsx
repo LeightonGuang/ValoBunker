@@ -80,10 +80,7 @@ export default function Home() {
   return (
     <section>
       <div className="flex flex-col gap-4 lg:flex-row">
-        <div
-          className="order-2 flex w-full flex-col gap-4 lg:order-1"
-          id="main-content"
-        >
+        <div className="order-2 flex w-full flex-col gap-4 lg:order-1">
           <Card aria-label="News">
             <CardHeader
               className="w-min cursor-pointer text-large hover:underline"
@@ -145,15 +142,20 @@ export default function Home() {
                 {patchNotesList.map((patchObj, i) => (
                   <ListboxItem
                     key={patchObj.id}
-                    classNames={{
-                      title: "text-medium",
-                      base: "flex-col lg:flex-row",
-                    }}
-                    description={patchObj.description}
+                    className="flex-col justify-center text-center lg:flex-row lg:justify-start lg:text-left"
+                    description={
+                      <div className="max-h-16 overflow-hidden overflow-ellipsis">
+                        {patchObj.description}
+                      </div>
+                    }
                     endContent={
                       <div className="mt-2 flex w-full justify-between lg:h-full lg:w-min lg:flex-col lg:justify-start lg:gap-4">
-                        <span className="order-2 whitespace-nowrap text-tiny text-foreground-500 lg:order-1">
-                          {patchObj.release_date}
+                        <span className="h-max whitespace-nowrap text-tiny text-foreground-500">
+                          {new Intl.DateTimeFormat("en-GB", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          }).format(new Date(patchObj.release_date))}
                         </span>
                         <Link
                           isExternal
@@ -168,19 +170,22 @@ export default function Home() {
                     showDivider={i !== patchNotesList.length - 1}
                     startContent={
                       <Image
+                        alt={patchObj.title}
                         className="h-full w-full lg:w-[12.5rem]"
                         src={patchObj.banner_url}
                       />
                     }
                     textValue={patchObj.title}
-                    title={`${patchObj.patch_num} ${patchObj.title}`}
+                    title={
+                      <span>{`${patchObj.patch_num} ${patchObj.title}`}</span>
+                    }
                   />
                 ))}
               </Listbox>
             </CardBody>
           </Card>
         </div>
-        <div className="order-1 w-full lg:order-2 lg:w-96" id="side-content">
+        <div className="order-1 w-full lg:order-2 lg:w-96">
           <Card aria-label="Events" className="h-min">
             <CardHeader
               className="w-min cursor-pointer hover:underline"
@@ -196,8 +201,6 @@ export default function Home() {
                 onAction={(key) => router.push(`/esports/events/${key}`)}
               >
                 {eventList.map((eventObj, i) => {
-                  // const todayDate = new Date().setHours(0, 0, 0, 0);
-
                   const formatDate = (date: Date) => {
                     return date.toLocaleDateString("en-GB");
                   };
