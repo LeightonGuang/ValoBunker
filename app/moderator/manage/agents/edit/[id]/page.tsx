@@ -1,26 +1,27 @@
 "use client";
 
 import {
-  Avatar,
-  BreadcrumbItem,
-  Breadcrumbs,
-  Button,
+  User,
   Card,
-  CardBody,
   Image,
   Input,
+  Avatar,
+  Button,
   Select,
+  Divider,
+  CardBody,
   SelectItem,
-  User,
+  Breadcrumbs,
+  BreadcrumbItem,
+  Textarea,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
-import { AgentsTableType } from "@/types/AgentsTableType";
 import { RolesTableType } from "@/types/RolesTableType";
-// import { findObjectByKeyBind } from "@/utils/findObjectByKeyBind";
+import { AgentsTableType } from "@/types/AgentsTableType";
 import { AbilitiesTableType } from "@/types/AbilitiesTableType";
 
 const EditAgentsPage = () => {
@@ -30,36 +31,13 @@ const EditAgentsPage = () => {
   const [agentRoles, setAgentRoles] = useState<RolesTableType[]>([]);
   const [agentForm, setAgentForm] = useState<AgentsTableType | null>(null);
   const [abilitiesForm, setAbilitiesForm] = useState<AbilitiesTableType[]>([]);
-  const fetchRolesAndAgent = async () => {
-    try {
-      const supabase = getSupabase();
-      const { data: rolesData, error: rolesError } = await supabase
-        .from("roles")
-        .select("*");
 
-      if (rolesError) {
-        console.error(rolesError);
-      } else {
-        setAgentRoles(rolesData);
-      }
-
-      const { data: agentsData, error: agentsError } = await supabase
-        .from("agents")
-        .select(`*, abilities(*),roles(*)`)
-        .eq("id", agentId);
-
-      if (agentsError) {
-        console.error(agentsError);
-      } else {
-        setAgentForm(agentsData[0]);
-        setAbilitiesForm(agentsData[0].abilities);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const abilitiesKeyBinds = [
+    { bind: "E" },
+    { bind: "Q" },
+    { bind: "C" },
+    { bind: "X" },
+  ];
 
   const onAgentFormChange = (e: any) => {
     e.preventDefault();
@@ -75,12 +53,18 @@ const EditAgentsPage = () => {
   ) => {
     e.preventDefault();
 
-    const { name, value } = e.target;
+    if (!abilitiesForm) return;
 
-    setAbilitiesForm((prevAbilities) =>
-      prevAbilities.map((ability) =>
+    setAbilitiesForm(
+      abilitiesForm.map((ability) =>
         ability.key_bind === keyBind
-          ? { ...ability, [name]: name === "cost" ? Number(value) : value }
+          ? {
+              ...ability,
+              [e.target.name]:
+                e.target.name === "cost"
+                  ? Number(e.target.value)
+                  : e.target.value,
+            }
           : ability,
       ),
     );
@@ -98,6 +82,7 @@ const EditAgentsPage = () => {
           name: agentForm?.name,
           icon_url: agentForm?.icon_url,
           role_id: agentForm?.role_id,
+          release_date: agentForm?.release_date,
         })
         .eq("id", agentId);
 
@@ -117,8 +102,85 @@ const EditAgentsPage = () => {
   };
 
   useEffect(() => {
+    const fetchRolesAndAgent = async () => {
+      try {
+        const supabase = getSupabase();
+        const { data: rolesData, error: rolesError } = await supabase
+          .from("roles")
+          .select("*");
+
+        if (rolesError) {
+          console.error(rolesError);
+        } else {
+          setAgentRoles(rolesData);
+        }
+
+        const { data: agentsData, error: agentsError } = await supabase
+          .from("agents")
+          .select(`*, abilities(*),roles(*)`)
+          .eq("id", agentId);
+
+        if (agentsError) {
+          console.error(agentsError);
+        } else {
+          setAgentForm(agentsData[0]);
+
+          if (agentsData[0].abilities.length === 0) {
+            setAbilitiesForm([
+              {
+                id: 0,
+                key_bind: "E",
+                name: "",
+                icon_url: "",
+                description: "",
+                cost: 0,
+              } as AbilitiesTableType,
+              {
+                id: 1,
+                key_bind: "Q",
+                name: "",
+                icon_url: "",
+                description: "",
+                cost: 0,
+              } as AbilitiesTableType,
+              {
+                id: 2,
+                key_bind: "C",
+                name: "",
+                icon_url: "",
+                description: "",
+                cost: 0,
+              } as AbilitiesTableType,
+              {
+                id: 3,
+                key_bind: "X",
+                name: "",
+                icon_url: "",
+                description: "",
+                cost: 0,
+              } as AbilitiesTableType,
+            ]);
+          } else {
+            setAbilitiesForm(agentsData[0].abilities);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchRolesAndAgent();
   }, []);
+
+  useEffect(() => {
+    console.log(agentForm);
+  }, [agentForm]);
+
+  useEffect(() => {
+    console.table(abilitiesForm);
+  }, [abilitiesForm]);
 
   return (
     <section>
@@ -134,110 +196,175 @@ const EditAgentsPage = () => {
           <Card className="w-96">
             <CardBody>
               <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                <div className="flex items-center gap-4">
-                  <Image
-                    alt={agentForm?.name}
-                    className="h-12 max-h-12 w-12 max-w-12 rounded-full"
-                    src={agentForm?.icon_url}
-                  />
+                <div className="flex flex-col gap-4">
+                  <label htmlFor="agentInfo">Agent Info</label>
 
-                  <Input
-                    label="Agent Icon URL"
-                    name="icon_url"
-                    value={agentForm?.icon_url}
-                    onChange={onAgentFormChange}
-                  />
+                  <div className="flex items-center gap-4">
+                    <Avatar
+                      className="h-10 min-h-10 w-10 min-w-10"
+                      src={agentForm?.icon_url}
+                    />
+                    <Input
+                      label="Agent Icon URL"
+                      name="icon_url"
+                      placeholder="Agent Icon URL"
+                      type="URL"
+                      value={agentForm?.icon_url}
+                      onChange={onAgentFormChange}
+                    />
+                  </div>
+
+                  <div className="flex gap-4">
+                    <Input
+                      isRequired
+                      label="Agent Name"
+                      name="name"
+                      placeholder="Agent Name"
+                      type="text"
+                      value={agentForm?.name}
+                      onChange={onAgentFormChange}
+                    />
+
+                    <Input
+                      isRequired
+                      label="Release Date"
+                      name="release_date"
+                      type="date"
+                      value={agentForm?.release_date}
+                      onChange={onAgentFormChange}
+                    />
+                  </div>
                 </div>
 
-                <Input
-                  label="Agent Name"
-                  name="name"
-                  value={agentForm?.name}
-                  onChange={onAgentFormChange}
-                />
+                <Divider />
 
-                <Select
-                  aria-label="Agent Role"
-                  items={agentRoles}
-                  label="Agent Role"
-                  placeholder="Select Agent Role"
-                  renderValue={(agentRoles) => {
-                    return agentRoles.map((role) => (
-                      <div key={role.key}>
-                        <Avatar
-                          alt={role.data?.name}
-                          className="flex-shrink-0"
-                          size="sm"
-                          src={role.data?.icon_url}
-                        />
-                        <div className="flex flex-col">
-                          <span>{role.data?.name}</span>
-                          <span className="text-tiny text-default-500">
-                            {role.data?.description}
-                          </span>
+                <div className="flex flex-col gap-4">
+                  <label htmlFor="abilities">Abilities</label>
+
+                  {abilitiesKeyBinds.map((keybind, i) => {
+                    const currentKeybind = abilitiesKeyBinds[i].bind;
+                    const currentAbility = abilitiesForm.find(
+                      (form) => form.key_bind === keybind.bind,
+                    );
+
+                    return (
+                      <div
+                        key={currentAbility?.id}
+                        className="flex flex-col gap-4"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Image
+                            alt={currentAbility?.name}
+                            className="h-8 max-h-8 w-8 max-w-8 rounded-none"
+                            src={
+                              currentAbility?.icon_url === ""
+                                ? "https://placehold.co/32x32"
+                                : currentAbility?.icon_url
+                            }
+                          />
+
+                          <Input
+                            isRequired
+                            label="Ability Icon URL"
+                            name="icon_url"
+                            type="url"
+                            value={currentAbility?.icon_url}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
                         </div>
+
+                        <div className="flex gap-4">
+                          <Input
+                            isRequired
+                            label={`${currentKeybind} Ability Name`}
+                            name="name"
+                            type="text"
+                            value={currentAbility?.name}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
+
+                          <Input
+                            label="Cost"
+                            name="cost"
+                            type="number"
+                            value={`${currentAbility?.cost}`}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <Input
+                            isRequired
+                            label="Charges on Spawn"
+                            name="charges_on_spawn"
+                            type="number"
+                            value={`${currentAbility?.charges_on_spawn}`}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
+                          <Input
+                            isRequired
+                            label="Max Charge"
+                            name="max_charge"
+                            type="number"
+                            value={`${currentAbility?.max_charge}`}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
+                          <Input
+                            label="Ult Orb Number"
+                            name="ult_orb_num"
+                            type="number"
+                            value={`${currentAbility?.ult_orb_num}`}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
+                          <Input
+                            label="Cooldown"
+                            name="cooldown"
+                            type="number"
+                            value={`${currentAbility?.cooldown}`}
+                            onChange={(e) => {
+                              onAbilitiesFormChange(e, currentKeybind);
+                            }}
+                          />
+                        </div>
+
+                        <Textarea
+                          label="Description"
+                          name="description"
+                          type="textarea"
+                          value={currentAbility?.description}
+                          onChange={(e) =>
+                            onAbilitiesFormChange(e, currentKeybind)
+                          }
+                        />
                       </div>
-                    ));
-                  }}
-                >
-                  {agentRoles.map((role) => (
-                    <SelectItem
-                      key={role.id}
-                      textValue={role.name}
-                      value={role.id}
-                    >
-                      <User
-                        avatarProps={{ src: role.icon_url }}
-                        name={role.name}
-                      />
-                    </SelectItem>
-                  ))}
-                </Select>
+                    );
+                  })}
+                </div>
 
-                {abilitiesForm.map((ability) => (
-                  <div key={ability.key_bind} className="flex flex-col gap-4">
-                    <div className="flex items-center gap-4">
-                      <Image
-                        alt={ability.name}
-                        className="h-12 max-h-12 w-12 max-w-12 rounded-full"
-                        src={ability.icon_url}
-                      />
-                      <Input
-                        isRequired
-                        label={`${ability.key_bind} Ability Icon URL`}
-                        name="icon_url"
-                        value={ability.icon_url}
-                        onChange={(e) =>
-                          onAbilitiesFormChange(e, ability.key_bind)
-                        }
-                      />
-                    </div>
-                    <div className="flex gap-4">
-                      <Input
-                        isRequired
-                        label={`${ability.key_bind} Ability Name`}
-                        name="name"
-                        value={ability.name}
-                        onChange={(e) =>
-                          onAbilitiesFormChange(e, ability.key_bind)
-                        }
-                      />
-                      <Input
-                        label={`${ability.key_bind} Ability Cost`}
-                        name="cost"
-                        type="number"
-                        value={`${ability.cost}`}
-                        onChange={(e) =>
-                          onAbilitiesFormChange(e, ability.key_bind)
-                        }
-                      />
-                    </div>
-                  </div>
-                ))}
-
-                <Button className="w-full" color="primary" type="submit">
-                  Update
-                </Button>
+                <div className="flex w-full justify-between gap-4">
+                  <Button
+                    className="w-full"
+                    color="danger"
+                    onClick={() => router.push("/moderator/manage/agents")}
+                  >
+                    Cancel
+                  </Button>
+                  <Button className="w-full" color="primary" type="submit">
+                    Submit
+                  </Button>
+                </div>
               </form>
             </CardBody>
           </Card>
