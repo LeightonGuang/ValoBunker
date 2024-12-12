@@ -54,7 +54,6 @@ const TeamsPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data);
         setTeamsDataList(data);
       }
     } catch (error) {

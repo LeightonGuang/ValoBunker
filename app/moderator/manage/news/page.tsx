@@ -1,60 +1,66 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
 } from "@nextui-org/table";
+import Link from "next/link";
 import {
-  BreadcrumbItem,
-  Breadcrumbs,
+  Image,
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownTrigger,
-  Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
   useDisclosure,
+  DropdownTrigger,
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalFooter,
+  Breadcrumbs,
+  BreadcrumbItem,
+  Code,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { title } from "@/components/primitives";
-import { EllipsisIcon } from "@/components/icons";
+import { NewsTableType } from "@/types/NewsTableType";
 import { getSupabase } from "@/utils/supabase/client";
-import { PatchesTableType } from "@/types/PatchesTableType";
+import { EllipsisIcon } from "@/components/icons";
 
-const columnsHeader: string[] = ["Release Date", "Version", "Title", "Actions"];
+const columnsHeader: { name: string; sortable: boolean }[] = [
+  { name: "Title", sortable: true },
+  { name: "Image", sortable: false },
+  { name: "Content", sortable: true },
+  { name: "News Date", sortable: true },
+  { name: "Action", sortable: false },
+];
 
-const ManagePatchesPage = () => {
+const ManageNewsPage = () => {
   const router = useRouter();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [patchesData, setPatchesData] = useState<PatchesTableType[]>([]);
-  const [patchToDelete, setPatchToDelete] = useState<PatchesTableType>(
-    {} as PatchesTableType,
-  );
+  const [newsToDelete, setNewsToDelete] = useState<NewsTableType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [newsData, setNewsData] = useState<NewsTableType[]>([]);
 
-  const fetchPatches = async () => {
+  const fetchAllNews = async () => {
     try {
       const supabase = getSupabase();
+
       const { data, error } = await supabase
-        .from("patches")
+        .from("news")
         .select("*")
-        .order("release_date", { ascending: false });
+        .order("news_date", { ascending: false });
 
       if (error) {
         console.error(error);
       } else {
-        // console.log(data);
-        setPatchesData(data);
+        setNewsData(data);
       }
     } catch (error) {
       console.error(error);
@@ -63,19 +69,16 @@ const ManagePatchesPage = () => {
     }
   };
 
-  const deletePatchById = async (id: number) => {
+  const deleteNewsById = async (id: number) => {
     try {
       const supabase = getSupabase();
-      const { data, error } = await supabase
-        .from("patches")
-        .delete()
-        .eq("id", id);
+      const { error } = await supabase.from("news").delete().eq("id", id);
 
       if (error) {
         console.error(error);
       } else {
         // console.log(data);
-        fetchPatches();
+        fetchAllNews();
       }
     } catch (error) {
       console.error(error);
@@ -85,62 +88,63 @@ const ManagePatchesPage = () => {
   const topContent = () => (
     <div className="flex items-center justify-between">
       <span className="text-small text-default-400">
-        Total {patchesData.length} Patches
+        Total {newsData.length} News
       </span>
       <Button
         color="primary"
         endContent={<span>+</span>}
-        onClick={() => router.push("/moderator/manage/patches/add")}
+        onClick={() => router.push("/moderator/manage/news/create")}
       >
-        Add Patch Note
+        News Article
       </Button>
     </div>
   );
 
   useEffect(() => {
-    fetchPatches();
+    fetchAllNews();
   }, []);
 
   return (
     <section>
-      <Breadcrumbs aria-label="Patches" className="mb-6">
+      <Breadcrumbs aria-label="News">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
-        <BreadcrumbItem>Patches</BreadcrumbItem>
+        <BreadcrumbItem>News</BreadcrumbItem>
       </Breadcrumbs>
 
-      <h1 className={title()}>Manage Patches</h1>
+      <h1 className={title()}>Manage News</h1>
 
-      <div className="mt-6">
+      <div>
         <Table
-          aria-label="Patches"
-          selectionMode="single"
+          aria-label="News"
           topContent={topContent()}
           topContentPlacement="outside"
         >
           <TableHeader>
             {columnsHeader.map((column, i) => (
-              <TableColumn key={i}>{column}</TableColumn>
+              <TableColumn key={i}>{column.name}</TableColumn>
             ))}
           </TableHeader>
           <TableBody isLoading={isLoading}>
-            {patchesData.map((patch) => (
-              <TableRow key={patch.id}>
-                <TableCell className="whitespace-nowrap">
-                  {new Date(patch.release_date).toLocaleDateString("en-GB")}
-                </TableCell>
-
-                <TableCell>{patch.patch_num}</TableCell>
+            {newsData.map((news) => (
+              <TableRow key={news.id}>
+                <TableCell>{news.title}</TableCell>
 
                 <TableCell>
-                  <div className="flex items-center gap-4">
-                    <Image
-                      className="max-h-8 rounded-none"
-                      src={patch.banner_url}
-                    />
-                    <p className="overflow-hidden whitespace-nowrap">
-                      {patch.title}
-                    </p>
+                  <Image
+                    alt={news.title}
+                    className="h-16 min-h-16 w-16 min-w-16 rounded-none object-contain"
+                    src={news.img_url}
+                  />
+                </TableCell>
+
+                <TableCell>
+                  <div className="line-clamp-2 overflow-hidden text-ellipsis">
+                    {news.content}
                   </div>
+                </TableCell>
+
+                <TableCell className="whitespace-nowrap">
+                  {news.news_date}
                 </TableCell>
 
                 <TableCell>
@@ -153,9 +157,7 @@ const ManagePatchesPage = () => {
                     <DropdownMenu>
                       <DropdownItem
                         onClick={() =>
-                          router.push(
-                            `/moderator/manage/patches/edit/${patch.id}`,
-                          )
+                          router.push(`/moderator/manage/news/edit/${news.id}`)
                         }
                       >
                         Edit
@@ -163,7 +165,7 @@ const ManagePatchesPage = () => {
                       <DropdownItem
                         onClick={() => {
                           onOpen();
-                          setPatchToDelete(patch);
+                          setNewsToDelete(news);
                         }}
                       >
                         Delete
@@ -176,6 +178,7 @@ const ManagePatchesPage = () => {
           </TableBody>
         </Table>
       </div>
+
       <Modal
         isOpen={isOpen}
         size="md"
@@ -185,14 +188,25 @@ const ManagePatchesPage = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalBody>{`Are you sure you want to delete patch ${patchToDelete.patch_num}?`}</ModalBody>
+              <ModalBody className="text-medium">
+                {`Are you sure you want to delete News: `}
+                <Image
+                  className="h-16 min-h-16 w-16 min-w-16"
+                  src={newsToDelete?.img_url}
+                />
+                <span>
+                  <Code className="whitespace-break-spaces" color="default">
+                    {newsToDelete?.title}
+                  </Code>
+                  ?
+                </span>
+              </ModalBody>
               <ModalFooter>
                 <Button onClick={onClose}>Cancel</Button>
-
                 <Button
                   color="danger"
                   onClick={() => {
-                    deletePatchById(patchToDelete.id);
+                    newsToDelete && deleteNewsById(newsToDelete?.id);
                     onClose();
                   }}
                 >
@@ -207,4 +221,4 @@ const ManagePatchesPage = () => {
   );
 };
 
-export default ManagePatchesPage;
+export default ManageNewsPage;
