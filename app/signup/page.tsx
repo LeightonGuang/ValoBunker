@@ -15,6 +15,7 @@ import { Button } from "@nextui-org/button";
 import { signUp } from "../actions/auth/signup/actions";
 
 import { signUpWithGoogle } from "@/utils/signUpWithGoogle";
+import { signUpWithDiscord } from "@/utils/signUpWithDiscord";
 import { DiscordIcon, GoogleIcon } from "@/components/icons";
 
 const SignupPage = () => {
@@ -170,6 +171,7 @@ const SignupPage = () => {
                 <Button
                   className="w-full bg-blurple font-medium text-white"
                   startContent={<DiscordIcon className="h-4 w-4" />}
+                  onClick={signUpWithDiscord}
                 >
                   Sign up with Discord
                 </Button>
