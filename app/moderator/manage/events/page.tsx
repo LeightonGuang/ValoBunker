@@ -224,6 +224,7 @@ const ManageEventsPage = () => {
                     </DropdownTrigger>
                     <DropdownMenu>
                       <DropdownItem
+                        key="edit"
                         onClick={() =>
                           router.push(
                             `/moderator/manage/events/edit/${event.id}`,
@@ -233,6 +234,7 @@ const ManageEventsPage = () => {
                         Edit
                       </DropdownItem>
                       <DropdownItem
+                        key="delete"
                         onClick={() => {
                           onOpen();
                           setEventToDelete(event);

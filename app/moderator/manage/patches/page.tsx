@@ -152,6 +152,7 @@ const ManagePatchesPage = () => {
                     </DropdownTrigger>
                     <DropdownMenu>
                       <DropdownItem
+                        key="edit"
                         onClick={() =>
                           router.push(
                             `/moderator/manage/patches/edit/${patch.id}`,
@@ -161,6 +162,7 @@ const ManagePatchesPage = () => {
                         Edit
                       </DropdownItem>
                       <DropdownItem
+                        key="delete"
                         onClick={() => {
                           onOpen();
                           setPatchToDelete(patch);

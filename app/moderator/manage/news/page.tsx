@@ -156,6 +156,7 @@ const ManageNewsPage = () => {
                     </DropdownTrigger>
                     <DropdownMenu>
                       <DropdownItem
+                        key="edit"
                         onClick={() =>
                           router.push(`/moderator/manage/news/edit/${news.id}`)
                         }
@@ -163,6 +164,7 @@ const ManageNewsPage = () => {
                         Edit
                       </DropdownItem>
                       <DropdownItem
+                        key="delete"
                         onClick={() => {
                           onOpen();
                           setNewsToDelete(news);
