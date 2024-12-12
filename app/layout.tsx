@@ -37,7 +37,9 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head>
-        <AdSense publisherId={`${process.env.NextUI_ADSENSE_PUBLISHER_ID}`} />
+        <AdSense
+          publisherId={`${process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}`}
+        />
       </head>
       <body
         className={clsx(
