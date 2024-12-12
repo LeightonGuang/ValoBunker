@@ -10,10 +10,10 @@ import {
   Select,
   Divider,
   CardBody,
+  Textarea,
   SelectItem,
   Breadcrumbs,
   BreadcrumbItem,
-  Textarea,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -239,8 +239,6 @@ const EditAgentsPage = () => {
                 <Divider />
 
                 <div className="flex flex-col gap-4">
-                  <label htmlFor="abilities">Abilities</label>
-
                   {abilitiesKeyBinds.map((keybind, i) => {
                     const currentKeybind = abilitiesKeyBinds[i].bind;
                     const currentAbility = abilitiesForm.find(
@@ -252,6 +250,7 @@ const EditAgentsPage = () => {
                         key={currentAbility?.id}
                         className="flex flex-col gap-4"
                       >
+                        <h2>{currentKeybind} Ability</h2>
                         <div className="flex items-center gap-2">
                           <Image
                             alt={currentAbility?.name}
