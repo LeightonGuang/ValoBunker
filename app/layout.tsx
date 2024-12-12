@@ -6,6 +6,7 @@ import { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 
 import { fontSans } from "@/config/fonts";
+import AdSense from "@/components/AdSense";
 import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/navbar";
 import AdBlockDetector from "@/components/AdBlockDetector";
@@ -35,7 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <head>
+        <AdSense publisherId={`${process.env.NextUI_ADSENSE_PUBLISHER_ID}`} />
+      </head>
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",

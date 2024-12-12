@@ -2,13 +2,13 @@
 
 import {
   Card,
+  Chip,
+  Link,
+  Image,
+  Divider,
+  Listbox,
   CardBody,
   CardHeader,
-  Chip,
-  Divider,
-  Image,
-  Link,
-  Listbox,
   ListboxItem,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { eventStatus } from "@/utils/eventStatus";
 import { getSupabase } from "@/utils/supabase/client";
 import { NewsTableType } from "@/types/NewsTableType";
+import AdSenseBanner from "@/components/AdSenseBanner";
 import { EventsTableType } from "@/types/EventsTableType";
 import { PatchesTableType } from "@/types/PatchesTableType";
 
@@ -88,7 +89,9 @@ export default function Home() {
             >
               News
             </CardHeader>
+
             <Divider />
+
             <CardBody>
               <Listbox
                 aria-label="News"
@@ -132,7 +135,9 @@ export default function Home() {
 
           <Card aria-label="Patch Notes">
             <CardHeader className="text-large">Patch Notes</CardHeader>
+
             <Divider />
+
             <CardBody>
               <Listbox
                 aria-label="Patch Notes"
@@ -184,7 +189,14 @@ export default function Home() {
               </Listbox>
             </CardBody>
           </Card>
+
+          <AdSenseBanner
+            dataAdFormat="auto"
+            dataAdSlot="9267496872"
+            dataFullWidthResponsive={true}
+          />
         </div>
+
         <div className="order-1 w-full lg:order-2 lg:w-96">
           <Card aria-label="Events" className="h-min">
             <CardHeader
@@ -193,7 +205,9 @@ export default function Home() {
             >
               Events
             </CardHeader>
+
             <Divider />
+
             <CardBody>
               <Listbox
                 aria-label="Events"
