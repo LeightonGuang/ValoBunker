@@ -73,7 +73,9 @@ const ManageAgentsPage = () => {
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Agents</BreadcrumbItem>
       </Breadcrumbs>
+
       <h1 className={title()}>Manage Agents</h1>
+
       <div className="mt-6">
         <Table aria-label="Manage Agents" selectionMode="single">
           <TableHeader>
@@ -81,6 +83,7 @@ const ManageAgentsPage = () => {
               <TableColumn key={i}>{column.name}</TableColumn>
             ))}
           </TableHeader>
+
           <TableBody isLoading={isLoading}>
             {agents.map((agent) => {
               return (
@@ -91,6 +94,7 @@ const ManageAgentsPage = () => {
                       name={agent.name}
                     />
                   </TableCell>
+
                   <TableCell>
                     <User
                       avatarProps={{
@@ -103,6 +107,7 @@ const ManageAgentsPage = () => {
                       name={agent.roles.name}
                     />
                   </TableCell>
+
                   <TableCell>
                     <User
                       avatarProps={{
@@ -180,6 +185,7 @@ const ManageAgentsPage = () => {
                       </DropdownTrigger>
                       <DropdownMenu>
                         <DropdownItem
+                          key="edit"
                           onClick={() =>
                             router.push(
                               `/moderator/manage/agents/edit/${agent.id}`,
@@ -188,7 +194,9 @@ const ManageAgentsPage = () => {
                         >
                           Edit
                         </DropdownItem>
+
                         <DropdownItem
+                          key="delete"
                           onClick={() => {
                             onOpen();
                             // setEventToDelete(agent);
