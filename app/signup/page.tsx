@@ -1,19 +1,20 @@
 "use client";
 
-import { Input } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
-import { useState } from "react";
 import {
   Card,
+  Link,
+  Image,
+  Divider,
   CardBody,
   CardHeader,
-  Divider,
-  Image,
-  Link,
 } from "@nextui-org/react";
+import { useState } from "react";
+import { Input } from "@nextui-org/input";
+import { Button } from "@nextui-org/button";
 
 import { signUp } from "../actions/auth/signup/actions";
 
+import { signUpWithGoogle } from "@/utils/signUpWithGoogle";
 import { DiscordIcon, GoogleIcon } from "@/components/icons";
 
 const SignupPage = () => {
@@ -162,6 +163,7 @@ const SignupPage = () => {
                 <Button
                   className="w-full bg-white font-medium text-black light:border-1 light:border-default-500"
                   startContent={<GoogleIcon className="h-4 w-4" />}
+                  onClick={signUpWithGoogle}
                 >
                   Sign up with Google
                 </Button>
