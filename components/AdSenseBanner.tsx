@@ -26,14 +26,12 @@ const AdSenseBanner = ({
   return (
     <ins
       className="adsbygoogle"
-      data-ad-client={process.env.NextUI_ADSENSE_CLIENT_ID}
+      data-ad-client={`ca-${process.env.NextUI_ADSENSE_CLIENT_ID}`}
       data-ad-format={dataAdFormat}
       data-ad-slot={dataAdSlot}
       data-full-width-responsive={dataFullWidthResponsive.toString()}
       style={{ display: "block" }}
-    >
-      {" "}
-    </ins>
+    />
   );
 };
 
