@@ -7,7 +7,7 @@
   scroll-padding-top: 6rem;
 }
 
-ul {
+.tiptap ul {
   list-style-position: inside;
   list-style: disc !important;
   padding-left: 0;
@@ -15,11 +15,23 @@ ul {
   margin: 0;
 }
 
-ol {
+.tiptap ol {
   padding: 0 2rem;
   list-style: decimal !important;
 }
 
 li {
   margin: 0.25rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
 }
