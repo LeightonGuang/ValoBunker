@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Card,
   Button,
@@ -37,7 +38,7 @@ import {
 import { ChevronDown } from "./icons";
 interface NewsTextEditorProps {
   onContentChange?: (content: string) => void;
-  content?: string;
+  value: string;
 }
 
 const Toolbar = ({ editor }: { editor: any }) => {
@@ -315,7 +316,7 @@ const Toolbar = ({ editor }: { editor: any }) => {
   );
 };
 
-const TiptapEditor = ({ onContentChange, content }: NewsTextEditorProps) => {
+const NextTextEditor = ({ onContentChange, value }: NewsTextEditorProps) => {
   const tiptapExtensions = [
     StarterKit.configure({
       heading: {
@@ -341,7 +342,7 @@ const TiptapEditor = ({ onContentChange, content }: NewsTextEditorProps) => {
   const editor = useEditor({
     immediatelyRender: false,
     extensions: tiptapExtensions,
-    content: content,
+    content: value,
 
     onUpdate: ({ editor }) => {
       onContentChange?.(editor.getHTML());
@@ -354,7 +355,11 @@ const TiptapEditor = ({ onContentChange, content }: NewsTextEditorProps) => {
     },
   });
 
-  if (!editor) return null;
+  useEffect(() => {
+    if (editor && !editor.isFocused) {
+      editor.commands.setContent(value);
+    }
+  }, [editor, value]);
 
   return (
     <Card>
@@ -371,4 +376,4 @@ const TiptapEditor = ({ onContentChange, content }: NewsTextEditorProps) => {
   );
 };
 
-export default TiptapEditor;
+export default NextTextEditor;
