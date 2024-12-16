@@ -44,6 +44,25 @@
   cursor: col-resize;
 }
 
+.rich-text-content table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  border: 1px solid #ddd;
+}
+
+.rich-text-content table th {
+  color: white;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.rich-text-content table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
 li {
   margin: 0.25rem 0;
 }
