@@ -21,7 +21,7 @@ const CreateNewsPage = () => {
   } as NewsTableType);
 
   const [newsFormErrors, setNewsFormErrors] = useState({
-    title: false,
+    headline: false,
     content: false,
     news_date: false,
   });
@@ -93,11 +93,11 @@ const CreateNewsPage = () => {
 
                   <Input
                     isRequired
-                    errorMessage="Please enter a title"
-                    isInvalid={newsFormErrors.title}
-                    label="Title"
-                    name="title"
-                    placeholder="Title"
+                    errorMessage="Please enter a headline"
+                    isInvalid={newsFormErrors.headline}
+                    label="Headline"
+                    name="headline"
+                    placeholder="Headline"
                     type="text"
                     value={newsForm.headline}
                     onChange={onNewsFormChange}
@@ -117,7 +117,7 @@ const CreateNewsPage = () => {
               </div>
 
               <NewsTextEditor
-                content={newsForm.content}
+                value={newsForm.content}
                 onContentChange={(content) =>
                   setNewsForm({ ...newsForm, content })
                 }

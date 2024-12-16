@@ -8,30 +8,29 @@ import {
   TableColumn,
   TableHeader,
 } from "@nextui-org/table";
-import Link from "next/link";
 import {
+  Code,
   Image,
+  Modal,
   Button,
   Dropdown,
+  ModalBody,
+  Breadcrumbs,
+  ModalFooter,
+  ModalContent,
   DropdownItem,
   DropdownMenu,
   useDisclosure,
-  DropdownTrigger,
-  Modal,
-  ModalContent,
-  ModalBody,
-  ModalFooter,
-  Breadcrumbs,
   BreadcrumbItem,
-  Code,
+  DropdownTrigger,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { title } from "@/components/primitives";
+import { EllipsisIcon } from "@/components/icons";
 import { NewsTableType } from "@/types/NewsTableType";
 import { getSupabase } from "@/utils/supabase/client";
-import { EllipsisIcon } from "@/components/icons";
 
 const columnsHeader: { name: string; sortable: boolean }[] = [
   { name: "Title", sortable: true },
@@ -94,6 +93,7 @@ const ManageNewsPage = () => {
         color="primary"
         endContent={<span>+</span>}
         onClick={() => router.push("/moderator/manage/news/create")}
+        onTouchStart={() => router.push("/moderator/manage/news/create")}
       >
         News Article
       </Button>
@@ -116,6 +116,7 @@ const ManageNewsPage = () => {
       <div>
         <Table
           aria-label="News"
+          className="mt-4"
           topContent={topContent()}
           topContentPlacement="outside"
         >
@@ -127,11 +128,11 @@ const ManageNewsPage = () => {
           <TableBody isLoading={isLoading}>
             {newsData.map((news) => (
               <TableRow key={news.id}>
-                <TableCell>{news.title}</TableCell>
+                <TableCell>{news.headline}</TableCell>
 
                 <TableCell>
                   <Image
-                    alt={news.title}
+                    alt={news.headline}
                     className="h-16 min-h-16 w-16 min-w-16 rounded-none object-contain"
                     src={news.img_url}
                   />
@@ -198,7 +199,7 @@ const ManageNewsPage = () => {
                 />
                 <span>
                   <Code className="whitespace-break-spaces" color="default">
-                    {newsToDelete?.title}
+                    {newsToDelete?.headline}
                   </Code>
                   ?
                 </span>

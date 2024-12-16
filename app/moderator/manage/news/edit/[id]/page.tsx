@@ -1,25 +1,31 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import {
-  BreadcrumbItem,
-  Breadcrumbs,
-  Button,
   Card,
-  CardBody,
   Image,
   Input,
+  Button,
+  CardBody,
   Textarea,
+  Breadcrumbs,
+  BreadcrumbItem,
 } from "@nextui-org/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { NewsTableType } from "@/types/NewsTableType";
+import NewsTextEditor from "@/components/NewsTextEditor";
 
 const EditNewsPage = () => {
   const router = useRouter();
   const newsId = useParams().id;
-  const [newsFormData, setNewsFormData] = useState<NewsTableType | null>(null);
+  const [newsFormData, setNewsFormData] = useState<NewsTableType>({
+    img_url: "",
+    headline: "",
+    content: "",
+    news_date: "",
+  } as NewsTableType);
 
   const fetchNewsById = async () => {
     try {
@@ -81,6 +87,10 @@ const EditNewsPage = () => {
     fetchNewsById();
   }, []);
 
+  useEffect(() => {
+    console.log(newsFormData.content);
+  }, [newsFormData.content]);
+
   return (
     <section className="w-full">
       <Breadcrumbs aria-label="Breadcrumb" className="mb-4">
@@ -106,19 +116,18 @@ const EditNewsPage = () => {
               </div>
 
               <Input
-                label="Title"
-                name="title"
+                label="Headline"
+                name="headline"
                 type="text"
                 value={newsFormData?.headline}
                 onChange={onNewsFormChange}
               />
 
-              <Textarea
-                label="Content"
-                name="content"
-                type="text"
-                value={newsFormData?.content}
-                onChange={onNewsFormChange}
+              <NewsTextEditor
+                value={newsFormData.content}
+                onContentChange={(value) =>
+                  setNewsFormData({ ...newsFormData, content: value })
+                }
               />
 
               <Input
