@@ -8,7 +8,6 @@ import {
   Input,
   Button,
   CardBody,
-  Textarea,
   Breadcrumbs,
   BreadcrumbItem,
 } from "@nextui-org/react";
@@ -66,6 +65,7 @@ const EditNewsPage = () => {
           img_url: newsFormData?.img_url,
           headline: newsFormData?.headline,
           content: newsFormData?.content,
+          description: newsFormData?.description,
           news_date: newsFormData?.news_date,
         })
         .eq("id", newsId);
@@ -100,45 +100,80 @@ const EditNewsPage = () => {
       </Breadcrumbs>
 
       <div className="flex justify-center">
-        <Card className="w-96">
+        <Card className="w-full">
           <CardBody>
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <form className="flex flex-col" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-4">
-                <Image className="mx-auto w-1/2" src={newsFormData?.img_url} />
+                <div className="flex flex-col gap-4 lg:flex-row">
+                  <div className="aspect-w-16 aspect-h-9 flex items-center justify-center lg:w-1/2">
+                    <Image
+                      alt={newsFormData.headline}
+                      className="object-cover"
+                      classNames={{
+                        wrapper: "w-full h-full",
+                      }}
+                      src={
+                        newsFormData.img_url === ""
+                          ? "https://via.placeholder.com/1920x1080"
+                          : newsFormData.img_url
+                      }
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
 
-                <Input
-                  label="Image URL"
-                  name="img_url"
-                  type="url"
-                  value={newsFormData?.img_url}
-                  onChange={onNewsFormChange}
+                  <div className="flex flex-col gap-4 lg:w-1/2">
+                    <Input
+                      label="Image URL"
+                      name="img_url"
+                      placeholder="Image URL"
+                      type="url"
+                      value={newsFormData.img_url}
+                      onChange={onNewsFormChange}
+                    />
+
+                    <Input
+                      isRequired
+                      errorMessage="Please enter a headline"
+                      // isInvalid={newsFormErrors.headline}
+                      label="Headline"
+                      name="headline"
+                      placeholder="Headline"
+                      type="text"
+                      value={newsFormData.headline}
+                      onChange={onNewsFormChange}
+                    />
+
+                    <Input
+                      label="Description"
+                      name="description"
+                      placeholder="Description"
+                      type="text"
+                      value={newsFormData.description || ""}
+                      onChange={onNewsFormChange}
+                    />
+
+                    <Input
+                      isRequired
+                      errorMessage="Please enter the news date"
+                      // isInvalid={newsFormErrors.news_date}
+                      label="News Date"
+                      name="news_date"
+                      type="date"
+                      value={newsFormData.news_date}
+                      onChange={onNewsFormChange}
+                    />
+                  </div>
+                </div>
+
+                <NewsTextEditor
+                  value={newsFormData.content}
+                  onContentChange={(content) =>
+                    setNewsFormData({ ...newsFormData, content })
+                  }
                 />
               </div>
 
-              <Input
-                label="Headline"
-                name="headline"
-                type="text"
-                value={newsFormData?.headline}
-                onChange={onNewsFormChange}
-              />
-
-              <NewsTextEditor
-                value={newsFormData.content}
-                onContentChange={(value) =>
-                  setNewsFormData({ ...newsFormData, content: value })
-                }
-              />
-
-              <Input
-                label="Date"
-                name="news_date"
-                type="date"
-                value={newsFormData?.news_date}
-                onChange={onNewsFormChange}
-              />
-
-              <Button color="primary" type="submit">
+              <Button className="mt-4" color="primary" type="submit">
                 Update
               </Button>
             </form>
