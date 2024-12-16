@@ -3,7 +3,15 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@nextui-org/input";
-import { Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import {
+  Card,
+  Image,
+  Button,
+  CardBody,
+  CardHeader,
+  Breadcrumbs,
+  BreadcrumbItem,
+} from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
@@ -58,7 +66,13 @@ const CreateNewsPage = () => {
   }, [newsForm.content]);
 
   return (
-    <section className="flex w-full items-center justify-center">
+    <section className="w-full">
+      <Breadcrumbs aria-label="Breadcrumb" className="mb-4">
+        <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
+        <BreadcrumbItem href="/moderator/manage/news">News</BreadcrumbItem>
+        <BreadcrumbItem>Create</BreadcrumbItem>
+      </Breadcrumbs>
+
       <Card className="w-full">
         <CardHeader className={title()}>Create News</CardHeader>
         <CardBody>
@@ -100,6 +114,15 @@ const CreateNewsPage = () => {
                     placeholder="Headline"
                     type="text"
                     value={newsForm.headline}
+                    onChange={onNewsFormChange}
+                  />
+
+                  <Input
+                    label="Description"
+                    name="description"
+                    placeholder="Description"
+                    type="text"
+                    value={newsForm.description || ""}
                     onChange={onNewsFormChange}
                   />
 
