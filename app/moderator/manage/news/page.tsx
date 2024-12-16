@@ -35,7 +35,7 @@ import { getSupabase } from "@/utils/supabase/client";
 const columnsHeader: { name: string; sortable: boolean }[] = [
   { name: "Title", sortable: true },
   { name: "Image", sortable: false },
-  { name: "Content", sortable: true },
+  { name: "Description", sortable: true },
   { name: "News Date", sortable: true },
   { name: "Action", sortable: false },
 ];
@@ -140,7 +140,7 @@ const ManageNewsPage = () => {
 
                 <TableCell>
                   <div className="line-clamp-2 overflow-hidden text-ellipsis">
-                    {news.content}
+                    {news.description}
                   </div>
                 </TableCell>
 
