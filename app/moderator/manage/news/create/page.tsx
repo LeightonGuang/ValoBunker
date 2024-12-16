@@ -15,7 +15,7 @@ const CreateNewsPage = () => {
 
   const [newsForm, setNewsForm] = useState<NewsTableType>({
     img_url: "",
-    title: "",
+    headline: "",
     content: "",
     news_date: "",
   } as NewsTableType);
@@ -67,7 +67,7 @@ const CreateNewsPage = () => {
               <div className="flex flex-col gap-4 lg:flex-row">
                 <div className="aspect-w-16 aspect-h-9 flex items-center justify-center lg:w-1/2">
                   <Image
-                    alt={newsForm.title}
+                    alt={newsForm.headline}
                     className="object-cover"
                     classNames={{
                       wrapper: "w-full h-full",
@@ -99,7 +99,7 @@ const CreateNewsPage = () => {
                     name="title"
                     placeholder="Title"
                     type="text"
-                    value={newsForm.title}
+                    value={newsForm.headline}
                     onChange={onNewsFormChange}
                   />
 

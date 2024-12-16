@@ -120,13 +120,17 @@ export default function Home() {
                     showDivider={i !== newsList.length - 1}
                     startContent={
                       <Image
-                        alt={newsObj.title}
+                        alt={newsObj.headline}
                         className="h-12 min-h-12 w-12 min-w-12 rounded-none"
                         src={newsObj.img_url}
                       />
                     }
-                    textValue={newsObj.title}
-                    title={<span className="text-medium">{newsObj.title}</span>}
+                    textValue={newsObj.headline}
+                    title={
+                      <span className="text-headlinemedium">
+                        {newsObj.headline}
+                      </span>
+                    }
                   />
                 ))}
               </Listbox>

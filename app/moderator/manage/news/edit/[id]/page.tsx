@@ -58,7 +58,7 @@ const EditNewsPage = () => {
         .from("news")
         .update({
           img_url: newsFormData?.img_url,
-          title: newsFormData?.title,
+          headline: newsFormData?.headline,
           content: newsFormData?.content,
           news_date: newsFormData?.news_date,
         })
@@ -109,7 +109,7 @@ const EditNewsPage = () => {
                 label="Title"
                 name="title"
                 type="text"
-                value={newsFormData?.title}
+                value={newsFormData?.headline}
                 onChange={onNewsFormChange}
               />
 
