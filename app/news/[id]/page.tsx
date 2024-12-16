@@ -48,7 +48,7 @@ const NewsPage = () => {
 
     return (
       <div className="flex justify-center">
-        <div>{parse(sanitizedHTML)}</div>
+        <div className="rich-text-content">{parse(sanitizedHTML)}</div>
       </div>
     );
   };
