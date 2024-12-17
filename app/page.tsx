@@ -121,7 +121,7 @@ export default function Home() {
                     startContent={
                       <Image
                         alt={newsObj.headline}
-                        className="h-12 min-h-12 w-12 min-w-12 rounded-none"
+                        className="h-12 min-h-12 w-12 min-w-12 rounded-none object-cover"
                         src={newsObj.img_url}
                       />
                     }
