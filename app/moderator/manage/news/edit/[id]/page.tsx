@@ -67,6 +67,7 @@ const EditNewsPage = () => {
           content: newsFormData?.content,
           description: newsFormData?.description,
           news_date: newsFormData?.news_date,
+          link_url: newsFormData?.link_url,
         })
         .eq("id", newsId);
 
@@ -160,6 +161,14 @@ const EditNewsPage = () => {
                       name="news_date"
                       type="date"
                       value={newsFormData.news_date}
+                      onChange={onNewsFormChange}
+                    />
+
+                    <Input
+                      label="Link"
+                      name="link_url"
+                      type="url"
+                      value={newsFormData.link_url}
                       onChange={onNewsFormChange}
                     />
                   </div>

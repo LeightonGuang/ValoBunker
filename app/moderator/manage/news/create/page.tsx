@@ -26,6 +26,7 @@ const CreateNewsPage = () => {
     headline: "",
     content: "",
     news_date: "",
+    link_url: "",
   } as NewsTableType);
 
   const [newsFormErrors, setNewsFormErrors] = useState({
@@ -134,6 +135,14 @@ const CreateNewsPage = () => {
                     name="news_date"
                     type="date"
                     value={newsForm.news_date}
+                    onChange={onNewsFormChange}
+                  />
+
+                  <Input
+                    label="Link"
+                    name="link_url"
+                    type="url"
+                    value={newsForm.link_url}
                     onChange={onNewsFormChange}
                   />
                 </div>
