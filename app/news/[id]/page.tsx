@@ -48,7 +48,9 @@ const NewsPage = () => {
 
     return (
       <div className="flex justify-center">
-        <div className="rich-text-content">{parse(sanitizedHTML)}</div>
+        <div className="rich-text-content mx-8 w-full">
+          {parse(sanitizedHTML)}
+        </div>
       </div>
     );
   };
@@ -61,7 +63,7 @@ const NewsPage = () => {
     <section>
       <Card aria-label={newsData?.headline}>
         <CardHeader className={title()}>
-          <span>{newsData?.headline}</span>
+          <h1 className="m-4">{newsData?.headline}</h1>
         </CardHeader>
         <CardBody>
           <div>
