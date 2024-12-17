@@ -119,6 +119,7 @@ const ManageNewsPage = () => {
           className="mt-4"
           topContent={topContent()}
           topContentPlacement="outside"
+          onRowAction={(key) => router.push(`/news/${key}`)}
         >
           <TableHeader>
             {columnsHeader.map((column, i) => (
@@ -127,7 +128,10 @@ const ManageNewsPage = () => {
           </TableHeader>
           <TableBody isLoading={isLoading}>
             {newsData.map((news) => (
-              <TableRow key={news.id}>
+              <TableRow
+                key={news.id}
+                className="cursor-pointer rounded-lg hover:bg-default-100"
+              >
                 <TableCell>{news.headline}</TableCell>
 
                 <TableCell>
