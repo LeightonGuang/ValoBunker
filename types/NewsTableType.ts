@@ -1,7 +1,8 @@
 export interface NewsTableType {
   id: number;
   img_url?: string;
-  title: string;
+  headline: string;
+  description?: string;
   content: string;
   news_date: string;
   link_url?: string;

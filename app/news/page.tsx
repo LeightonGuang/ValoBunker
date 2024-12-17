@@ -64,12 +64,12 @@ const AllNewsPage = () => {
               }
               startContent={
                 <Image
-                  alt={news.title}
+                  alt={news.headline}
                   className="h-12 min-h-12 w-12 min-w-12 rounded-none"
                   src={news.img_url}
                 />
               }
-              title={news.title}
+              title={news.headline}
             />
           ))}
         </Listbox>

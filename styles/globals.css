@@ -7,6 +7,93 @@
   scroll-padding-top: 6rem;
 }
 
-ul {
+li {
+  margin: 0.25rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+.tiptap ul {
   list-style-position: inside;
+  list-style: disc !important;
+  padding-left: 0;
+  padding: 0 1rem;
+  margin: 0;
+}
+
+.tiptap ol {
+  padding: 0 2rem;
+  list-style: decimal !important;
+}
+
+.tiptap table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  border: 1px solid #ddd;
+}
+
+.tiptap table th {
+  color: white;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.tiptap table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.tiptap.resize-cursor {
+  cursor: ew-resize;
+  cursor: col-resize;
+}
+
+.rich-text-content table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  border: 1px solid #ddd;
+}
+
+.rich-text-content table th {
+  color: white;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.rich-text-content table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.rich-text-content ul {
+  list-style-position: inside;
+  list-style: disc !important;
+  padding-left: 0;
+  padding: 0 1rem;
+  margin: 0;
+}
+
+.rich-text-content ol {
+  padding: 0 2rem;
+  list-style: decimal !important;
+}
+
+.rich-text-content h1,
+h2,
+h3 {
+  margin-top: 1rem;
 }

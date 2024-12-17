@@ -105,7 +105,7 @@ export default function Home() {
                     className="flex-col justify-center text-center lg:flex-row lg:justify-start lg:text-left"
                     description={
                       <div className="max-h-16 overflow-hidden overflow-ellipsis">
-                        {newsObj.content}
+                        {newsObj.description}
                       </div>
                     }
                     endContent={
@@ -120,18 +120,28 @@ export default function Home() {
                     showDivider={i !== newsList.length - 1}
                     startContent={
                       <Image
-                        alt={newsObj.title}
+                        alt={newsObj.headline}
                         className="h-12 min-h-12 w-12 min-w-12 rounded-none"
                         src={newsObj.img_url}
                       />
                     }
-                    textValue={newsObj.title}
-                    title={<span className="text-medium">{newsObj.title}</span>}
+                    textValue={newsObj.headline}
+                    title={
+                      <span className="text-headlinemedium">
+                        {newsObj.headline}
+                      </span>
+                    }
                   />
                 ))}
               </Listbox>
             </CardBody>
           </Card>
+
+          <AdSenseBanner
+            dataAdFormat="auto"
+            dataAdSlot="9267496872"
+            dataFullWidthResponsive={true}
+          />
 
           <Card aria-label="Patch Notes">
             <CardHeader className="text-large">Patch Notes</CardHeader>
@@ -150,7 +160,7 @@ export default function Home() {
                     className="flex-col justify-center text-center lg:flex-row lg:justify-start lg:text-left"
                     description={
                       <div className="max-h-16 overflow-hidden overflow-ellipsis">
-                        {patchObj.description}
+                        {patchObj?.description}
                       </div>
                     }
                     endContent={
@@ -189,12 +199,6 @@ export default function Home() {
               </Listbox>
             </CardBody>
           </Card>
-
-          <AdSenseBanner
-            dataAdFormat="auto"
-            dataAdSlot="9267496872"
-            dataFullWidthResponsive={true}
-          />
         </div>
 
         <div className="order-1 w-full lg:order-2 lg:w-96">

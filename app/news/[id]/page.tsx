@@ -11,6 +11,8 @@ import {
   CardFooter,
   CardHeader,
 } from "@nextui-org/react";
+import DOMPurify from "dompurify";
+import parse from "html-react-parser";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
@@ -41,21 +43,33 @@ const NewsPage = () => {
     }
   };
 
+  const RenderRawHtml = (rawHTML: string) => {
+    const sanitizedHTML = DOMPurify.sanitize(rawHTML);
+
+    return (
+      <div className="flex justify-center">
+        <div className="rich-text-content mx-8 w-full">
+          {parse(sanitizedHTML)}
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     fetchNewsById();
   }, []);
 
   return (
     <section>
-      <Card aria-label={newsData?.title}>
+      <Card aria-label={newsData?.headline}>
         <CardHeader className={title()}>
-          <span>{newsData?.title}</span>
+          <h1 className="m-4">{newsData?.headline}</h1>
         </CardHeader>
         <CardBody>
           <div>
             <div className="flex w-full justify-center">
               <Image
-                alt={newsData?.title}
+                alt={newsData?.headline}
                 className="max-h-64"
                 src={newsData?.img_url}
               />
@@ -64,7 +78,9 @@ const NewsPage = () => {
             <Divider className="my-4" />
 
             <div className="mt-4 w-full">
-              <p className="mx-auto max-w-3xl">{newsData?.content}</p>
+              {newsData?.content
+                ? RenderRawHtml(newsData?.content)
+                : "No Content"}
             </div>
           </div>
         </CardBody>

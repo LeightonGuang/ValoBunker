@@ -220,7 +220,10 @@ export const Navbar = () => {
                   <DropdownItem
                     key="moderator"
                     href="/moderator/manage/agents"
-                    onClick={() => router.push("/moderator/manage/agents")}
+                    onClick={() => {
+                      router.push("/moderator/manage/agents");
+                      setIsMenuOpen(false);
+                    }}
                   >
                     Moderator
                   </DropdownItem>
@@ -342,7 +345,10 @@ export const Navbar = () => {
                 <Link
                   color={"foreground"}
                   href="/moderator/manage/agents"
-                  onClick={() => router.push("/moderator/manage/agents")}
+                  onClick={() => {
+                    router.push("/moderator/manage/agents");
+                    setIsMenuOpen(false);
+                  }}
                 >
                   Moderator
                 </Link>
