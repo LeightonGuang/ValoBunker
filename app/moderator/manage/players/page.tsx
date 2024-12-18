@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   User,
+  Image,
   Table,
   Button,
+  Tooltip,
   TableRow,
   TableBody,
   TableCell,
@@ -96,7 +98,29 @@ const ManagePlayersPage = () => {
     }
   };
 
-  const topContent = () => <div>{playersData.length} Players</div>;
+  const convertedAge = (date: Date) => {
+    const birthday = new Date(date);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthday.getFullYear();
+
+    if (
+      today.getMonth() < birthday.getMonth() ||
+      today.getDate() < birthday.getDate()
+    ) {
+      age--;
+    }
+
+    return age;
+  };
+
+  const topContent = () => (
+    <div className="flex justify-between">
+      <span className="text-small text-default-400">
+        Total {playersData.length} players
+      </span>
+    </div>
+  );
 
   const onSortChange = (descriptor: SortDescriptor) => {
     setSortDescriptor(descriptor);
@@ -108,6 +132,7 @@ const ManagePlayersPage = () => {
       { name: "Age", sortBy: "age", sortable: true },
       { name: "Role", sortBy: "role", sortable: true },
       { name: "Team", sortBy: "teams.name", sortable: true },
+      { name: "League", sortBy: "teams.vct_league.name", sortable: true },
       { name: "Actions", sortBy: "actions", sortable: false },
     ];
 
@@ -152,11 +177,22 @@ const ManagePlayersPage = () => {
                 />
               </TableCell>
 
-              <TableCell>{item.age}</TableCell>
+              <TableCell>
+                {item.birthday ? convertedAge(item.birthday) : "-"}
+              </TableCell>
 
               <TableCell>{item.role}</TableCell>
 
               <TableCell>{item.teams.name}</TableCell>
+
+              <TableCell>
+                <Tooltip content={item.teams.vct_league.name}>
+                  <Image
+                    className="h-8 w-8 rounded-none object-contain"
+                    src={item.teams.vct_league.logo_url}
+                  />
+                </Tooltip>
+              </TableCell>
 
               <TableCell>
                 <Button
