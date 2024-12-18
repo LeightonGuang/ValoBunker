@@ -129,9 +129,9 @@ const ManagePlayersPage = () => {
   const PlayersTable = () => {
     const tableHeaders = [
       { name: "Name", sortBy: "ign", sortable: true },
-      { name: "Age", sortBy: "age", sortable: true },
-      { name: "Role", sortBy: "role", sortable: true },
       { name: "Team", sortBy: "teams.name", sortable: true },
+      { name: "Role", sortBy: "role", sortable: true },
+      { name: "Age", sortBy: "age", sortable: true },
       { name: "League", sortBy: "teams.vct_league.name", sortable: true },
       { name: "Actions", sortBy: "actions", sortable: false },
     ];
@@ -178,12 +178,19 @@ const ManagePlayersPage = () => {
               </TableCell>
 
               <TableCell>
-                {item.birthday ? convertedAge(item.birthday) : "-"}
+                <Tooltip content={item.teams.name}>
+                  <Image
+                    className="h-8 w-8 rounded-none object-contain"
+                    src={item.teams.logo_url}
+                  />
+                </Tooltip>
               </TableCell>
 
               <TableCell>{item.role}</TableCell>
 
-              <TableCell>{item.teams.name}</TableCell>
+              <TableCell>
+                {item.birthday ? convertedAge(item.birthday) : "-"}
+              </TableCell>
 
               <TableCell>
                 <Tooltip content={item.teams.vct_league.name}>
