@@ -3,18 +3,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
+  User,
   Table,
   Button,
   TableRow,
   TableBody,
   TableCell,
+  Pagination,
+  TableColumn,
   TableHeader,
   Breadcrumbs,
   BreadcrumbItem,
-  TableColumn,
-  User,
-  Pagination,
-  getKeyValue,
+  SortDescriptor,
 } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
@@ -26,15 +26,49 @@ const ManagePlayersPage = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [playersData, setPlayersData] = useState<PlayersTableType[]>([]);
+  const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
+    column: "ign",
+    direction: "ascending",
+  });
   const rowsPerPage = 10;
   const pages = Math.ceil(playersData.length / rowsPerPage);
 
-  const items = useMemo(() => {
+  const sortedPlayers = useMemo(() => {
+    // Sort the entire playersData array
+    return [...playersData].sort((a, b) => {
+      const getValue = (obj: any, path: string) => {
+        return path.split(".").reduce((acc, key) => (acc ? acc[key] : ""), obj);
+      };
+
+      const first = getValue(
+        a,
+        sortDescriptor.column as keyof PlayersTableType,
+      );
+      const second = getValue(
+        b,
+        sortDescriptor.column as keyof PlayersTableType,
+      );
+
+      const normalizeValue = (value: any) => {
+        return value ? String(value).toLowerCase() : "";
+      };
+
+      const normalizedFirst = normalizeValue(first);
+      const normalizedSecond = normalizeValue(second);
+
+      const result = normalizedFirst.localeCompare(normalizedSecond);
+
+      return sortDescriptor.direction === "ascending" ? result : -result;
+    });
+  }, [playersData, sortDescriptor]);
+
+  const paginatedPlayers = useMemo(() => {
+    // Slice the sorted array for the current page
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    return playersData.slice(start, end);
-  }, [page, playersData]);
+    return sortedPlayers.slice(start, end);
+  }, [page, sortedPlayers]);
 
   const fetchPlayers = async () => {
     try {
@@ -42,9 +76,13 @@ const ManagePlayersPage = () => {
       const { data, error } = await supabase.from("players").select(
         `*, 
         teams(
-          *
+          *, vct_league(
+            *
+          )
+        )
         )`,
       );
+
       if (error) {
         console.error(error);
       } else {
@@ -53,15 +91,25 @@ const ManagePlayersPage = () => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const PlayersTable = ({
-    playersData,
-  }: {
-    playersData: PlayersTableType[];
-  }) => {
-    const tableHeaders = ["Name", "Age", "Role", "Team", "Actions"];
+  const topContent = () => <div>{playersData.length} Players</div>;
+
+  const onSortChange = (descriptor: SortDescriptor) => {
+    setSortDescriptor(descriptor);
+  };
+
+  const PlayersTable = () => {
+    const tableHeaders = [
+      { name: "Name", sortBy: "ign", sortable: true },
+      { name: "Age", sortBy: "age", sortable: true },
+      { name: "Role", sortBy: "role", sortable: true },
+      { name: "Team", sortBy: "teams.name", sortable: true },
+      { name: "Actions", sortBy: "actions", sortable: false },
+    ];
 
     return (
       <Table
@@ -81,15 +129,19 @@ const ManagePlayersPage = () => {
         }
         className="w-full"
         selectionMode="single"
-        topContent={<div>{playersData.length} Players</div>}
+        sortDescriptor={sortDescriptor}
+        topContent={topContent()}
         topContentPlacement="outside"
+        onSortChange={onSortChange}
       >
         <TableHeader>
-          {tableHeaders.map((h, i) => (
-            <TableColumn key={i}>{h}</TableColumn>
+          {tableHeaders.map((header) => (
+            <TableColumn key={header.sortBy} allowsSorting={header.sortable}>
+              {header.name}
+            </TableColumn>
           ))}
         </TableHeader>
-        <TableBody isLoading={isLoading} items={items}>
+        <TableBody isLoading={isLoading} items={paginatedPlayers}>
           {(item: PlayersTableType) => (
             <TableRow key={item.id}>
               <TableCell>
@@ -99,9 +151,13 @@ const ManagePlayersPage = () => {
                   name={item.ign}
                 />
               </TableCell>
+
               <TableCell>{item.age}</TableCell>
+
               <TableCell>{item.role}</TableCell>
+
               <TableCell>{item.teams.name}</TableCell>
+
               <TableCell>
                 <Button
                   onClick={() => {
@@ -132,7 +188,7 @@ const ManagePlayersPage = () => {
       <h1 className={title()}>Manage Players</h1>
 
       <div className="mt-6 w-full">
-        <PlayersTable playersData={playersData} />
+        <PlayersTable />
       </div>
     </section>
   );
