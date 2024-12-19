@@ -8,36 +8,74 @@ import {
   Table,
   Button,
   Tooltip,
+  Dropdown,
   TableRow,
+  Selection,
   TableBody,
   TableCell,
   Pagination,
   TableColumn,
   TableHeader,
   Breadcrumbs,
+  DropdownItem,
+  DropdownMenu,
   BreadcrumbItem,
   SortDescriptor,
+  DropdownTrigger,
 } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
 import { PlayersTableType } from "@/types/PlayersTableType";
+import { ChevronDown } from "@/components/icons";
+import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
 
 const ManagePlayersPage = () => {
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [playersData, setPlayersData] = useState<PlayersTableType[]>([]);
+  const [vctLeagues, setVctLeagues] = useState<VctLeaguesTableType[]>([]);
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "ign",
     direction: "ascending",
   });
+  const [leagueFilter, setLeagueFilter] = useState<Selection>("all");
+  const [searchFilterValue, setSearchFilterValue] = useState("");
+
   const rowsPerPage = 10;
-  const pages = Math.ceil(playersData.length / rowsPerPage);
+
+  const hasSearchFilter = Boolean(searchFilterValue);
+
+  const filteredItems = useMemo(() => {
+    let filteredPlayers = [...playersData];
+
+    // Search bar filtering
+    if (hasSearchFilter) {
+      filteredPlayers = filteredPlayers.filter((player) =>
+        player.ign.toLowerCase().includes(searchFilterValue.toLowerCase()),
+      );
+    }
+
+    // League dropdown filtering
+    if (leagueFilter !== "all" && leagueFilter.size > 0) {
+      const selectedLeagues = Array.from(leagueFilter).map(String);
+
+      filteredPlayers = filteredPlayers.filter(
+        (player) =>
+          player.teams?.vct_league &&
+          selectedLeagues.includes(String(player.teams.vct_league.id)),
+      );
+    }
+
+    return filteredPlayers;
+  }, [playersData, searchFilterValue, leagueFilter]);
+
+  const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
   const sortedPlayers = useMemo(() => {
     // Sort the entire playersData array
-    return [...playersData].sort((a, b) => {
+    return [...filteredItems].sort((a, b) => {
       const getValue = (obj: any, path: string) => {
         return path.split(".").reduce((acc, key) => (acc ? acc[key] : ""), obj);
       };
@@ -62,7 +100,7 @@ const ManagePlayersPage = () => {
 
       return sortDescriptor.direction === "ascending" ? result : -result;
     });
-  }, [playersData, sortDescriptor]);
+  }, [filteredItems, sortDescriptor]);
 
   const paginatedPlayers = useMemo(() => {
     // Slice the sorted array for the current page
@@ -75,21 +113,30 @@ const ManagePlayersPage = () => {
   const fetchPlayers = async () => {
     try {
       const supabase = getSupabase();
-      const { data, error } = await supabase.from("players").select(
-        `*, 
-        teams(
+      const { data: playersData, error: playersError }: any =
+        await supabase.from("players").select(`
+        *, teams(
           *, vct_league(
             *
+            )
           )
         )
-        )`,
-      );
+      `);
 
-      if (error) {
-        console.error(error);
+      if (playersError) {
+        console.error(playersError);
       } else {
-        setPlayersData(data);
-        console.log(data);
+        setPlayersData(playersData);
+      }
+
+      const { data: vctLeaguesData, error: vctLeaguesError } = await supabase
+        .from("vct_leagues")
+        .select("*");
+
+      if (vctLeaguesError) {
+        console.error(vctLeaguesError);
+      } else {
+        setVctLeagues(vctLeaguesData);
       }
     } catch (error) {
       console.error(error);
@@ -114,13 +161,58 @@ const ManagePlayersPage = () => {
     return age;
   };
 
-  const topContent = () => (
-    <div className="flex justify-between">
-      <span className="text-small text-default-400">
-        Total {playersData.length} players
-      </span>
-    </div>
-  );
+  const topContent = () => {
+    return (
+      <div className="flex justify-between">
+        <span className="flex items-center text-small text-default-400">
+          Total {playersData.length} players
+        </span>
+
+        <div className="flex gap-2">
+          <Dropdown>
+            <DropdownTrigger>
+              <Button endContent={<ChevronDown fill="currentColor" />}>
+                League
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label="League"
+              closeOnSelect={false}
+              selectedKeys={leagueFilter}
+              selectionMode="multiple"
+              onSelectionChange={setLeagueFilter}
+            >
+              {vctLeagues.map((league) => (
+                <DropdownItem
+                  key={league.id}
+                  aria-selected="false"
+                  textValue={league.name}
+                >
+                  <User
+                    avatarProps={{
+                      isBordered: false,
+                      size: "sm",
+                      src: league.logo_url,
+                      className: "bg-transparent rounded-none",
+                    }}
+                    name={league.name}
+                  />
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+          <Button
+            color="primary"
+            endContent={<span>+</span>}
+            onPress={() => router.push("/moderator/manage/players/add")}
+          >
+            Player
+          </Button>
+        </div>
+      </div>
+    );
+  };
 
   const onSortChange = (descriptor: SortDescriptor) => {
     setSortDescriptor(descriptor);
@@ -129,6 +221,7 @@ const ManagePlayersPage = () => {
   const PlayersTable = () => {
     const tableHeaders = [
       { name: "Name", sortBy: "ign", sortable: true },
+      { name: "Country", sortBy: "country", sortable: true },
       { name: "Team", sortBy: "teams.name", sortable: true },
       { name: "Role", sortBy: "role", sortable: true },
       { name: "Age", sortBy: "age", sortable: true },
@@ -166,7 +259,10 @@ const ManagePlayersPage = () => {
             </TableColumn>
           ))}
         </TableHeader>
-        <TableBody isLoading={isLoading} items={paginatedPlayers}>
+        <TableBody
+          isLoading={isLoading}
+          items={isLoading ? [] : paginatedPlayers}
+        >
           {(item: PlayersTableType) => (
             <TableRow key={item.id}>
               <TableCell>
@@ -176,6 +272,8 @@ const ManagePlayersPage = () => {
                   name={item.ign}
                 />
               </TableCell>
+
+              <TableCell>{item.country}</TableCell>
 
               <TableCell>
                 <Tooltip content={item.teams.name}>
