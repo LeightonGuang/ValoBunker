@@ -289,10 +289,6 @@ const ManagePlayersPage = () => {
       { name: "Actions", sortBy: "actions", sortable: false },
     ];
 
-    useEffect(() => {
-      console.log(playersData);
-    }, [playersData]);
-
     return (
       <Table
         aria-label="Players"
