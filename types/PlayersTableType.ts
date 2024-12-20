@@ -7,7 +7,7 @@ export interface PlayersTableType {
   name: string;
   created_at: string;
   country: string;
-  role: string;
+  roles: string[];
   birthday: Date;
   profile_picture_url: string;
   teams: TeamsTableType;
