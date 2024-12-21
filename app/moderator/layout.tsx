@@ -137,7 +137,7 @@ export default function ModeratorLayout({
                 ))}
               </Listbox>
             </div>
-            <div className="lg:flex lg:w-full lg:justify-center">
+            <div className="lg:flex lg:h-[calc(100dvh-7rem)] lg:w-full lg:justify-center lg:overflow-y-auto">
               {children}
             </div>
           </div>
