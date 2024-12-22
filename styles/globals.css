@@ -93,7 +93,7 @@ h3 {
 }
 
 .rich-text-content h1,
-h2,
-h3 {
+.rich-text-content h2,
+.rich-text-content h3 {
   margin-top: 1rem;
 }
