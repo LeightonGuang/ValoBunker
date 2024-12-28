@@ -5,16 +5,54 @@ import { useRouter } from "next/navigation";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import React, { useEffect, useState, useCallback } from "react";
 
-import { TeamIcon, UserIcon } from "@/components/icons";
+import {
+  NewsIcon,
+  TeamIcon,
+  UserIcon,
+  AgentIcon,
+  PatchIcon,
+  PlayerIcon,
+  CalendarIcon,
+} from "@/components/moderatorPageIcons";
 import { getSupabase } from "@/utils/supabase/client";
 import { IconWrapper } from "@/components/IconWrapper";
 
 const menuList = [
-  { name: "Agents", key: "agents", href: "/moderator/manage/agents" },
-  { name: "Events", key: "events", href: "/moderator/manage/events" },
-  { name: "News", key: "news", href: "/moderator/manage/news" },
-  { name: "Patches", key: "patches", href: "/moderator/manage/patches" },
-  { name: "Players", key: "players", href: "/moderator/manage/players" },
+  {
+    name: "Agents",
+    key: "agents",
+    href: "/moderator/manage/agents",
+    icon: <AgentIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
+  {
+    name: "Events",
+    key: "events",
+    href: "/moderator/manage/events",
+    icon: <CalendarIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
+  {
+    name: "News",
+    key: "news",
+    href: "/moderator/manage/news",
+    icon: <NewsIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
+  {
+    name: "Patches",
+    key: "patches",
+    href: "/moderator/manage/patches",
+    icon: <PatchIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
+  {
+    name: "Players",
+    key: "players",
+    href: "/moderator/manage/players",
+    icon: <PlayerIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
   {
     name: "Teams",
     key: "teams",
