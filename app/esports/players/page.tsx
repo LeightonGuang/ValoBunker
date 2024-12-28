@@ -1,221 +1,361 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { Image, Tab, Tabs, User } from "@nextui-org/react";
+import { Key, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
+  Selection,
   TableColumn,
   TableHeader,
-  TableRow,
+  SortDescriptor,
 } from "@nextui-org/table";
-import { SortDescriptor } from "@nextui-org/table";
+import {
+  Chip,
+  User,
+  Image,
+  Button,
+  Tooltip,
+  Dropdown,
+  Pagination,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
+import { ChevronDown } from "@/components/icons";
 import { getSupabase } from "@/utils/supabase/client";
 import { PlayersTableType } from "@/types/PlayersTableType";
+import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
+
+const headerColumns = [
+  { name: "Name", sortBy: "ign", sortable: true },
+  { name: "Country", sortBy: "country", sortable: true },
+  { name: "Team", sortBy: "teams.name", sortable: true },
+  { name: "Role", sortBy: "role", sortable: false },
+  { name: "Age", sortBy: "age", sortable: true },
+  { name: "League", sortBy: "teams.vct_league.name", sortable: true },
+];
 
 const PlayersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [regionTab, setRegionTab] = useState("All");
-  const [playersList, setPlayersList] = useState<PlayersTableType[]>([]);
+  const [playersData, setPlayersData] = useState<PlayersTableType[]>([]);
+  const [vctLeagues, setVctLeagues] = useState<VctLeaguesTableType[]>([]);
+  const [filterValue, setFilterValue] = useState("");
+  const [selectedLeagueKey, setSelectedLeagueKey] = useState<Selection>(
+    new Set([]),
+  );
+  const [leagueFilter, setLeagueFilter] = useState<Selection>("all");
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "ign",
     direction: "ascending",
   });
 
-  const getAllPlayers = async () => {
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 15;
+  const hasSearchFilter = Boolean(filterValue);
+
+  const fetchData = async () => {
     try {
       const supabase = getSupabase();
-      const { data, error } = await supabase.from("players").select(`
-        *,
-        teams (
-          *
-        )
-      `);
+      const { data: playersData, error: playersError }: any = await supabase
+        .from("players")
+        .select(`*, teams(*, vct_league(*)))`)
+        .order("ign", { ascending: true });
 
-      if (error) {
-        console.error(error);
+      if (playersError) {
+        console.error(playersError);
       } else {
-        setPlayersList(data);
+        setPlayersData(playersData);
       }
 
-      setIsLoading(false);
+      const { data: vctLeaguesData, error: vctLeaguesError } = await supabase
+        .from("vct_leagues")
+        .select("*")
+        .order("id", { ascending: true });
+
+      if (vctLeaguesError) {
+        console.error(vctLeaguesError);
+      } else {
+        setVctLeagues(vctLeaguesData);
+      }
     } catch (error) {
-      console.error(error);
+    } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    getAllPlayers();
-  }, []);
+  const filteredPlayers = useMemo(() => {
+    let filteredPlayersData = [...playersData];
+
+    if (hasSearchFilter) {
+      filteredPlayersData = filteredPlayersData.filter((player) =>
+        player.ign.toLowerCase().includes(filterValue.toLowerCase()),
+      );
+    }
+
+    if (
+      leagueFilter !== "all" &&
+      Array.from(leagueFilter).length !== vctLeagues.length
+    ) {
+      filteredPlayersData = filteredPlayersData.filter((player) =>
+        Array.from(leagueFilter).includes(
+          player.teams.vct_league.id.toString(),
+        ),
+      );
+    }
+
+    return filteredPlayersData;
+  }, [playersData, filterValue, leagueFilter, vctLeagues]);
+
+  const pages = Math.ceil(filteredPlayers.length / rowsPerPage);
 
   const sortedPlayers = useMemo(() => {
-    return [...playersList]
-      .filter((player) => {
-        if (regionTab === "All") return true;
+    return [...filteredPlayers].sort((a, b) => {
+      const first = a[
+        sortDescriptor.column as keyof PlayersTableType
+      ] as number;
+      const second = b[
+        sortDescriptor.column as keyof PlayersTableType
+      ] as number;
+      const cmp = first < second ? -1 : first > second ? 1 : 0;
 
-        return player.teams.vct_league === regionTab;
-      })
-      .sort((a, b) => {
-        const getValue = (obj: any, path: string) => {
-          return path.split(".").reduce((acc, key) => acc?.[key], obj);
-        };
+      return sortDescriptor.direction === "descending" ? -cmp : cmp;
+    });
+  }, [sortDescriptor, filteredPlayers]);
 
-        const first = getValue(
-          a,
-          sortDescriptor.column as keyof PlayersTableType,
+  const players = useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return sortedPlayers.slice(start, end);
+  }, [sortedPlayers, page]);
+
+  const renderCell = useCallback((player: PlayersTableType, columnKey: Key) => {
+    const convertedAge = (date: Date) => {
+      const birthday = new Date(date);
+      const today = new Date();
+
+      let age = today.getFullYear() - birthday.getFullYear();
+
+      if (
+        today.getMonth() < birthday.getMonth() ||
+        today.getDate() < birthday.getDate()
+      ) {
+        age--;
+      }
+
+      return age;
+    };
+
+    switch (columnKey) {
+      case "ign": {
+        return (
+          <User
+            avatarProps={{ src: player.profile_picture_url }}
+            description={player.name}
+            name={player.ign}
+          />
         );
-        const second = getValue(
-          b,
-          sortDescriptor.column as keyof PlayersTableType,
+      }
+
+      case "country": {
+        return <>{player.country}</>;
+      }
+
+      case "teams.name": {
+        return (
+          <Tooltip content={player.teams.name}>
+            <Image
+              alt={player.teams.name}
+              className="h-8 w-8 rounded-none object-contain"
+              src={player.teams.logo_url}
+            />
+          </Tooltip>
         );
+      }
 
-        const normalizeTeamName = (name: string) => {
-          return name.toLowerCase().replace(/^\d+\s*/, "");
-        };
+      case "role": {
+        return (
+          <div className="flex gap-2">
+            {player.roles.map((role) => (
+              <Chip
+                key={
+                  role === "1"
+                    ? "Controller"
+                    : role === "2"
+                      ? "Duelist"
+                      : role === "3"
+                        ? "Initiator"
+                        : role === "4"
+                          ? "Sentinel"
+                          : role
+                }
+                color={
+                  role === "1"
+                    ? "success"
+                    : role === "2"
+                      ? "danger"
+                      : role === "3"
+                        ? "warning"
+                        : role === "4"
+                          ? "secondary"
+                          : role === "IGL"
+                            ? "primary"
+                            : "default"
+                }
+                variant="flat"
+              >
+                {role === "1"
+                  ? "Controller"
+                  : role === "2"
+                    ? "Duelist"
+                    : role === "3"
+                      ? "Initiator"
+                      : role === "4"
+                        ? "Sentinel"
+                        : role}
+              </Chip>
+            ))}
+          </div>
+        );
+      }
 
-        const normalizedFirst = first ? normalizeTeamName(String(first)) : "";
-        const normalizedSecond = second
-          ? normalizeTeamName(String(second))
-          : "";
+      case "age": {
+        return <>{player.birthday ? convertedAge(player.birthday) : "-"}</>;
+      }
 
-        const result = normalizedFirst.localeCompare(normalizedSecond);
+      case "teams.vct_league.name": {
+        return (
+          <Tooltip content={player.teams.vct_league.name}>
+            <Image
+              className="h-8 w-8 rounded-none object-contain"
+              src={player.teams.vct_league.logo_url}
+            />
+          </Tooltip>
+        );
+      }
+    }
+  }, []);
 
-        return sortDescriptor.direction === "ascending" ? result : -result;
-      });
-  }, [playersList, sortDescriptor, regionTab]);
+  const TopContent = useMemo(
+    () => (
+      <div className="flex items-center justify-between">
+        <span className="text-small text-default-400">
+          {`Total ${playersData.length} players`}
+        </span>
 
-  const onSortChange = (descriptor: SortDescriptor) => {
-    setSortDescriptor(descriptor);
-  };
+        <Dropdown>
+          <DropdownTrigger>
+            <Button endContent={<ChevronDown fill="currentColor" />}>
+              League
+            </Button>
+          </DropdownTrigger>
 
-  const regionTabs: { region: string; region_icon_url: string }[] = [
-    {
-      region: "All",
-      region_icon_url: "https://cdn3.emoji.gg/emojis/7053-vct-red-logo.png",
-    },
-    {
-      region: "Americas",
-      region_icon_url: "https://owcdn.net/img/640f5ab71dfbb.png",
-    },
-    {
-      region: "China",
-      region_icon_url: "https://owcdn.net/img/65dd97cea9a25.png",
-    },
-    {
-      region: "EMEA",
-      region_icon_url: "https://owcdn.net/img/65ab54a77831c.png",
-    },
-    {
-      region: "Pacific",
-      region_icon_url: "https://owcdn.net/img/640f5ae002674.png",
-    },
-  ];
+          <DropdownMenu
+            disallowEmptySelection
+            aria-label="League"
+            closeOnSelect={false}
+            selectedKeys={leagueFilter}
+            selectionMode="multiple"
+            onSelectionChange={setLeagueFilter}
+          >
+            {vctLeagues.map((league) => (
+              <DropdownItem
+                key={league.id}
+                aria-selected="false"
+                textValue={league.name}
+              >
+                <User
+                  avatarProps={{
+                    isBordered: false,
+                    size: "sm",
+                    src: league.logo_url,
+                    className: "bg-transparent rounded-none",
+                  }}
+                  name={league.name}
+                />
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+    ),
+    [playersData, leagueFilter, vctLeagues],
+  );
 
-  const tableHeaders: {
-    columnName: string;
-    sortBy: string;
-    sortable: boolean;
-  }[] = [
-    { columnName: "Player", sortBy: "ign", sortable: true },
-    { columnName: "Role", sortBy: "role", sortable: true },
-    { columnName: "Team", sortBy: "teams.name", sortable: true },
-    { columnName: "Country", sortBy: "country", sortable: true },
-  ];
+  const BottomContent = useMemo(() => {
+    return (
+      <div className="flex w-full items-center justify-center">
+        <Pagination
+          isCompact
+          showControls
+          color="primary"
+          page={page}
+          total={pages}
+          onChange={setPage}
+        />
+      </div>
+    );
+  }, [selectedLeagueKey, players.length, page, pages, hasSearchFilter]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filterValue, leagueFilter, sortDescriptor]);
+
+  useEffect(() => {
+    console.log("League Filter:", leagueFilter);
+  }, [leagueFilter]);
+
+  useEffect(() => {
+    console.log("Players Data:", playersData);
+  }, [playersData]);
 
   return (
     <section>
       <h1 className={title()}>Players</h1>
-      <Tabs
-        className="mt-4 flex justify-center"
-        classNames={{ tabList: "gap-0 lg:gap-2", tab: "max-w-fit h-max" }}
-        onSelectionChange={(key) => {
-          setRegionTab(String(key));
-        }}
-      >
-        {regionTabs.map((tab) => (
-          <Tab
-            key={tab.region}
-            title={
-              <div className="flex flex-col items-center gap-2 lg:flex-row">
-                <Image
-                  alt={tab.region}
-                  className="h-4 w-4"
-                  height={16}
-                  src={tab.region_icon_url}
-                  width={16}
-                />
-                {tab.region}
-              </div>
-            }
+
+      <div className="mt-6 w-full">
+        <Table
+          aria-label="Players"
+          bottomContent={BottomContent}
+          selectedKeys={selectedLeagueKey}
+          selectionMode="single"
+          sortDescriptor={sortDescriptor}
+          topContent={TopContent}
+          topContentPlacement="outside"
+          onSelectionChange={setSelectedLeagueKey}
+          onSortChange={setSortDescriptor}
+        >
+          <TableHeader>
+            {headerColumns.map((header) => (
+              <TableColumn key={header.sortBy} allowsSorting={header.sortable}>
+                {header.name}
+              </TableColumn>
+            ))}
+          </TableHeader>
+
+          <TableBody
+            emptyContent="No players found"
+            isLoading={isLoading}
+            items={players}
           >
-            <div className="mt-6">
-              <Table
-                aria-label="Players"
-                sortDescriptor={sortDescriptor}
-                onSortChange={onSortChange}
-              >
-                <TableHeader>
-                  {tableHeaders.map((header) => (
-                    <TableColumn
-                      key={header.sortBy}
-                      allowsSorting={header.sortable}
-                    >
-                      {header.columnName}
-                    </TableColumn>
-                  ))}
-                </TableHeader>
-                <TableBody isLoading={isLoading} items={sortedPlayers}>
-                  {(player) => (
-                    <TableRow key={player.id}>
-                      <TableCell className="whitespace-nowrap">
-                        <User
-                          avatarProps={{
-                            src: player.profile_picture_url,
-                            isBordered: player.role === "IGL",
-                            color:
-                              player.role === "IGL" ? "primary" : "default",
-                            classNames: {
-                              base: "bg-[#ffffff]",
-                            },
-                          }}
-                          description={player.name}
-                          name={player.ign}
-                        />
-                      </TableCell>
-
-                      <TableCell>{player.role}</TableCell>
-
-                      <TableCell className="whitespace-nowrap">
-                        <div className="flex items-center gap-2">
-                          <Image
-                            alt={player.teams.name}
-                            className="light:bg-[#000000]"
-                            classNames={{
-                              img: "min-w-8 min-h-8 rounded-none",
-                            }}
-                            height={32}
-                            src={player.teams.logo_url}
-                            width={32}
-                          />
-                          {player.teams.name}
-                        </div>
-                      </TableCell>
-
-                      <TableCell className="whitespace-nowrap">
-                        {player.country}
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-          </Tab>
-        ))}
-      </Tabs>
+            {(player) => (
+              <TableRow key={player.id}>
+                {(columnKey) => (
+                  <TableCell>{renderCell(player, columnKey)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </section>
   );
 };
