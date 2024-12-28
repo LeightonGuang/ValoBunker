@@ -68,7 +68,7 @@ const ManageAgentsPage = () => {
   }, []);
 
   return (
-    <section>
+    <section className="w-full lg:mr-4">
       <Breadcrumbs>
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Agents</BreadcrumbItem>
