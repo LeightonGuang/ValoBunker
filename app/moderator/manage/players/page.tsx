@@ -293,7 +293,7 @@ const ManagePlayersPage = () => {
   }, []);
 
   return (
-    <section>
+    <section className="w-full lg:mr-4">
       <Breadcrumbs aria-label="Players" className="mb-6">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Players</BreadcrumbItem>
@@ -416,7 +416,7 @@ const ManagePlayersPage = () => {
                 <TableCell>
                   <Button
                     onClick={() => {
-                      router.push(`/moderator/manage/players/${item.id}`);
+                      router.push(`/moderator/manage/players/edit/${item.id}`);
                     }}
                   >
                     Edit
