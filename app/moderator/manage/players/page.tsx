@@ -33,6 +33,16 @@ import { ChevronDown, SearchIcon } from "@/components/icons";
 import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
 import { RolesTableType } from "@/types/RolesTableType";
 
+const tableHeaders = [
+  { name: "Name", sortBy: "ign", sortable: true },
+  { name: "Country", sortBy: "country", sortable: true },
+  { name: "Team", sortBy: "teams.name", sortable: true },
+  { name: "Role", sortBy: "role", sortable: false },
+  { name: "Age", sortBy: "age", sortable: true },
+  { name: "League", sortBy: "teams.vct_league.name", sortable: true },
+  { name: "Actions", sortBy: "actions", sortable: false },
+];
+
 const ManagePlayersPage = () => {
   const router = useRouter();
   const [playersData, setPlayersData] = useState<PlayersTableType[]>([]);
@@ -278,145 +288,6 @@ const ManagePlayersPage = () => {
     setSortDescriptor(descriptor);
   };
 
-  const PlayersTable = () => {
-    const tableHeaders = [
-      { name: "Name", sortBy: "ign", sortable: true },
-      { name: "Country", sortBy: "country", sortable: true },
-      { name: "Team", sortBy: "teams.name", sortable: true },
-      { name: "Role", sortBy: "role", sortable: false },
-      { name: "Age", sortBy: "age", sortable: true },
-      { name: "League", sortBy: "teams.vct_league.name", sortable: true },
-      { name: "Actions", sortBy: "actions", sortable: false },
-    ];
-
-    return (
-      <Table
-        aria-label="Players"
-        bottomContent={
-          <div className="flex w-full justify-center">
-            <Pagination
-              isCompact
-              showControls
-              color="primary"
-              page={page}
-              total={pages}
-              onChange={setPage}
-            />
-          </div>
-        }
-        className="w-full"
-        selectionMode="single"
-        sortDescriptor={sortDescriptor}
-        topContent={topContent}
-        topContentPlacement="outside"
-        onSortChange={onSortChange}
-      >
-        <TableHeader>
-          {tableHeaders.map((header) => (
-            <TableColumn key={header.sortBy} allowsSorting={header.sortable}>
-              {header.name}
-            </TableColumn>
-          ))}
-        </TableHeader>
-        <TableBody
-          emptyContent="No players found"
-          isLoading={isLoading}
-          items={isLoading ? [] : paginatedPlayers}
-        >
-          {(item: PlayersTableType) => (
-            <TableRow key={item.id}>
-              <TableCell>
-                <User
-                  avatarProps={{ src: item.profile_picture_url }}
-                  description={item.name}
-                  name={item.ign}
-                />
-              </TableCell>
-
-              <TableCell>{item.country}</TableCell>
-
-              <TableCell>
-                <Tooltip content={item.teams.name}>
-                  <Image
-                    className="h-8 w-8 rounded-none object-contain"
-                    src={item.teams.logo_url}
-                  />
-                </Tooltip>
-              </TableCell>
-
-              <TableCell>
-                <div className="flex gap-2">
-                  {item.roles.map((role) => (
-                    <Chip
-                      key={
-                        role === "1"
-                          ? "Controller"
-                          : role === "2"
-                            ? "Duelist"
-                            : role === "3"
-                              ? "Initiator"
-                              : role === "4"
-                                ? "Sentinel"
-                                : role
-                      }
-                      color={
-                        role === "1"
-                          ? "success"
-                          : role === "2"
-                            ? "danger"
-                            : role === "3"
-                              ? "warning"
-                              : role === "4"
-                                ? "secondary"
-                                : role === "IGL"
-                                  ? "primary"
-                                  : "default"
-                      }
-                      variant="flat"
-                    >
-                      {role === "1"
-                        ? "Controller"
-                        : role === "2"
-                          ? "Duelist"
-                          : role === "3"
-                            ? "Initiator"
-                            : role === "4"
-                              ? "Sentinel"
-                              : role}
-                    </Chip>
-                  ))}
-                </div>
-              </TableCell>
-
-              <TableCell>
-                {item.birthday ? convertedAge(item.birthday) : "-"}
-              </TableCell>
-
-              <TableCell>
-                <Tooltip content={item.teams.vct_league.name}>
-                  <Image
-                    className="h-8 w-8 rounded-none object-contain"
-                    src={item.teams.vct_league.logo_url}
-                  />
-                </Tooltip>
-              </TableCell>
-
-              <TableCell>
-                <Button
-                  onClick={() => {
-                    router.push(`/moderator/manage/players/${item.id}`);
-                  }}
-                >
-                  Edit
-                </Button>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    );
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -431,7 +302,130 @@ const ManagePlayersPage = () => {
       <h1 className={title()}>Manage Players</h1>
 
       <div className="mt-6 w-full">
-        <PlayersTable />
+        <Table
+          aria-label="Players"
+          bottomContent={
+            <div className="flex w-full justify-center">
+              <Pagination
+                isCompact
+                showControls
+                color="primary"
+                page={page}
+                total={pages}
+                onChange={setPage}
+              />
+            </div>
+          }
+          className="w-full"
+          selectionMode="single"
+          sortDescriptor={sortDescriptor}
+          topContent={topContent}
+          topContentPlacement="outside"
+          onSortChange={onSortChange}
+        >
+          <TableHeader>
+            {tableHeaders.map((header) => (
+              <TableColumn key={header.sortBy} allowsSorting={header.sortable}>
+                {header.name}
+              </TableColumn>
+            ))}
+          </TableHeader>
+          <TableBody
+            emptyContent="No players found"
+            isLoading={isLoading}
+            items={isLoading ? [] : paginatedPlayers}
+          >
+            {(item: PlayersTableType) => (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <User
+                    avatarProps={{ src: item.profile_picture_url }}
+                    description={item.name}
+                    name={item.ign}
+                  />
+                </TableCell>
+
+                <TableCell>{item.country}</TableCell>
+
+                <TableCell>
+                  <Tooltip content={item.teams.name}>
+                    <Image
+                      className="h-8 w-8 rounded-none object-contain"
+                      src={item.teams.logo_url}
+                    />
+                  </Tooltip>
+                </TableCell>
+
+                <TableCell>
+                  <div className="flex gap-2">
+                    {item.roles.map((role) => (
+                      <Chip
+                        key={
+                          role === "1"
+                            ? "Controller"
+                            : role === "2"
+                              ? "Duelist"
+                              : role === "3"
+                                ? "Initiator"
+                                : role === "4"
+                                  ? "Sentinel"
+                                  : role
+                        }
+                        color={
+                          role === "1"
+                            ? "success"
+                            : role === "2"
+                              ? "danger"
+                              : role === "3"
+                                ? "warning"
+                                : role === "4"
+                                  ? "secondary"
+                                  : role === "IGL"
+                                    ? "primary"
+                                    : "default"
+                        }
+                        variant="flat"
+                      >
+                        {role === "1"
+                          ? "Controller"
+                          : role === "2"
+                            ? "Duelist"
+                            : role === "3"
+                              ? "Initiator"
+                              : role === "4"
+                                ? "Sentinel"
+                                : role}
+                      </Chip>
+                    ))}
+                  </div>
+                </TableCell>
+
+                <TableCell>
+                  {item.birthday ? convertedAge(item.birthday) : "-"}
+                </TableCell>
+
+                <TableCell>
+                  <Tooltip content={item.teams.vct_league.name}>
+                    <Image
+                      className="h-8 w-8 rounded-none object-contain"
+                      src={item.teams.vct_league.logo_url}
+                    />
+                  </Tooltip>
+                </TableCell>
+
+                <TableCell>
+                  <Button
+                    onClick={() => {
+                      router.push(`/moderator/manage/players/${item.id}`);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </div>
     </section>
   );
