@@ -22,10 +22,11 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Input,
 } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
-import { ChevronDown } from "@/components/icons";
+import { ChevronDown, SearchIcon } from "@/components/icons";
 import { getSupabase } from "@/utils/supabase/client";
 import { PlayersTableType } from "@/types/PlayersTableType";
 import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
@@ -240,53 +241,79 @@ const PlayersPage = () => {
     }
   }, []);
 
-  const TopContent = useMemo(
+  const onSearchChange = useCallback((ign?: string) => {
+    console.log(filterValue);
+
+    if (ign) {
+      setFilterValue(ign);
+      setPage(1);
+    } else {
+      setFilterValue("");
+    }
+  }, []);
+
+  const topContent = useMemo(
     () => (
       <div className="flex items-center justify-between">
         <span className="text-small text-default-400">
           {`Total ${playersData.length} players`}
         </span>
 
-        <Dropdown>
-          <DropdownTrigger>
-            <Button endContent={<ChevronDown fill="currentColor" />}>
-              League
-            </Button>
-          </DropdownTrigger>
+        <div className="flex justify-end gap-2">
+          <Input
+            isClearable
+            className="w-full sm:max-w-[44%]"
+            placeholder="Search by IGN"
+            startContent={<SearchIcon />}
+            value={filterValue}
+            onClear={() => {
+              setFilterValue("");
+              setPage(1);
+            }}
+            onValueChange={onSearchChange}
+          />
 
-          <DropdownMenu
-            disallowEmptySelection
-            aria-label="League"
-            closeOnSelect={false}
-            selectedKeys={leagueFilter}
-            selectionMode="multiple"
-            onSelectionChange={setLeagueFilter}
-          >
-            {vctLeagues.map((league) => (
-              <DropdownItem
-                key={league.id}
-                aria-selected="false"
-                textValue={league.name}
-              >
-                <User
-                  avatarProps={{
-                    isBordered: false,
-                    size: "sm",
-                    src: league.logo_url,
-                    className: "bg-transparent rounded-none",
-                  }}
-                  name={league.name}
-                />
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
+          <Dropdown>
+            <DropdownTrigger>
+              <Button endContent={<ChevronDown fill="currentColor" />}>
+                League
+              </Button>
+            </DropdownTrigger>
+
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label="League"
+              closeOnSelect={false}
+              selectedKeys={leagueFilter}
+              selectionMode="multiple"
+              onSelectionChange={setLeagueFilter}
+            >
+              {vctLeagues.map((league) => (
+                <DropdownItem
+                  key={league.id}
+                  aria-selected="false"
+                  textValue={league.name}
+                >
+                  <User
+                    avatarProps={{
+                      isBordered: false,
+                      size: "sm",
+                      src: league.logo_url,
+                      className: "bg-transparent rounded-none",
+                    }}
+                    name={league.name}
+                  />
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </div>
     ),
-    [playersData, leagueFilter, vctLeagues],
+    [playersData, leagueFilter, vctLeagues, onSearchChange, filterValue],
   );
 
-  const BottomContent = useMemo(() => {
+  const bottomContent = useMemo(() => {
     return (
       <div className="flex w-full items-center justify-center">
         <Pagination
@@ -307,7 +334,7 @@ const PlayersPage = () => {
 
   useEffect(() => {
     setPage(1);
-  }, [filterValue, leagueFilter, sortDescriptor]);
+  }, [leagueFilter, sortDescriptor]);
 
   useEffect(() => {
     console.log("League Filter:", leagueFilter);
@@ -324,11 +351,11 @@ const PlayersPage = () => {
       <div className="mt-6 w-full">
         <Table
           aria-label="Players"
-          bottomContent={BottomContent}
+          bottomContent={bottomContent}
           selectedKeys={selectedLeagueKey}
           selectionMode="single"
           sortDescriptor={sortDescriptor}
-          topContent={TopContent}
+          topContent={topContent}
           topContentPlacement="outside"
           onSelectionChange={setSelectedLeagueKey}
           onSortChange={setSortDescriptor}
