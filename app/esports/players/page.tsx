@@ -63,7 +63,7 @@ const PlayersPage = () => {
       const supabase = getSupabase();
       const { data: playersData, error: playersError }: any = await supabase
         .from("players")
-        .select(`*, teams(*, vct_league(*)))`)
+        .select(`*, teams(*, vct_league(*))`)
         .order("ign", { ascending: true });
 
       if (playersError) {
@@ -135,7 +135,7 @@ const PlayersPage = () => {
   }, [sortedPlayers, page]);
 
   const renderCell = useCallback((player: PlayersTableType, columnKey: Key) => {
-    const convertedAge = (date: Date) => {
+    const convertedAge = (date: string | Date) => {
       const birthday = new Date(date);
       const today = new Date();
 
