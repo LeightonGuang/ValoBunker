@@ -19,8 +19,6 @@ const timezones = {
   GMT: "Etc/GMT",
 } as { [key: string]: string };
 
-// a function thats calculate the countdown time
-
 const calculateCountdown: (endDate: Date, timeZone: string) => string = (
   endDate: Date,
   timeZone: string,
@@ -63,27 +61,26 @@ const CountdownCard = ({
 }: {
   countdownEventList?: CountdownTableType[] | undefined;
 }) => {
-  const [times, setTimes] = useState<
-    { [key: string]: { PST: string; GMT: string; HKT: string } }[]
-  >([]);
+  const [times, setTimes] = useState<{
+    [key: string]: { PST: string; GMT: string; HKT: string };
+  }>({});
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (countdownEventList) {
-        // Update each event's countdown
         const updatedTimes: {
           [key: string]: { PST: string; GMT: string; HKT: string };
-        }[] = [{}];
+        } = {};
 
         countdownEventList.forEach((countdownObj) => {
           updatedTimes[countdownObj.name as any] = {
-            PST: calculateCountdown(countdownObj.end_date, "PST"),
-            GMT: calculateCountdown(countdownObj.end_date, "GMT"),
-            HKT: calculateCountdown(countdownObj.end_date, "HKT"),
+            PST: calculateCountdown(new Date(countdownObj.end_date), "PST"),
+            GMT: calculateCountdown(new Date(countdownObj.end_date), "GMT"),
+            HKT: calculateCountdown(new Date(countdownObj.end_date), "HKT"),
           };
         });
 
-        setTimes(updatedTimes); // Set updated times at once
+        setTimes(updatedTimes);
       }
     }, 1000);
 
