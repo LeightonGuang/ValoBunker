@@ -175,7 +175,7 @@ const ManagePlayersPage = () => {
     }
   };
 
-  const convertedAge = (date: Date) => {
+  const convertedAge = (date: string | Date) => {
     const birthday = new Date(date);
     const today = new Date();
 
