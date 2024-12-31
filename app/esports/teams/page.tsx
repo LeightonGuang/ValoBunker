@@ -92,7 +92,6 @@ const TeamsPage = () => {
     });
 
     setFilteredTeamList(teams);
-    console.log(teams);
   }, [selectedRegionTab, teamsDataList]);
 
   return (

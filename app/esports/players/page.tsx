@@ -242,8 +242,6 @@ const PlayersPage = () => {
   }, []);
 
   const onSearchChange = useCallback((ign?: string) => {
-    console.log(filterValue);
-
     if (ign) {
       setFilterValue(ign);
       setPage(1);
@@ -335,14 +333,6 @@ const PlayersPage = () => {
   useEffect(() => {
     setPage(1);
   }, [leagueFilter, sortDescriptor]);
-
-  useEffect(() => {
-    console.log("League Filter:", leagueFilter);
-  }, [leagueFilter]);
-
-  useEffect(() => {
-    console.log("Players Data:", playersData);
-  }, [playersData]);
 
   return (
     <section>
