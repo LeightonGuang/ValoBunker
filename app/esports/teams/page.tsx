@@ -11,6 +11,7 @@ import {
   CardFooter,
   AccordionItem,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { title } from "@/components/primitives";
@@ -42,6 +43,7 @@ const regionTabs: { name: string; region_icon_url: string }[] = [
 ];
 
 const TeamsPage = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedRegionTab, setSelectedRegionTab] = useState("All");
   const [teamsDataList, setTeamsDataList] = useState<TeamsTableType[]>([]);
@@ -158,7 +160,13 @@ const TeamsPage = () => {
                           )
                           .map((player) => (
                             <li key={player.id}>
-                              <Card>
+                              <Card
+                                isPressable
+                                className="cursor-pointer"
+                                onPress={() =>
+                                  router.push(`/esports/players/${player.id}`)
+                                }
+                              >
                                 <CardBody className="flex justify-center">
                                   <Image
                                     className="aspect-square h-full w-full bg-white object-cover object-top"
