@@ -28,10 +28,10 @@ import {
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
+import { RolesTableType } from "@/types/RolesTableType";
 import { PlayersTableType } from "@/types/PlayersTableType";
 import { ChevronDown, SearchIcon } from "@/components/icons";
 import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
-import { RolesTableType } from "@/types/RolesTableType";
 
 const tableHeaders = [
   { name: "Name", sortBy: "ign", sortable: true },
@@ -55,7 +55,6 @@ const ManagePlayersPage = () => {
     direction: "ascending",
   });
   const [page, setPage] = useState(1);
-  const [roleData, setRoleData] = useState<RolesTableType[]>([]);
 
   const rowsPerPage = 10;
 
@@ -156,17 +155,6 @@ const ManagePlayersPage = () => {
         console.error(vctLeaguesError);
       } else {
         setVctLeagues(vctLeaguesData);
-      }
-
-      const { data: roleData, error: roleError } = await supabase
-        .from("roles")
-        .select("*")
-        .order("id", { ascending: true });
-
-      if (roleError) {
-        console.error(roleError);
-      } else {
-        setRoleData(roleData);
       }
     } catch (error) {
       console.error(error);
@@ -335,30 +323,34 @@ const ManagePlayersPage = () => {
             isLoading={isLoading}
             items={isLoading ? [] : paginatedPlayers}
           >
-            {(item: PlayersTableType) => (
-              <TableRow key={item.id}>
+            {(player: PlayersTableType) => (
+              <TableRow key={player.id}>
                 <TableCell>
                   <User
-                    avatarProps={{ src: item.profile_picture_url }}
-                    description={item.name}
-                    name={item.ign}
+                    avatarProps={{
+                      src: player.profile_picture_url,
+                      className: "min-w-10 min-h-10",
+                      size: "md",
+                    }}
+                    description={player.name}
+                    name={player.ign}
                   />
                 </TableCell>
 
-                <TableCell>{item.country}</TableCell>
+                <TableCell>{player.country}</TableCell>
 
                 <TableCell>
-                  <Tooltip content={item.teams.name}>
+                  <Tooltip content={player.teams.name}>
                     <Image
                       className="h-8 w-8 rounded-none object-contain"
-                      src={item.teams.logo_url}
+                      src={player.teams.logo_url}
                     />
                   </Tooltip>
                 </TableCell>
 
                 <TableCell>
                   <div className="flex gap-2">
-                    {item.roles.map((role) => (
+                    {player.roles.map((role) => (
                       <Chip
                         key={
                           role === "1"
@@ -401,14 +393,14 @@ const ManagePlayersPage = () => {
                 </TableCell>
 
                 <TableCell>
-                  {item.birthday ? convertedAge(item.birthday) : "-"}
+                  {player.birthday ? convertedAge(player.birthday) : "-"}
                 </TableCell>
 
                 <TableCell>
-                  <Tooltip content={item.teams.vct_league.name}>
+                  <Tooltip content={player.teams.vct_league.name}>
                     <Image
                       className="h-8 w-8 rounded-none object-contain"
-                      src={item.teams.vct_league.logo_url}
+                      src={player.teams.vct_league.logo_url}
                     />
                   </Tooltip>
                 </TableCell>
@@ -416,7 +408,9 @@ const ManagePlayersPage = () => {
                 <TableCell>
                   <Button
                     onClick={() => {
-                      router.push(`/moderator/manage/players/edit/${item.id}`);
+                      router.push(
+                        `/moderator/manage/players/edit/${player.id}`,
+                      );
                     }}
                   >
                     Edit
