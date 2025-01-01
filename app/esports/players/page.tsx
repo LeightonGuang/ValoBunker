@@ -15,6 +15,7 @@ import {
   Chip,
   User,
   Image,
+  Input,
   Button,
   Tooltip,
   Dropdown,
@@ -22,13 +23,13 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Input,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 import { title } from "@/components/primitives";
-import { ChevronDown, SearchIcon } from "@/components/icons";
 import { getSupabase } from "@/utils/supabase/client";
 import { PlayersTableType } from "@/types/PlayersTableType";
+import { ChevronDown, SearchIcon } from "@/components/icons";
 import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
 
 const headerColumns = [
@@ -41,6 +42,7 @@ const headerColumns = [
 ];
 
 const PlayersPage = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [playersData, setPlayersData] = useState<PlayersTableType[]>([]);
   const [vctLeagues, setVctLeagues] = useState<VctLeaguesTableType[]>([]);
@@ -349,6 +351,7 @@ const PlayersPage = () => {
           topContentPlacement="outside"
           onSelectionChange={setSelectedLeagueKey}
           onSortChange={setSortDescriptor}
+          onRowAction={(key) => router.push(`/esports/players/${key}`)}
         >
           <TableHeader>
             {headerColumns.map((header) => (
@@ -364,7 +367,7 @@ const PlayersPage = () => {
             items={players}
           >
             {(player) => (
-              <TableRow key={player.id}>
+              <TableRow key={player.id} className="cursor-pointer">
                 {(columnKey) => (
                   <TableCell>{renderCell(player, columnKey)}</TableCell>
                 )}
