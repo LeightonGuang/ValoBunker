@@ -131,7 +131,7 @@ export const Navbar = () => {
                   key={i}
                   description={abilityType.description}
                   href={abilityType.href}
-                  onClick={() => {
+                  onPress={() => {
                     setIsMenuOpen(false);
                     router.push(abilityType.href);
                   }}
@@ -168,7 +168,7 @@ export const Navbar = () => {
                   key={esport.label}
                   description={esport.description}
                   href={esport.href}
-                  onClick={() => {
+                  onPress={() => {
                     setIsMenuOpen(false);
                     router.push(esport.href);
                   }}
@@ -210,7 +210,7 @@ export const Navbar = () => {
                   <DropdownItem
                     key="settings"
                     href="/settings"
-                    onClick={() => router.push("/settings")}
+                    onPress={() => router.push("/settings")}
                   >
                     Settings
                   </DropdownItem>
@@ -220,7 +220,7 @@ export const Navbar = () => {
                   <DropdownItem
                     key="moderator"
                     href="/moderator/manage/agents"
-                    onClick={() => {
+                    onPress={() => {
                       router.push("/moderator/manage/agents");
                       setIsMenuOpen(false);
                     }}
@@ -229,7 +229,7 @@ export const Navbar = () => {
                   </DropdownItem>
                 </DropdownSection>
 
-                <DropdownItem key="logout" onClick={handleLogOut}>
+                <DropdownItem key="logout" onPress={handleLogOut}>
                   Log Out
                 </DropdownItem>
               </DropdownMenu>
@@ -257,7 +257,7 @@ export const Navbar = () => {
                 color={"foreground"}
                 href={item.href}
                 size="lg"
-                onClick={() => setIsMenuOpen(false)}
+                onPress={() => setIsMenuOpen(false)}
               >
                 {item.label}
               </Link>
@@ -289,7 +289,7 @@ export const Navbar = () => {
                   key={i}
                   description={abilityType.description}
                   href={abilityType.href}
-                  onClick={() => {
+                  onPress={() => {
                     setIsMenuOpen(false);
                     router.push(abilityType.href);
                   }}
@@ -325,7 +325,7 @@ export const Navbar = () => {
                   key={esport.label}
                   description={esport.description}
                   href={esport.href}
-                  onClick={() => {
+                  onPress={() => {
                     setIsMenuOpen(false);
                     router.push(esport.href);
                   }}
@@ -345,7 +345,7 @@ export const Navbar = () => {
                 <Link
                   color={"foreground"}
                   href="/moderator/manage/agents"
-                  onClick={() => {
+                  onPress={() => {
                     router.push("/moderator/manage/agents");
                     setIsMenuOpen(false);
                   }}
@@ -360,7 +360,7 @@ export const Navbar = () => {
                 <Link
                   color={"foreground"}
                   href="/settings"
-                  onClick={() => setIsMenuOpen(false)}
+                  onPress={() => setIsMenuOpen(false)}
                 >
                   Settings
                 </Link>
@@ -377,7 +377,7 @@ export const Navbar = () => {
                   className="w-full"
                   href="/login"
                   size="lg"
-                  onClick={() => setIsMenuOpen(false)}
+                  onPress={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>
@@ -388,7 +388,7 @@ export const Navbar = () => {
                   className="w-full"
                   href="/signup"
                   size="lg"
-                  onClick={() => setIsMenuOpen(false)}
+                  onPress={() => setIsMenuOpen(false)}
                 >
                   Sign up
                 </Link>
