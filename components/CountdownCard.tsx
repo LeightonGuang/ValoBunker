@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Image, Accordion, AccordionItem } from "@nextui-org/react";
+import { Image, Accordion, AccordionItem, Progress } from "@nextui-org/react";
 
 import { CountdownTableType } from "@/types/CountdownTableType";
 
@@ -39,19 +39,20 @@ const CountdownCard = ({
       variant="shadow"
     >
       {countdownEventList.map((event) => {
+        const startDate = new Date(event.start_date);
         const endDate = new Date(event.end_date);
-        const currentTime = new Date(currentDateTime).getTime();
+        const currentDate = new Date(currentDateTime);
 
         const americaTimeDifference =
           new Date(
             endDate.getTime() + americaOffset * 60 * 60 * 1000,
-          ).getTime() - currentTime;
+          ).getTime() - currentDate.getTime();
 
         const asiaTimeDifference =
           new Date(endDate.getTime() + asiaOffset * 60 * 60 * 1000).getTime() -
-          currentTime;
+          currentDate.getTime();
 
-        const europeTimeDifference = endDate.getTime() - currentTime;
+        const europeTimeDifference = endDate.getTime() - currentDate.getTime();
 
         const formattedTime = (difference: number) => {
           const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
@@ -90,38 +91,111 @@ const CountdownCard = ({
           >
             {event.is_same_time ? (
               <div className="flex flex-col">
-                <span className="text-sm font-medium">All regions</span>
-                <span className="font-semibold">
-                  {formattedTime(europeTimeDifference)}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-small font-medium">All regions</span>
+                  <span className="text-small text-default-400">
+                    {endDate.toLocaleString()}
+                  </span>
+                </div>
+
+                <Progress
+                  aria-label={event.name}
+                  color="primary"
+                  label={
+                    <span className="text-medium font-semibold">
+                      {formattedTime(europeTimeDifference)}
+                    </span>
+                  }
+                  size="sm"
+                  value={
+                    (europeTimeDifference /
+                      (endDate.getTime() - startDate.getTime())) *
+                    100
+                  }
+                />
               </div>
             ) : (
               <ul className="flex flex-col">
                 <li className="flex flex-col">
-                  <span className="text-sm font-medium">America</span>
-                  <span className="flex items-center gap-2 font-semibold">
-                    {formattedTime(americaTimeDifference)}
+                  <div className="flex items-center justify-between">
+                    <span className="text-small font-medium">America</span>
                     <span className="text-small text-default-400">
-                      {americaOffset}h
+                      {new Date(
+                        endDate.getTime() + americaOffset * 60 * 60 * 1000,
+                      ).toLocaleString()}
                     </span>
-                  </span>
+                  </div>
+                  <Progress
+                    aria-label={event.name}
+                    color="primary"
+                    label={
+                      <div className="flex items-center gap-2 text-medium font-semibold">
+                        {formattedTime(americaTimeDifference)}
+                        <span className="text-small text-default-400">
+                          {americaOffset}h
+                        </span>
+                      </div>
+                    }
+                    size="sm"
+                    value={
+                      (americaTimeDifference /
+                        (endDate.getTime() - startDate.getTime())) *
+                      100
+                    }
+                  />
                 </li>
 
                 <li className="flex flex-col">
-                  <span className="text-sm font-medium">Asia</span>
-                  <span className="flex items-center gap-2 font-semibold">
-                    {formattedTime(asiaTimeDifference)}
+                  <div className="flex items-center justify-between">
+                    <span className="text-small font-medium">Asia</span>
                     <span className="text-small text-default-400">
-                      {asiaOffset}h
+                      {new Date(
+                        endDate.getTime() + asiaOffset * 60 * 60 * 1000,
+                      ).toLocaleString()}
                     </span>
-                  </span>
+                  </div>
+                  <Progress
+                    aria-label={event.name}
+                    color="primary"
+                    label={
+                      <div className="flex items-center gap-2 text-medium font-semibold">
+                        {formattedTime(asiaTimeDifference)}
+                        <span className="text-small text-default-400">
+                          {asiaOffset}h
+                        </span>
+                      </div>
+                    }
+                    size="sm"
+                    value={
+                      (asiaTimeDifference /
+                        (endDate.getTime() - startDate.getTime())) *
+                      100
+                    }
+                  />
                 </li>
 
                 <li className="flex flex-col">
-                  <span className="text-sm font-medium">Europe</span>
-                  <span className="font-semibold">
-                    {formattedTime(europeTimeDifference)}
-                  </span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-small font-medium">Europe</span>
+                    <span className="text-small text-default-400">
+                      {endDate.toLocaleString()}
+                    </span>
+                  </div>
+                  <Progress
+                    aria-label={event.name}
+                    color="primary"
+                    label={
+                      <span className="text-medium font-semibold">
+                        {formattedTime(europeTimeDifference)}
+                      </span>
+                    }
+                    size="sm"
+                    value={
+                      (europeTimeDifference /
+                        (endDate.getTime() - startDate.getTime())) *
+                      100
+                    }
+                  />
                 </li>
               </ul>
             )}
