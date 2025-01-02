@@ -1,86 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Card,
-  Image,
-  Divider,
-  CardBody,
-  Accordion,
-  CardHeader,
-  AccordionItem,
-} from "@nextui-org/react";
+import { Image, Accordion, AccordionItem } from "@nextui-org/react";
 
 import { CountdownTableType } from "@/types/CountdownTableType";
-
-const timezones = {
-  HKT: "Asia/Hong_Kong",
-  PST: "America/Los_Angeles",
-  GMT: "Etc/GMT",
-} as { [key: string]: string };
-
-const calculateCountdown: (endDate: Date, timeZone: string) => string = (
-  endDate: Date,
-  timeZone: string,
-) => {
-  endDate = new Date(endDate);
-
-  const convertToTimezone = (date: Date, timeZone: string) => {
-    const utcDate = date.getTime() + date.getTimezoneOffset() * 60000;
-    const targetTimeZoneOffset = new Date(utcDate).toLocaleString("en-US", {
-      timeZone,
-    });
-
-    return new Date(targetTimeZoneOffset);
-  };
-
-  const currentDateTime = convertToTimezone(new Date(), timezones[timeZone]);
-  const difference = endDate.getTime() - currentDateTime.getTime();
-
-  const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
-  const days = Math.floor(
-    (difference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24),
-  );
-  const hours = Math.floor(
-    (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-  );
-  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-  const doubleDigits = (num: number) => {
-    return num.toString().padStart(2, "0");
-  };
-
-  return months
-    ? `${months}m, ${days}d, ${doubleDigits(hours)}:${doubleDigits(minutes)}:${doubleDigits(seconds)}`
-    : `${days}d, ${doubleDigits(hours)}:${doubleDigits(minutes)}:${doubleDigits(seconds)}`;
-};
 
 const CountdownCard = ({
   countdownEventList,
 }: {
-  countdownEventList?: CountdownTableType[] | undefined;
+  countdownEventList: CountdownTableType[];
 }) => {
-  const [times, setTimes] = useState<{
-    [key: string]: { PST: string; GMT: string; HKT: string };
-  }>({});
+  const americaOffset = -14;
+  const asiaOffset = -6;
+
+  const [currentDateTime, setCurrentDateTime] = useState<string>(
+    new Date().toLocaleString("en-US", { timeZone: "Europe/London" }),
+  );
 
   useEffect(() => {
     const intervalId = setInterval(() => {
+      const currentTime = new Date().toLocaleString("en-US", {
+        timeZone: "Europe/London",
+      });
+
+      setCurrentDateTime(currentTime);
+
       if (countdownEventList) {
-        const updatedTimes: {
-          [key: string]: { PST: string; GMT: string; HKT: string };
-        } = {};
-
-        countdownEventList.forEach((countdownObj) => {
-          updatedTimes[countdownObj.name as any] = {
-            PST: calculateCountdown(new Date(countdownObj.end_date), "PST"),
-            GMT: calculateCountdown(new Date(countdownObj.end_date), "GMT"),
-            HKT: calculateCountdown(new Date(countdownObj.end_date), "HKT"),
-          };
-        });
-
-        setTimes(updatedTimes);
       }
     }, 1000);
 
@@ -88,49 +33,102 @@ const CountdownCard = ({
   }, [countdownEventList]);
 
   return (
-    <Card>
-      <CardHeader>Countdown</CardHeader>
+    <Accordion
+      defaultExpandedKeys={[`${countdownEventList[0].id}`]}
+      selectionMode="multiple"
+      variant="shadow"
+    >
+      {countdownEventList.map((event) => {
+        const endDate = new Date(event.end_date);
+        const currentTime = new Date(currentDateTime).getTime();
 
-      <Divider />
+        const americaTimeDifference =
+          new Date(
+            endDate.getTime() + americaOffset * 60 * 60 * 1000,
+          ).getTime() - currentTime;
 
-      <CardBody>
-        <Accordion
-          defaultExpandedKeys={
-            countdownEventList && [`${countdownEventList[0].id}`]
-          }
-        >
-          {countdownEventList
-            ? countdownEventList?.map((countdownEventObj) => {
-                return (
-                  <AccordionItem
-                    key={countdownEventObj.id}
-                    startContent={
-                      <Image
-                        alt={countdownEventObj.name}
-                        className="h-8 w-8 rounded-none object-cover"
-                        src={countdownEventObj.img_url}
-                      />
-                    }
-                    title={countdownEventObj.name}
-                  >
-                    {
-                      <div className="flex flex-col">
-                        <span>
-                          America: {times[countdownEventObj.name]?.PST}
-                        </span>
-                        <span>
-                          Europe: {times[countdownEventObj.name]?.GMT}
-                        </span>
-                        <span>Asia: {times[countdownEventObj.name]?.HKT}</span>
-                      </div>
-                    }
-                  </AccordionItem>
-                );
-              })
-            : null}
-        </Accordion>
-      </CardBody>
-    </Card>
+        const asiaTimeDifference =
+          new Date(endDate.getTime() + asiaOffset * 60 * 60 * 1000).getTime() -
+          currentTime;
+
+        const europeTimeDifference = endDate.getTime() - currentTime;
+
+        const formattedTime = (difference: number) => {
+          const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
+          const days = Math.floor(
+            (difference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24),
+          );
+          const hours = Math.floor(
+            (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          );
+          const minutes = Math.floor(
+            (difference % (1000 * 60 * 60)) / (1000 * 60),
+          );
+          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+          const doubleDigits = (num: number) => {
+            return num.toString().padStart(2, "0");
+          };
+
+          return months
+            ? `${months}m, ${days}d, ${doubleDigits(hours)}:${doubleDigits(minutes)}:${doubleDigits(seconds)}`
+            : `${days}d, ${doubleDigits(hours)}:${doubleDigits(minutes)}:${doubleDigits(seconds)}`;
+        };
+
+        return (
+          <AccordionItem
+            key={event.id}
+            startContent={
+              <Image
+                alt={event.name}
+                className="h-8 w-8 rounded-none object-cover"
+                src={event.img_url}
+              />
+            }
+            textValue={event.name}
+            title={<span className="text-lg">{event.name}</span>}
+          >
+            {event.is_same_time ? (
+              <div className="flex flex-col">
+                <span className="text-sm font-medium">All regions</span>
+                <span className="font-semibold">
+                  {formattedTime(europeTimeDifference)}
+                </span>
+              </div>
+            ) : (
+              <ul className="flex flex-col">
+                <li className="flex flex-col">
+                  <span className="text-sm font-medium">America</span>
+                  <span className="flex items-center gap-2 font-semibold">
+                    {formattedTime(americaTimeDifference)}
+                    <span className="text-small text-default-400">
+                      {americaOffset}h
+                    </span>
+                  </span>
+                </li>
+
+                <li className="flex flex-col">
+                  <span className="text-sm font-medium">Asia</span>
+                  <span className="flex items-center gap-2 font-semibold">
+                    {formattedTime(asiaTimeDifference)}
+                    <span className="text-small text-default-400">
+                      {asiaOffset}h
+                    </span>
+                  </span>
+                </li>
+
+                <li className="flex flex-col">
+                  <span className="text-sm font-medium">Europe</span>
+                  <span className="font-semibold">
+                    {formattedTime(europeTimeDifference)}
+                  </span>
+                </li>
+              </ul>
+            )}
+          </AccordionItem>
+        );
+      })}
+    </Accordion>
   );
 };
 
