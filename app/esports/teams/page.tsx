@@ -8,6 +8,7 @@ import {
   Image,
   CardBody,
   Accordion,
+  Selection,
   CardFooter,
   AccordionItem,
 } from "@nextui-org/react";
@@ -51,6 +52,7 @@ const TeamsPage = () => {
   const [filteredTeamList, setFilteredTeamList] = useState<TeamsTableType[]>(
     [],
   );
+  const [selectedTeam, setSelectedTeam] = useState<Selection>(new Set(["1"]));
 
   const fetchData = async () => {
     try {
@@ -96,6 +98,10 @@ const TeamsPage = () => {
     setFilteredTeamList(teams);
   }, [selectedRegionTab, teamsDataList]);
 
+  useEffect(() => {
+    setSelectedTeam(new Set([String(filteredTeamList[0]?.id)]));
+  }, [filteredTeamList]);
+
   return (
     <section>
       <div>
@@ -131,8 +137,12 @@ const TeamsPage = () => {
                 <Accordion
                   key={selectedRegionTab}
                   className="mt-4 flex flex-col gap-4 p-0"
+                  selectedKeys={selectedTeam}
                   selectionMode="multiple"
                   showDivider={false}
+                  onSelectionChange={(key) => {
+                    setSelectedTeam(key);
+                  }}
                 >
                   {filteredTeamList.map((teamObj) => (
                     <AccordionItem
