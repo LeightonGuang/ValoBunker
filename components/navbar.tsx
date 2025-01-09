@@ -110,7 +110,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] data-[active=true]:text-primary"
+                  className="p-0 text-base text-foreground data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -147,7 +147,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] data-[active=true]:text-primary"
+                  className="p-0 text-[1rem] text-foreground data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -188,7 +188,7 @@ export const Navbar = () => {
           icon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
         />
 
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
 
         <NavbarItem className="hidden lg:block">
           {isLoadingUser ? (
