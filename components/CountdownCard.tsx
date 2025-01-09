@@ -24,17 +24,14 @@ const CountdownCard = ({
       });
 
       setCurrentDateTime(currentTime);
-
-      if (countdownEventList) {
-      }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [countdownEventList]);
+  }, []);
 
   return (
     <Accordion
-      defaultExpandedKeys={[`${countdownEventList[0].id}`]}
+      defaultExpandedKeys={[`${countdownEventList[0]?.id}`]}
       selectionMode="multiple"
       variant="shadow"
     >
@@ -42,6 +39,10 @@ const CountdownCard = ({
         const startDate = new Date(event.start_date);
         const endDate = new Date(event.end_date);
         const currentDate = new Date(currentDateTime);
+
+        if (currentDate < startDate || currentDate > endDate) {
+          return null;
+        }
 
         const americaTimeDifference =
           new Date(
@@ -82,7 +83,7 @@ const CountdownCard = ({
             startContent={
               <Image
                 alt={event.name}
-                className="h-8 w-8 rounded-none object-cover"
+                className="h-8 w-full rounded-md object-cover"
                 src={event.img_url}
               />
             }
