@@ -188,11 +188,13 @@ const TeamsPage = () => {
                                   />
                                 </CardBody>
                                 <CardFooter className="flex text-large">
-                                  <div className="flex flex-col">
-                                    <span>{player.ign}</span>
+                                  <div className="flex w-full flex-col">
+                                    <span className="text-left">
+                                      {player.ign}
+                                    </span>
 
-                                    <div className="w-full">
-                                      <span className="text-small text-default-400">
+                                    <div className="mt-2 w-full">
+                                      <span className="flex text-small text-default-400">
                                         {player.roles.length === 1
                                           ? "Role:"
                                           : "Roles:"}
