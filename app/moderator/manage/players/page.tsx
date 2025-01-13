@@ -407,7 +407,7 @@ const ManagePlayersPage = () => {
 
                 <TableCell>
                   <Button
-                    onClick={() => {
+                    onPress={() => {
                       router.push(
                         `/moderator/manage/players/edit/${player.id}`,
                       );
