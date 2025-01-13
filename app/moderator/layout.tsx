@@ -1,7 +1,7 @@
 "use client";
 
 import { Key } from "@react-types/shared";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import React, { useEffect, useState, useCallback } from "react";
 
@@ -17,7 +17,13 @@ import {
 import { getSupabase } from "@/utils/supabase/client";
 import { IconWrapper } from "@/components/IconWrapper";
 
-const menuList = [
+const menuList: Array<{
+  name: string;
+  key: string;
+  href: string;
+  icon: JSX.Element;
+  iconClassName: string;
+}> = [
   {
     name: "Agents",
     key: "agents",
@@ -29,6 +35,13 @@ const menuList = [
     name: "Events",
     key: "events",
     href: "/moderator/manage/events",
+    icon: <CalendarIcon />,
+    iconClassName: "bg-default/50 text-foreground",
+  },
+  {
+    name: "Countdown",
+    key: "countdown",
+    href: "/moderator/manage/countdown",
     icon: <CalendarIcon />,
     iconClassName: "bg-default/50 text-foreground",
   },
@@ -76,12 +89,13 @@ export default function ModeratorLayout({
 }) {
   const router = useRouter();
   const supabase = getSupabase();
+  const path = usePathname().split("/")[usePathname().split("/").length - 1];
 
   const [isLoading, setIsLoading] = useState(true);
   const [hasRole, setHasRole] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<
     "all" | Iterable<Key> | undefined
-  >(["agents"]);
+  >([path]);
 
   const fetchUserAndRole = useCallback(async () => {
     try {
