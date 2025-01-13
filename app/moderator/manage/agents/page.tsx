@@ -2,23 +2,25 @@
 
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
 } from "@nextui-org/table";
 import { useEffect, useState } from "react";
 import {
-  BreadcrumbItem,
-  Breadcrumbs,
+  User,
+  Avatar,
   Button,
+  Tooltip,
   Dropdown,
+  Breadcrumbs,
   DropdownItem,
   DropdownMenu,
-  DropdownTrigger,
   useDisclosure,
-  User,
+  BreadcrumbItem,
+  DropdownTrigger,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
@@ -76,7 +78,7 @@ const ManageAgentsPage = () => {
 
       <h1 className={title()}>Manage Agents</h1>
 
-      <div className="mt-6">
+      <div className="mt-6 w-full">
         <Table aria-label="Manage Agents" selectionMode="single">
           <TableHeader>
             {columns.map((column, i) => (
@@ -96,16 +98,9 @@ const ManageAgentsPage = () => {
                   </TableCell>
 
                   <TableCell>
-                    <User
-                      avatarProps={{
-                        src: agent.roles.icon_url,
-                        radius: "none",
-                        classNames: {
-                          base: "bg-transparent w-6 h-6",
-                        },
-                      }}
-                      name={agent.roles.name}
-                    />
+                    <Tooltip content={agent.roles.name}>
+                      <Avatar className="h-6 w-6" src={agent.roles.icon_url} />
+                    </Tooltip>
                   </TableCell>
 
                   <TableCell>
