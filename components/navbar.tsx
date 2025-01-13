@@ -87,7 +87,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="max-w-fit gap-3">
           <NextLink className="flex items-center justify-start gap-1" href="/">
-            <p className="text-inherit text-lg font-bold">Valo Bunker</p>
+            <p className="text-inherit text-large font-bold">Valo Bunker</p>
           </NextLink>
         </NavbarBrand>
         <div className="ml-2 hidden justify-start gap-4 lg:flex">
@@ -110,7 +110,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-base text-foreground data-[active=true]:text-primary"
+                  className="p-0 text-medium text-foreground data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -147,7 +147,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 text-[1rem] text-foreground data-[active=true]:text-primary"
+                  className="p-0 text-medium text-foreground data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
