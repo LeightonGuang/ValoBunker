@@ -25,6 +25,17 @@ module.exports = {
   darkMode: "class",
   darkMode: "class",
   plugins: [
-    nextui({ themes: { light: { colors: {} }, dark: { colors: {} } } }),
+    nextui({
+      layout: {
+        fontSize: {
+          tiny: "0.875rem",
+          small: "1.125rem",
+          medium: "1.25rem",
+          large: "1.875rem",
+          DEFAULT: "1rem",
+        },
+      },
+      themes: { light: { colors: {} }, dark: { colors: {} } },
+    }),
   ],
 };
