@@ -33,9 +33,9 @@ import {
   SearchIcon,
   ChevronDown,
 } from "@/components/icons";
-import { ThemeSwitch } from "@/components/theme-switch";
 import { siteConfig } from "@/config/site";
 import { useUser } from "@/app/hook/useUser";
+import { ThemeSwitch } from "@/components/theme-switch";
 import { logOut } from "@/app/actions/auth/logout/actions";
 
 export const Navbar = () => {
@@ -76,191 +76,21 @@ export const Navbar = () => {
     }
   };
 
-  return (
-    <NextUINavbar
-      className="bg-valorantRed"
-      isMenuOpen={isMenuOpen}
-      maxWidth="xl"
-      position="sticky"
-      onMenuOpenChange={setIsMenuOpen}
-    >
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand className="max-w-fit gap-3">
-          <NextLink className="flex items-center justify-start gap-1" href="/">
-            <p className="text-inherit text-large font-bold">Valo Bunker</p>
-          </NextLink>
-        </NavbarBrand>
-        <div className="ml-2 hidden justify-start gap-4 lg:flex">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "h-full data-[active=true]:font-medium data-[active=true]:text-primary",
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
-          <Dropdown>
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 text-medium text-foreground data-[active=true]:text-primary"
-                  endContent={<ChevronDown fill="currentColor" size={16} />}
-                  radius="sm"
-                  variant="light"
-                >
-                  Similar Abilities
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="Similar Abilities"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
-            >
-              {siteConfig.navAbilitiesComparison.map((abilityType, i) => (
-                <DropdownItem
-                  key={i}
-                  description={abilityType.description}
-                  href={abilityType.href}
-                  onPress={() => {
-                    setIsMenuOpen(false);
-                    router.push(abilityType.href);
-                  }}
-                >
-                  {abilityType.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-
-          <Dropdown>
-            <NavbarItem>
-              <DropdownTrigger>
-                <Button
-                  disableRipple
-                  className="p-0 text-medium text-foreground data-[active=true]:text-primary"
-                  endContent={<ChevronDown fill="currentColor" size={16} />}
-                  radius="sm"
-                  variant="light"
-                >
-                  Esports
-                </Button>
-              </DropdownTrigger>
-            </NavbarItem>
-            <DropdownMenu
-              aria-label="Esports"
-              className="w-[340px]"
-              itemClasses={{
-                base: "gap-4",
-              }}
-            >
-              {siteConfig.dropdownEsports.map((esport) => (
-                <DropdownItem
-                  key={esport.label}
-                  description={esport.description}
-                  href={esport.href}
-                  onPress={() => {
-                    setIsMenuOpen(false);
-                    router.push(esport.href);
-                  }}
-                >
-                  {esport.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-        </div>
-      </NavbarContent>
-
-      <NavbarContent className="basis-1 pl-4" justify="end">
-        <ThemeSwitch />
-        <NavbarMenuToggle
-          className="lg:hidden"
-          icon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-        />
-
-        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
-
-        <NavbarItem className="hidden lg:block">
-          {isLoadingUser ? (
-            ""
-          ) : user?.user_metadata ? (
-            <Dropdown>
-              <DropdownTrigger className="hover:cursor-pointer hover:underline">
-                {user.user_metadata.name || "No Username"}
-              </DropdownTrigger>
-              <DropdownMenu
-                aria-label="Account"
-                disabledKeys={[user.user_metadata.name]}
-              >
-                <DropdownSection showDivider aria-label="Profile">
-                  <DropdownItem key={user.user_metadata.name}>
-                    {`Logged in as @${user.user_metadata.name}`}
-                  </DropdownItem>
-
-                  <DropdownItem
-                    key="settings"
-                    href="/settings"
-                    onPress={() => router.push("/settings")}
-                  >
-                    Settings
-                  </DropdownItem>
-                </DropdownSection>
-
-                <DropdownSection showDivider aria-label="Moderator">
-                  <DropdownItem
-                    key="moderator"
-                    href="/moderator/manage/agents"
-                    onPress={() => {
-                      router.push("/moderator/manage/agents");
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Moderator
-                  </DropdownItem>
-                </DropdownSection>
-
-                <DropdownItem key="logout" onPress={handleLogOut}>
-                  Log Out
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          ) : (
-            <div className="flex gap-4">
-              <Button as={Link} href="/login" variant="flat">
-                Log in
-              </Button>
-              <Button as={Link} href="/signup" variant="flat">
-                Sign Up
-              </Button>
-            </div>
-          )}
-        </NavbarItem>
-      </NavbarContent>
-
+  const MobileNavbar = () => {
+    return (
       <NavbarMenu>
         {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
+              <NextLink
                 className="w-full"
                 color={"foreground"}
                 href={item.href}
-                size="lg"
-                onPress={() => setIsMenuOpen(false)}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
-              </Link>
+              </NextLink>
             </NavbarMenuItem>
           ))}
           <Dropdown>
@@ -268,7 +98,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="h-7 p-0 text-[1.125rem] leading-none data-[active=true]:text-primary"
+                  className="h-7 p-0 text-large leading-none data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -304,7 +134,7 @@ export const Navbar = () => {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="h-7 w-full justify-start p-0 text-left text-[1.125rem] data-[active=true]:text-primary"
+                  className="h-7 w-full justify-start p-0 text-left text-large data-[active=true]:text-primary"
                   endContent={<ChevronDown fill="currentColor" size={16} />}
                   radius="sm"
                   variant="light"
@@ -341,8 +171,9 @@ export const Navbar = () => {
           ) : user?.user_metadata ? (
             <>
               <NavbarMenuItem>
-                <Divider />
+                <Divider className="my-2" />
                 <Link
+                  className="text-large"
                   color={"foreground"}
                   href="/moderator/manage/agents"
                   onPress={() => {
@@ -358,6 +189,7 @@ export const Navbar = () => {
 
               <NavbarMenuItem>
                 <Link
+                  className="text-large"
                   color={"foreground"}
                   href="/settings"
                   onPress={() => setIsMenuOpen(false)}
@@ -397,6 +229,191 @@ export const Navbar = () => {
           )}
         </div>
       </NavbarMenu>
+    );
+  };
+
+  const DesktopNavbar = () => {
+    return (
+      <>
+        <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+          <NavbarBrand className="max-w-fit gap-3">
+            <NextLink
+              className="flex items-center justify-start gap-1"
+              href="/"
+            >
+              <p className="text-inherit text-large font-bold">Valo Bunker</p>
+            </NextLink>
+          </NavbarBrand>
+          <div className="ml-2 hidden justify-start gap-4 lg:flex">
+            {siteConfig.navItems.map((item) => (
+              <NavbarItem key={item.href}>
+                <NextLink
+                  className={clsx(
+                    linkStyles({ color: "foreground" }),
+                    "h-full data-[active=true]:font-medium data-[active=true]:text-primary",
+                  )}
+                  color="foreground"
+                  href={item.href}
+                >
+                  {item.label}
+                </NextLink>
+              </NavbarItem>
+            ))}
+            <Dropdown>
+              <NavbarItem>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className="p-0 text-medium text-foreground data-[active=true]:text-primary"
+                    endContent={<ChevronDown fill="currentColor" size={16} />}
+                    radius="sm"
+                    variant="light"
+                  >
+                    Similar Abilities
+                  </Button>
+                </DropdownTrigger>
+              </NavbarItem>
+              <DropdownMenu
+                aria-label="Similar Abilities"
+                className="w-[340px]"
+                itemClasses={{
+                  base: "gap-4",
+                }}
+              >
+                {siteConfig.navAbilitiesComparison.map((abilityType, i) => (
+                  <DropdownItem
+                    key={i}
+                    description={abilityType.description}
+                    href={abilityType.href}
+                    onPress={() => {
+                      setIsMenuOpen(false);
+                      router.push(abilityType.href);
+                    }}
+                  >
+                    {abilityType.label}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+
+            <Dropdown>
+              <NavbarItem>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className="p-0 text-medium text-foreground data-[active=true]:text-primary"
+                    endContent={<ChevronDown fill="currentColor" size={16} />}
+                    radius="sm"
+                    variant="light"
+                  >
+                    Esports
+                  </Button>
+                </DropdownTrigger>
+              </NavbarItem>
+              <DropdownMenu
+                aria-label="Esports"
+                className="w-[340px]"
+                itemClasses={{
+                  base: "gap-4",
+                }}
+              >
+                {siteConfig.dropdownEsports.map((esport) => (
+                  <DropdownItem
+                    key={esport.label}
+                    description={esport.description}
+                    href={esport.href}
+                    onPress={() => {
+                      setIsMenuOpen(false);
+                      router.push(esport.href);
+                    }}
+                  >
+                    {esport.label}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        </NavbarContent>
+
+        <NavbarContent className="basis-1 pl-4" justify="end">
+          <ThemeSwitch />
+          <NavbarMenuToggle
+            className="lg:hidden"
+            icon={isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          />
+
+          {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
+
+          <NavbarItem className="hidden lg:block">
+            {isLoadingUser ? (
+              ""
+            ) : user?.user_metadata ? (
+              <Dropdown>
+                <DropdownTrigger className="hover:cursor-pointer hover:underline">
+                  {user.user_metadata.name || "No Username"}
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Account"
+                  disabledKeys={[user.user_metadata.name]}
+                >
+                  <DropdownSection showDivider aria-label="Profile">
+                    <DropdownItem key={user.user_metadata.name}>
+                      {`Logged in as @${user.user_metadata.name}`}
+                    </DropdownItem>
+
+                    <DropdownItem
+                      key="settings"
+                      href="/settings"
+                      onPress={() => router.push("/settings")}
+                    >
+                      Settings
+                    </DropdownItem>
+                  </DropdownSection>
+
+                  <DropdownSection showDivider aria-label="Moderator">
+                    <DropdownItem
+                      key="moderator"
+                      href="/moderator/manage/agents"
+                      onPress={() => {
+                        router.push("/moderator/manage/agents");
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Moderator
+                    </DropdownItem>
+                  </DropdownSection>
+
+                  <DropdownItem key="logout" onPress={handleLogOut}>
+                    Log Out
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <div className="flex gap-4">
+                <Button as={Link} href="/login" variant="flat">
+                  Log in
+                </Button>
+                <Button as={Link} href="/signup" variant="flat">
+                  Sign Up
+                </Button>
+              </div>
+            )}
+          </NavbarItem>
+        </NavbarContent>
+      </>
+    );
+  };
+
+  return (
+    <NextUINavbar
+      className="bg-valorantRed"
+      isMenuOpen={isMenuOpen}
+      maxWidth="xl"
+      position="sticky"
+      onMenuOpenChange={setIsMenuOpen}
+    >
+      <MobileNavbar />
+      <DesktopNavbar />
     </NextUINavbar>
   );
 };
