@@ -52,7 +52,7 @@ const AllNewsPage = () => {
           {newsData.map((news) => (
             <ListboxItem
               key={news.id}
-              description={<div className="">{news.content}</div>}
+              description={<p>{news.description}</p>}
               endContent={
                 <span className="h-max whitespace-nowrap text-tiny text-foreground-500">
                   {new Intl.DateTimeFormat("en-GB", {
