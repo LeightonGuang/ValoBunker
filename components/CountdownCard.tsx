@@ -88,13 +88,13 @@ const CountdownCard = ({
               />
             }
             textValue={event.name}
-            title={<span className="text-lg">{event.name}</span>}
+            title={<span className="text-medium">{event.name}</span>}
           >
             {event.is_same_time ? (
               <div className="flex flex-col">
                 <div className="flex items-center justify-between">
                   <span className="text-small font-medium">All regions</span>
-                  <span className="text-small text-default-400">
+                  <span className="text-tiny text-default-400">
                     {endDate.toLocaleString()}
                   </span>
                 </div>
@@ -120,7 +120,7 @@ const CountdownCard = ({
                 <li className="flex flex-col">
                   <div className="flex items-center justify-between">
                     <span className="text-small font-medium">America</span>
-                    <span className="text-small text-default-400">
+                    <span className="text-tiny text-default-400">
                       {new Date(
                         endDate.getTime() + americaOffset * 60 * 60 * 1000,
                       ).toLocaleString()}
@@ -149,7 +149,7 @@ const CountdownCard = ({
                 <li className="flex flex-col">
                   <div className="flex items-center justify-between">
                     <span className="text-small font-medium">Asia</span>
-                    <span className="text-small text-default-400">
+                    <span className="text-tiny text-default-400">
                       {new Date(
                         endDate.getTime() + asiaOffset * 60 * 60 * 1000,
                       ).toLocaleString()}
@@ -178,7 +178,7 @@ const CountdownCard = ({
                 <li className="flex flex-col">
                   <div className="flex items-center justify-between">
                     <span className="text-small font-medium">Europe</span>
-                    <span className="text-small text-default-400">
+                    <span className="text-tiny text-default-400">
                       {endDate.toLocaleString()}
                     </span>
                   </div>
