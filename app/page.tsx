@@ -59,7 +59,11 @@ export default function Home() {
           .order("end_date", { ascending: true })
           .gte("end_date", new Date().toISOString())
           .limit(4),
-        supabase.from("countdown").select(`*`).order("id", { ascending: true }),
+        supabase
+          .from("countdown")
+          .select(`*`)
+          .order("id", { ascending: true })
+          .gt("end_date", new Date().toISOString()),
       ]);
 
       if (
@@ -209,7 +213,7 @@ export default function Home() {
     return (
       <Card aria-label="Events" className="h-min">
         <CardHeader
-          className="w-min cursor-pointer hover:underline"
+          className="w-min cursor-pointer text-large hover:underline"
           onClick={() => router.push("/esports/events")}
         >
           Events
@@ -295,10 +299,6 @@ export default function Home() {
   useEffect(() => {
     fetchAllData();
   }, []);
-
-  useEffect(() => {
-    console.log(countdownEventList);
-  }, [countdownEventList]);
 
   return (
     !isLoading && (
