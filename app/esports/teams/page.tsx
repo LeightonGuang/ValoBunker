@@ -156,7 +156,7 @@ const TeamsPage = () => {
                           width={48}
                         />
                       }
-                      title={teamObj.name}
+                      title={<span className="text-large">{teamObj.name}</span>}
                       variant="splitted"
                     >
                       <ul className="grid grid-cols-2 gap-4 lg:grid-cols-5">
