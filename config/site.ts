@@ -7,6 +7,7 @@ export const siteConfig = {
 
   navItems: [
     { label: "Agents", href: "/agents" },
+    { label: "Maps", href: "/maps" },
     { label: "Weapons", href: "/weapons" },
   ],
 
@@ -30,6 +31,7 @@ export const siteConfig = {
 
   navMenuItems: [
     { label: "Agents", href: "/agents" },
+    { label: "Maps", href: "/maps" },
     { label: "Weapons", href: "/weapons" },
   ],
 
