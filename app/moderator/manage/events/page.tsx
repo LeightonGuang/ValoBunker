@@ -162,7 +162,7 @@ const ManageEventsPage = () => {
   );
 
   return (
-    <section>
+    <section className="w-full lg:mr-4">
       <Breadcrumbs className="mb-4">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Events</BreadcrumbItem>

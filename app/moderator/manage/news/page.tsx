@@ -105,7 +105,7 @@ const ManageNewsPage = () => {
   }, []);
 
   return (
-    <section>
+    <section className="w-full lg:mr-4">
       <Breadcrumbs aria-label="News">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>News</BreadcrumbItem>
