@@ -4,16 +4,21 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   Card,
+  User,
   Input,
   Image,
   Button,
+  Select,
   CardBody,
+  SelectItem,
   Breadcrumbs,
+  SelectedItems,
   BreadcrumbItem,
 } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
+import { TeamsTableType } from "@/types/TeamsTableType";
 import { EventsTableType } from "@/types/EventsTableType";
 
 const EditEventPage = () => {
@@ -21,20 +26,33 @@ const EditEventPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [eventForm, setEventForm] = useState<EventsTableType | null>(null);
+  const [teams, setTeams] = useState<TeamsTableType[]>([]);
 
-  const fetchEventById = async () => {
+  const fetchData = async () => {
     try {
       const supabase = getSupabase();
-      const { data, error } = await supabase
+      const { data: eventData, error: eventError } = await supabase
         .from("events")
         .select(`*`)
         .eq("id", eventId);
 
-      if (error) {
-        console.error(error);
+      if (eventError) {
+        console.error(eventError);
       } else {
         // console.log(data[0]);
-        setEventForm(data[0]);
+        setEventForm(eventData[0]);
+      }
+
+      const { data: teamsData, error: teamsError } = await supabase
+        .from("teams")
+        .select("*, vct_league(*)")
+        .order("name", { ascending: true });
+
+      if (teamsError) {
+        console.error(teamsError);
+      } else {
+        console.log(teamsData);
+        setTeams(teamsData);
       }
     } catch (error) {
       console.error(error);
@@ -74,17 +92,19 @@ const EditEventPage = () => {
   };
 
   useEffect(() => {
-    fetchEventById();
+    fetchData();
   }, []);
 
   return (
-    <section>
+    <section className="w-full lg:mr-4">
       <Breadcrumbs aria-label="breadcrumb">
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem href="/moderator/manage/events">Events</BreadcrumbItem>
         <BreadcrumbItem>Edit</BreadcrumbItem>
       </Breadcrumbs>
+
       <h1 className={title()}>Edit Event</h1>
+
       <div className="mt-6 flex justify-center">
         {!isLoading && eventForm && (
           <Card className="w-96">
@@ -154,6 +174,43 @@ const EditEventPage = () => {
                     value={eventForm?.end_date}
                     onChange={onEventFormChange}
                   />
+                </label>
+
+                <label htmlFor="">
+                  Participating Teams
+                  <Select
+                    isMultiline={true}
+                    items={teams}
+                    placeholder="Select participating teams"
+                    renderValue={(teams: SelectedItems<TeamsTableType>) => (
+                      <div className="flex flex-wrap gap-4 p-2">
+                        {teams.map((team) => (
+                          <User
+                            key={team.data?.id}
+                            avatarProps={{
+                              src: team.data?.logo_url,
+                              className: "bg-transparent rounded-none",
+                            }}
+                            name={team.data?.name}
+                          />
+                        ))}
+                      </div>
+                    )}
+                    selectionMode="multiple"
+                  >
+                    {(team) => (
+                      <SelectItem key={team.id}>
+                        <User
+                          avatarProps={{
+                            src: team.logo_url,
+                            className: "bg-transparent rounded-none",
+                          }}
+                          description={team.vct_league.name}
+                          name={team.name}
+                        />
+                      </SelectItem>
+                    )}
+                  </Select>
                 </label>
 
                 <label htmlFor="prize_pool">
