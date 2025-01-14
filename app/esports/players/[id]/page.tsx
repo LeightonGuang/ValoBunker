@@ -85,15 +85,15 @@ const PlayerPage = () => {
 
               <div className="flex w-full flex-col gap-2">
                 <div className="flex flex-col">
-                  <span className="text-2xl">{playerData?.ign}</span>
+                  <span className="text-large">{playerData?.ign}</span>
                   <span className="text-small text-default-400">
                     {playerData?.name}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-small">
-                  <span className="text-sm font-medium">Age:</span>
-                  <span className="text-sm font-extralight">
+                <div className="flex items-center justify-between text-small">
+                  <span className="text-tiny font-medium">Age:</span>
+                  <span className="text-tiny font-extralight">
                     {playerData?.birthday
                       ? convertedAge(playerData?.birthday)
                       : "-"}
@@ -103,8 +103,15 @@ const PlayerPage = () => {
                 <Divider />
 
                 <div className="flex items-center justify-between text-small">
-                  <span className="text-sm font-medium">Team:</span>
-                  <div className="flex items-center gap-2 text-sm">
+                  <span className="text-tiny font-medium">Country:</span>
+                  <div className="text-tiny">{playerData?.country}</div>
+                </div>
+
+                <Divider />
+
+                <div className="flex items-center justify-between text-small">
+                  <span className="text-tiny font-medium">Team:</span>
+                  <div className="flex items-center gap-2 text-tiny">
                     <Image
                       alt={playerData?.teams.name}
                       className="h-6 w-6 rounded-none"
@@ -117,7 +124,7 @@ const PlayerPage = () => {
                 <Divider />
 
                 <div className="flex items-center justify-between text-small">
-                  <span className="pr-2 text-sm font-medium">
+                  <span className="pr-2 text-tiny font-medium">
                     {playerData?.roles.length === 1 ? "Role:" : "Roles:"}
                   </span>
 
