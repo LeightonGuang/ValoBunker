@@ -56,7 +56,7 @@ export default function Home() {
         supabase
           .from("events")
           .select(`*`)
-          .order("end_date", { ascending: true })
+          .order("start_date", { ascending: true })
           .gte("end_date", new Date().toISOString())
           .limit(4),
         supabase
