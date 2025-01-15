@@ -62,7 +62,7 @@ export default function Home() {
         supabase
           .from("countdown")
           .select(`*`)
-          .order("id", { ascending: true })
+          .order("end_date", { ascending: true })
           .gt("end_date", new Date().toISOString()),
       ]);
 
