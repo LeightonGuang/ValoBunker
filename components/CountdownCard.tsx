@@ -83,7 +83,7 @@ const CountdownCard = ({
             startContent={
               <Image
                 alt={event.name}
-                className="h-8 w-full rounded-md object-cover"
+                className="h-8 rounded-md object-cover"
                 src={event.img_url}
               />
             }
