@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import {
   Chip,
   Card,
+  Link,
   Image,
   Avatar,
   Divider,
@@ -111,14 +112,17 @@ const PlayerPage = () => {
 
                 <div className="flex items-center justify-between text-small">
                   <span className="text-tiny font-medium">Team:</span>
-                  <div className="flex items-center gap-2 text-tiny">
+                  <Link
+                    className="flex items-center gap-2 text-tiny text-foreground"
+                    href={`/esports/teams/${playerData?.teams.id}`}
+                  >
                     <Image
                       alt={playerData?.teams.name}
                       className="h-6 w-6 rounded-none"
                       src={playerData?.teams.logo_url}
                     />
                     <span>{playerData?.teams.name}</span>
-                  </div>
+                  </Link>
                 </div>
 
                 <Divider />
