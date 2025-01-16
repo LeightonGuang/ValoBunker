@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import {
   Card,
-  Chip,
   Form,
   User,
   Input,
@@ -11,7 +10,6 @@ import {
   Button,
   Select,
   CardBody,
-  DateInput,
   Selection,
   DatePicker,
   SelectItem,
@@ -32,24 +30,11 @@ const PlayerEditPage = () => {
   const [playerForm, setPlayerForm] = useState<PlayersTableType>();
   const [teams, setTeams] = useState<TeamsTableType[]>();
   const [rolesData, setRolesData] = useState<RolesTableType[]>([]);
-  const [selectedTeam, setSelectedTeam] = useState<Selection>(new Set([]));
+  const [selectedTeamId, setSelectedTeamId] = useState<Selection>(new Set([]));
 
   const fetchData = async () => {
     try {
       const supabase = getSupabase();
-      const { data: playerData, error: playerError } = await supabase
-        .from("players")
-        .select(`*, teams(*, vct_league(*))`)
-        .eq("id", playerId);
-
-      if (playerError) {
-        console.error(playerError);
-      } else {
-        console.log(playerData[0]);
-        setPlayer(playerData[0]);
-        setPlayerForm(playerData[0]);
-        setSelectedTeam(new Set([playerData[0].team_id]));
-      }
 
       const { data: TeamsData, error: TeamsError } = await supabase
         .from("teams")
@@ -72,6 +57,21 @@ const PlayerEditPage = () => {
       } else {
         console.log(RolesData);
         setRolesData(RolesData);
+      }
+
+      const { data: playerData, error: playerError } = await supabase
+        .from("players")
+        .select(`*, teams(*, vct_league(*))`)
+        .eq("id", playerId)
+        .single();
+
+      if (playerError) {
+        console.error(playerError);
+      } else {
+        console.log(playerData);
+        setPlayer(playerData);
+        setPlayerForm(playerData);
+        setSelectedTeamId(new Set([playerData.team_id.toString()]));
       }
     } catch (error) {
       console.error(error);
@@ -111,24 +111,31 @@ const PlayerEditPage = () => {
   }, [rolesData]);
 
   useEffect(() => {
-    console.log("selected team:", selectedTeam);
-  }, [selectedTeam]);
+    console.log("selected team:", selectedTeamId);
+  }, [selectedTeamId]);
 
-  useEffect(() => {
-    console.log("teams:", teams);
-  }, [teams]);
+  // useEffect(() => {
+  //   console.log("teams:", teams);
+  // }, [teams]);
 
   return (
     <section className="w-full">
-      <div>
-        <h1 className={title()}>Edit Player</h1>
+      <h1 className={title()}>Edit Player</h1>
 
-        <Card className="mt-6">
-          {!isLoading && (
+      <div className="mt-6 flex justify-center">
+        {!isLoading && (
+          <Card className="w-96">
             <CardBody>
               <Form>
-                <Avatar size="lg" src={playerForm?.profile_picture_url} />
+                <div className="mb-4 flex w-full justify-center">
+                  <Avatar
+                    className="h-32 w-32 rounded-none"
+                    src={playerForm?.profile_picture_url}
+                  />
+                </div>
+
                 <Input
+                  label="Profile Picture URL"
                   name="profile_picture_url"
                   placeholder="Profile Picture URL"
                   value={playerForm?.profile_picture_url}
@@ -136,6 +143,8 @@ const PlayerEditPage = () => {
                 />
 
                 <Input
+                  isRequired
+                  label="IGN"
                   name="ign"
                   placeholder="IGN"
                   value={playerForm?.ign}
@@ -143,43 +152,40 @@ const PlayerEditPage = () => {
                 />
 
                 <Input
+                  isRequired
+                  label="Name"
                   name="name"
                   placeholder="Name"
                   value={playerForm?.name}
                   onChange={onFormChange}
                 />
 
-                <Input
-                  name="country"
-                  placeholder="Country"
-                  value={playerForm?.country}
-                  onChange={onFormChange}
-                />
-
-                <DatePicker
-                  label="Birthday (DD-MM-YYYY)"
-                  name="birthday"
-                  value={
-                    playerForm?.birthday ? parseDate(playerForm.birthday) : null
-                  }
-                  onChange={(date) =>
-                    setPlayerForm({
-                      ...playerForm,
-                      birthday: date?.toString(),
-                    } as PlayersTableType)
-                  }
-                />
-
                 {teams && (
                   <Select
                     aria-label="Teams"
+                    items={teams}
+                    label="Team"
                     placeholder="Select a team"
-                    selectedKeys={selectedTeam}
-                    onSelectionChange={setSelectedTeam}
+                    renderValue={(items) => {
+                      const selectedTeam = items[0];
+
+                      return (
+                        <User
+                          avatarProps={{
+                            src: selectedTeam.data?.logo_url,
+                            className: "bg-transparent rounded-none p-2",
+                          }}
+                          name={selectedTeam.data?.name}
+                        />
+                      );
+                    }}
+                    selectedKeys={selectedTeamId}
+                    selectionMode="single"
+                    onSelectionChange={setSelectedTeamId}
                   >
-                    {teams?.map((team) => (
+                    {(team) => (
                       <SelectItem
-                        key={team.id}
+                        key={team.id.toString()}
                         aria-label={team.name}
                         textValue={team.name}
                       >
@@ -193,17 +199,41 @@ const PlayerEditPage = () => {
                           name={team.name}
                         />
                       </SelectItem>
-                    ))}
+                    )}
                   </Select>
                 )}
+
+                <Input
+                  isRequired
+                  label="Country"
+                  name="country"
+                  placeholder="Country"
+                  value={playerForm?.country}
+                  onChange={onFormChange}
+                />
+
+                <DatePicker
+                  label="Birthday (DD-MM-YYYY)"
+                  name="birthday"
+                  selectorButtonPlacement="start"
+                  value={
+                    playerForm?.birthday ? parseDate(playerForm.birthday) : null
+                  }
+                  onChange={(date) =>
+                    setPlayerForm({
+                      ...playerForm,
+                      birthday: date?.toString(),
+                    } as PlayersTableType)
+                  }
+                />
 
                 <Button color="primary" type="submit">
                   Update
                 </Button>
               </Form>
             </CardBody>
-          )}
-        </Card>
+          </Card>
+        )}
       </div>
     </section>
   );
