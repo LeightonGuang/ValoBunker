@@ -5,6 +5,7 @@ import {
   Card,
   Chip,
   Tabs,
+  Link,
   Image,
   CardBody,
   Accordion,
@@ -156,7 +157,14 @@ const TeamsPage = () => {
                           width={48}
                         />
                       }
-                      title={<span className="text-large">{teamObj.name}</span>}
+                      title={
+                        <Link
+                          className="text-large text-foreground"
+                          href={`/esports/teams/${teamObj.id}`}
+                        >
+                          {teamObj.name}
+                        </Link>
+                      }
                       variant="splitted"
                     >
                       <ul className="grid grid-cols-2 gap-4 lg:grid-cols-5">
