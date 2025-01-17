@@ -103,12 +103,12 @@ export const Navbar = () => {
                   radius="sm"
                   variant="light"
                 >
-                  Similar Abilities
+                  Compare Abilities
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu
-              aria-label="Similar Abilities"
+              aria-label="Compare Abilities"
               className="w-[340px]"
               itemClasses={{
                 base: "gap-4",
@@ -269,12 +269,12 @@ export const Navbar = () => {
                     radius="sm"
                     variant="light"
                   >
-                    Similar Abilities
+                    Compare Abilities
                   </Button>
                 </DropdownTrigger>
               </NavbarItem>
               <DropdownMenu
-                aria-label="Similar Abilities"
+                aria-label="Compare Abilities"
                 className="w-[340px]"
                 itemClasses={{
                   base: "gap-4",
