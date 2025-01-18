@@ -81,7 +81,6 @@ export default function SmokesPage() {
       if (circularSmokesError) {
         console.error(circularSmokesError);
       } else {
-        console.log(circularSmokesData);
         setCircularSmokesData(circularSmokesData);
       }
 
@@ -94,7 +93,6 @@ export default function SmokesPage() {
       if (wallSmokesError) {
         console.error(wallSmokesError);
       } else {
-        console.log(wallSmokesData);
         setWallSmokesData(wallSmokesData);
       }
     } catch (error) {
