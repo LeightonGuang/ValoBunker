@@ -137,7 +137,7 @@ const EventPage = () => {
               <iframe
                 allowFullScreen
                 className="aspect-video h-80 w-full"
-                src={`https://player.twitch.tv/?channel=${twitchChannel}&parent=valobunker.netlify.app`}
+                src={`https://player.twitch.tv/?channel=${twitchChannel}&parent=netlify.app`}
                 title="Twitch Stream"
               />
             </>
