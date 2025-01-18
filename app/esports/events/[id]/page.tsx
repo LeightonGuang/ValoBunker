@@ -48,7 +48,7 @@ const EventPage = () => {
     }
   };
 
-  const EventCard = () => {
+  const TwitchEmbed = () => {
     const twitchChannel =
       eventData.region === "americas"
         ? "valorant_americas"
@@ -60,6 +60,17 @@ const EventPage = () => {
               ? "valorantesports_cn"
               : null;
 
+    return (
+      <iframe
+        allowFullScreen
+        className="aspect-video h-80 w-full"
+        src={`https://player.twitch.tv/?channel=${twitchChannel}&parent=${window.location.hostname}`}
+        title="Twitch Stream"
+      />
+    );
+  };
+
+  const EventCard = () => {
     return (
       <Card className="mt-6">
         <CardHeader className="flex gap-4">
@@ -134,12 +145,7 @@ const EventPage = () => {
 
               <h2>Streams</h2>
 
-              <iframe
-                allowFullScreen
-                className="aspect-video h-80 w-full"
-                src={`https://player.twitch.tv/?channel=${twitchChannel}&parent=netlify.app`}
-                title="Twitch Stream"
-              />
+              <TwitchEmbed />
             </>
           )}
 
@@ -237,6 +243,7 @@ const EventPage = () => {
 
   useEffect(() => {
     fetchEventById();
+    console.log(window.location.hostname);
   }, []);
 
   return (
