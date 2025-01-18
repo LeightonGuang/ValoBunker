@@ -22,7 +22,7 @@ interface CircularSmokeType {
   duration: number;
   radius: number;
   cost: number;
-  regen?: number;
+  regen?: string;
   agents: {
     name: string;
     icon_url: string;
@@ -36,7 +36,7 @@ interface WallSmokeType {
   duration: number;
   length: number;
   cost: number;
-  regen?: number;
+  regen?: string;
   agents: {
     name: string;
     icon_url: string;
