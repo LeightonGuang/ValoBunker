@@ -5,6 +5,7 @@ export interface EventsTableType {
   id: number;
   type: string;
   name: string;
+  region?: string;
   event_icon_url: string;
   start_date?: string;
   end_date?: string;
