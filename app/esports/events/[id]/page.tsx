@@ -26,6 +26,7 @@ const EventPage = () => {
   const [eventData, setEventData] = useState<EventsTableType>(
     {} as EventsTableType,
   );
+
   const fetchEventById = async () => {
     try {
       const supabase = getSupabase();
@@ -38,7 +39,6 @@ const EventPage = () => {
       if (error) {
         console.error(error);
       } else {
-        console.log(data);
         setEventData(data);
       }
     } catch (error) {
@@ -243,7 +243,6 @@ const EventPage = () => {
 
   useEffect(() => {
     fetchEventById();
-    console.log(window.location.hostname);
   }, []);
 
   return (
