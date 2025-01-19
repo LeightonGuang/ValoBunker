@@ -44,7 +44,11 @@ const ManageTeamsPage = () => {
   };
 
   const TeamsTable = () => {
-    const columns = ["Team", "League", "country"];
+    const columns: { name: string; sortable: boolean }[] = [
+      { name: "Team", sortable: true },
+      { name: "League", sortable: true },
+      { name: "country", sortable: true },
+    ];
 
     const topContent = (
       <div className="flex items-center justify-between">
@@ -52,8 +56,12 @@ const ManageTeamsPage = () => {
           Total {teams.length} Teams
         </div>
 
-        <Button color="primary" startContent={<span>+</span>}>
-          Add Team
+        <Button
+          color="primary"
+          startContent={<span>+</span>}
+          onPress={() => router.push("/moderator/manage/teams/create")}
+        >
+          Create Team
         </Button>
       </div>
     );
@@ -68,7 +76,9 @@ const ManageTeamsPage = () => {
       >
         <TableHeader>
           {columns.map((column, i) => (
-            <TableColumn key={i}>{column}</TableColumn>
+            <TableColumn key={i} allowsSorting={column.sortable}>
+              {column.name}
+            </TableColumn>
           ))}
         </TableHeader>
 
