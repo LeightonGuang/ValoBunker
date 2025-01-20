@@ -240,8 +240,8 @@ export default function Home() {
                   key={eventObj.id}
                   description={
                     <div className="flex flex-col">
-                      <span className="flex justify-between text-small text-white">
-                        {eventObj.type}{" "}
+                      <span className="flex justify-between text-small text-foreground">
+                        {eventObj.type}
                         <Chip
                           className="border-none"
                           color={
