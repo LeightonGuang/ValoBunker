@@ -167,89 +167,95 @@ const TeamsPage = () => {
                       }
                       variant="splitted"
                     >
-                      <ul className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-                        {[...teamObj.players]
-                          .sort((a, b) =>
-                            a.roles[0] === "IGL"
-                              ? -1
-                              : b.roles[0] === "IGL"
-                                ? 1
-                                : 0,
-                          )
-                          .map((player) => (
-                            <li key={player.id}>
-                              <Card
-                                isPressable
-                                className="cursor-pointer"
-                                onPress={() =>
-                                  router.push(`/esports/players/${player.id}`)
-                                }
-                              >
-                                <CardBody className="flex justify-center">
-                                  <Image
-                                    className="aspect-square h-full w-full bg-white object-cover object-top"
-                                    src={
-                                      player.profile_picture_url
-                                        ? player.profile_picture_url
-                                        : "https://placehold.co/500x500"
-                                    }
-                                  />
-                                </CardBody>
-                                <CardFooter className="flex text-large">
-                                  <div className="flex w-full flex-col">
-                                    <span className="text-left">
-                                      {player.ign}
-                                    </span>
-
-                                    <div className="mt-2 w-full">
-                                      <span className="flex text-small text-default-400">
-                                        {player.roles.length === 1
-                                          ? "Role:"
-                                          : "Roles:"}
+                      {teamObj.players.length > 0 ? (
+                        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+                          {[...teamObj.players]
+                            .sort((a, b) =>
+                              a.roles[0] === "IGL"
+                                ? -1
+                                : b.roles[0] === "IGL"
+                                  ? 1
+                                  : 0,
+                            )
+                            .map((player) => (
+                              <li key={player.id}>
+                                <Card
+                                  isPressable
+                                  className="cursor-pointer"
+                                  onPress={() =>
+                                    router.push(`/esports/players/${player.id}`)
+                                  }
+                                >
+                                  <CardBody className="flex justify-center">
+                                    <Image
+                                      className="aspect-square h-full w-full bg-white object-cover object-top"
+                                      src={
+                                        player.profile_picture_url
+                                          ? player.profile_picture_url
+                                          : "https://placehold.co/500x500"
+                                      }
+                                    />
+                                  </CardBody>
+                                  <CardFooter className="flex text-large">
+                                    <div className="flex w-full flex-col">
+                                      <span className="text-left">
+                                        {player.ign}
                                       </span>
 
-                                      <ul className="flex w-full flex-wrap gap-x-2">
-                                        {player.roles.map((roleId) => {
-                                          return (
-                                            <li key={roleId}>
-                                              <Chip
-                                                color={
-                                                  roleId === "1"
-                                                    ? "success"
-                                                    : roleId === "2"
-                                                      ? "danger"
-                                                      : roleId === "3"
-                                                        ? "warning"
-                                                        : roleId === "4"
-                                                          ? "secondary"
-                                                          : roleId === "IGL"
-                                                            ? "primary"
-                                                            : "default"
-                                                }
-                                                size="sm"
-                                              >
-                                                {roleId === "1" ||
-                                                roleId === "2" ||
-                                                roleId === "3" ||
-                                                roleId === "4"
-                                                  ? rolesDataList.filter(
-                                                      (roleObj) =>
-                                                        roleObj.id ===
-                                                        Number(roleId),
-                                                    )[0].name
-                                                  : roleId}
-                                              </Chip>
-                                            </li>
-                                          );
-                                        })}
-                                      </ul>
+                                      <div className="mt-2 w-full">
+                                        <span className="flex text-small text-default-400">
+                                          {player.roles.length === 1
+                                            ? "Role:"
+                                            : "Roles:"}
+                                        </span>
+
+                                        <ul className="flex w-full flex-wrap gap-x-2">
+                                          {player.roles.map((roleId) => {
+                                            return (
+                                              <li key={roleId}>
+                                                <Chip
+                                                  color={
+                                                    roleId === "1"
+                                                      ? "success"
+                                                      : roleId === "2"
+                                                        ? "danger"
+                                                        : roleId === "3"
+                                                          ? "warning"
+                                                          : roleId === "4"
+                                                            ? "secondary"
+                                                            : roleId === "IGL"
+                                                              ? "primary"
+                                                              : "default"
+                                                  }
+                                                  size="sm"
+                                                >
+                                                  {roleId === "1" ||
+                                                  roleId === "2" ||
+                                                  roleId === "3" ||
+                                                  roleId === "4"
+                                                    ? rolesDataList.filter(
+                                                        (roleObj) =>
+                                                          roleObj.id ===
+                                                          Number(roleId),
+                                                      )[0].name
+                                                    : roleId}
+                                                </Chip>
+                                              </li>
+                                            );
+                                          })}
+                                        </ul>
+                                      </div>
                                     </div>
-                                  </div>
-                                </CardFooter>
-                              </Card>
-                            </li>
-                          ))}
-                      </ul>
+                                  </CardFooter>
+                                </Card>
+                              </li>
+                            ))}
+                        </ul>
+                      ) : (
+                        <span className="text-medium">
+                          There are no players in this team
+                        </span>
+                      )}
                     </AccordionItem>
                   ))}
                 </Accordion>
