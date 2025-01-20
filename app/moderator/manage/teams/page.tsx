@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   User,
   Image,
@@ -8,14 +7,20 @@ import {
   Button,
   Tooltip,
   TableRow,
+  Dropdown,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
+  DropdownMenu,
+  DropdownItem,
+  DropdownTrigger,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { title } from "@/components/primitives";
+import { EllipsisIcon } from "@/components/icons";
 import { getSupabase } from "@/utils/supabase/client";
 import { TeamsTableType } from "@/types/TeamsTableType";
 
@@ -47,7 +52,8 @@ const ManageTeamsPage = () => {
     const columns: { name: string; sortable: boolean }[] = [
       { name: "Team", sortable: true },
       { name: "League", sortable: true },
-      { name: "country", sortable: true },
+      { name: "Country", sortable: true },
+      { name: "Actions", sortable: false },
     ];
 
     const topContent = (
@@ -106,6 +112,30 @@ const ManageTeamsPage = () => {
               </TableCell>
 
               <TableCell>{team.country}</TableCell>
+
+              <TableCell>
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button isIconOnly variant="light">
+                      <EllipsisIcon />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu>
+                    <DropdownItem
+                      key="edit"
+                      onPress={() =>
+                        router.push(`/moderator/manage/teams/edit/${team.id}`)
+                      }
+                    >
+                      Edit
+                    </DropdownItem>
+
+                    <DropdownItem key="delete" onPress={() => {}}>
+                      Delete
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
