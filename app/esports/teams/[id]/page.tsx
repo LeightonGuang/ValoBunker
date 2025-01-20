@@ -50,7 +50,7 @@ const TeamPage = () => {
 
   return (
     <section className="flex w-full flex-col items-center">
-      <Card className="max-w-5xl p-2">
+      <Card className="min-w-[50rem] max-w-5xl p-2">
         <CardHeader>
           <div className="flex w-full flex-col gap-6 p-6">
             <div className="flex items-center gap-4">
@@ -61,7 +61,12 @@ const TeamPage = () => {
               />
 
               <div>
-                <h1 className="text-3xl font-bold">{team?.name}</h1>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-3xl font-bold">{team?.name}</h1>
+                  <span className="text-medium text-default-400">
+                    {team?.tag}
+                  </span>
+                </div>
                 <span className="mt-2 text-default-400">
                   Country: {team?.country}
                 </span>
