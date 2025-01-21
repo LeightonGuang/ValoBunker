@@ -1,35 +1,79 @@
 "use client";
 
-import Image from "next/image";
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
 } from "@nextui-org/table";
-import { Tooltip, User } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { Image, Tooltip, User } from "@nextui-org/react";
 
-import molliesData from "@/public/data/molliesData.json";
 import { title } from "@/components/primitives";
+import { getSupabase } from "@/utils/supabase/client";
+
+const mollyColumns = [
+  { name: "Agent", sortable: true },
+  { name: "Ability", sortable: true },
+  { name: "Damage", sortable: false },
+  { name: "Duration", sortable: true },
+  { name: "Radius", sortable: true },
+  { name: "Cost", sortable: true },
+];
+
+interface MolliesType {
+  id: number;
+  name: string;
+  icon_url: string;
+  damage: number;
+  duration: number;
+  radius: number;
+  cost: number;
+  regen?: string;
+  agents: {
+    name: string;
+    icon_url: string;
+  };
+}
 
 export default function MolliesPage() {
-  const mollyColumns = [
-    { name: "Agent", sortable: true },
-    { name: "Ability", sortable: true },
-    { name: "Damage", sortable: false },
-    { name: "Duration", sortable: true },
-    { name: "Charge", sortable: true },
-    { name: "Cost", sortable: true },
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const [molliesData, setMolliesData] = useState<any[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const supabase = getSupabase();
+
+      const { data: molliesData, error: molliesError } = await supabase
+        .from("abilities")
+        .select("id, name, icon_url, duration, radius, cost, agents(*)")
+        .eq("category", "molly")
+        .order("name", { ascending: true });
+
+      if (molliesError) {
+        console.error(molliesError);
+      } else {
+        setMolliesData(molliesData);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <section>
       <h1 className={title()}>Mollies</h1>
       <div>
         <h2 className="mt-6">All mollies</h2>
-        <Table className="mt-4" fullWidth={true}>
+        <Table aria-label="Mollies" className="mt-4" fullWidth={true}>
           <TableHeader>
             {mollyColumns.map((column) => (
               <TableColumn key={column.name}>
@@ -37,37 +81,41 @@ export default function MolliesPage() {
               </TableColumn>
             ))}
           </TableHeader>
-          <TableBody>
-            {molliesData.molliesData.map((molly) => (
-              <TableRow key={molly.id}>
+
+          <TableBody isLoading={isLoading} items={molliesData}>
+            {(molly: MolliesType) => (
+              <TableRow>
                 <TableCell>
                   <div className="flex w-max items-center">
                     <User
-                      avatarProps={{ src: molly.agent_icon_url }}
+                      avatarProps={{ src: molly.agents.icon_url }}
                       className="gap-4"
-                      name={molly.agent}
+                      name={molly.agents.name}
                     />
                   </div>
                 </TableCell>
+
                 <TableCell>
-                  <Tooltip content={molly.name}>
-                    <div className="cursor-pointer">
+                  {
+                    <Tooltip content={molly.name}>
                       <Image
-                        unoptimized
                         alt={molly.name}
-                        height={24}
-                        src={molly.ability_icon_url}
-                        width={24}
+                        className="h-6 w-6"
+                        src={molly.icon_url}
                       />
-                    </div>
-                  </Tooltip>
+                    </Tooltip>
+                  }
                 </TableCell>
-                <TableCell className="whitespace-nowrap">{`${molly.damage.min !== null ? `${molly.damage.min} - ` : ""} ${molly.damage.max}`}</TableCell>
+
+                <TableCell>{molly.damage}</TableCell>
+
                 <TableCell>{molly.duration}</TableCell>
-                <TableCell>{molly.charge}</TableCell>
+
+                <TableCell>{molly.radius}</TableCell>
+
                 <TableCell>{molly.cost}</TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </div>
