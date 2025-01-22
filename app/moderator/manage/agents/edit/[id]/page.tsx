@@ -320,9 +320,9 @@ const EditAgentsPage = () => {
                           />
                           <Input
                             label="Ult Orb Number"
-                            name="ult_orb_num"
+                            name="ult_points"
                             type="number"
-                            value={`${currentAbility?.ult_orb_num}`}
+                            value={`${currentAbility?.ult_points}`}
                             onChange={(e) => {
                               onAbilitiesFormChange(e, currentKeybind);
                             }}
