@@ -28,7 +28,6 @@ import {
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
-import { RolesTableType } from "@/types/RolesTableType";
 import { PlayersTableType } from "@/types/PlayersTableType";
 import { ChevronDown, SearchIcon } from "@/components/icons";
 import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
@@ -77,7 +76,7 @@ const ManagePlayersPage = () => {
       filteredPlayers = filteredPlayers.filter(
         (player) =>
           player.teams?.vct_league &&
-          selectedLeagues.includes(String(player.teams.vct_league.id)),
+          selectedLeagues.includes(String(player.teams?.vct_league.id)),
       );
     }
 
@@ -340,10 +339,10 @@ const ManagePlayersPage = () => {
                 <TableCell>{player.country}</TableCell>
 
                 <TableCell>
-                  <Tooltip content={player.teams.name}>
+                  <Tooltip content={player.teams?.name}>
                     <Image
                       className="h-8 w-8 rounded-none object-contain"
-                      src={player.teams.logo_url}
+                      src={player.teams?.logo_url}
                     />
                   </Tooltip>
                 </TableCell>
@@ -397,10 +396,10 @@ const ManagePlayersPage = () => {
                 </TableCell>
 
                 <TableCell>
-                  <Tooltip content={player.teams.vct_league.name}>
+                  <Tooltip content={player.teams?.vct_league.name}>
                     <Image
                       className="h-8 w-8 rounded-none object-contain"
-                      src={player.teams.vct_league.logo_url}
+                      src={player.teams?.vct_league.logo_url}
                     />
                   </Tooltip>
                 </TableCell>
