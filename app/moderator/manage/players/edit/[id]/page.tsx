@@ -26,7 +26,6 @@ import { PlayersTableType } from "@/types/PlayersTableType";
 const PlayerEditPage = () => {
   const playerId = useParams().id;
   const [isLoading, setIsLoading] = useState(false);
-  const [player, setPlayer] = useState<PlayersTableType>();
   const [playerForm, setPlayerForm] = useState<PlayersTableType>();
   const [teams, setTeams] = useState<TeamsTableType[]>();
   const [rolesData, setRolesData] = useState<RolesTableType[]>([]);
@@ -55,7 +54,6 @@ const PlayerEditPage = () => {
       if (RolesError) {
         console.error(RolesError);
       } else {
-        console.log(RolesData);
         setRolesData(RolesData);
       }
 
@@ -68,8 +66,6 @@ const PlayerEditPage = () => {
       if (playerError) {
         console.error(playerError);
       } else {
-        console.log(playerData);
-        setPlayer(playerData);
         setPlayerForm(playerData);
         setSelectedTeamId(new Set([playerData.team_id.toString()]));
       }
@@ -80,18 +76,7 @@ const PlayerEditPage = () => {
     }
   };
 
-  const onBirthdayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    setPlayer({
-      ...player,
-      [e.target.name]: e.target.value,
-    } as PlayersTableType);
-  };
-
   const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
     setPlayerForm({
       ...playerForm,
       [e.target.name]: e.target.value,
@@ -101,22 +86,6 @@ const PlayerEditPage = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {
-    console.log("player form:", playerForm);
-  }, [playerForm]);
-
-  useEffect(() => {
-    console.log(rolesData);
-  }, [rolesData]);
-
-  useEffect(() => {
-    console.log("selected team:", selectedTeamId);
-  }, [selectedTeamId]);
-
-  // useEffect(() => {
-  //   console.log("teams:", teams);
-  // }, [teams]);
 
   return (
     <section className="w-full">
