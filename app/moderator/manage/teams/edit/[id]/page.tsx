@@ -12,6 +12,7 @@ import {
   Selection,
   CardHeader,
   SelectItem,
+  User,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -19,6 +20,7 @@ import { useParams, useRouter } from "next/navigation";
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
 import { TeamsTableType } from "@/types/TeamsTableType";
+import { PlayersTableType } from "@/types/PlayersTableType";
 import { VctLeaguesTableType } from "@/types/VctLeaguesTableType";
 
 const EditTeamPage = () => {
@@ -29,7 +31,11 @@ const EditTeamPage = () => {
   const [teamData, setTeamData] = useState<TeamsTableType>(
     {} as TeamsTableType,
   );
+  const [playersData, setPlayersData] = useState<PlayersTableType[]>([]);
   const [selectedVctLeague, setSelectedVctLeague] = useState<Selection>(
+    new Set([]),
+  );
+  const [selectedPlayers, setSelectedPlayers] = useState<Selection>(
     new Set([]),
   );
 
@@ -39,7 +45,7 @@ const EditTeamPage = () => {
 
       const { data: teamsData, error: teamsError } = await supabase
         .from("teams")
-        .select("*, vct_league(*)")
+        .select("*, players(*), vct_league(*)")
         .eq("id", teamId)
         .single();
 
@@ -59,6 +65,17 @@ const EditTeamPage = () => {
       } else {
         setLeaguesData(leaguesData);
       }
+
+      const { data: playersData, error: playersError } = await supabase
+        .from("players")
+        .select("*")
+        .order("ign", { ascending: true });
+
+      if (playersError) {
+        console.error(playersError);
+      } else {
+        setPlayersData(playersData);
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -75,10 +92,18 @@ const EditTeamPage = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const originalSelectedPlayers = teamData.players.map(
+      (player: PlayersTableType) => player.id,
+    );
+
+    const playersToDeselect = originalSelectedPlayers.filter(
+      (id) => !Array.from(selectedPlayers).includes(id),
+    );
+
     try {
       const supabase = getSupabase();
 
-      const { error } = await supabase
+      const { error: teamsError } = await supabase
         .from("teams")
         .update({
           name: teamData.name,
@@ -89,13 +114,43 @@ const EditTeamPage = () => {
         })
         .eq("id", teamId);
 
-      if (error) {
-        console.error(error);
-      } else {
-        router.push("/moderator/manage/teams");
+      if (teamsError) {
+        console.error(teamsError);
+      }
+
+      const { error: playersError } = await supabase
+        .from("players")
+        .update({
+          team_id: teamData.id,
+        })
+        .in("id", Array.from(selectedPlayers));
+
+      if (playersError) {
+        console.error(playersError);
       }
     } catch (error) {
       console.error(error);
+    }
+
+    if (playersToDeselect.length > 0) {
+      try {
+        const supabase = getSupabase();
+
+        const { error: deselectPlayersError } = await supabase
+          .from("players")
+          .update({ team_id: null })
+          .in("id", playersToDeselect);
+
+        if (deselectPlayersError) {
+          console.error(deselectPlayersError);
+        } else {
+          router.push("/moderator/manage/teams");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      router.push("/moderator/manage/teams");
     }
   };
 
@@ -108,6 +163,12 @@ const EditTeamPage = () => {
       setSelectedVctLeague(new Set([teamData.vct_league.id]));
     }
   }, [teamData.vct_league]);
+
+  useEffect(() => {
+    if (teamData.players) {
+      setSelectedPlayers(new Set(teamData.players.map((player) => player.id)));
+    }
+  }, [teamData.players]);
 
   return (
     <section>
@@ -199,6 +260,49 @@ const EditTeamPage = () => {
                   value={teamData.country}
                   onChange={onTeamFormChange}
                 />
+
+                {teamData.players && playersData && (
+                  <Select
+                    isMultiline
+                    items={playersData}
+                    label="Players"
+                    renderValue={(players) => (
+                      <div className="flex flex-wrap gap-2">
+                        {players.map((player) => (
+                          <User
+                            key={player.data?.id}
+                            avatarProps={{
+                              src: player.data?.profile_picture_url,
+                              className: "bg-transparent h-6 w-6 rounded-none",
+                            }}
+                            classNames={{ name: "text-small" }}
+                            name={player.data?.ign}
+                          />
+                        ))}
+                      </div>
+                    )}
+                    selectedKeys={Array.from(selectedPlayers)}
+                    selectionMode="multiple"
+                    onSelectionChange={setSelectedPlayers}
+                  >
+                    {(player) => {
+                      return (
+                        <SelectItem
+                          startContent={
+                            <Avatar
+                              alt={player.ign}
+                              className="bg-transparent h-6 w-6 rounded-none"
+                              src={player.profile_picture_url}
+                            />
+                          }
+                          textValue={String(player.id)}
+                        >
+                          {player.ign}
+                        </SelectItem>
+                      );
+                    }}
+                  </Select>
+                )}
 
                 <Button className="w-full" color="primary" type="submit">
                   Update Team
