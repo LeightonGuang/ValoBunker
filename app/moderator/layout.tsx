@@ -155,7 +155,7 @@ export default function ModeratorLayout({
       ) : hasRole ? (
         <div className="w-full">
           <div className="flex flex-col gap-4 lg:flex-row">
-            <div className="flex w-full items-center lg:h-[80dvh] lg:w-48">
+            <div className="flex w-full items-center lg:w-48">
               <Listbox
                 disallowEmptySelection
                 aria-label="Manage"
