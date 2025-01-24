@@ -57,7 +57,6 @@ const ManageAgentsPage = () => {
       if (error) throw error;
 
       setAgents(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -181,7 +180,7 @@ const ManageAgentsPage = () => {
                       <DropdownMenu>
                         <DropdownItem
                           key="edit"
-                          onClick={() =>
+                          onPress={() =>
                             router.push(
                               `/moderator/manage/agents/edit/${agent.id}`,
                             )
@@ -192,7 +191,7 @@ const ManageAgentsPage = () => {
 
                         <DropdownItem
                           key="delete"
-                          onClick={() => {
+                          onPress={() => {
                             onOpen();
                             // setEventToDelete(agent);
                           }}
