@@ -1,8 +1,9 @@
 "use client";
 
 import {
-  User,
   Card,
+  Form,
+  User,
   Image,
   Input,
   Avatar,
@@ -11,6 +12,8 @@ import {
   Divider,
   CardBody,
   Textarea,
+  Selection,
+  CardHeader,
   SelectItem,
   Breadcrumbs,
   BreadcrumbItem,
@@ -30,6 +33,7 @@ const EditAgentsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [agentRoles, setAgentRoles] = useState<RolesTableType[]>([]);
   const [agentForm, setAgentForm] = useState<AgentsTableType | null>(null);
+  const [selectedRole, setSelectedRole] = useState<Selection>(new Set([]));
   const [abilitiesForm, setAbilitiesForm] = useState<AbilitiesTableType[]>([]);
 
   const abilitiesKeyBinds = [
@@ -38,6 +42,76 @@ const EditAgentsPage = () => {
     { bind: "C" },
     { bind: "X" },
   ];
+
+  const fetchData = async () => {
+    try {
+      const supabase = getSupabase();
+      const { data: rolesData, error: rolesError } = await supabase
+        .from("roles")
+        .select("*");
+
+      if (rolesError) {
+        console.error(rolesError);
+      } else {
+        setAgentRoles(rolesData);
+      }
+
+      const { data: agentsData, error: agentsError } = await supabase
+        .from("agents")
+        .select(`*, abilities(*),roles(*)`)
+        .eq("id", agentId)
+        .single();
+
+      if (agentsError) {
+        console.error(agentsError);
+      } else {
+        setAgentForm(agentsData);
+
+        if (agentsData.abilities.length === 0) {
+          setAbilitiesForm([
+            {
+              id: 0,
+              key_bind: "E",
+              name: "",
+              icon_url: "",
+              description: "",
+              cost: 0,
+            } as AbilitiesTableType,
+            {
+              id: 1,
+              key_bind: "Q",
+              name: "",
+              icon_url: "",
+              description: "",
+              cost: 0,
+            } as AbilitiesTableType,
+            {
+              id: 2,
+              key_bind: "C",
+              name: "",
+              icon_url: "",
+              description: "",
+              cost: 0,
+            } as AbilitiesTableType,
+            {
+              id: 3,
+              key_bind: "X",
+              name: "",
+              icon_url: "",
+              description: "",
+              cost: 0,
+            } as AbilitiesTableType,
+          ]);
+        } else {
+          setAbilitiesForm(agentsData.abilities);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onAgentFormChange = (e: any) => {
     e.preventDefault();
@@ -72,7 +146,6 @@ const EditAgentsPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Update agent details
     try {
       const supabase = getSupabase();
 
@@ -81,7 +154,7 @@ const EditAgentsPage = () => {
         .update({
           name: agentForm?.name,
           icon_url: agentForm?.icon_url,
-          role_id: agentForm?.role_id,
+          role_id: Array.from(selectedRole)[0],
           release_date: agentForm?.release_date,
         })
         .eq("id", agentId);
@@ -102,101 +175,36 @@ const EditAgentsPage = () => {
   };
 
   useEffect(() => {
-    const fetchRolesAndAgent = async () => {
-      try {
-        const supabase = getSupabase();
-        const { data: rolesData, error: rolesError } = await supabase
-          .from("roles")
-          .select("*");
-
-        if (rolesError) {
-          console.error(rolesError);
-        } else {
-          setAgentRoles(rolesData);
-        }
-
-        const { data: agentsData, error: agentsError } = await supabase
-          .from("agents")
-          .select(`*, abilities(*),roles(*)`)
-          .eq("id", agentId);
-
-        if (agentsError) {
-          console.error(agentsError);
-        } else {
-          setAgentForm(agentsData[0]);
-
-          if (agentsData[0].abilities.length === 0) {
-            setAbilitiesForm([
-              {
-                id: 0,
-                key_bind: "E",
-                name: "",
-                icon_url: "",
-                description: "",
-                cost: 0,
-              } as AbilitiesTableType,
-              {
-                id: 1,
-                key_bind: "Q",
-                name: "",
-                icon_url: "",
-                description: "",
-                cost: 0,
-              } as AbilitiesTableType,
-              {
-                id: 2,
-                key_bind: "C",
-                name: "",
-                icon_url: "",
-                description: "",
-                cost: 0,
-              } as AbilitiesTableType,
-              {
-                id: 3,
-                key_bind: "X",
-                name: "",
-                icon_url: "",
-                description: "",
-                cost: 0,
-              } as AbilitiesTableType,
-            ]);
-          } else {
-            setAbilitiesForm(agentsData[0].abilities);
-          }
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchRolesAndAgent();
+    fetchData();
   }, []);
 
   useEffect(() => {
     console.log(agentForm);
-  }, [agentForm]);
 
-  useEffect(() => {
-    console.table(abilitiesForm);
-  }, [abilitiesForm]);
+    if (agentForm?.abilities) {
+      setSelectedRole(new Set([agentForm?.roles.id]));
+    }
+  }, [agentForm?.roles]);
 
   return (
-    <section>
+    <section className="w-full">
       <Breadcrumbs aria-label="breadcrumb" className="mb-4">
-        <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
-        <BreadcrumbItem href="/moderator/manage/agents">Agents</BreadcrumbItem>
+        <BreadcrumbItem href="/moderator/manage/agents">
+          Manage Agents
+        </BreadcrumbItem>
         <BreadcrumbItem>Edit</BreadcrumbItem>
       </Breadcrumbs>
-      <h1 className={title()}>Edit Agents</h1>
 
       <div className="mt-6 flex justify-center">
         {!isLoading && (
           <Card className="w-96">
+            <CardHeader>
+              <h1 className={title()}>Edit Agents</h1>
+            </CardHeader>
+
             <CardBody>
-              <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-4">
+              <Form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                <div className="flex w-full flex-col gap-4">
                   <label htmlFor="agentInfo">Agent Info</label>
 
                   <div className="flex items-center gap-4">
@@ -207,7 +215,6 @@ const EditAgentsPage = () => {
                     <Input
                       label="Agent Icon URL"
                       name="icon_url"
-                      placeholder="Agent Icon URL"
                       type="URL"
                       value={agentForm?.icon_url}
                       onChange={onAgentFormChange}
@@ -219,7 +226,6 @@ const EditAgentsPage = () => {
                       isRequired
                       label="Agent Name"
                       name="name"
-                      placeholder="Agent Name"
                       type="text"
                       value={agentForm?.name}
                       onChange={onAgentFormChange}
@@ -234,11 +240,47 @@ const EditAgentsPage = () => {
                       onChange={onAgentFormChange}
                     />
                   </div>
+
+                  <Select
+                    isRequired
+                    items={agentRoles}
+                    label="Role"
+                    name="role_id"
+                    renderValue={(role) => (
+                      <User
+                        avatarProps={{
+                          src: role[0]?.data?.icon_url,
+                          className: "bg-transparent h-4 w-4 rounded-none",
+                        }}
+                        name={role[0]?.data?.name}
+                      />
+                    )}
+                    selectedKeys={Array.from(selectedRole).map(String)}
+                    selectionMode="single"
+                    onSelectionChange={setSelectedRole}
+                  >
+                    {(role) => {
+                      return (
+                        <SelectItem
+                          key={String(role.id)}
+                          startContent={
+                            <Avatar
+                              alt={role.name}
+                              className="bg-transparent h-4 w-4 rounded-none"
+                              src={role.icon_url}
+                            />
+                          }
+                        >
+                          {role.name}
+                        </SelectItem>
+                      );
+                    }}
+                  </Select>
                 </div>
 
                 <Divider />
 
-                <div className="flex flex-col gap-4">
+                <div className="flex w-full flex-col gap-4">
                   {abilitiesKeyBinds.map((keybind, i) => {
                     const currentKeybind = abilitiesKeyBinds[i].bind;
                     const currentAbility = abilitiesForm.find(
@@ -356,15 +398,15 @@ const EditAgentsPage = () => {
                   <Button
                     className="w-full"
                     color="danger"
-                    onClick={() => router.push("/moderator/manage/agents")}
+                    onPress={() => router.push("/moderator/manage/agents")}
                   >
                     Cancel
                   </Button>
                   <Button className="w-full" color="primary" type="submit">
-                    Submit
+                    Save
                   </Button>
                 </div>
-              </form>
+              </Form>
             </CardBody>
           </Card>
         )}
