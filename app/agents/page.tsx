@@ -182,8 +182,11 @@ export default function AgentsPage() {
         onSortChange={onSortChange}
       >
         <TableHeader>
-          {allAgentsColumns.map((column) => (
-            <TableColumn key={column.sortBy} allowsSorting={column.sortable}>
+          {allAgentsColumns.map((column, i) => (
+            <TableColumn
+              key={column.sortBy ?? i}
+              allowsSorting={column.sortable}
+            >
               {column.name}
             </TableColumn>
           ))}
