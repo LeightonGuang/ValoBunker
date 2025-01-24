@@ -194,7 +194,7 @@ export default function AgentsPage() {
             const { roles, abilities } = agent;
 
             return (
-              <TableRow key={agent.id} className="cursor-pointer">
+              <TableRow key={agent.name} className="cursor-pointer">
                 <TableCell>
                   <div className="flex w-max items-center">
                     <User

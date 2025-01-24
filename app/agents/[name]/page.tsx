@@ -18,7 +18,7 @@ import { getSupabase } from "@/utils/supabase/client";
 import { AgentsTableType } from "@/types/AgentsTableType";
 
 const AgentPage = () => {
-  const agentId = useParams().id;
+  const agentName = useParams().name;
   const [isLoading, setIsLoading] = useState(true);
   const [agentData, setAgentData] = useState<AgentsTableType>();
 
@@ -30,7 +30,7 @@ const AgentPage = () => {
       const { data: agentData, error: agentError } = await supabase
         .from("agents")
         .select(`*, abilities(*), roles(*)`)
-        .eq("id", agentId)
+        .eq("name", agentName)
         .single();
 
       if (agentError) {
