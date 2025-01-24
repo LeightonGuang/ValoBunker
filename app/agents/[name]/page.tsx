@@ -36,6 +36,7 @@ const AgentPage = () => {
       if (agentError) {
         console.error(agentError);
       } else {
+        console.log(agentData);
         setAgentData(agentData);
       }
     } catch (error) {
@@ -48,6 +49,15 @@ const AgentPage = () => {
   const AgentCard = ({ className }: { className?: string }) => {
     const ability = (bind: string) =>
       agentData?.abilities.find((ability) => ability.key_bind === bind);
+
+    const totalAbilityCost = agentData?.abilities
+      ? agentData?.abilities.reduce(
+          (total, ability) =>
+            total +
+            ability.cost * (ability.max_charge - ability.charges_on_spawn),
+          0,
+        )
+      : 0;
 
     return (
       <Card className={className}>
@@ -84,43 +94,48 @@ const AgentPage = () => {
         <Divider />
 
         <CardBody>
-          <div className="flex items-center justify-center gap-2">
-            {abilitiesOrder.map((bind, i) => {
-              return (
-                <div key={bind} className="flex items-center gap-2">
-                  <Tooltip key={bind} content={ability(bind)?.name}>
-                    <div className="flex w-full flex-col items-center text-center">
-                      <Image
-                        alt={ability(bind)?.name}
-                        className="flex h-8 w-8 flex-col rounded-none"
-                        src={ability(bind)?.icon_url}
-                      />
-                      <div className="my-2 flex h-3 max-w-7 flex-wrap items-center justify-center gap-1">
-                        {bind !== "X"
-                          ? Array.from({
-                              length: ability(bind)?.max_charge ?? 0,
-                            }).map((_, i) => (
-                              <div
-                                key={i}
-                                className="h-1 w-1 rounded-full bg-foreground"
-                              />
-                            ))
-                          : Array.from({
-                              length: ability(bind)?.ult_points ?? 0,
-                            }).map((_, i) => (
-                              <div key={i} className="relative h-1 w-1">
-                                <div className="absolute inset-0 rotate-45 transform bg-foreground" />
-                              </div>
-                            ))}
+          <div>
+            <span className="text-large">Abilities</span>
+            <div className="flex items-center justify-center gap-2">
+              {abilitiesOrder.map((bind, i) => {
+                return (
+                  <div key={bind} className="flex items-center gap-2">
+                    <Tooltip key={bind} content={ability(bind)?.name}>
+                      <div className="flex w-full flex-col items-center text-center">
+                        <Image
+                          alt={ability(bind)?.name}
+                          className="flex h-8 w-8 flex-col rounded-none"
+                          src={ability(bind)?.icon_url}
+                        />
+                        <div className="my-2 flex h-3 max-w-7 flex-wrap items-center justify-center gap-1">
+                          {bind !== "X"
+                            ? Array.from({
+                                length: ability(bind)?.max_charge ?? 0,
+                              }).map((_, i) => (
+                                <div
+                                  key={i}
+                                  className="h-1 w-1 rounded-full bg-foreground"
+                                />
+                              ))
+                            : Array.from({
+                                length: ability(bind)?.ult_points ?? 0,
+                              }).map((_, i) => (
+                                <div key={i} className="relative h-1 w-1">
+                                  <div className="absolute inset-0 rotate-45 transform bg-foreground" />
+                                </div>
+                              ))}
+                        </div>
+                        <span className="w-min">{bind}</span>
                       </div>
-                      <span className="w-min">{bind}</span>
-                    </div>
-                  </Tooltip>
+                    </Tooltip>
 
-                  {i < abilitiesOrder.length - 1 && <Divider className="w-2" />}
-                </div>
-              );
-            })}
+                    {i < abilitiesOrder.length - 1 && (
+                      <Divider className="w-2" />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <Divider className="my-3" />
@@ -130,6 +145,11 @@ const AgentPage = () => {
               return (
                 <div key={bind}>
                   <div className="flex items-center gap-2">
+                    <Avatar
+                      alt={ability(bind)?.name}
+                      className="bg-transparent h-6 w-6 rounded-none"
+                      src={ability(bind)?.icon_url}
+                    />
                     <span className="text-medium">{ability(bind)?.name}</span>
                     <span className="text-tiny text-default-400">
                       {ability(bind)?.cost
@@ -142,10 +162,52 @@ const AgentPage = () => {
                     </span>
                   </div>
 
-                  <p className="mt-2 text-tiny">{ability(bind)?.description}</p>
+                  <p className="mt-2 text-tiny text-default-600">
+                    {ability(bind)?.description}
+                  </p>
                 </div>
               );
             })}
+          </div>
+
+          <Divider className="my-3" />
+
+          <div>
+            <h2 className="mb-2 text-large">Full Buy Minimum Credit</h2>
+
+            <ul className="flex flex-col gap-1">
+              <li className="flex items-center justify-between">
+                <h3 className="text-medium">
+                  Half Shield with Vandal / Phantom
+                </h3>
+                <span className="text-tiny text-default-400">
+                  {totalAbilityCost + 2900 + 400}
+                </span>
+              </li>
+
+              <li className="flex items-center justify-between">
+                <h3 className="text-medium">
+                  Full Shield with Vandal / Phantom
+                </h3>
+                <span className="text-tiny text-default-400">
+                  {totalAbilityCost + 2900 + 1000}
+                </span>
+              </li>
+
+              <li className="flex items-center justify-between">
+                <h3 className="text-medium">Half Shield with Operator</h3>
+                <span className="text-tiny text-default-400">
+                  {totalAbilityCost + 4700 + 400}
+                </span>
+              </li>
+
+              <li className="flex items-center justify-between">
+                <h3 className="text-medium">Full Shield with Operator</h3>
+                <span className="text-tiny text-default-400">
+                  {totalAbilityCost + 4700 + 1000}
+                </span>
+              </li>
+            </ul>
           </div>
         </CardBody>
       </Card>
@@ -166,7 +228,7 @@ const AgentPage = () => {
           </Breadcrumbs>
 
           <div className="flex justify-center">
-            <AgentCard className="mt-4 w-96" />
+            <AgentCard className="mt-4 w-96 lg:w-[50rem]" />
           </div>
         </div>
       )}
