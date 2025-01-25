@@ -28,10 +28,10 @@ import { Button } from "@nextui-org/button";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 
 import { title } from "@/components/primitives";
+import { eventStatus } from "@/utils/eventStatus";
 import { getSupabase } from "@/utils/supabase/client";
 import { EventsTableType } from "@/types/EventsTableType";
 import { ChevronDown, EllipsisIcon } from "@/components/icons";
-import { eventStatus } from "@/utils/eventStatus";
 
 const columns = [
   { name: "Event", sortable: true },
@@ -153,7 +153,7 @@ const ManageEventsPage = () => {
         <Button
           color="primary"
           endContent={<span>+</span>}
-          onClick={() => router.push("/moderator/manage/events/add")}
+          onPress={() => router.push("/moderator/manage/events/add")}
         >
           Add Event
         </Button>
@@ -167,7 +167,9 @@ const ManageEventsPage = () => {
         <BreadcrumbItem href="/moderator/manage">Manage</BreadcrumbItem>
         <BreadcrumbItem>Events</BreadcrumbItem>
       </Breadcrumbs>
+
       <h1 className={title()}>Manage Events</h1>
+
       <div className="mt-6">
         <Table
           aria-label="Events Table"
@@ -180,6 +182,7 @@ const ManageEventsPage = () => {
               <TableColumn key={i}>{name}</TableColumn>
             ))}
           </TableHeader>
+
           <TableBody isLoading={isLoading}>
             {filteredEvents().map((event) => (
               <TableRow key={event.id}>
@@ -194,13 +197,17 @@ const ManageEventsPage = () => {
                     <div>{`${event.type} ${event.name}`}</div>
                   </div>
                 </TableCell>
+
                 <TableCell>
                   {`${formatDate(event.start_date)} - ${formatDate(
                     event.end_date,
                   )}`}
                 </TableCell>
+
                 <TableCell>{event.location}</TableCell>
+
                 <TableCell>{event.prize_pool || "/"}</TableCell>
+
                 <TableCell>
                   <Chip
                     color={
@@ -215,6 +222,7 @@ const ManageEventsPage = () => {
                     {eventStatus(event.start_date, event.end_date)}
                   </Chip>
                 </TableCell>
+
                 <TableCell>
                   <Dropdown>
                     <DropdownTrigger>
@@ -222,10 +230,11 @@ const ManageEventsPage = () => {
                         <EllipsisIcon />
                       </Button>
                     </DropdownTrigger>
+
                     <DropdownMenu>
                       <DropdownItem
                         key="edit"
-                        onClick={() =>
+                        onPress={() =>
                           router.push(
                             `/moderator/manage/events/edit/${event.id}`,
                           )
@@ -235,7 +244,7 @@ const ManageEventsPage = () => {
                       </DropdownItem>
                       <DropdownItem
                         key="delete"
-                        onClick={() => {
+                        onPress={() => {
                           onOpen();
                           setEventToDelete(event);
                         }}
@@ -261,11 +270,13 @@ const ManageEventsPage = () => {
             Are you sure you want to delete the event: {eventToDelete.type}{" "}
             {eventToDelete.name}?
           </ModalBody>
+
           <ModalFooter>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onPress={onClose}>Cancel</Button>
+
             <Button
               color="danger"
-              onClick={() => {
+              onPress={() => {
                 deleteEventById(eventToDelete.id);
                 onClose();
               }}
