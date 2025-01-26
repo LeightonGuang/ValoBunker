@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import {
+  Chip,
   Image,
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +26,7 @@ const MapsPage = () => {
       const { data: mapsData, error: mapsError } = await supabase
         .from("maps")
         .select("*")
-        .order("id", { ascending: true });
+        .order("release_date", { ascending: true });
 
       if (mapsError) {
         console.error(mapsError);
@@ -40,7 +41,14 @@ const MapsPage = () => {
 
   const MapsTable = () => {
     const router = useRouter();
-    const columns = ["Name", "Image", "Site Count", "Location", "Release Date"];
+    const columns = [
+      "Name",
+      "Image",
+      "Site Count",
+      "Location",
+      "Active Competitive Map",
+      "Release Date",
+    ];
 
     const topContent = (
       <div className="flex justify-between">
@@ -52,6 +60,7 @@ const MapsPage = () => {
 
     return (
       <Table
+        aria-label="Maps Table"
         className="mt-6"
         selectionMode="single"
         topContent={topContent}
@@ -68,11 +77,24 @@ const MapsPage = () => {
           {maps.map((map) => (
             <TableRow key={map.id} className="cursor-pointer">
               <TableCell>{map.name}</TableCell>
+
               <TableCell>
                 <Image className="w-24 rounded-md" src={map.cover_img_url} />
               </TableCell>
+
               <TableCell>{map.site_count}</TableCell>
+
               <TableCell>{map.location}</TableCell>
+
+              <TableCell>
+                <Chip
+                  color={map.competitive_map_pool ? "success" : "danger"}
+                  variant="flat"
+                >
+                  {map.competitive_map_pool ? "Yes" : "No"}
+                </Chip>
+              </TableCell>
+
               <TableCell>
                 {map.release_date ? map.release_date.toLocaleString() : "-"}
               </TableCell>
