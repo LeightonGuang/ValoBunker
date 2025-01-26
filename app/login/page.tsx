@@ -1,21 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Input } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
 import {
   Card,
+  Form,
+  Link,
+  Image,
+  Divider,
   CardBody,
   CardHeader,
-  Divider,
-  Image,
-  Link,
 } from "@nextui-org/react";
+import { useState } from "react";
+import { Input } from "@nextui-org/input";
+import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/button";
 
 import { logIn } from "../actions/auth/login/actions";
 
+import { signUpWithGoogle } from "@/utils/signUpWithGoogle";
 import { DiscordIcon, GoogleIcon } from "@/components/icons";
+import { signUpWithDiscord } from "@/utils/signUpWithDiscord";
 
 const LoginPage = () => {
   const [logInForm, setLogInForm] = useState<{
@@ -61,6 +64,7 @@ const LoginPage = () => {
             src="https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/60cfa90e4a5195c27e50c00fb8aeb017c6855c8e-1920x1080.jpg"
           />
         </div>
+
         <div className="flex items-center justify-center lg:w-1/2 lg:bg-darkBlue">
           <Card className="h-min w-80">
             <CardHeader>
@@ -69,8 +73,9 @@ const LoginPage = () => {
                 <span className="text-sm">Log in to your account</span>
               </div>
             </CardHeader>
+
             <CardBody className="gap-4">
-              <form className="flex flex-col gap-4">
+              <Form className="flex flex-col gap-4">
                 <Input
                   isRequired
                   isInvalid={logInErrorMessage !== ""}
@@ -80,6 +85,7 @@ const LoginPage = () => {
                   type="email"
                   onChange={onLogInFormChange}
                 />
+
                 <Input
                   isRequired
                   errorMessage={logInErrorMessage}
@@ -90,28 +96,39 @@ const LoginPage = () => {
                   type="password"
                   onChange={onLogInFormChange}
                 />
-                <Button color="primary" formAction={handleLogIn} type="submit">
+
+                <Button
+                  className="w-full"
+                  color="primary"
+                  formAction={handleLogIn}
+                  type="submit"
+                >
                   Log in
                 </Button>
-              </form>
+              </Form>
 
               <Divider />
+
               <div className="flex w-full flex-col gap-4">
                 <Button
                   className="w-full bg-white font-medium text-black light:border-1 light:border-default-500"
                   startContent={<GoogleIcon className="h-4 w-4" />}
+                  onPress={signUpWithGoogle}
                 >
                   Log in with Google
                 </Button>
+
                 <Button
                   className="w-full bg-blurple font-medium text-white"
                   startContent={<DiscordIcon className="h-4 w-4" />}
+                  onPress={signUpWithDiscord}
                 >
                   Log in with Discord
                 </Button>
-                <div className="text-center text-sm">
+
+                <div className="text-center text-tiny">
                   {`Don't have an account? `}
-                  <Link className="text-sm" href="/signup">
+                  <Link className="text-tiny" href="/signup">
                     Sign up
                   </Link>
                 </div>
