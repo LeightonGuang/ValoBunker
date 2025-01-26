@@ -15,8 +15,8 @@ import { Button } from "@nextui-org/button";
 import { signUp } from "../actions/auth/signup/actions";
 
 import { signUpWithGoogle } from "@/utils/signUpWithGoogle";
-import { signUpWithDiscord } from "@/utils/signUpWithDiscord";
 import { DiscordIcon, GoogleIcon } from "@/components/icons";
+import { signUpWithDiscord } from "@/utils/signUpWithDiscord";
 
 const SignupPage = () => {
   const [signUpForm, setSignUpForm] = useState<{
@@ -59,7 +59,7 @@ const SignupPage = () => {
         signUpForm.confirmPassword,
       );
 
-      console.log(data, errors, isSignUpFormValid);
+      // console.log(data, errors, isSignUpFormValid);
       setErrors(errors);
     } catch (error) {
       console.error(error);
@@ -77,6 +77,7 @@ const SignupPage = () => {
                 <span className="text-sm">Create your account</span>
               </div>
             </CardHeader>
+
             <CardBody className="gap-4">
               <form className="flex flex-col gap-4">
                 <Input
@@ -91,6 +92,7 @@ const SignupPage = () => {
                   type="text"
                   onChange={onSignUpFormChange}
                 />
+
                 <Input
                   isRequired
                   errorMessage={
@@ -107,6 +109,7 @@ const SignupPage = () => {
                   type="email"
                   onChange={onSignUpFormChange}
                 />
+
                 <Input
                   isRequired
                   errorMessage={
@@ -125,6 +128,7 @@ const SignupPage = () => {
                   type="email"
                   onChange={onSignUpFormChange}
                 />
+
                 <Input
                   isRequired
                   errorMessage={
@@ -137,6 +141,7 @@ const SignupPage = () => {
                   type="password"
                   onChange={onSignUpFormChange}
                 />
+
                 <Input
                   isRequired
                   errorMessage={
@@ -155,26 +160,31 @@ const SignupPage = () => {
                   type="password"
                   onChange={onSignUpFormChange}
                 />
+
                 <Button color="primary" formAction={handleSignUp} type="submit">
                   Sign up
                 </Button>
               </form>
+
               <Divider />
+
               <div className="flex w-full flex-col gap-4">
                 <Button
                   className="w-full bg-white font-medium text-black light:border-1 light:border-default-500"
                   startContent={<GoogleIcon className="h-4 w-4" />}
-                  onClick={signUpWithGoogle}
+                  onPress={signUpWithGoogle}
                 >
                   Sign up with Google
                 </Button>
+
                 <Button
                   className="w-full bg-blurple font-medium text-white"
                   startContent={<DiscordIcon className="h-4 w-4" />}
-                  onClick={signUpWithDiscord}
+                  onPress={signUpWithDiscord}
                 >
                   Sign up with Discord
                 </Button>
+
                 <div className="text-center text-sm">
                   {`Already have an account? `}
                   <Link className="text-sm" href="/login">
@@ -185,6 +195,7 @@ const SignupPage = () => {
             </CardBody>
           </Card>
         </div>
+
         <div className="hidden h-full w-1/2 object-fill lg:flex">
           <Image
             className="h-full rounded-none lg:object-cover"
