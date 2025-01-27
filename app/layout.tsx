@@ -40,7 +40,13 @@ export default function RootLayout({
         <AdSense
           publisherId={`${process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}`}
         />
+
+        <meta
+          content="95OV8Owevm86TYyOdpCFyl20wkad0IJEMBhShITHkEM"
+          name="google-site-verification"
+        />
       </head>
+
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
