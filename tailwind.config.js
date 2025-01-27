@@ -20,6 +20,7 @@ module.exports = {
       white: "#fff",
       black: "#000",
       blurple: "#5865F2",
+      radianite: "#60efb7",
     },
   },
   darkMode: "class",
