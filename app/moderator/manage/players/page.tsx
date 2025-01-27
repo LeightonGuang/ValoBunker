@@ -24,7 +24,7 @@ import {
   BreadcrumbItem,
   SortDescriptor,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";

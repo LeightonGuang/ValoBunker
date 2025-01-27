@@ -8,7 +8,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
   Navbar as NextUINavbar,
-} from "@nextui-org/navbar";
+} from "@heroui/navbar";
 import {
   Button,
   Divider,
@@ -17,15 +17,15 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import clsx from "clsx";
 import NextLink from "next/link";
 import { useState } from "react";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
+import { Kbd } from "@heroui/kbd";
+import { Link } from "@heroui/link";
+import { Input } from "@heroui/input";
 import { useRouter } from "next/navigation";
-import { link as linkStyles } from "@nextui-org/theme";
+import { link as linkStyles } from "@heroui/theme";
 
 import {
   MenuIcon,

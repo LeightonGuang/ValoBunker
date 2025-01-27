@@ -1,8 +1,8 @@
 "use client";
 
 import { Key } from "@react-types/shared";
+import { Listbox, ListboxItem } from "@heroui/listbox";
 import { usePathname, useRouter } from "next/navigation";
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
 import React, { useEffect, useState, useCallback } from "react";
 
 import {

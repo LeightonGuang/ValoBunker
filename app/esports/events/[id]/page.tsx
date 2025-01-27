@@ -14,7 +14,7 @@ import {
   Chip,
   Divider,
   Image,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { EventsTableType } from "@/types/EventsTableType";

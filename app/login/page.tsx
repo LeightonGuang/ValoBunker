@@ -8,11 +8,11 @@ import {
   Divider,
   CardBody,
   CardHeader,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useState } from "react";
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
-import { Button } from "@nextui-org/button";
 
 import { logIn } from "../actions/auth/login/actions";
 

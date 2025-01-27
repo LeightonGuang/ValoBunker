@@ -11,7 +11,7 @@ import {
   Image,
   Input,
   Textarea,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { PatchesTableType } from "@/types/PatchesTableType";

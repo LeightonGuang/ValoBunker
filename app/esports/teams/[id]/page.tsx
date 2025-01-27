@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardFooter,
   Avatar,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { TeamsTableType } from "@/types/TeamsTableType";

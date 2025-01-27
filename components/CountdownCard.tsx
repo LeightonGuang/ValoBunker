@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Image, Accordion, AccordionItem, Progress } from "@nextui-org/react";
+import { Image, Accordion, AccordionItem, Progress } from "@heroui/react";
 
 import { CountdownTableType } from "@/types/CountdownTableType";
 

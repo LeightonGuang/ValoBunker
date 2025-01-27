@@ -7,9 +7,9 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import { useEffect, useState } from "react";
-import { Image, Tooltip, User } from "@nextui-org/react";
+import { Image, Tooltip, User } from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
@@ -69,7 +69,7 @@ export default function MolliesPage() {
   }, []);
 
   return (
-    <section>
+    (<section>
       <h1 className={title()}>Mollies</h1>
       <div>
         <h2 className="mt-6">All mollies</h2>
@@ -119,6 +119,6 @@ export default function MolliesPage() {
           </TableBody>
         </Table>
       </div>
-    </section>
+    </section>)
   );
 }

@@ -13,7 +13,7 @@ import {
   CardHeader,
   SelectItem,
   User,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 

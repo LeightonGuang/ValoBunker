@@ -13,7 +13,7 @@ import {
   Selection,
   DatePicker,
   SelectItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useParams } from "next/navigation";
 import { parseDate } from "@internationalized/date";
 

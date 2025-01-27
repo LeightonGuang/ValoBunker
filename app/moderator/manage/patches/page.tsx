@@ -4,27 +4,27 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import {
-  BreadcrumbItem,
-  Breadcrumbs,
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Image,
   Modal,
+  Button,
+  Dropdown,
   ModalBody,
-  ModalContent,
+  Breadcrumbs,
   ModalFooter,
+  DropdownItem,
+  DropdownMenu,
+  ModalContent,
   useDisclosure,
-} from "@nextui-org/react";
+  BreadcrumbItem,
+  DropdownTrigger,
+} from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { EllipsisIcon } from "@/components/icons";

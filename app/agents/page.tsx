@@ -9,7 +9,7 @@ import {
   TableColumn,
   TableHeader,
   SortDescriptor,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -21,7 +21,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { ChevronDown } from "@/components/icons";

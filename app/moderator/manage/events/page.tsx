@@ -9,7 +9,7 @@ import {
   TableBody,
   TableColumn,
   TableHeader,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import {
   Chip,
   Modal,
@@ -23,9 +23,9 @@ import {
   DropdownMenu,
   useDisclosure,
   DropdownTrigger,
-} from "@nextui-org/react";
-import { Button } from "@nextui-org/button";
-import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
+} from "@heroui/react";
+import { Button } from "@heroui/button";
+import { BreadcrumbItem, Breadcrumbs } from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { eventStatus } from "@/utils/eventStatus";

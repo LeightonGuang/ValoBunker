@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { Card, CardHeader, Divider, Image } from "@nextui-org/react";
+import { Listbox, ListboxItem } from "@heroui/listbox";
+import { Card, CardHeader, Divider, Image } from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { NewsTableType } from "@/types/NewsTableType";

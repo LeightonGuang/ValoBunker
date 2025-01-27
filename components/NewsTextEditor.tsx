@@ -12,7 +12,7 @@ import {
   DropdownMenu,
   DropdownItem,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Table from "@tiptap/extension-table";
 import StarterKit from "@tiptap/starter-kit";
 import TableRow from "@tiptap/extension-table-row";

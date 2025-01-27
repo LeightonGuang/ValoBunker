@@ -10,7 +10,7 @@ import {
   TableColumn,
   TableHeader,
   SortDescriptor,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import {
   Chip,
   User,
@@ -23,7 +23,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useRouter } from "next/navigation";
 
 import { title } from "@/components/primitives";

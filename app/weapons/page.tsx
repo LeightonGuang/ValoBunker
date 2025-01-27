@@ -8,7 +8,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/table";
+} from "@heroui/table";
 
 import weaponsData from "@/public/data/weaponData.json";
 import { title } from "@/components/primitives";
@@ -24,7 +24,7 @@ export default function WeaponsPage() {
   ];
 
   return (
-    <section>
+    (<section>
       <h1 className={title()}>Weapons</h1>
       <div>
         <h2 className="mt-6">Weapons</h2>
@@ -84,6 +84,6 @@ export default function WeaponsPage() {
           </TableBody>
         </Table>
       </div>
-    </section>
+    </section>)
   );
 }

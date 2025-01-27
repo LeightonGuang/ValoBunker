@@ -10,7 +10,7 @@ import {
   CardBody,
   Breadcrumbs,
   BreadcrumbItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { NewsTableType } from "@/types/NewsTableType";

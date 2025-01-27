@@ -10,7 +10,7 @@ import {
   Avatar,
   Divider,
   CardBody,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { RolesTableType } from "@/types/RolesTableType";

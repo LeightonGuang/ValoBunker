@@ -7,10 +7,10 @@ import {
   Divider,
   CardBody,
   CardHeader,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useState } from "react";
-import { Input } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
 
 import { signUp } from "../actions/auth/signup/actions";
 

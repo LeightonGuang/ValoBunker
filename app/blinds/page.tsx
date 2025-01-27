@@ -8,9 +8,9 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import Image from "next/image";
-import { Tooltip, User } from "@nextui-org/react";
+import { Tooltip, User } from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";

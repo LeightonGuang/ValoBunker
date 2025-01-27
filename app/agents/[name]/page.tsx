@@ -12,7 +12,7 @@ import {
   CardHeader,
   Breadcrumbs,
   BreadcrumbItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { getSupabase } from "@/utils/supabase/client";
 import { AgentsTableType } from "@/types/AgentsTableType";

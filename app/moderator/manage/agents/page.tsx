@@ -7,7 +7,7 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import { useEffect, useState } from "react";
 import {
   User,
@@ -21,7 +21,7 @@ import {
   useDisclosure,
   BreadcrumbItem,
   DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useRouter } from "next/navigation";
 
 import { title } from "@/components/primitives";

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import {
   Card,
   Image,
@@ -11,7 +11,7 @@ import {
   CardHeader,
   Breadcrumbs,
   BreadcrumbItem,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";

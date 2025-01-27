@@ -7,10 +7,10 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/table";
+} from "@heroui/table";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Chip, Image } from "@nextui-org/react";
+import { Chip, Image } from "@heroui/react";
 
 import { title } from "@/components/primitives";
 import { eventStatus } from "@/utils/eventStatus";
