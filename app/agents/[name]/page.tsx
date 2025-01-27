@@ -16,6 +16,7 @@ import {
 
 import { getSupabase } from "@/utils/supabase/client";
 import { AgentsTableType } from "@/types/AgentsTableType";
+import { AbilitiesTableType } from "@/types/AbilitiesTableType";
 
 const AgentPage = () => {
   const agentName = useParams().name;
@@ -47,8 +48,9 @@ const AgentPage = () => {
   };
 
   const AgentCard = ({ className }: { className?: string }) => {
-    const ability = (bind: string) =>
-      agentData?.abilities.find((ability) => ability.key_bind === bind);
+    const ability: (bind: string) => AbilitiesTableType | undefined = (
+      bind: string,
+    ) => agentData?.abilities.find((ability) => ability.key_bind === bind);
 
     const totalAbilityCost = agentData?.abilities
       ? agentData?.abilities.reduce(
@@ -59,10 +61,37 @@ const AgentPage = () => {
         )
       : 0;
 
+    const CreditIcon = () => {
+      return (
+        <Avatar
+          className="bg-transparent h-3 w-3 rounded-none text-tiny opacity-40"
+          src="https://static.wikia.nocookie.net/valorant/images/8/81/Credits_icon.png"
+        />
+      );
+    };
+
+    const LightArmorIcon = ({ className }: { className?: string }) => {
+      return (
+        <Avatar
+          className={`bg-transparent rounded-none ${className}`}
+          src="https://static.wikia.nocookie.net/valorant/images/9/93/Light_Armor.png"
+        />
+      );
+    };
+
+    const HeavyArmorIcon = ({ className }: { className?: string }) => {
+      return (
+        <Avatar
+          className={`bg-transparent rounded-none ${className}`}
+          src="https://static.wikia.nocookie.net/valorant/images/6/62/Heavy_Armor.png"
+        />
+      );
+    };
+
     return (
       <Card className={className}>
         <CardHeader className="flex justify-between">
-          <div className="flex items-center gap-4">
+          <div className="grid w-full grid-cols-2 items-center">
             <Avatar
               alt={agentData?.name}
               className="bg-transparent h-32 min-h-32 w-32 min-w-32 rounded-none"
@@ -95,39 +124,60 @@ const AgentPage = () => {
 
         <CardBody>
           <div>
-            <span className="text-large">Abilities</span>
+            <div className="flex items-center gap-2">
+              <span className="text-large">Abilities</span>
+              <p className="text-tiny text-default-400">
+                *Highted abilities can regenerate
+              </p>
+            </div>
+
             <div className="flex items-center justify-center gap-2">
               {abilitiesOrder.map((bind, i) => {
+                const selectedAbility = ability(bind);
+
                 return (
-                  <div key={bind} className="flex items-center gap-2">
-                    <Tooltip key={bind} content={ability(bind)?.name}>
-                      <div className="flex w-full flex-col items-center text-center">
-                        <Image
-                          alt={ability(bind)?.name}
-                          className="flex h-8 w-8 flex-col rounded-none"
-                          src={ability(bind)?.icon_url}
-                        />
-                        <div className="my-2 flex h-3 max-w-7 flex-wrap items-center justify-center gap-1">
-                          {bind !== "X"
-                            ? Array.from({
-                                length: ability(bind)?.max_charge ?? 0,
-                              }).map((_, i) => (
-                                <div
-                                  key={i}
-                                  className="h-1 w-1 rounded-full bg-foreground"
-                                />
-                              ))
-                            : Array.from({
-                                length: ability(bind)?.ult_points ?? 0,
-                              }).map((_, i) => (
-                                <div key={i} className="relative h-1 w-1">
-                                  <div className="absolute inset-0 rotate-45 transform bg-foreground" />
-                                </div>
-                              ))}
+                  <div key={bind} className={`flex items-center gap-2`}>
+                    <div
+                      className={`rounded-md p-1 ${selectedAbility?.regen && "bg-default-100"}`}
+                    >
+                      <Tooltip
+                        key={bind}
+                        content={
+                          <span className="text-tiny">
+                            {selectedAbility?.name}
+                          </span>
+                        }
+                      >
+                        <div className="flex w-full flex-col items-center text-center">
+                          <Image
+                            alt={ability(bind)?.name}
+                            className="flex h-8 w-8 flex-col rounded-none"
+                            src={ability(bind)?.icon_url}
+                          />
+
+                          <div className="my-2 flex h-3 max-w-7 flex-wrap items-center justify-center gap-1">
+                            {bind !== "X"
+                              ? Array.from({
+                                  length: ability(bind)?.max_charge ?? 0,
+                                }).map((_, i) => (
+                                  <div
+                                    key={i}
+                                    className="h-1 w-1 rounded-full bg-foreground"
+                                  />
+                                ))
+                              : Array.from({
+                                  length: ability(bind)?.ult_points ?? 0,
+                                }).map((_, i) => (
+                                  <div key={i} className="relative h-1 w-1">
+                                    <div className="absolute inset-0 rotate-45 transform bg-foreground" />
+                                  </div>
+                                ))}
+                          </div>
+
+                          <span className="w-min">{bind}</span>
                         </div>
-                        <span className="w-min">{bind}</span>
-                      </div>
-                    </Tooltip>
+                      </Tooltip>
+                    </div>
 
                     {i < abilitiesOrder.length - 1 && (
                       <Divider className="w-2" />
@@ -142,28 +192,41 @@ const AgentPage = () => {
 
           <div className="flex flex-col gap-4">
             {abilitiesOrder.map((bind) => {
+              const selectedAbility = ability(bind);
+
               return (
-                <div key={bind}>
+                <div key={bind} className="flex flex-col gap-1">
                   <div className="flex items-center gap-2">
                     <Avatar
-                      alt={ability(bind)?.name}
+                      alt={selectedAbility?.name}
                       className="bg-transparent h-6 w-6 rounded-none"
-                      src={ability(bind)?.icon_url}
+                      src={selectedAbility?.icon_url}
                     />
-                    <span className="text-medium">{ability(bind)?.name}</span>
+
+                    <span className="text-medium">{selectedAbility?.name}</span>
+
                     <span className="text-tiny text-default-400">
-                      {ability(bind)?.cost
-                        ? ability(bind)?.cost
-                        : ability(bind)?.cost === 0
+                      {selectedAbility?.cost
+                        ? selectedAbility?.cost
+                        : selectedAbility?.cost === 0
                           ? "Free"
-                          : ability(bind)?.cost === null
-                            ? `${ability(bind)?.ult_points ?? "x"} ult points`
+                          : selectedAbility?.cost === null
+                            ? `${selectedAbility?.ult_points ?? "x"} ult points`
                             : ""}
                     </span>
                   </div>
 
-                  <p className="mt-2 text-tiny text-default-600">
-                    {ability(bind)?.description}
+                  <div className="flex gap-4 text-default-600">
+                    {selectedAbility?.cooldown && (
+                      <span>{`Cooldown: ${selectedAbility?.cooldown ? `${selectedAbility?.cooldown}s` : "x"}`}</span>
+                    )}
+                    {selectedAbility?.regen && (
+                      <span>{`Regen: ${selectedAbility?.regen ? `${selectedAbility?.regen}s` : "x"}`}</span>
+                    )}
+                  </div>
+
+                  <p className="rounded-md bg-default-100 p-1 text-tiny text-default-600">
+                    {selectedAbility?.description}
                   </p>
                 </div>
               );
@@ -173,40 +236,62 @@ const AgentPage = () => {
           <Divider className="my-3" />
 
           <div>
-            <h2 className="mb-2 text-large">Full Buy Minimum Credit</h2>
+            <h2 className="mb-2 text-large">Minimum Credit Required</h2>
 
             <ul className="flex flex-col gap-1">
-              <li className="flex items-center justify-between">
-                <h3 className="text-medium">
-                  Half Shield with Vandal / Phantom
-                </h3>
-                <span className="text-tiny text-default-400">
-                  {totalAbilityCost + 2900 + 400}
-                </span>
-              </li>
+              {[
+                {
+                  title: "Light Armor with Vandal / Phantom",
+                  cost: totalAbilityCost + 2900 + 400,
+                  iconList: [<LightArmorIcon key={0} className="h-6 w-6" />],
+                },
+                {
+                  title: "Heavy Armor with Vandal / Phantom",
+                  cost: totalAbilityCost + 2900 + 1000,
+                  iconList: [<HeavyArmorIcon key={0} className="h-6 w-6" />],
+                },
+                {
+                  title: "Light Armor with Vandal / Phantom",
+                  cost: totalAbilityCost + 4700 + 400,
+                  iconList: [<LightArmorIcon key={0} className="h-6 w-6" />],
+                },
+                {
+                  title: "Heavy Armor with Vandal / Phantom",
+                  cost: totalAbilityCost + 4700 + 1000,
+                  iconList: [<HeavyArmorIcon key={0} className="h-6 w-6" />],
+                },
+              ].map((buy, i) => {
+                return (
+                  <li key={i} className="flex items-center justify-between">
+                    <h3 className="text-medium">
+                      {buy.title}
 
-              <li className="flex items-center justify-between">
-                <h3 className="text-medium">
-                  Full Shield with Vandal / Phantom
-                </h3>
-                <span className="text-tiny text-default-400">
-                  {totalAbilityCost + 2900 + 1000}
-                </span>
-              </li>
+                      <div className="mt-1 flex gap-2">
+                        {buy.iconList.map((icon) => icon)}
 
-              <li className="flex items-center justify-between">
-                <h3 className="text-medium">Half Shield with Operator</h3>
-                <span className="text-tiny text-default-400">
-                  {totalAbilityCost + 4700 + 400}
-                </span>
-              </li>
+                        <span className="text-medium">+</span>
 
-              <li className="flex items-center justify-between">
-                <h3 className="text-medium">Full Shield with Operator</h3>
-                <span className="text-tiny text-default-400">
-                  {totalAbilityCost + 4700 + 1000}
-                </span>
-              </li>
+                        <Avatar
+                          className="bg-transparent h-6 w-6 rounded-none"
+                          src={ability("C")?.icon_url}
+                        />
+
+                        <span className="text-medium">+</span>
+
+                        <Avatar
+                          className="bg-transparent h-6 w-6 rounded-none"
+                          src={ability("Q")?.icon_url}
+                        />
+                      </div>
+                    </h3>
+
+                    <span className="flex items-center gap-1 text-tiny text-default-400">
+                      <CreditIcon />
+                      {buy.cost}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </CardBody>
