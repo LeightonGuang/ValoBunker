@@ -88,41 +88,41 @@ const AgentPage = () => {
       );
     };
 
-    return (
-      <Card className={className}>
-        <CardHeader className="flex justify-between">
-          <div className="grid w-full grid-cols-2 items-center">
-            <Avatar
-              alt={agentData?.name}
-              className="bg-transparent h-32 min-h-32 w-32 min-w-32 rounded-none"
-              src={agentData?.icon_url}
-            />
+    const AgentInfo = () => {
+      return (
+        <div className="grid w-full grid-cols-2 items-center">
+          <Avatar
+            alt={agentData?.name}
+            className="bg-transparent h-32 min-h-32 w-32 min-w-32 rounded-none"
+            src={agentData?.icon_url}
+          />
 
-            <div className="flex flex-col gap-1">
-              <span className="text-large">{agentData?.name}</span>
+          <div className="flex flex-col gap-1">
+            <span className="text-large">{agentData?.name}</span>
 
-              <span className="flex items-center gap-2 text-tiny">
-                <Avatar
-                  alt={agentData?.roles.name}
-                  className="bg-transparent h-4 w-4 rounded-none"
-                  src={agentData?.roles.icon_url}
-                />
-                <span>{agentData?.roles.name}</span>
-              </span>
+            <span className="flex items-center gap-2 text-tiny">
+              <Avatar
+                alt={agentData?.roles.name}
+                className="bg-transparent h-4 w-4 rounded-none"
+                src={agentData?.roles.icon_url}
+              />
+              <span>{agentData?.roles.name}</span>
+            </span>
 
-              <span className="text-tiny text-default-400">
-                Release Date:{" "}
-                {new Intl.DateTimeFormat().format(
-                  new Date(agentData?.release_date ?? ""),
-                )}
-              </span>
-            </div>
+            <span className="text-tiny text-default-400">
+              Release Date:{" "}
+              {new Intl.DateTimeFormat().format(
+                new Date(agentData?.release_date ?? ""),
+              )}
+            </span>
           </div>
-        </CardHeader>
+        </div>
+      );
+    };
 
-        <Divider />
-
-        <CardBody>
+    const AgentDetails = () => {
+      return (
+        <>
           <div>
             <div className="flex items-center gap-2">
               <span className="text-large">Abilities</span>
@@ -294,6 +294,20 @@ const AgentPage = () => {
               })}
             </ul>
           </div>
+        </>
+      );
+    };
+
+    return (
+      <Card className={className}>
+        <CardHeader className="flex justify-between">
+          <AgentInfo />
+        </CardHeader>
+
+        <Divider />
+
+        <CardBody>
+          <AgentDetails />
         </CardBody>
       </Card>
     );
