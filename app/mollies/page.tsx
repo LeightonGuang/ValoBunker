@@ -27,7 +27,7 @@ interface MolliesType {
   id: number;
   name: string;
   icon_url: string;
-  damage: number;
+  damage: string;
   duration: number;
   radius: number;
   cost: number;
@@ -48,7 +48,7 @@ export default function MolliesPage() {
 
       const { data: molliesData, error: molliesError } = await supabase
         .from("abilities")
-        .select("id, name, icon_url, duration, radius, cost, agents(*)")
+        .select("id, name, icon_url, damage, duration, radius, cost, agents(*)")
         .eq("category", "molly")
         .order("name", { ascending: true });
 
@@ -69,7 +69,7 @@ export default function MolliesPage() {
   }, []);
 
   return (
-    (<section>
+    <section>
       <h1 className={title()}>Mollies</h1>
       <div>
         <h2 className="mt-6">All mollies</h2>
@@ -119,6 +119,6 @@ export default function MolliesPage() {
           </TableBody>
         </Table>
       </div>
-    </section>)
+    </section>
   );
 }
