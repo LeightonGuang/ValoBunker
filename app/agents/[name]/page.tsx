@@ -61,10 +61,10 @@ const AgentPage = () => {
         )
       : 0;
 
-    const CreditIcon = () => {
+    const CreditIcon = ({ className }: { className?: string }) => {
       return (
         <Avatar
-          className="bg-transparent h-3 w-3 rounded-none text-tiny opacity-40"
+          className={`bg-transparent h-3 w-3 rounded-none opacity-40 ${className}`}
           src="https://static.wikia.nocookie.net/valorant/images/8/81/Credits_icon.png"
         />
       );
@@ -126,9 +126,16 @@ const AgentPage = () => {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-large">Abilities</span>
-              <p className="text-tiny text-default-400">
-                *Highted abilities can regenerate
-              </p>
+
+              <div className="flex gap-2">
+                <p className="text-tiny text-radianite">*Free ability</p>
+
+                <p className="text-tiny text-default-500">
+                  *Regenerates after cooldown
+                </p>
+
+                <p className="text-tiny text-blue">*Regenerates on kills</p>
+              </div>
             </div>
 
             <div className="flex items-center justify-center gap-2">
@@ -138,7 +145,7 @@ const AgentPage = () => {
                 return (
                   <div key={bind} className={`flex items-center gap-2`}>
                     <div
-                      className={`rounded-md p-1 ${selectedAbility?.regen && "bg-default-100"}`}
+                      className={`rounded-md p-1 ${selectedAbility?.deploy_cooldown && "bg-default-100"} ${selectedAbility?.regen_on_kills && "border-1 border-blue"}`}
                     >
                       <Tooltip
                         key={bind}
@@ -162,7 +169,7 @@ const AgentPage = () => {
                                 }).map((_, i) => (
                                   <div
                                     key={i}
-                                    className="h-1 w-1 rounded-full bg-foreground"
+                                    className={`h-1 w-1 rounded-full ${(ability(bind)?.charges_on_spawn ?? 0) > i ? "bg-radianite" : "bg-foreground"} `}
                                   />
                                 ))
                               : Array.from({
@@ -217,11 +224,11 @@ const AgentPage = () => {
                   </div>
 
                   <div className="flex gap-4 text-default-600">
-                    {selectedAbility?.cooldown && (
-                      <span>{`Cooldown: ${selectedAbility?.cooldown ? `${selectedAbility?.cooldown}s` : "x"}`}</span>
+                    {selectedAbility?.recall_cooldown && (
+                      <span>{`Recall Cooldown: ${selectedAbility?.recall_cooldown ? `${selectedAbility?.recall_cooldown}s` : "x"}`}</span>
                     )}
-                    {selectedAbility?.regen && (
-                      <span>{`Regen: ${selectedAbility?.regen ? `${selectedAbility?.regen}s` : "x"}`}</span>
+                    {selectedAbility?.deploy_cooldown && (
+                      <span>{`Deploy Cooldown: ${selectedAbility?.deploy_cooldown ? `${selectedAbility?.deploy_cooldown}s` : "x"}`}</span>
                     )}
                   </div>
 
@@ -286,7 +293,7 @@ const AgentPage = () => {
                     </h3>
 
                     <span className="flex items-center gap-1 text-tiny text-default-400">
-                      <CreditIcon />
+                      <CreditIcon className="h-2 w-2" />
                       {buy.cost}
                     </span>
                   </li>
