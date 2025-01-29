@@ -350,6 +350,7 @@ const EditAgentsPage = () => {
                               onAbilitiesFormChange(e, currentKeybind);
                             }}
                           />
+
                           <Input
                             isRequired
                             label="Max Charge"
@@ -360,6 +361,7 @@ const EditAgentsPage = () => {
                               onAbilitiesFormChange(e, currentKeybind);
                             }}
                           />
+
                           <Input
                             label="Ult Orb Number"
                             name="ult_points"
@@ -369,11 +371,12 @@ const EditAgentsPage = () => {
                               onAbilitiesFormChange(e, currentKeybind);
                             }}
                           />
+
                           <Input
-                            label="Cooldown"
-                            name="cooldown"
+                            label="Recall Cooldown"
+                            name="recall_cooldown"
                             type="number"
-                            value={`${currentAbility?.cooldown}`}
+                            value={`${currentAbility?.recall_cooldown}`}
                             onChange={(e) => {
                               onAbilitiesFormChange(e, currentKeybind);
                             }}
@@ -402,6 +405,7 @@ const EditAgentsPage = () => {
                   >
                     Cancel
                   </Button>
+
                   <Button className="w-full" color="primary" type="submit">
                     Save
                   </Button>
