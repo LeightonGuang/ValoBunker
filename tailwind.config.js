@@ -21,6 +21,7 @@ module.exports = {
       black: "#000",
       blurple: "#5865F2",
       radianite: "#60efb7",
+      blue: "#87CEEB",
     },
   },
   darkMode: "class",
