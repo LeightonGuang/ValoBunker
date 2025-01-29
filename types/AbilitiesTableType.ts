@@ -10,8 +10,9 @@ export interface AbilitiesTableType {
   max_charge: number;
   ult_points: number;
   health: number;
-  cooldown: number;
-  regen: string;
+  recall_cooldown: number;
+  deploy_cooldown: string;
+  regen_on_kills: number;
   duration: string;
   length: number;
   radius: number;

@@ -20,6 +20,7 @@ import { NewsTableType } from "@/types/NewsTableType";
 
 const NewsPage = () => {
   const newsId = useParams().id;
+  const [isLoading, setIsLoading] = useState(true);
   const [newsData, setNewsData] = useState<NewsTableType>();
 
   const fetchNewsById = async () => {
@@ -29,17 +30,20 @@ const NewsPage = () => {
       const { data, error } = await supabase
         .from("news")
         .select("*")
-        .eq("id", newsId);
+        .eq("id", newsId)
+        .single();
 
       if (error) {
         console.error(error);
       }
 
       if (data) {
-        setNewsData(data[0]);
+        setNewsData(data);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -61,44 +65,49 @@ const NewsPage = () => {
 
   return (
     <section>
-      <Card aria-label={newsData?.headline}>
-        <CardHeader className={title()}>
-          <h1 className="m-4">{newsData?.headline}</h1>
-        </CardHeader>
-        <CardBody>
-          <div>
-            <div className="flex w-full justify-center">
-              <Image
-                alt={newsData?.headline}
-                className="max-h-64"
-                src={newsData?.img_url}
-              />
+      {!isLoading && (
+        <Card aria-label={newsData?.headline}>
+          <CardHeader className={title()}>
+            <h1 className="m-4 text-large font-medium">{newsData?.headline}</h1>
+          </CardHeader>
+
+          <CardBody>
+            <div>
+              <div className="flex w-full justify-center">
+                <Image
+                  alt={newsData?.headline}
+                  className="max-h-64"
+                  isLoading={isLoading}
+                  src={newsData?.img_url}
+                />
+              </div>
+
+              <Divider className="my-4" />
+
+              <div className="mt-4 w-full">
+                {newsData?.content
+                  ? RenderRawHtml(newsData?.content)
+                  : "No Content"}
+              </div>
             </div>
+          </CardBody>
 
-            <Divider className="my-4" />
+          <CardFooter className="awhitespace-nowrap flex justify-between text-tiny text-foreground-500">
+            <div>{newsData?.news_date}</div>
 
-            <div className="mt-4 w-full">
-              {newsData?.content
-                ? RenderRawHtml(newsData?.content)
-                : "No Content"}
-            </div>
-          </div>
-        </CardBody>
-        <CardFooter className="awhitespace-nowrap flex justify-between text-tiny text-foreground-500">
-          <div>{newsData?.news_date}</div>
-
-          {newsData?.link_url && (
-            <Link
-              isExternal
-              showAnchorIcon
-              className="order-1 whitespace-nowrap text-tiny lg:order-2"
-              href={newsData?.link_url}
-            >
-              Link
-            </Link>
-          )}
-        </CardFooter>
-      </Card>
+            {newsData?.link_url && (
+              <Link
+                isExternal
+                showAnchorIcon
+                className="order-1 whitespace-nowrap text-tiny lg:order-2"
+                href={newsData?.link_url}
+              >
+                Link
+              </Link>
+            )}
+          </CardFooter>
+        </Card>
+      )}
     </section>
   );
 };

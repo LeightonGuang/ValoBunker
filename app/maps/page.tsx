@@ -65,7 +65,7 @@ const MapsPage = () => {
         selectionMode="single"
         topContent={topContent}
         topContentPlacement="outside"
-        onRowAction={(id) => router.push(`/maps/${id}`)}
+        onRowAction={(name) => router.push(`/maps/${name}`)}
       >
         <TableHeader>
           {columns.map((column, i) => (
@@ -75,7 +75,7 @@ const MapsPage = () => {
 
         <TableBody>
           {maps.map((map) => (
-            <TableRow key={map.id} className="cursor-pointer">
+            <TableRow key={map.name} className="cursor-pointer">
               <TableCell>{map.name}</TableCell>
 
               <TableCell>

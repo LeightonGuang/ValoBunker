@@ -22,7 +22,7 @@ interface BlindType {
   duration: number;
   cost: number;
   max_charge: number;
-  regen?: string;
+  deploy_cooldown?: string;
   health?: number;
   ult_points?: number;
   agents: {
@@ -37,7 +37,7 @@ const flashColumns = [
   { name: "Blind Duration", sortable: true },
   { name: "Charge", sortable: true },
   { name: "Cost", sortable: true },
-  { name: "Regen", sortable: true },
+  { name: "Deploy Cooldown", sortable: true },
   { name: "Health", sortable: true },
 ];
 
@@ -47,7 +47,7 @@ const nearsigntColumns = [
   { name: "Blind Duration", sortable: true },
   { name: "Charge", sortable: true },
   { name: "Cost", sortable: true },
-  { name: "Regen", sortable: true },
+  { name: "Deploy Cooldown", sortable: true },
   { name: "Health", sortable: true },
 ];
 
@@ -63,7 +63,7 @@ export default function SmokePage() {
       const { data: flashData, error: flashError } = await supabase
         .from("abilities")
         .select(
-          "id, name, icon_url, duration, cost, regen, health, max_charge, ult_points, agents(*)",
+          "id, name, icon_url, duration, cost, deploy_cooldown, health, max_charge, ult_points, agents(*)",
         )
         .eq("category", "flash")
         .order("name", { ascending: true });
@@ -77,7 +77,7 @@ export default function SmokePage() {
       const { data: nearsigntData, error: nearsigntError } = await supabase
         .from("abilities")
         .select(
-          "id, name, icon_url, duration, cost, regen, health, max_charge, ult_points, agents(*)",
+          "id, name, icon_url, duration, cost, deploy_cooldown, health, max_charge, ult_points, agents(*)",
         )
         .eq("category", "nearsight")
         .order("name", { ascending: true });
@@ -136,7 +136,7 @@ export default function SmokePage() {
                 <TableCell>{flash.max_charge}</TableCell>
                 <TableCell>{flash.cost}</TableCell>
                 <TableCell className="whitespace-nowrap">
-                  {flash.regen ? flash.regen : "x"}
+                  {flash.deploy_cooldown ? flash.deploy_cooldown : "x"}
                 </TableCell>
                 <TableCell>{flash.health ? flash.health : "-"}</TableCell>
               </TableRow>
@@ -182,7 +182,9 @@ export default function SmokePage() {
                     ? `${nearsight.ult_points} ult points`
                     : nearsight.cost}
                 </TableCell>
-                <TableCell>{nearsight.regen ? nearsight.regen : "x"}</TableCell>
+                <TableCell>
+                  {nearsight.deploy_cooldown ? nearsight.deploy_cooldown : "x"}
+                </TableCell>
                 <TableCell>
                   {nearsight.health ? nearsight.health : "-"}
                 </TableCell>

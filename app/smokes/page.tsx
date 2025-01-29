@@ -22,7 +22,7 @@ interface CircularSmokeType {
   duration: number;
   radius: number;
   cost: number;
-  regen?: string;
+  deploy_cooldown?: string;
   agents: {
     name: string;
     icon_url: string;
@@ -36,7 +36,7 @@ interface WallSmokeType {
   duration: number;
   length: number;
   cost: number;
-  regen?: string;
+  deploy_cooldown?: string;
   agents: {
     name: string;
     icon_url: string;
@@ -50,7 +50,7 @@ export default function SmokesPage() {
     { name: "Duration", sortable: true },
     { name: "Radius", sortable: true },
     { name: "Cost", sortable: true },
-    { name: "Regen", sortable: true },
+    { name: "Deploy Cooldown", sortable: true },
   ];
   const wallSmokesColumns = [
     { name: "Agent", sortable: true },
@@ -58,7 +58,7 @@ export default function SmokesPage() {
     { name: "Duration", sortable: true },
     { name: "Length", sortable: true },
     { name: "Cost", sortable: true },
-    { name: "Regen", sortable: true },
+    { name: "Deploy Cooldown", sortable: true },
   ];
 
   const [isLoading, setIsLoading] = useState(true);
@@ -73,7 +73,7 @@ export default function SmokesPage() {
         await supabase
           .from("abilities")
           .select(
-            "id, name, icon_url, duration, radius, cost, regen, agents(*)",
+            "id, name, icon_url, duration, radius, cost, deploy_cooldown, agents(*)",
           )
           .eq("category", "circular_smoke")
           .order("name", { ascending: true });
@@ -86,7 +86,9 @@ export default function SmokesPage() {
 
       const { data: wallSmokesData, error: wallSmokesError } = await supabase
         .from("abilities")
-        .select("id, name, icon_url, duration, length, cost, regen, agents(*)")
+        .select(
+          "id, name, icon_url, duration, length, cost, deploy_cooldown, agents(*)",
+        )
         .eq("category", "wall_smoke")
         .order("name", { ascending: true });
 
@@ -122,6 +124,7 @@ export default function SmokesPage() {
                   name={smoke.agents.name}
                 />
               </TableCell>
+
               <TableCell>
                 <Tooltip content={smoke.name}>
                   <div className="cursor-pointer">
@@ -135,10 +138,16 @@ export default function SmokesPage() {
                   </div>
                 </Tooltip>
               </TableCell>
+
               <TableCell>{smoke.duration}</TableCell>
+
               <TableCell>{smoke.radius}</TableCell>
+
               <TableCell>{smoke.cost}</TableCell>
-              <TableCell>{smoke.regen ? smoke.regen : "x"}</TableCell>
+
+              <TableCell>
+                {smoke.deploy_cooldown ? smoke.deploy_cooldown : "x"}
+              </TableCell>
             </TableRow>
           )}
         </TableBody>
@@ -166,6 +175,7 @@ export default function SmokesPage() {
                   name={smoke.agents.name}
                 />
               </TableCell>
+
               <TableCell>
                 <Tooltip content={smoke.name}>
                   <div className="cursor-pointer">
@@ -179,10 +189,16 @@ export default function SmokesPage() {
                   </div>
                 </Tooltip>
               </TableCell>
+
               <TableCell>{smoke.duration}</TableCell>
+
               <TableCell>{smoke.length}</TableCell>
+
               <TableCell>{smoke.cost}</TableCell>
-              <TableCell>{smoke.regen ? smoke.regen : "x"}</TableCell>
+
+              <TableCell>
+                {smoke.deploy_cooldown ? smoke.deploy_cooldown : "x"}
+              </TableCell>
             </TableRow>
           )}
         </TableBody>
