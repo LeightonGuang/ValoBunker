@@ -48,9 +48,8 @@ const AgentPage = () => {
   };
 
   const AgentCard = ({ className }: { className?: string }) => {
-    const ability: (bind: string) => AbilitiesTableType | undefined = (
-      bind: string,
-    ) => agentData?.abilities.find((ability) => ability.key_bind === bind);
+    const ability: (bind: string) => AbilitiesTableType = (bind: string) =>
+      agentData?.abilities.find((ability) => ability.key_bind === bind)!;
 
     const totalAbilityCost = agentData?.abilities
       ? agentData?.abilities.reduce(
@@ -70,6 +69,9 @@ const AgentPage = () => {
       );
     };
 
+    const lightArmorIconUrl =
+      "https://static.wikia.nocookie.net/valorant/images/9/93/Light_Armor.png";
+
     const LightArmorIcon = ({ className }: { className?: string }) => {
       return (
         <Avatar
@@ -78,6 +80,9 @@ const AgentPage = () => {
         />
       );
     };
+
+    const heavyArmorIconUrl =
+      "https://static.wikia.nocookie.net/valorant/images/6/62/Heavy_Armor.png";
 
     const HeavyArmorIcon = ({ className }: { className?: string }) => {
       return (
@@ -250,22 +255,22 @@ const AgentPage = () => {
                 {
                   title: "Light Armor with Vandal / Phantom",
                   cost: totalAbilityCost + 2900 + 400,
-                  iconList: [<LightArmorIcon key={0} className="h-6 w-6" />],
+                  armor: <LightArmorIcon className="h-6 w-6" />,
                 },
                 {
                   title: "Heavy Armor with Vandal / Phantom",
                   cost: totalAbilityCost + 2900 + 1000,
-                  iconList: [<HeavyArmorIcon key={0} className="h-6 w-6" />],
+                  armor: <HeavyArmorIcon className="h-6 w-6" />,
                 },
                 {
-                  title: "Light Armor with Vandal / Phantom",
+                  title: "Light Armor with Operator",
                   cost: totalAbilityCost + 4700 + 400,
-                  iconList: [<LightArmorIcon key={0} className="h-6 w-6" />],
+                  armor: <LightArmorIcon className="h-6 w-6" />,
                 },
                 {
-                  title: "Heavy Armor with Vandal / Phantom",
+                  title: "Heavy Armor with Operator",
                   cost: totalAbilityCost + 4700 + 1000,
-                  iconList: [<HeavyArmorIcon key={0} className="h-6 w-6" />],
+                  armor: <HeavyArmorIcon className="h-6 w-6" />,
                 },
               ].map((buy, i) => {
                 return (
@@ -274,26 +279,39 @@ const AgentPage = () => {
                       {buy.title}
 
                       <div className="mt-1 flex gap-2">
-                        {buy.iconList.map((icon) => icon)}
+                        {buy.armor}
+                        {"+"}
 
-                        <span className="text-medium">+</span>
+                        {["C", "Q", "E"].map((bind, i) => {
+                          return (
+                            ability(bind).max_charge -
+                              ability(bind).charges_on_spawn !==
+                              0 && (
+                              <>
+                                {i !== 0 && <span>+</span>}
 
-                        <Avatar
-                          className="bg-transparent h-6 w-6 rounded-none"
-                          src={ability("C")?.icon_url}
-                        />
+                                <div className="flex flex-col justify-center gap-1">
+                                  <Avatar
+                                    alt="icons"
+                                    className={`bg-transparent h-6 w-6 rounded-none`}
+                                    src={ability(bind)?.icon_url}
+                                  />
 
-                        <span className="text-medium">+</span>
-
-                        <Avatar
-                          className="bg-transparent h-6 w-6 rounded-none"
-                          src={ability("Q")?.icon_url}
-                        />
+                                  <span className="text-center text-tiny text-default-500">
+                                    {"x" +
+                                      (ability(bind)?.max_charge -
+                                        ability(bind)?.charges_on_spawn)}
+                                  </span>
+                                </div>
+                              </>
+                            )
+                          );
+                        })}
                       </div>
                     </h3>
 
-                    <span className="flex items-center gap-1 text-tiny text-default-400">
-                      <CreditIcon className="h-2 w-2" />
+                    <span className="flex items-center gap-1 text-small text-default-400">
+                      <CreditIcon className="h-3 w-3" />
                       {buy.cost}
                     </span>
                   </li>
