@@ -5,6 +5,7 @@
 * {
   box-sizing: border-box;
   scroll-padding-top: 6rem;
+  letter-spacing: 0.02rem;
 }
 
 li {
