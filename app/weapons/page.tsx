@@ -1,89 +1,98 @@
 "use client";
 
-import Image from "next/image";
 import {
   Table,
+  TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
 } from "@heroui/table";
+import { Image } from "@heroui/react";
+import { useEffect, useState } from "react";
 
-import weaponsData from "@/public/data/weaponData.json";
 import { title } from "@/components/primitives";
+import { getSupabase } from "@/utils/supabase/client";
+import { WeaponsTableType } from "@/types/WeaponsTableType";
 
 export default function WeaponsPage() {
-  const flashColumns = [
-    { name: "Name", sortable: true },
-    { name: "Type", sortable: false },
-    { name: "Image", sortable: true },
-    { name: "Cost", sortable: true },
-    { name: "Range: Head / Body / Leg", sortable: true },
-    { name: "fire_rate", sortable: true },
+  const [isLoading, setIsLoading] = useState(true);
+  const [weaponsData, setWeaponsData] = useState<WeaponsTableType[]>([]);
+
+  const fetchData = async () => {
+    try {
+      const supabase = getSupabase();
+
+      const { data: weaponsData, error: weaponsError } = await supabase
+        .from("weapons")
+        .select("*");
+
+      if (weaponsError) {
+        console.error(weaponsError);
+      } else {
+        console.log(weaponsData);
+        setWeaponsData(weaponsData);
+      }
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const weaponsColumns = [
+    { name: "Name", key: "name", sortable: true },
+    { name: "Type", key: "type", sortable: false },
+    { name: "Image", key: "img_url", sortable: true },
+    { name: "Cost", key: "cost", sortable: true },
+    { name: "Range: Head / Body / Leg", key: "damage_list", sortable: true },
+    { name: "Fire Rate", key: "fire_rate", sortable: true },
   ];
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    (<section>
+    <section>
       <h1 className={title()}>Weapons</h1>
       <div>
         <h2 className="mt-6">Weapons</h2>
-        <Table className="mt-4" fullWidth={true}>
+        <Table aria-label="Weapons" className="mt-4" fullWidth={true}>
           <TableHeader>
-            {flashColumns.map((column) => (
-              <TableColumn key={column.name}>
-                {column.name.replace(/_/g, " ")}
-              </TableColumn>
+            {weaponsColumns.map((column) => (
+              <TableColumn key={column.name}>{column.name}</TableColumn>
             ))}
           </TableHeader>
-          <TableBody>
-            {weaponsData.weaponData.map((weapon) => (
-              <TableRow key={weapon.id}>
-                <TableCell>{weapon.name}</TableCell>
-                <TableCell>{weapon.type}</TableCell>
-                <TableCell>
-                  <div className="w-16 cursor-pointer">
-                    <Image
-                      unoptimized
-                      alt={weapon.name}
-                      className="aspect-video h-auto w-32 object-contain"
-                      height={64}
-                      src={weapon.img_url}
-                      width={64}
-                    />
-                  </div>
-                </TableCell>
-                <TableCell>{weapon.cost}</TableCell>
-                <TableCell>
-                  <div className="flex w-min flex-col gap-1 whitespace-nowrap">
-                    {weapon.damageList.map((damageObj: any, i) => (
-                      <div key={i}>
-                        <span className="font-bold">{`${damageObj.range}: `}</span>
-                        <span>
-                          {Object.keys(damageObj.damage).map((key, j) => (
-                            <span key={j}>
-                              {`${damageObj.damage[key]}${
-                                j < Object.keys(damageObj.damage).length - 1
-                                  ? " / "
-                                  : ""
-                              }`}
-                            </span>
-                          ))}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {`${weapon.fire_rate?.primary ? weapon.fire_rate?.primary : "x"} 
-                / 
-                ${weapon.fire_rate?.alt ? weapon.fire_rate?.alt : "x"}`}
-                </TableCell>
-              </TableRow>
-            ))}
+
+          <TableBody isLoading={isLoading} items={weaponsData}>
+            {(weapon) => {
+              return (
+                <TableRow key={weapon.id}>
+                  <TableCell>{weapon.name}</TableCell>
+
+                  <TableCell>{weapon.type}</TableCell>
+
+                  <TableCell>
+                    <div className="w-16 cursor-pointer">
+                      <Image
+                        alt={weapon.name}
+                        className="aspect-auto h-10 rounded-none object-contain"
+                        src={weapon.img_url}
+                      />
+                    </div>
+                  </TableCell>
+
+                  <TableCell>{weapon.cost}</TableCell>
+
+                  <TableCell>x</TableCell>
+
+                  <TableCell className="whitespace-nowrap">x</TableCell>
+                </TableRow>
+              );
+            }}
           </TableBody>
         </Table>
       </div>
-    </section>)
+    </section>
   );
 }
