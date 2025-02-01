@@ -16,12 +16,16 @@ import {
 
 import { getSupabase } from "@/utils/supabase/client";
 import { AgentsTableType } from "@/types/AgentsTableType";
+import { WeaponsTableType } from "@/types/WeaponsTableType";
 import { AbilitiesTableType } from "@/types/AbilitiesTableType";
 
 const AgentPage = () => {
   const agentName = useParams().name;
   const [isLoading, setIsLoading] = useState(true);
-  const [agentData, setAgentData] = useState<AgentsTableType>();
+  const [agentData, setAgentData] = useState<AgentsTableType>(
+    {} as AgentsTableType,
+  );
+  const [weaponsData, setWeaponsData] = useState<WeaponsTableType[]>([]);
 
   const abilitiesOrder = ["C", "Q", "E", "X"];
 
@@ -37,8 +41,18 @@ const AgentPage = () => {
       if (agentError) {
         console.error(agentError);
       } else {
-        console.log(agentData);
         setAgentData(agentData);
+      }
+
+      const { data: weaponsData, error: weaponsError } = await supabase
+        .from("weapons")
+        .select("*")
+        .in("id", [12, 13, 16]);
+
+      if (weaponsError) {
+        console.error(weaponsError);
+      } else {
+        setWeaponsData(weaponsData);
       }
     } catch (error) {
       console.error(error);
@@ -69,9 +83,6 @@ const AgentPage = () => {
       );
     };
 
-    const lightArmorIconUrl =
-      "https://static.wikia.nocookie.net/valorant/images/9/93/Light_Armor.png";
-
     const LightArmorIcon = ({ className }: { className?: string }) => {
       return (
         <Avatar
@@ -80,9 +91,6 @@ const AgentPage = () => {
         />
       );
     };
-
-    const heavyArmorIconUrl =
-      "https://static.wikia.nocookie.net/valorant/images/6/62/Heavy_Armor.png";
 
     const HeavyArmorIcon = ({ className }: { className?: string }) => {
       return (
@@ -132,12 +140,12 @@ const AgentPage = () => {
             <div className="flex items-center gap-2">
               <span className="text-large">Abilities</span>
 
-              <div className="flex gap-2">
-                <p className="text-tiny text-radianite">*Free ability</p>
-
+              <div className="flex w-full justify-evenly">
                 <p className="text-tiny text-default-500">
                   *Regenerates after cooldown
                 </p>
+
+                <p className="text-tiny text-radianite">*Free ability</p>
 
                 <p className="text-tiny text-blue">*Regenerates on kills</p>
               </div>
@@ -209,22 +217,28 @@ const AgentPage = () => {
               return (
                 <div key={bind} className="flex flex-col gap-1">
                   <div className="flex items-center gap-2">
-                    <Avatar
-                      alt={selectedAbility?.name}
-                      className="bg-transparent h-6 w-6 rounded-none"
-                      src={selectedAbility?.icon_url}
-                    />
-
-                    <span className="text-medium">{selectedAbility?.name}</span>
+                    <span className="flex gap-1 text-medium">
+                      <Avatar
+                        alt={selectedAbility?.name}
+                        className="bg-transparent h-6 w-6 rounded-none"
+                        src={selectedAbility?.icon_url}
+                      />
+                      {selectedAbility?.name}
+                    </span>
 
                     <span className="text-tiny text-default-400">
-                      {selectedAbility?.cost
-                        ? selectedAbility?.cost
-                        : selectedAbility?.cost === 0
-                          ? "Free"
-                          : selectedAbility?.cost === null
-                            ? `${selectedAbility?.ult_points ?? "x"} ult points`
-                            : ""}
+                      {selectedAbility?.cost ? (
+                        <div className="flex items-center gap-1">
+                          <CreditIcon className="h-2 w-2" />
+                          {selectedAbility?.cost}
+                        </div>
+                      ) : selectedAbility?.cost === 0 ? (
+                        "Free"
+                      ) : selectedAbility?.cost === null ? (
+                        `${selectedAbility?.ult_points ?? "x"} ult points`
+                      ) : (
+                        ""
+                      )}
                     </span>
                   </div>
 
@@ -253,34 +267,44 @@ const AgentPage = () => {
             <ul className="flex flex-col gap-1">
               {[
                 {
-                  title: "Light Armor with Vandal / Phantom",
+                  title: "Light Armor with Phantom / Vandal",
                   cost: totalAbilityCost + 2900 + 400,
-                  armor: <LightArmorIcon className="h-6 w-6" />,
+                  armor: <LightArmorIcon className="h-6 w-6 min-w-6" />,
+                  weaponsId: [12, 13],
                 },
                 {
-                  title: "Heavy Armor with Vandal / Phantom",
+                  title: "Heavy Armor with Phantom / Vandal",
                   cost: totalAbilityCost + 2900 + 1000,
-                  armor: <HeavyArmorIcon className="h-6 w-6" />,
+                  armor: <HeavyArmorIcon className="h-6 w-6 min-w-6" />,
+                  weaponsId: [12, 13],
                 },
                 {
                   title: "Light Armor with Operator",
                   cost: totalAbilityCost + 4700 + 400,
                   armor: <LightArmorIcon className="h-6 w-6" />,
+                  weaponsId: [16],
                 },
                 {
                   title: "Heavy Armor with Operator",
                   cost: totalAbilityCost + 4700 + 1000,
                   armor: <HeavyArmorIcon className="h-6 w-6" />,
+                  weaponsId: [16],
                 },
               ].map((buy, i) => {
                 return (
-                  <li key={i} className="flex items-center justify-between">
-                    <h3 className="text-medium">
-                      {buy.title}
+                  <li key={i}>
+                    <div className="flex w-full justify-between">
+                      <h3 className="text-medium">{buy.title}</h3>
 
-                      <div className="mt-1 flex gap-2">
+                      <span className="flex items-center gap-1 text-small text-default-400">
+                        <CreditIcon className="h-3 w-3" />
+                        {buy.cost}
+                      </span>
+                    </div>
+
+                    <div>
+                      <div className="mt-1 flex max-w-64 gap-2 lg:max-w-none">
                         {buy.armor}
-                        {"+"}
 
                         {["C", "Q", "E"].map((bind, i) => {
                           return (
@@ -288,7 +312,7 @@ const AgentPage = () => {
                               ability(bind).charges_on_spawn !==
                               0 && (
                               <>
-                                {i !== 0 && <span>+</span>}
+                                <span>+</span>
 
                                 <div className="flex flex-col justify-center gap-1">
                                   <Avatar
@@ -307,13 +331,36 @@ const AgentPage = () => {
                             )
                           );
                         })}
-                      </div>
-                    </h3>
 
-                    <span className="flex items-center gap-1 text-small text-default-400">
-                      <CreditIcon className="h-3 w-3" />
-                      {buy.cost}
-                    </span>
+                        {buy.weaponsId.map((id, i) => {
+                          return (
+                            <>
+                              <span>+</span>
+
+                              <div key={i} className="flex flex-col gap-1">
+                                <Image
+                                  alt="icons"
+                                  className={`bg-transparent aspect-auto h-6 rounded-none object-contain`}
+                                  src={
+                                    weaponsData.find(
+                                      (weapon) => weapon.id === id,
+                                    )?.icon_url
+                                  }
+                                />
+
+                                <span className="text-center text-tiny text-default-500">
+                                  {
+                                    weaponsData.find(
+                                      (weapon) => weapon.id === id,
+                                    )?.name
+                                  }
+                                </span>
+                              </div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </li>
                 );
               })}
