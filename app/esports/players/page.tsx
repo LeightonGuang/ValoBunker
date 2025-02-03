@@ -262,7 +262,7 @@ const PlayersPage = () => {
         <div className="flex justify-end gap-2">
           <Input
             isClearable
-            className="w-full sm:max-w-[44%]"
+            className="w-full max-w-[50%] lg:max-w-40"
             placeholder="Search by IGN"
             startContent={<SearchIcon />}
             value={filterValue}
@@ -273,9 +273,11 @@ const PlayersPage = () => {
             onValueChange={onSearchChange}
           />
 
-          <Dropdown>
+          <Dropdown className="w-1/2">
             <DropdownTrigger>
-              <Button endContent={<ChevronDown fill="currentColor" />}>
+              <Button
+                endContent={<ChevronDown fill="currentColor" size={16} />}
+              >
                 League
               </Button>
             </DropdownTrigger>
