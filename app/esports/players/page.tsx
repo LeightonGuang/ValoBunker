@@ -117,15 +117,29 @@ const PlayersPage = () => {
 
   const sortedPlayers = useMemo(() => {
     return [...filteredPlayers].sort((a, b) => {
-      const first = a[
-        sortDescriptor.column as keyof PlayersTableType
-      ] as number;
-      const second = b[
-        sortDescriptor.column as keyof PlayersTableType
-      ] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
+      const getValue = (obj: any, path: string) => {
+        return path.split(".").reduce((acc, key) => (acc ? acc[key] : ""), obj);
+      };
 
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
+      const first = getValue(
+        a,
+        sortDescriptor.column as keyof PlayersTableType,
+      );
+      const second = getValue(
+        b,
+        sortDescriptor.column as keyof PlayersTableType,
+      );
+
+      const normalizeValue = (value: any) => {
+        return value ? String(value).toLowerCase() : "";
+      };
+
+      const normalizedFirst = normalizeValue(first);
+      const normalizedSecond = normalizeValue(second);
+
+      const result = normalizedFirst.localeCompare(normalizedSecond);
+
+      return sortDescriptor.direction === "ascending" ? result : -result;
     });
   }, [sortDescriptor, filteredPlayers]);
 
@@ -169,7 +183,7 @@ const PlayersPage = () => {
       }
 
       case "teams.name": {
-        return (
+        return player.teams ? (
           <Tooltip content={player.teams.name}>
             <Image
               alt={player.teams.name}
@@ -177,6 +191,8 @@ const PlayersPage = () => {
               src={player.teams.logo_url}
             />
           </Tooltip>
+        ) : (
+          <span>x</span>
         );
       }
 
@@ -231,13 +247,15 @@ const PlayersPage = () => {
       }
 
       case "teams.vct_league.name": {
-        return (
+        return player.teams ? (
           <Tooltip content={player.teams.vct_league.name}>
             <Image
               className="h-8 w-8 rounded-none object-contain"
               src={player.teams.vct_league.logo_url}
             />
           </Tooltip>
+        ) : (
+          <span>x</span>
         );
       }
     }
@@ -358,7 +376,7 @@ const PlayersPage = () => {
           <TableHeader>
             {headerColumns.map((header) => (
               <TableColumn key={header.sortBy} allowsSorting={header.sortable}>
-                {header.name}
+                {header.name ?? "No team"}
               </TableColumn>
             ))}
           </TableHeader>
