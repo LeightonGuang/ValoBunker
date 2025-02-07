@@ -4,17 +4,16 @@ import {
   Chip,
   Image,
   Table,
+  Button,
+  Dropdown,
   TableRow,
   TableBody,
   TableCell,
   TableColumn,
   TableHeader,
-  Dropdown,
-  DropdownTrigger,
-  Button,
   DropdownMenu,
   DropdownItem,
-  divider,
+  DropdownTrigger,
 } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -72,10 +71,20 @@ const ManageCountdownPage = () => {
         <Table
           aria-label="Manage Countdown"
           topContent={
-            <div>
+            <div className="flex items-center justify-between">
               <span className="text-small text-default-400">
                 Total {countdownData.length} Countdowns
               </span>
+
+              <Button
+                color="primary"
+                endContent={<span>+</span>}
+                onPress={() =>
+                  router.push("/moderator/manage/countdown/create")
+                }
+              >
+                Add Countdown
+              </Button>
             </div>
           }
           topContentPlacement="outside"
@@ -111,9 +120,11 @@ const ManageCountdownPage = () => {
                     </Chip>
                   </TableCell>
 
-                  <TableCell>{countdown.start_date.toLocaleString()}</TableCell>
+                  <TableCell>
+                    {countdown.start_date?.toLocaleString()}
+                  </TableCell>
 
-                  <TableCell>{countdown.end_date.toLocaleString()}</TableCell>
+                  <TableCell>{countdown.end_date?.toLocaleString()}</TableCell>
 
                   <TableCell>
                     <Dropdown>
