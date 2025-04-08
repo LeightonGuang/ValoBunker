@@ -31,7 +31,7 @@ const MollyGraph = ({
                     className="h-4 w-4"
                     src={molly.icon_url}
                   />
-                  <span>{molly.name}</span>
+                  <span>{`${molly.name} (${molly.radius}m)`}</span>
                 </div>
               </div>
             ))}
