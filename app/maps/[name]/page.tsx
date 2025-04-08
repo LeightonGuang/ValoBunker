@@ -59,7 +59,7 @@ const MapPage = () => {
                 alt={mapData.name}
                 className="aspect-auto h-64 rounded-none"
                 isLoading={isLoading}
-                src={mapData.mini_map_url}
+                src={mapData.minimap_img_url}
               />
             </div>
           </div>
