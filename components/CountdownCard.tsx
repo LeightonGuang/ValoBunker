@@ -36,8 +36,8 @@ const CountdownCard = ({
       variant="shadow"
     >
       {countdownEventList.map((event) => {
-        const startDate = new Date(event.start_date);
-        const endDate = new Date(event.end_date);
+        const startDate = new Date(event.start_date ?? "");
+        const endDate = new Date(event.end_date ?? "");
         const currentDate = new Date(currentDateTime);
 
         if (currentDate < startDate || currentDate > endDate) {
