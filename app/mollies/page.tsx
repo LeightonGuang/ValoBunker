@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Image, Tooltip, User } from "@heroui/react";
 
 import { title } from "@/components/primitives";
+import MollyGraph from "@/components/MollyGraph";
 import { getSupabase } from "@/utils/supabase/client";
 
 const mollyColumns = [
@@ -118,6 +119,11 @@ export default function MolliesPage() {
             )}
           </TableBody>
         </Table>
+
+        <MollyGraph
+          className="mt-4 flex w-full justify-center"
+          mollies={molliesData}
+        />
       </div>
     </section>
   );
