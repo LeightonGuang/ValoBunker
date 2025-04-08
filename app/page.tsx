@@ -314,8 +314,12 @@ export default function Home() {
             <PatchNotesCard />
           </div>
 
-          <div className="order-1 flex w-full flex-col gap-4 lg:order-2 lg:w-96">
-            <CountdownCard countdownEventList={countdownEventList} />
+          <div
+            className={`order-1 flex w-full flex-col gap-4 lg:order-2 lg:w-96`}
+          >
+            {countdownEventList.length > 0 && (
+              <CountdownCard countdownEventList={countdownEventList} />
+            )}
             <EventsCard />
           </div>
         </div>
