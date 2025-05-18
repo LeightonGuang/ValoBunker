@@ -9,7 +9,10 @@
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
   },
   "dependencies": {
+    "@heroui/radio": "^2.3.18",
     "@heroui/react": "^2.7.6",
+    "@heroui/system": "^2.4.15",
+    "@heroui/theme": "^2.4.15",
     "@internationalized/date": "^3.6.0",
     "@react-aria/ssr": "3.9.4",
     "@react-aria/visually-hidden": "3.8.12",
