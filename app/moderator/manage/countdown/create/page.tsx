@@ -64,7 +64,7 @@ const CreateCountdownPage = () => {
         throw error;
       }
     } catch (error) {
-  error(error);
+      console.error(error);
     }
   };
 
