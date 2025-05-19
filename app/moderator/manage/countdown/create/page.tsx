@@ -12,6 +12,7 @@ import {
   DatePicker,
   RadioGroup,
 } from "@heroui/react";
+import Link from "next/link";
 import {
   CalendarDate,
   ZonedDateTime,
@@ -20,12 +21,14 @@ import {
   parseAbsoluteToLocal,
 } from "@internationalized/date";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
 import { CountdownTableType } from "@/types/CountdownTableType";
 
 const CreateCountdownPage = () => {
+  const router = useRouter();
   const [countdownData, setCountdownData] = useState<CountdownTableType>({
     start_date: null,
     end_date: null,
@@ -62,6 +65,8 @@ const CreateCountdownPage = () => {
 
       if (error) {
         throw error;
+      } else {
+        router.push("/moderator/manage/countdown");
       }
     } catch (error) {
       console.error(error);
@@ -191,9 +196,28 @@ const CreateCountdownPage = () => {
         <div className="w-40">
           <h1>tips</h1>
 
+          <ul>
+            <li>
+              <p>
+                Season usually starts at 12am and ends anytime from 1am to 3am.
+                It is also different for different regions
+              </p>
+            </li>
+
+            <li>
+              <p>Bundle always start and ends at 10pm</p>
+            </li>
+          </ul>
+
           <p>
-            Season usually starts at 12am and ends anytime from 1am to 3am. It
-            is also different for different regions
+            Valorant official news website:{" "}
+            <Link
+              className="underline"
+              href="https://playvalorant.com/en-gb/news/"
+              target="_blank"
+            >
+              Link
+            </Link>
           </p>
         </div>
       </div>
