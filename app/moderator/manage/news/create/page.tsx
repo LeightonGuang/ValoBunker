@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Input } from "@heroui/input";
 import {
   Card,
   Image,
@@ -12,6 +9,9 @@ import {
   Breadcrumbs,
   BreadcrumbItem,
 } from "@heroui/react";
+import { Input } from "@heroui/input";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { title } from "@/components/primitives";
 import { getSupabase } from "@/utils/supabase/client";
