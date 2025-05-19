@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
   },
   "dependencies": {
+    "@heroui/date-picker": "^2.3.19",
     "@heroui/radio": "^2.3.18",
     "@heroui/react": "^2.7.6",
     "@heroui/system": "^2.4.15",
