@@ -19,7 +19,7 @@ export interface PlayersTableType {
   created_at: string;
   country: string;
   roles: PlayerRoles[];
-  birthday: string;
+  birthday: Date;
   profile_picture_url: string;
   teams: TeamsTableType;
 }
