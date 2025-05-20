@@ -243,7 +243,7 @@ const ManagePlayersPage = () => {
       <Button
         color="primary"
         endContent={<span>+</span>}
-        onPress={() => router.push("/moderator/manage/players/add")}
+        onPress={() => router.push("/moderator/manage/players/create")}
       >
         Player
       </Button>
