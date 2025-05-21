@@ -264,7 +264,7 @@ export const Navbar = () => {
                 <DropdownTrigger>
                   <Button
                     disableRipple
-                    className="p-0 text-medium text-foreground data-[active=true]:text-primary"
+                    className="p-2 text-medium text-foreground data-[active=true]:text-primary"
                     endContent={<ChevronDown fill="currentColor" size={16} />}
                     radius="sm"
                     variant="light"
